@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BKFoodCourt</string>
+    <string-array name="user_choice">
+        <item>Customer</item>
+        <item>Cook</item>
+        <item>Manager</item>
+    </string-array>
+</resources>
