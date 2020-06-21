@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
             navigateToStoreDetailFragment()
         }
         binding.menuCard.setOnClickListener { navigateToMenuFragment() }
+        binding.bottomNav.selectedItemId = R.id.nav_home
         binding.bottomNav.setOnNavigationItemSelectedListener { item ->
             bottomNavigationItemSelected(item)
         }

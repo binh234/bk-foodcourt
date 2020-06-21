@@ -63,6 +63,7 @@ class StoreFragment: Fragment() {
         when (item.itemId) {
             R.id.nav_home -> {
                 val intent = Intent(context, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
                 activity?.finish()
             }
