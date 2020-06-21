@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="store"
+            type="com.example.bkmerchant.storeActivity.Store" />
+
+        <variable
+            name="viewModel"
+            type="com.example.bkmerchant.storeActivity.store.StoreViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/base_margin">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginEnd="@dimen/base_margin">
+
+            <ImageView
+                android:id="@+id/store_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{store.imageUrl}" />
+
+            <TextView
+                android:id="@+id/store_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_toEndOf="@id/store_image"
+                android:text="@{store.name}"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="Domino's Pizza" />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/store_rating"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/store_name"
+                android:layout_alignStart="@id/store_name"
+                android:layout_marginTop="@dimen/small_margin"
+                android:stepSize="0.5"
+                android:theme="@style/RatingBar"
+                tools:rating="4" />
+
+            <TextView
+                android:id="@+id/store_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/store_rating"
+                android:layout_alignStart="@id/store_name"
+                android:layout_marginTop="@dimen/small_margin"
+                android:maxLines="2"
+                android:text="@{store.description}"
+                android:textSize="14sp"
+                tools:text="Tiết kiệm đến 25%. Phù hợp  với nhóm từ 2-4 người. Pizza nướng thơm lừng ..." />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/store_description"
+                android:layout_alignStart="@id/store_name"
+                android:layout_marginTop="@dimen/small_margin"
+                android:onClick="@{() -> viewModel.openStore(store)}"
+                android:padding="@dimen/small_margin"
+                android:text="@string/edit"
+                android:textColor="@color/colorBlue"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/default_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/store_description"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/small_margin"
+                android:onClick="@{() -> viewModel.setDefaultStore(store.id)}"
+                android:padding="@dimen/small_margin"
+                android:text="@string/set_as_default"
+                android:textColor="@color/colorBlue"
+                android:textSize="16sp"
+                android:visibility="@{store.isFocus ? View.GONE : View.VISIBLE}" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="category"
+            type="com.example.bkmerchant.menu.Category" />
+
+        <variable
+            name="viewModel"
+            type="com.example.bkmerchant.menu.MenuViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base_margin"
+        android:paddingBottom="@dimen/base_margin">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/menu_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:fontFamily="sans-serif-medium"
+                android:text="@{category.name}"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Pizza" />
+
+            <TextView
+                android:id="@+id/edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.openCategory(category)}"
+                android:paddingStart="@dimen/base_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingEnd="@dimen/base_margin"
+                android:text="@string/edit"
+                android:textColor="@color/colorBlue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/menu_item_name" />
+
+            <TextView
+                android:id="@+id/delete_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.deleteCategory(category)}"
+                android:paddingStart="@dimen/small_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingEnd="@dimen/base_margin"
+                android:text="@string/delete"
+                android:textColor="@color/colorBlue"
+                app:layout_constraintStart_toEndOf="@id/edit_text"
+                app:layout_constraintTop_toTopOf="@id/edit_text" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dish_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/base_margin"
+                android:layout_marginEnd="@dimen/base_margin"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="@id/edit_text"
+                app:layout_constraintTop_toBottomOf="@id/edit_text"
+                tools:itemCount="2"
+                tools:listitem="@layout/dish_item" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

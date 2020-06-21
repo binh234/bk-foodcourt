@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="dish"
+            type="com.example.bkmerchant.menu.Dish" />
+
+        <variable
+            name="viewModel"
+            type="com.example.bkmerchant.menu.MenuViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/dish_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/small_margin"
+            android:scaleType="fitCenter"
+            android:layout_marginBottom="@dimen/small_margin"
+            app:imageUrl="@{dish.imageUrl}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:src="@drawable/ic_food_default" />
+
+        <TextView
+            android:id="@+id/dish_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:fontFamily="sans-serif-medium"
+            android:onClick="@{() -> viewModel.openDish(dish)}"
+            android:text="@{dish.name}"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@id/dish_status"
+            app:layout_constraintStart_toEndOf="@id/dish_image"
+            app:layout_constraintTop_toTopOf="@id/dish_image"
+            tools:text="Pizza" />
+
+        <TextView
+            android:id="@+id/dish_description"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/small_margin"
+            android:maxLines="2"
+            android:text="@{dish.description}"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/dish_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/dish_name"
+            app:layout_constraintTop_toBottomOf="@id/dish_name"
+            tools:text="Description of a dish" />
+
+        <TextView
+            android:id="@+id/dish_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/dish_image"
+            app:layout_constraintStart_toStartOf="@id/dish_name"
+            app:priceText="@{dish.price}"
+            tools:text="99,000đ" />
+
+        <Switch
+            android:id="@+id/dish_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@{dish.availability}"
+            android:onClick="@{() -> viewModel.changeDishStatus(dish)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/dish_image" />
+
+        <TextView
+            android:id="@+id/edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:onClick="@{() -> viewModel.openDish(dish)}"
+            android:padding="@dimen/small_margin"
+            android:text="@string/edit"
+            android:textColor="@color/colorBlue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/delete_text" />
+
+        <TextView
+            android:id="@+id/delete_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.deleteDish(dish)}"
+            android:padding="@dimen/small_margin"
+            android:text="@string/delete"
+            android:textColor="@color/colorBlue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">BKMerchant</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="create_account">Not registered? Sign up here</string>
+    <string name="email">Email</string>
+    <string name="register">Register</string>
+    <string name="already_account">Already have account? Sign in here</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="menu">Menu</string>
+    <string name="name">Name</string>
+    <string name="log_out">log out</string>
+
+    <string name="category">Category</string>
+    <string name="dish">Dish</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="description">Description</string>
+    <string name="price">Price</string>
+    <string name="image">Image</string>
+    <string name="home">Home</string>
+    <string name="payment">Payment</string>
+    <string name="store">Store</string>
+    <string name="account">Account</string>
+    <string name="orders">Orders</string>
+    <string name="promotions">Promotions</string>
+    <string name="notifications">Notifications</string>
+    <string name="report">Report</string>
+    <string name="employees">Employees</string>
+    <string name="total_sales">Total sales Today</string>
+    <string name="vnd">VNĐ</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="change_information">Change information</string>
+    <string name="set_as_default">Set as default</string>
+    <string name="price_money">đ</string>
+    <string name="open_time">Opening Time</string>
+    <string name="close_time">Closing Time</string>
+    <string name="change">Change</string>
+    <string name="hotline">Hotline</string>
+    <string name="website">Website</string>
+    <string name="support_email">Support email</string>
+    <string name="update_information">Update information</string>
+    <string name="change_password">Change password</string>
+    <string name="term_amp_privacy"><![CDATA[Term & Privacy]]></string>
+    <string name="about_us">About Us</string>
+
+</resources>
