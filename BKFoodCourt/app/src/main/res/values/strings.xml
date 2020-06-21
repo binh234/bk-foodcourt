@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">BKFoodCourt</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_Order">Order List</string>
+    <string name="nav_noti">Notifications</string>
+    <string name="nav_profile">Profile</string>
     <string-array name="user_choice">
         <item>Customer</item>
         <item>Cook</item>

@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         mFemale = findViewById(R.id.rbFemale);
         mOther = findViewById(R.id.rbOther);
         mButtonSignUp = findViewById(R.id.btnSignUp);
-
+        mLogin = findViewById(R.id.tvLogin);
         // authentication
         fAuth = FirebaseAuth.getInstance();
 
