@@ -20,7 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText mUsername, mPassword, mFullname, mPhonenumber, mAddress, mBirthday;
+    EditText mUsername, mPassword, mConfirmPW, mFullname, mPhonenumber, mAddress, mBirthday;
     RadioGroup mGender;
     RadioButton mMale, mFemale, mOther;
     Button mButtonSignUp;
@@ -35,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
         // initialization
         mUsername = findViewById(R.id.etUsername);
         mPassword = findViewById(R.id.etPassword);
+        mConfirmPW = findViewById(R.id.etConfirmPassword);
         mFullname = findViewById(R.id.etFullname);
         mPhonenumber = findViewById(R.id.etPhoneNumber);
         mAddress = findViewById(R.id.etAddress);
@@ -59,19 +60,24 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String username = mUsername.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
-
+                String confirmPassword = mConfirmPW.getText().toString().trim();
                 if(TextUtils.isEmpty(username)) {
                     mUsername.setError("You must enter a username.");
                     return;
                 }
-                if(TextUtils.isEmpty(password)) {
+                else if(TextUtils.isEmpty(password)) {
                     mPassword.setError("You must enter password.");
                     return;
                 }
-                if (password.length() < 6) {
+                else if (password.length() < 6) {
                     mPassword.setError("Your password must be at least 6 characters.");
                     return;
                 }
+                else if (password.equals(confirmPassword) == false) {
+                    mPassword.setError("Your password and confirm password don't match.");
+                    return;
+                }
+
 
                 // register the user in firebase
                 fAuth.createUserWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -79,7 +85,9 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "Sign up successfully!", Toast.LENGTH_SHORT).show();
+                            fAuth.signOut();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            finish();
                         }
                         else {
                             Toast.makeText(RegisterActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

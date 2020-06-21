@@ -67,7 +67,11 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Sign in successfully!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            String user = mUserChoice.getSelectedItem().toString();
+                            if (user.equals(new String("Cook"))) {
+                                startActivity(new Intent(getApplicationContext(), Cook.class));
+                                finish();
+                            }
                         }
                         else {
                             Toast.makeText(LoginActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
