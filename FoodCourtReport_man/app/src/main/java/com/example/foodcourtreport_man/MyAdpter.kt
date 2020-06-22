@@ -1,3 +1,4 @@
+/*
 package com.example.foodcourtreport_man
 
 import android.content.Context
@@ -7,6 +8,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
+*/
+/*
 class MyAdapter(private val myContext: Context, fa: FragmentActivity, private var totalTabs: Int) : FragmentStateAdapter(fa) {
 
     // this is for fragment tabs
@@ -21,9 +24,11 @@ class MyAdapter(private val myContext: Context, fa: FragmentActivity, private va
             else ->AddVendorFragment()
         }
     }
+*//*
+
 
     // this counts total number of tabs
     override fun getItemCount(): Int {
         return totalTabs
     }
-}
+}*/
