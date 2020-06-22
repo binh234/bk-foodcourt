@@ -15,6 +15,11 @@
     <string name="nav_orderlist">Order List</string>
     <string name="nav_notification">Notification</string>
     <string name="nav_profile">Profile</string>
+    <string name="enter_vendor_name">Enter Vendor Name</string>
+    <string name="owner_name">Owner Name:</string>
+    <string name="name">Name:</string>
+    <string name="vendor_information_form">Vendor Information Form</string>
+    <string name="enter_vendor_s_owner_name">Enter Vendor\'s Owner Name</string>
 
     <string-array name="user_choice">
         <item>Customer</item>
