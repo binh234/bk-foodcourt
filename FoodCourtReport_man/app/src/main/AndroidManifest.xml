@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.foodcourtreport_man">
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".StatReportActivity"></activity>
+        <activity android:name=".AddRemoveVendorActivity"></activity>
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@ import android.widget.ImageButton
 
 class MainActivity : AppCompatActivity() {
     private val openStatReport = 1
+    private val openAddRemoveVendor = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -15,7 +16,11 @@ class MainActivity : AppCompatActivity() {
         statReportImageButton.setOnClickListener{
             val intent = Intent(this, StatReportActivity::class.java)
             startActivityForResult(intent, openStatReport)
-
+        }
+        val addRemoveVendorButton : ImageButton = findViewById(R.id.addRemoveVendorButton)
+        addRemoveVendorButton.setOnClickListener{
+            val intent = Intent(this,AddRemoveVendorActivity::class.java)
+            startActivityForResult(intent,openAddRemoveVendor)
         }
 
     }
