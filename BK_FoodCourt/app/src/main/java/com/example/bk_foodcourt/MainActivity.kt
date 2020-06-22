@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(applicationContext, LoginActivity::class.java))
             finish()
         }
+
+
     }
 
     fun logout(view: View?) {

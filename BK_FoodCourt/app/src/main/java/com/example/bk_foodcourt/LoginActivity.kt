@@ -63,6 +63,10 @@ class LoginActivity : AppCompatActivity(), OnItemSelectedListener {
                             startActivity(Intent(applicationContext, Cook::class.java))
                             finish()
                         }
+                        else if (user == "Manager") {
+                            startActivity(Intent(applicationContext, Manager::class.java))
+                            finish()
+                        }
                     } else {
                         Toast.makeText(
                             this@LoginActivity,

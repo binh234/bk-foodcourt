@@ -1,4 +1,15 @@
 <resources>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="total_revenues_by_vendor">Total Revenues By Vendor</string>
+    <string name="total_revenue_by_item">Total Revenue By Item</string>
+    <string name="item_chart">Item_chart</string>
+    <string name="vendor_chart">Vendor_chart</string>
+    <string name="add_new_vendor">Add New Vendor</string>
+    <string name="remove_vendor">Remove Vendor</string>
+    <string name="remove_the_fucking_vendor">REMOVE THE FUCKING VENDOR</string>
+    <string name="add_the_fucking_vendor">ADD THE FUCKING VENDOR</string>
     <string name="app_name">BK_FoodCourt</string>
     <string name="nav_home">Home</string>
     <string name="nav_orderlist">Order List</string>
@@ -10,4 +21,5 @@
         <item>Cook</item>
         <item>Manager</item>
     </string-array>
+
 </resources>

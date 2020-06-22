@@ -1,9 +1,9 @@
 package com.example.bk_foodcourt
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
-import com.example.bk_foodcourt.R
 
 class StatReportActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
