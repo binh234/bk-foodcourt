@@ -17,7 +17,7 @@ class Manager() : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_manager)
         val statReportImageButton : ImageButton =findViewById(R.id.statReport)
         statReportImageButton.setOnClickListener{
             val intent = Intent(this, StatReportActivity::class.java)

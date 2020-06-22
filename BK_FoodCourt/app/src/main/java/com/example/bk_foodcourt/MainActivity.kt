@@ -9,7 +9,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     var fAuth: FirebaseAuth? = null
-    private val View: Any? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,8 +19,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(applicationContext, LoginActivity::class.java))
             finish()
         }
-
-
     }
 
     fun logout(view: View?) {
