@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -40,6 +41,7 @@ class DishFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.dish)
 
         storageReference = FirebaseStorage.getInstance().getReference("dish_image")
 

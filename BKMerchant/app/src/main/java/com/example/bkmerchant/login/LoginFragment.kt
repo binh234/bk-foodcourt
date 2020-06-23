@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.bkmerchant.MainActivity
@@ -15,11 +16,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginFragment : Fragment() {
-    companion object {
-        const val TAG = "LoginFragment"
-        const val SIGN_IN_RESULT_CODE = 1001
-    }
-
     private lateinit var binding: LoginFragmentBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
@@ -30,6 +26,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.login)
 
         firebaseAuth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
@@ -39,8 +36,10 @@ class LoginFragment : Fragment() {
         }
 
         binding = LoginFragmentBinding.inflate(inflater, container, false)
+
         binding.loginButton.setOnClickListener { login() }
-        binding.registerTextView.setOnClickListener { navigateToRegisterFragment() }
+        binding.createAccountButton.setOnClickListener { navigateToRegisterFragment() }
+        binding.forgotPassword.setOnClickListener { resetPassword() }
 
         return binding.root;
     }
@@ -49,71 +48,99 @@ class LoginFragment : Fragment() {
         val email = binding.emailText.text.toString()
         val password = binding.passwordText.text.toString()
         if (email.isEmpty()) {
-            binding.emailText.setError("Empty email")
+            binding.emailText.error = "Empty email"
             binding.emailText.requestFocus()
         } else if (password.isEmpty()) {
-            binding.passwordText.setError("Empty password")
+            binding.passwordText.error = "Empty password"
             binding.passwordText.requestFocus()
         } else {
-            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val currentUser = firebaseAuth.currentUser
-                    if (currentUser != null) {
-                        currentUser.email?.let { email ->
-                            firestore.collection("userTypes")
-                                .whereEqualTo("email", email)
-                                .limit(1)
-                                .get()
-                                .addOnSuccessListener { query ->
-                                    if (query.isEmpty) {
-                                        firebaseAuth.signOut()
+            checkPermissionAndLogin(email, password)
+        }
+    }
+
+    private fun checkPermissionAndLogin(email: String, password: String) {
+        firestore.collection("userTypes")
+            .whereEqualTo("email", email)
+            .limit(1)
+            .get()
+            .addOnSuccessListener { query ->
+                if (query.isEmpty) {
+                    Toast.makeText(
+                        context,
+                        "Sorry, you don't have permission to use this app",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+
+                } else {
+                    for (document in query) {
+                        val userType = document.toObject(UserType::class.java)
+                        if (userType.accountType == AccountType.VENDOR_OWNER) {
+                            firebaseAuth.signInWithEmailAndPassword(email, password)
+                                .addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        if (!userType.update) {
+                                            val currentUser = firebaseAuth.currentUser
+                                            if (currentUser != null) {
+                                                firestore.collection("users")
+                                                    .document(currentUser.uid)
+                                                    .update(
+                                                        "accountType",
+                                                        AccountType.VENDOR_OWNER
+                                                    )
+                                            }
+                                            firestore.collection("userTypes")
+                                                .document(document.id)
+                                                .update("update", true)
+                                        }
                                         Toast.makeText(
                                             context,
-                                            "Sorry, you don't have permission to use this app",
-                                            Toast.LENGTH_LONG
+                                            "Login successful",
+                                            Toast.LENGTH_SHORT
                                         )
                                             .show()
+                                        startMainActivity()
                                     } else {
-                                        for (document in query) {
-                                            val userType = document.toObject(UserType::class.java)
-                                            if (userType.accountType == AccountType.VENDOR_OWNER) {
-                                                if (!userType.update) {
-                                                    firestore.collection("users")
-                                                        .document(currentUser.uid)
-                                                        .update(
-                                                            "accountType",
-                                                            AccountType.VENDOR_OWNER
-                                                        )
-                                                    firestore.collection("userTypes")
-                                                        .document(document.id)
-                                                        .update("update", true)
-                                                }
-                                                Toast.makeText(
-                                                    context,
-                                                    "Login successful",
-                                                    Toast.LENGTH_SHORT
-                                                )
-                                                    .show()
-                                                startMainActivity()
-                                            } else {
-                                                firebaseAuth.signOut()
-                                                Toast.makeText(
-                                                    context,
-                                                    "Sorry, you don't have permission to use this app",
-                                                    Toast.LENGTH_LONG
-                                                )
-                                                    .show()
-                                            }
-                                        }
+                                        Toast.makeText(
+                                            context,
+                                            "Login failed, please try again",
+                                            Toast.LENGTH_SHORT
+                                        )
+                                            .show()
                                     }
                                 }
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "Sorry, you don't have permission to use this app",
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
                         }
                     }
-                } else {
-                    Toast.makeText(context, "Login failed, please try again", Toast.LENGTH_SHORT)
-                        .show()
                 }
             }
+    }
+
+    private fun resetPassword() {
+        val email = binding.emailText.text.toString()
+        if (email.isEmpty()) {
+            binding.emailText.error = "Empty email"
+            binding.emailText.requestFocus()
+        } else {
+            firebaseAuth.sendPasswordResetEmail(email)
+                .addOnSuccessListener {
+                    Toast.makeText(
+                        context,
+                        "Please check your email to set new password",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(context, "Please enter a valid email", Toast.LENGTH_LONG)
+                        .show()
+                }
         }
     }
 

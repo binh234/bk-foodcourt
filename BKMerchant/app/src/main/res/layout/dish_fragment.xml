@@ -28,7 +28,7 @@
                 <ImageView
                     android:id="@+id/dish_image"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="@dimen/image_large_size"
                     android:layout_marginTop="@dimen/small_margin"
                     android:scaleType="centerCrop"
                     app:imageDetailUrl="@{viewModel.imageUrl}" />
@@ -43,6 +43,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/name"
+                        android:maxLength="40"
                         android:inputType="textCapSentences"
                         android:text="@={viewModel.name}" />
                 </com.google.android.material.textfield.TextInputLayout>

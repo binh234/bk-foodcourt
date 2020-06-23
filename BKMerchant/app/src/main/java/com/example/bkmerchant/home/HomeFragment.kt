@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -26,6 +27,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.home)
 
         firebaseAuth = FirebaseAuth.getInstance()
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
@@ -67,5 +69,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToStoreDetailFragment() {
+        val action = viewModel.currentStore.value?.let {
+            HomeFragmentDirections.actionHomeFragmentToHomeStoreDetailFragment(it)
+        }
+        if (action != null) {
+            findNavController().navigate(action)
+        }
     }
 }

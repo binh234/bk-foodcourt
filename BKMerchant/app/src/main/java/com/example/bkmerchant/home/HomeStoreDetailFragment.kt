@@ -1,4 +1,4 @@
-package com.example.bkmerchant.storeActivity.storeDetail
+package com.example.bkmerchant.home
 
 import android.app.Activity
 import android.app.TimePickerDialog
@@ -18,13 +18,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.StoreDetailFragmentBinding
+import com.example.bkmerchant.storeActivity.storeDetail.StoreDetailFactory
+import com.example.bkmerchant.storeActivity.storeDetail.StoreDetailFragmentArgs
+import com.example.bkmerchant.storeActivity.storeDetail.StoreDetailViewModel
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 import java.util.*
 
-class StoreDetailFragment : Fragment() {
+class HomeStoreDetailFragment : Fragment() {
     private lateinit var binding: StoreDetailFragmentBinding
     private lateinit var viewModel: StoreDetailViewModel
     private lateinit var viewModelFactory: StoreDetailFactory
@@ -173,7 +176,7 @@ class StoreDetailFragment : Fragment() {
     }
 
     private fun navigateToStoreFragment() {
-        findNavController().navigate(R.id.storeFragment)
+        findNavController().navigate(R.id.homeFragment)
     }
 
 }
