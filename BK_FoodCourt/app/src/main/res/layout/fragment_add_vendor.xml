@@ -1,34 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <!-- TODO: Update blank fragment layout -->
-
-
-    <TextView
-        android:text="@string/vendor_information_form"
-        style="@style/FormTitle" />
-    <TextView
-        android:text="@string/name"
-        style="@style/FormFieldAsk" />
-    <EditText
-        android:hint="@string/enter_vendor_name"
-        style="@style/FormEditText"
-        android:autofillHints="" />
-    <TextView
-        android:text="@string/owner_name"
-        style="@style/FormFieldAsk"
-        />
-    <EditText
-       android:hint="@string/enter_vendor_s_owner_name"
-        style ="@style/FormFieldAsk" />
 
 
 
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:text="@string/vendor_information_form"
+            style="@style/FormTitle" />
+        <TextView
+            android:text="@string/name"
+            style="@style/FormFieldAsk" />
+        <EditText
+            android:hint="@string/enter_vendor_name"
+            style="@style/FormEditText"
+            android:autofillHints="" />
+        <TextView
+            android:text="@string/owner_name"
+            style="@style/FormFieldAsk"
+            />
+        <EditText
+            android:hint="@string/enter_vendor_s_owner_name"
+            style ="@style/FormFieldAsk"
+            android:importantForAutofill="no" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_vendor_image"
+            android:textStyle="bold"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:contentDescription="@string/vendorimage" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/upload_image"
+            android:textStyle="bold"/>
+        <TextView
+            android:text="@string/hot_line"
+            style="@style/FormFieldAsk"/>
+        <EditText
+            android:hint="@string/enter_the_vendor_s_suppport_line_here"
+            style="@style/FormEditText"
+            android:autofillHints="no"/>
+        <TextView
+            android:text="@string/open_time"
+            style="@style/FormFieldAsk"/>
+        <EditText
+            android:hint="@string/enter_open_time"
+            style="@style/FormEditText"
+            android:autofillHints="no"/>
+        <TextView
+            android:hint="@string/close_time"
+            style="@style/FormFieldAsk"/>
+        <EditText
+            android:text="@string/enter_vendor_s_close_time"
+            style="@style/FormEditText"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor" />
 
 
+    </LinearLayout>
+</ScrollView>
 
-</LinearLayout>

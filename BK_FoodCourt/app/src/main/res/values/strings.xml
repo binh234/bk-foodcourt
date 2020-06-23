@@ -20,6 +20,21 @@
     <string name="name">Name:</string>
     <string name="vendor_information_form">Vendor Information Form</string>
     <string name="enter_vendor_s_owner_name">Enter Vendor\'s Owner Name</string>
+    <string name="choose_vendor_image">CHOOSE VENDOR IMAGE</string>
+    <string name="upload_image">UPLOAD IMAGE</string>
+    <string name="hot_line">Hot Line:</string>
+    <string name="enter_the_vendor_s_suppport_line_here">Enter the vendor\'s suppport line here</string>
+    <string name="open_time">Open Time:</string>
+    <string name="enter_open_time">Enter Open Time</string>
+    <string name="close_time">Close Time:</string>
+    <string name="enter_vendor_s_close_time">Enter vendor\'s close time</string>
+    <string name="vendorimage">VendorImage</string>
+    <string name="plans">PLANS</string>
+    <string name="management">MANAGEMENT</string>
+    <string name="bestsellers">BestSellers</string>
+    <string name="add_remove_vendors">Add/Remove Vendors</string>
+    <string name="vendor_management">Vendor Management</string>
+    <string name="check_stats">Check Stats</string>
 
     <string-array name="user_choice">
         <item>Customer</item>

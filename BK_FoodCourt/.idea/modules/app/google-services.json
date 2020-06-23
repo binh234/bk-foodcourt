@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "165534808147-q7ati1u4ch7jqv29esqsdsgpj9n30si0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bk_foodcourt",
+            "certificate_hash": "ee5bfcdf79e5b6950cb7b1b756eae0389fe5607e"
+          }
+        },
+        {
           "client_id": "165534808147-6ef8lmg82t6unrbnl0b1h555u7enhcei.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
