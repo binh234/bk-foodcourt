@@ -26,4 +26,6 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(applicationContext, LoginActivity::class.java))
         finish()
     }
+
+    fun add_to_list(view: View) {}
 }
