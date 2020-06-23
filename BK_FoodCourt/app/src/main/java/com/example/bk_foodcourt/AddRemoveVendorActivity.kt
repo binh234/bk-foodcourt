@@ -12,7 +12,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
 class AddRemoveVendorActivity : AppCompatActivity() {
-    var viewPager: ViewPager2? = null
+    private var viewPager: ViewPager2? = null
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_remove_vendor)

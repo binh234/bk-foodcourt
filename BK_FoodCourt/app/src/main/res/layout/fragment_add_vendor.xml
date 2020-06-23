@@ -1,70 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
-            android:text="@string/vendor_information_form"
-            style="@style/FormTitle" />
+            style="@style/FormTitle"
+            android:text="@string/vendor_information_form" />
+
         <TextView
-            android:text="@string/name"
-            style="@style/FormFieldAsk" />
-        <EditText
-            android:hint="@string/enter_vendor_name"
-            style="@style/FormEditText"
-            android:autofillHints="" />
-        <TextView
-            android:text="@string/owner_name"
             style="@style/FormFieldAsk"
-            />
+            android:text="@string/name" />
+
         <EditText
+            style="@style/FormEditText"
+            android:autofillHints=""
+            android:hint="@string/enter_vendor_name" />
+
+        <TextView
+            style="@style/FormFieldAsk"
+            android:text="@string/owner_name" />
+
+        <EditText
+            style="@style/FormFieldAsk"
             android:hint="@string/enter_vendor_s_owner_name"
-            style ="@style/FormFieldAsk"
             android:importantForAutofill="no" />
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/choose_vendor_image"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
         <ImageView
+            android:id="@+id/imageToUpload_addVendor"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:contentDescription="@string/vendorimage" />
+
+        <ProgressBar
+            android:id="@+id/progress_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/upload_image"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
         <TextView
-            android:text="@string/hot_line"
-            style="@style/FormFieldAsk"/>
+            style="@style/FormFieldAsk"
+            android:text="@string/hot_line" />
+
         <EditText
-            android:hint="@string/enter_the_vendor_s_suppport_line_here"
             style="@style/FormEditText"
-            android:autofillHints="no"/>
+            android:autofillHints="no"
+            android:hint="@string/enter_the_vendor_s_suppport_line_here" />
+
         <TextView
-            android:text="@string/open_time"
-            style="@style/FormFieldAsk"/>
+            style="@style/FormFieldAsk"
+            android:text="@string/open_time" />
+
         <EditText
-            android:hint="@string/enter_open_time"
             style="@style/FormEditText"
-            android:autofillHints="no"/>
+            android:autofillHints="no"
+            android:hint="@string/enter_open_time" />
+
         <TextView
-            android:hint="@string/close_time"
-            style="@style/FormFieldAsk"/>
+            style="@style/FormFieldAsk"
+            android:hint="@string/close_time" />
+
         <EditText
-            android:text="@string/enter_vendor_s_close_time"
             style="@style/FormEditText"
             android:importantForAutofill="no"
+            android:text="@string/enter_vendor_s_close_time"
             tools:ignore="LabelFor" />
 
 
