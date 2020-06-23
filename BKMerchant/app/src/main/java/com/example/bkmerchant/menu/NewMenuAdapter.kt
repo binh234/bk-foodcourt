@@ -2,7 +2,9 @@ package com.example.bkmerchant.menu
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.view.menu.MenuAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
@@ -26,6 +28,20 @@ class NewMenuAdapter(options: FirestoreRecyclerOptions<Category>,
             Log.d("MenuAdapter", "Create Adapter")
             binding.category = item
             binding.viewModel = viewModel
+
+            binding.viewText.setOnClickListener {
+                val textView = (it as TextView)
+                when (textView.text) {
+                    "Hide all" -> {
+                        textView.text = "Show all"
+                        binding.dishRecycler.visibility = View.GONE
+                    }
+                    else -> {
+                        textView.text = "Hide all"
+                        binding.dishRecycler.visibility = View.VISIBLE
+                    }
+                }
+            }
 
             val query: Query = FirebaseFirestore.getInstance()
                 .collection("stores")

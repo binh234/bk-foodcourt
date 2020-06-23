@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.bkmerchant.MainActivity
 import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.AccountFragmentBinding
@@ -30,11 +32,14 @@ class AccountFragment: Fragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.account_setting)
+
         firebaseAuth = FirebaseAuth.getInstance()
         currentUser = firebaseAuth.currentUser!!
 
         binding = AccountFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
+
         binding.bottomNav.selectedItemId = R.id.nav_account
         binding.bottomNav.setOnNavigationItemSelectedListener {
             bottomNavigationItemSelected(it)
@@ -42,6 +47,15 @@ class AccountFragment: Fragment() {
 
         binding.logoutButton.setOnClickListener {
             logout()
+        }
+        binding.termPrivacy.setOnClickListener {
+            navigateToTermFragment()
+        }
+        binding.aboutUs.setOnClickListener {
+            navigateToAboutFragment()
+        }
+        binding.changePassword.setOnClickListener {
+            navigateToPasswordFragment()
         }
 
         return binding.root
@@ -72,5 +86,17 @@ class AccountFragment: Fragment() {
     private fun startLoginActivity() {
         val intent = Intent(context, LoginActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun navigateToTermFragment() {
+        findNavController().navigate(R.id.termFragment)
+    }
+
+    private fun navigateToAboutFragment() {
+        findNavController().navigate(R.id.aboutFragment)
+    }
+
+    private fun navigateToPasswordFragment() {
+        findNavController().navigate(R.id.passwordFragment)
     }
 }

@@ -10,4 +10,19 @@
         android:name="com.example.bkmerchant.accountActivity.AccountFragment"
         android:label="AccountFragment"
         tools:layout="@layout/account_fragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.bkmerchant.accountActivity.AboutFragment"
+        android:label="AboutFragment"
+        tools:layout="@layout/term_privacy_fragment"/>
+    <fragment
+        android:id="@+id/termFragment"
+        android:name="com.example.bkmerchant.accountActivity.TermFragment"
+        android:label="TermFragment"
+        tools:layout="@layout/about_fragment"/>
+    <fragment
+        android:id="@+id/passwordFragment"
+        android:name="com.example.bkmerchant.accountActivity.PasswordFragment"
+        android:label="PasswordFragment"
+        tools:layout="@layout/password_fragment"/>
 </navigation>

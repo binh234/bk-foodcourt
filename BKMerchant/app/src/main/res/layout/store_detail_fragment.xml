@@ -29,7 +29,7 @@
                 <ImageView
                     android:id="@+id/store_image"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="@dimen/image_large_size"
                     android:layout_marginTop="@dimen/small_margin"
                     android:scaleType="centerCrop"
                     app:imageDetailUrl="@{viewModel.imageUrl}" />
@@ -45,6 +45,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/name"
                         android:inputType="textCapSentences"
+                        android:maxLength="20"
                         android:text="@={viewModel.name}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,9 +102,10 @@
                             android:layout_below="@id/open_time"
                             android:layout_marginStart="@dimen/base_margin"
                             android:layout_toEndOf="@id/open_time_text"
-                            android:background="@color/duskYellow"
+                            android:background="@drawable/fab_button_background"
                             android:padding="@dimen/fab_margin"
-                            android:text="@string/change" />
+                            android:text="@string/change"
+                            android:textColor="@android:color/white" />
 
                     </RelativeLayout>
 
@@ -137,9 +139,10 @@
                             android:layout_below="@id/close_time"
                             android:layout_marginStart="@dimen/base_margin"
                             android:layout_toEndOf="@id/close_time_text"
-                            android:background="@color/duskYellow"
+                            android:background="@drawable/fab_button_background"
                             android:padding="@dimen/fab_margin"
-                            android:text="@string/change" />
+                            android:text="@string/change"
+                            android:textColor="@android:color/white" />
 
                     </RelativeLayout>
 
