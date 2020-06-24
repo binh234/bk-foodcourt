@@ -46,7 +46,7 @@ class RegisterActivity : AppCompatActivity() {
 
         // check Login or not
         if (fAuth!!.currentUser != null) {
-            startActivity(Intent(applicationContext, MainActivity::class.java))
+            startActivity(Intent(applicationContext, OrderActivity::class.java))
             finish()
         }
         // Register button click

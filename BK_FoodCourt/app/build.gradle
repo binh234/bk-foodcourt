@@ -44,7 +44,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
+<<<<<<< HEAD
 //=======
+=======
+
+>>>>>>> a4a2c11b183c73927c2521b21a6930280051cafa
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.google.firebase:firebase-database:19.3.1'
     testImplementation 'junit:junit:4.12'

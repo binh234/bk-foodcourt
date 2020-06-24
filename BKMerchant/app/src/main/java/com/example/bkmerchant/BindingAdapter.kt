@@ -40,7 +40,11 @@ fun convertIntToTime(view:TextView, time:Int) {
 
 @BindingAdapter(value = ["total_rating", "total_star"])
 fun setRatingStar(view:TextView, totalRatings: Int, totalStars: Int) {
-    val rating = round(totalStars * 10.0 / totalRatings + 0.5) / 10
-    val text = String.format("%.1f", rating)
-    view.text = text
+    if (totalRatings !=0 ) {
+        val rating = round(totalStars * 10.0 / totalRatings + 0.5) / 10
+        val text = String.format("%.1f", rating)
+        view.text = text
+    } else {
+        view.text = "No ratings"
+    }
 }
