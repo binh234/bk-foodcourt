@@ -12,4 +12,6 @@
         <item name="android:textSize">20sp</item>
         <item name="android:background">#F4A460</item>
     </style>
+
+
 </resources>

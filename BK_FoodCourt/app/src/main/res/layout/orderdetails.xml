@@ -73,28 +73,28 @@
             >
 
             <Button
-                android:id="@+id/listen"
+                android:id="@+id/call"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_below="@+id/price_total_textView"
                 android:textColor="#fff"
                 android:layout_weight="1"
                 android:background="#ea7a66"
-                android:onClick="confirm"
-                android:text="Listen" />
+                android:onClick="call"
+                android:text="Call" />
 
             <Button
-                android:id="@+id/call"
+                android:id="@+id/pay"
 
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:background="#3a8fc1"
                 android:layout_below="@+id/price_total_textView"
-                android:layout_toRightOf="@id/listen"
+                android:layout_toRightOf="@id/call"
                 android:textColor="#fff"
                 android:layout_weight="1"
-                android:onClick="call"
-                android:text="Call" />
+                android:onClick="payOrder"
+                android:text="Pay" />
             <Button
                 android:id="@+id/sms"
 
