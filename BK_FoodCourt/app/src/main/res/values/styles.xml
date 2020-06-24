@@ -52,4 +52,20 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="vendorID_name">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:background">#4DFAA9</item>
+        <item name="android:textColor">#F08B4A</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="totalRevenues">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:background">@android:color/background_light</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
 </resources>

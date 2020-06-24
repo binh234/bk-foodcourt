@@ -10,29 +10,34 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.*
 
 
 class AddRemoveVendorActivity : AppCompatActivity() {
-    private val PICKIMAGEREQUEST : Int = 1
     private var viewPager: ViewPager2? = null
-    private val chooseVendorImageButton : Button = findViewById(R.id.chooseVendorImage)
-    private val vendorImageView : ImageView = findViewById(R.id.vendorImageView)
-    private val vendorImageUpload : Button = findViewById(R.id.uploadImageButton)
-    private lateinit var imageUri : Uri
-    override fun onCreate(savedInstanceState: Bundle?){
+    private var filepath : Uri? = null
+    private var storage: FirebaseStorage? = null
+       private var storageReference : StorageReference? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_remove_vendor)
-
         viewPager = findViewById<ViewPager2>(R.id.pager)
+        //Init firebase
+        storage = FirebaseStorage.getInstance()
+        storageReference = storage!!.reference
+        //Setup button
+
         viewPager!!.adapter = object : FragmentStateAdapter(this) {
-            override fun createFragment(position: Int) : Fragment {
-                return if (position == 0){
+            override fun createFragment(position: Int): Fragment {
+                return if (position == 0) {
                     AddVendorFragment.newInstance()
                 } else {
                     RemoveVendorFragment.newInstance()
@@ -45,36 +50,16 @@ class AddRemoveVendorActivity : AppCompatActivity() {
         }
         val tabLayout = findViewById<TabLayout>(R.id.tab_layout)
         TabLayoutMediator(tabLayout, viewPager!!) { tab, position ->
-            if (position == 0){
+            if (position == 0) {
                 tab.text = "Add New Vendor"
-            }
-            else {
+            } else {
                 tab.text = "Remove a Vendor"
             }
         }.attach()
-        chooseVendorImageButton.setOnClickListener(){
-            openFileChooser()
-        }
-
-    }
-
-    private fun openFileChooser() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        ActivityCompat.startActivityForResult(this,intent,PICKIMAGEREQUEST,null)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICKIMAGEREQUEST && resultCode == RESULT_OK
-            && data != null && data.data != null) {
-            imageUri = data.data!!
-            vendorImageView.setImageURI(imageUri)
-        }
     }
 
 }
+
 class AddVendorFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -84,10 +69,12 @@ class AddVendorFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater!!.inflate(R.layout.fragment_add_vendor, container, false)
     }
+
     companion object {
         fun newInstance(): AddVendorFragment = AddVendorFragment()
     }
 }
+
 class RemoveVendorFragment : Fragment() {
     // TODO: Rename and change types of parameters
     override fun onCreateView(
@@ -98,6 +85,7 @@ class RemoveVendorFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater!!.inflate(R.layout.fragment_remove_vendor, container, false)
     }
+
     companion object {
         fun newInstance(): RemoveVendorFragment = RemoveVendorFragment()
     }

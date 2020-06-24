@@ -22,6 +22,7 @@ class Cook : AppCompatActivity() {
         orderListFragment = OrderListFragment()
         notiFragment = NotificationFragment()
         profileFragment = ProfileFragment()
+        setFragment(homeFragment)
         mMainNav!!.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {

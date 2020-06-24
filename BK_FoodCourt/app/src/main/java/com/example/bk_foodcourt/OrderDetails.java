@@ -27,7 +27,7 @@ public class OrderDetails extends Activity {
 
 
 
-        b1= findViewById(R.id.listen);
+        b1 = findViewById(R.id.pay);
         b2= findViewById(R.id.call);
         b3 = findViewById(R.id.sms);
 
@@ -47,7 +47,7 @@ public class OrderDetails extends Activity {
       // bdt_price_view.setText(bdt_price);
 
        show_price_view = findViewById(R.id.showprice);
-       show_price_view.setText("BDT : "+bdt_price+" TK\n"+"USD : "+usd_price+" $");
+       show_price_view.setText("VND : "+bdt_price+" đ\n"+"USD : "+usd_price+" $");
 
         ordered__list.setText(data);
 
@@ -85,7 +85,7 @@ public class OrderDetails extends Activity {
 
                 //Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH,null,null);
+                    t1.speak(toSpeak,TextToSpeech.QUEUE_FLUSH,null,null);
                 } else {
                     t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                 }

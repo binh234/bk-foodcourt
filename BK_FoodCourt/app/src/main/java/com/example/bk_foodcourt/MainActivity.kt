@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
         if (fAuth!!.currentUser == null) {
             startActivity(Intent(applicationContext, LoginActivity::class.java))
             finish()
+        } else {
+
         }
     }
 

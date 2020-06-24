@@ -12,7 +12,7 @@ import android.widget.ImageButton
 class Manager() : AppCompatActivity() {
     private val openStatReport = 1
     private val openAddRemoveVendor = 1
-
+    private val checkVendorInfos = 1
     constructor(parcel: Parcel) : this() {
     }
 
@@ -40,14 +40,25 @@ class Manager() : AppCompatActivity() {
         // Open Top 5 Vendor List from the corresponding Image Button and Button
 
 
-        // Open Manage Vendor from the corresponding Image Button and Button
+        // Open Check Info Vendor from the corresponding Image Button and Button
+        val checkVendorInfo : ImageButton = findViewById(R.id.vendorCheckInfo)
+        checkVendorInfo.setOnClickListener{
+            openCheckInfo()
+        }
+        val checkVendorsInfoButton : Button = findViewById(R.id.vendor_check_Button)
+        checkVendorsInfoButton.setOnClickListener{
+            openCheckInfo()
+        }
     }
 
     private fun openAddRemoveClick() {
         val intent = Intent(this, AddRemoveVendorActivity::class.java)
         startActivityForResult(intent, openAddRemoveVendor)
     }
-
+    private fun openCheckInfo(){
+        val intent = Intent(this, AddRemoveVendorActivity::class.java)
+        startActivityForResult(intent,checkVendorInfos)
+    }
     private fun openStatReportClick() {
         val intent = Intent(this, StatReportActivity::class.java)
         startActivityForResult(intent, openStatReport)
