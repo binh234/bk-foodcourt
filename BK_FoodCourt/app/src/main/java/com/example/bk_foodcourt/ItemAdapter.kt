@@ -2,6 +2,7 @@ package com.example.bk_foodcourt
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,8 +52,8 @@ class ItemAdapter(
         var orders: List<Row>
         override fun onClick(view: View) {
             //Toast.makeText(context, "Success!", Toast.LENGTH_SHORT)
-            val intent = Intent(context, ViewOrderActivity::class.java)
-            context.startActivity(intent)
+//            val intent = Intent(context, ViewOrderActivity::class.java)
+//            context.startActivity(intent)
         }
 
         init {

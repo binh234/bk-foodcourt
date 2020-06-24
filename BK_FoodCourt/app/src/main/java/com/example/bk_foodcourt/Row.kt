@@ -6,9 +6,9 @@ class Row(s: String, s1: String) {
     private var orderID: String = ""
     private var userID: String = ""
 
-    public fun Row(orderID: String, userID: String) {
-        this.orderID = orderID
-        this.userID = userID
+    init {
+        this.orderID = s
+        this.userID = s1
     }
     public fun getOrderID(): String {
         return this.orderID
