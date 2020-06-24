@@ -17,8 +17,8 @@ class OrderListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view: View = inflater.inflate(R.layout.fragment_order_list, container, false)
-        orderList = view!!.findViewById(R.id.rvOrderList)
+        val view: View = inflater.inflate(R.layout.fragment_order_list, container, false)
+        orderList = view.findViewById(R.id.rvOrderList)
         orderList!!.setHasFixedSize(true)
         orderList!!.layoutManager = LinearLayoutManager(context)
         adapter = ItemAdapter(initData(), context!!)

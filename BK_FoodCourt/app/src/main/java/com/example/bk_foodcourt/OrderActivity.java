@@ -106,9 +106,9 @@ public class OrderActivity extends Activity {
     public void place_order(View view) {
 
         balancesheet();
-        Intent i = new Intent(OrderActivity.this, OrderDetails.class);
+        Intent i = new Intent(getApplicationContext(), OrderDetails.class);
         Bundle bundle = new Bundle();
-        bundle.putString("choice_iteams", choices);
+        bundle.putString("choice_items", choices);
         bundle.putString("bdt_price", prices);
         bundle.putString("usd_price", usd_price_string);
         i.putExtras(bundle);
