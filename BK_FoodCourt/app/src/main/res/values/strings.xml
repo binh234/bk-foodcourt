@@ -39,6 +39,24 @@
     <string name="manage_button">MANAGE VENDORS</string>
     <string name="vendors_stats">VENDORS STATS</string>
     <string name="add_remove_a_vendor">ADD/REMOVE A VENDOR</string>
+    <string name="store_number_1">STORE NUMBER 1</string>
+    <string name="total_revenues">Total Revenues:</string>
+    <string name="total_revenues_1000">Total Revenues:1000$</string>
+    <string name="store_number_2">STORE NUMBER 2</string>
+    <string name="total_revenues_2000">Total Revenues: 2000$</string>
+    <string name="display_pie_chart">Display Pie Chart</string>
+    <string name="pie_chart_displaying_vendors_sale_in">Pie Chart Displaying Vendors\' Sale (in %)</string>
+    <string name="total_revenues_2500">Total revenues: 2500$</string>
+    <string name="item_5">ITEM 5</string>
+    <string name="total_revenues_3000">Total revenues: 3000$</string>
+    <string name="item_4">ITEM 4</string>
+    <string name="total_revenues_500">Total Revenues: 500$</string>
+    <string name="item_3">ITEM 3</string>
+    <string name="item2">ITEM2</string>
+    <string name="total_revenues_1500">Total Revenues: 1500$</string>
+    <string name="item1">ITEM1</string>
+    <string name="check_vendors_info">CHECK VENDORS INFO</string>
+    <string name="please_click_on_a_vendor_image_to_check_its_information">Please click on a vendor image to check its information</string>
 
     <string-array name="user_choice">
         <item>Customer</item>

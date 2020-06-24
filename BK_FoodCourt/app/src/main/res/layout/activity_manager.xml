@@ -66,7 +66,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="36dp"
         android:layout_marginRight="36dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="64dp"
         android:contentDescription="@string/add_remove_vendors"
         android:scaleType="fitCenter"
         android:src="@drawable/add_remove_512_3_"
@@ -99,7 +99,7 @@
         tools:srcCompat="@drawable/stats_512" />
 
     <ImageButton
-        android:id="@+id/vendorManageButton"
+        android:id="@+id/vendorCheckInfo"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_marginStart="8dp"
@@ -156,9 +156,10 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:text="@string/manage_button"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/check_vendors_info"
         app:layout_constraintBottom_toTopOf="@+id/addRemoveVendorButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vendorManageButton"
@@ -181,12 +182,12 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
         android:text="@string/add_remove_a_vendor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addRemoveVendorButton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.526" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
