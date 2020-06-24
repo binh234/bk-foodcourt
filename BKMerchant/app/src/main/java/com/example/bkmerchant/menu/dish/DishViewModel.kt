@@ -61,12 +61,16 @@ class DishViewModel(val dish: Dish): ViewModel() {
                 .getReferenceFromUrl(imageUrl)
                 .delete()
         }
+        if (url.isNotEmpty()) {
+            dish.imageUrl = url
+        }
+
         dish.name = name.value ?: ""
         dish.description = description.value ?: ""
         dish.price = (price.value ?: "0").toDouble()
         dish.availability = true
         dish.categoryId = categories[index].id
-        dish.imageUrl = url
+
         if (dish.id.isNotEmpty()) {
             updateDish()
         } else {

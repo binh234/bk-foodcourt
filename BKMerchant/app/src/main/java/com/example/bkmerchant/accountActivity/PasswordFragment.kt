@@ -34,7 +34,7 @@ class PasswordFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.password_setting)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        currentUser = FirebaseAuth.getInstance().currentUser!!
+        currentUser = firebaseAuth.currentUser!!
 
         binding = PasswordFragmentBinding.inflate(inflater, container, false)
         binding.forgotPassword.setOnClickListener { resetPassword() }
@@ -52,7 +52,9 @@ class PasswordFragment : Fragment() {
             val credential = EmailAuthProvider.getCredential(it, currentPassword)
             currentUser.reauthenticate(credential)
                 .addOnSuccessListener {
-                    if (newPassword != confirmPassword) {
+                    if (newPassword.length < 6) {
+                        binding.newPassword.error = "Password must have at least 6 characters"
+                    } else if (newPassword != confirmPassword) {
                         binding.confirmPassword.error = "Password not match"
                     } else {
                         currentUser.updatePassword(newPassword)
@@ -87,7 +89,7 @@ class PasswordFragment : Fragment() {
                         .show()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(context, "Please enter a valid email", Toast.LENGTH_LONG)
+                    Toast.makeText(context, "Some error occurred, please try again", Toast.LENGTH_LONG)
                         .show()
                 }
         }
