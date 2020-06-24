@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_homeStoreDetailFragment"
+            app:destination="@id/homeStoreDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/menuFragment"
@@ -55,5 +58,14 @@
             app:destination="@id/menuFragment"
             app:popUpTo="@id/menuFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeStoreDetailFragment"
+        android:name="com.example.bkmerchant.home.HomeStoreDetailFragment"
+        android:label="HomeStoreDetailFragment"
+        tools:layout="@layout/store_detail_fragment">
+        <argument
+            android:name="store"
+            app:argType="com.example.bkmerchant.storeActivity.Store" />
     </fragment>
 </navigation>

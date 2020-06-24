@@ -18,5 +18,7 @@ data class Store(
     val openTime: Int = 0,
     val closeTime: Int = 0,
     val ownerID: String = "",
-    val ownerName: String = ""
+    val ownerName: String = "",
+    val totalRatings: Int = 0,
+    val totalStars: Int = 0
 ): Parcelable

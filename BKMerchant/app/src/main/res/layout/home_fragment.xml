@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.bkmerchant.home.HomeViewModel" />
@@ -31,15 +32,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/base_margin"
-                    android:textSize="24sp"
                     android:text="@{viewModel.userName}"
+                    android:textSize="24sp"
                     tools:text="Welcome" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/base_margin"
-                    android:layout_marginEnd="@dimen/base_margin">
+                    android:background="@android:color/white"
+                    android:paddingStart="@dimen/base_margin"
+                    android:paddingEnd="@dimen/base_margin">
 
                     <ImageView
                         android:id="@+id/store_image"
@@ -54,24 +56,31 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/small_margin"
                         android:layout_toEndOf="@id/store_image"
+                        android:text="@{viewModel.currentStore.name}"
                         android:textColor="@android:color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:text="@{viewModel.currentStore.name}"
                         tools:text="Domino's Pizza" />
 
-                    <androidx.appcompat.widget.AppCompatRatingBar
+                    <ImageView
                         android:id="@+id/store_rating"
-                        style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/store_name"
                         android:layout_alignStart="@id/store_name"
                         android:layout_marginTop="@dimen/small_margin"
-                        android:stepSize="0.5"
-                        android:theme="@style/RatingBar"
-                        android:rating="4"
-                        tools:rating="4" />
+                        android:src="@drawable/ic_star" />
+
+                    <TextView
+                        android:id="@+id/star_rating"
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_alignBottom="@id/store_rating"
+                        android:layout_marginStart="@dimen/small_margin"
+                        app:total_rating="@{viewModel.currentStore.totalRatings}"
+                        app:total_star="@{viewModel.currentStore.totalStars}"
+                        android:layout_toEndOf="@id/store_rating"
+                        tools:text="4.7" />
 
                     <TextView
                         android:id="@+id/store_description"
@@ -80,8 +89,8 @@
                         android:layout_below="@id/store_rating"
                         android:layout_alignStart="@id/store_name"
                         android:layout_marginTop="@dimen/small_margin"
-                        android:text="@{viewModel.currentStore.description}"
                         android:maxLines="2"
+                        android:text="@{viewModel.currentStore.description}"
                         android:textSize="14sp"
                         tools:text="Tiết kiệm đến 25%. Phù hợp  với nhóm từ 2-4 người. Pizza nướng thơm lừng ..." />
 
@@ -101,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/base_margin"
                     app:cardBackgroundColor="@color/colorPrimary"
-                    app:cardCornerRadius="@dimen/small_margin">
+                    app:cardCornerRadius="@dimen/corner_radius">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -142,10 +151,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/small_margin"
+                            android:text="1,350,000"
                             android:textColor="@android:color/white"
                             android:textSize="28sp"
                             android:textStyle="bold"
-                            android:text="1,350,000"
                             app:layout_constraintStart_toEndOf="@id/money"
                             app:layout_constraintTop_toTopOf="@id/money"
                             tools:text="1,350,000" />
@@ -164,9 +173,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
+                            android:text="VNĐ 1,250,000"
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
-                            android:text="VNĐ 1,250,000"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/money"
                             tools:text="VNĐ 1,250,000" />
@@ -177,195 +186,137 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:text="200 Orders Served"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:text="200 Orders Served"
                     tools:text="200 Orders Served" />
 
                 <androidx.gridlayout.widget.GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/base_margin"
                     android:layout_marginTop="@dimen/small_margin"
+                    android:padding="@dimen/base_margin"
                     app:alignmentMode="alignMargins"
                     app:columnCount="3"
                     app:orientation="horizontal"
                     app:rowCount="2">
 
                     <androidx.cardview.widget.CardView
+                        style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="@dimen/small_margin"
+                        app:cardCornerRadius="@dimen/corner_radius"
                         app:layout_columnWeight="1"
                         app:layout_gravity="fill"
                         app:layout_rowWeight="1">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_home" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/small_margin"
-                                android:text="@string/orders" />
-                        </LinearLayout>
+                            android:drawableTop="@drawable/ic_order"
+                            android:padding="@dimen/small_margin"
+                            android:text="@string/orders" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/menu_card"
+                        style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/base_margin"
-                        app:cardCornerRadius="@dimen/small_margin"
+                        app:cardCornerRadius="@dimen/corner_radius"
                         app:layout_columnWeight="1"
                         app:layout_gravity="fill"
                         app:layout_rowWeight="1">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_home" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/small_margin"
-                                android:text="@string/menu" />
-                        </LinearLayout>
+                            android:drawableTop="@drawable/ic_menu"
+                            android:padding="@dimen/small_margin"
+                            android:text="@string/menu" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/base_margin"
-                        app:cardCornerRadius="@dimen/small_margin"
+                        app:cardCornerRadius="@dimen/corner_radius"
                         app:layout_columnWeight="1"
                         app:layout_gravity="fill"
                         app:layout_rowWeight="1">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:orientation="vertical">
+                            android:drawableTop="@drawable/ic_megaphone"
+                            android:padding="@dimen/small_margin"
+                            android:text="@string/promotions" />
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_home" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/small_margin"
-                                android:text="@string/promotions" />
-                        </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/base_margin"
-                        app:cardCornerRadius="@dimen/small_margin"
+                        app:cardCornerRadius="@dimen/corner_radius"
                         app:layout_columnWeight="1"
                         app:layout_gravity="fill"
                         app:layout_rowWeight="1">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_home" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/small_margin"
-                                android:text="@string/report" />
-                        </LinearLayout>
+                            android:drawableTop="@drawable/ic_report"
+                            android:padding="@dimen/small_margin"
+                            android:text="@string/report" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/base_margin"
                         android:layout_marginTop="@dimen/base_margin"
-                        app:cardCornerRadius="@dimen/small_margin"
+                        app:cardCornerRadius="@dimen/corner_radius"
                         app:layout_columnWeight="1"
                         app:layout_gravity="fill"
                         app:layout_rowWeight="1">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_home" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/small_margin"
-                                android:text="@string/notifications" />
-                        </LinearLayout>
+                            android:drawableTop="@drawable/ic_notification"
+                            android:padding="@dimen/small_margin"
+                            android:text="@string/notifications" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/base_margin"
                         android:layout_marginTop="@dimen/base_margin"
-                        app:cardCornerRadius="@dimen/small_margin"
+                        app:cardCornerRadius="@dimen/corner_radius"
                         app:layout_columnWeight="1"
                         app:layout_gravity="fill"
                         app:layout_rowWeight="1">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:orientation="vertical">
+                            android:drawableTop="@drawable/ic_employee_24"
+                            android:padding="@dimen/small_margin"
+                            android:text="@string/employees" />
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_home" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/small_margin"
-                                android:text="@string/employees" />
-                        </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </androidx.gridlayout.widget.GridLayout>
             </LinearLayout>
