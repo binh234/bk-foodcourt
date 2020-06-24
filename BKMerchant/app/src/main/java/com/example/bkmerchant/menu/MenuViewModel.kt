@@ -4,8 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.FirebaseStorage
 
 class MenuViewModel : ViewModel() {
@@ -25,16 +28,45 @@ class MenuViewModel : ViewModel() {
 
     fun deleteCategory(category: Category) {
         Log.d(TAG, "id: ${category.id}")
-        firestore.collection("stores")
+        val task1 = firestore.collection("stores")
             .document(category.storeId)
             .collection("categories")
             .document(category.id)
-            .delete()
-            .addOnSuccessListener {
-                Log.d(TAG, "delete item success")
+            .collection("items")
+            .get()
+
+        task1.addOnSuccessListener { querySnapshot ->
+            for (document in querySnapshot) {
+                val imageUrl = document.getString("imageUrl")
+                if (imageUrl != null) {
+                    if (imageUrl.isNotEmpty()) {
+                        FirebaseStorage.getInstance()
+                            .getReferenceFromUrl(imageUrl)
+                            .delete()
+                            .addOnSuccessListener {
+                                document.reference.delete()
+                            }
+                    } else {
+                        document.reference.delete()
+                    }
+                }
             }
-            .addOnFailureListener {
-                Log.d(TAG, it.toString())
+            Log.d(TAG, "delete item list success")
+        }
+
+        Tasks.whenAllSuccess<Task<QuerySnapshot>>(task1)
+            .addOnSuccessListener {
+                firestore.collection("stores")
+                    .document(category.storeId)
+                    .collection("categories")
+                    .document(category.id)
+                    .delete()
+                    .addOnSuccessListener {
+                        Log.d(TAG, "delete item success")
+                    }
+                    .addOnFailureListener {
+                        Log.d(TAG, it.toString())
+                    }
             }
     }
 

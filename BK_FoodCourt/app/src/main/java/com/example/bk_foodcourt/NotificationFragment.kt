@@ -1,59 +1,123 @@
 package com.example.bk_foodcourt
 
+import android.app.AlertDialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.NotificationManager.IMPORTANCE_HIGH
+import android.app.PendingIntent
+import android.content.Context.NOTIFICATION_SERVICE
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_notification.view.*
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [NotificationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class NotificationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
-    private var mParam2: String? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mParam1 = arguments!!.getString(ARG_PARAM1)
-            mParam2 = arguments!!.getString(ARG_PARAM2)
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+    var option: Spinner? = null
+        //var order: Spinner? = null
+    var description: EditText? = null
+    override  fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false)
-    }
+        var view: View = inflater.inflate(R.layout.fragment_notification, container, false)
 
-    companion object {
-        // TODO: Rename parameter arguments, choose names that match
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private const val ARG_PARAM1 = "param1"
-        private const val ARG_PARAM2 = "param2"
+        option = view.findViewById(R.id.spinnerChannel)
+        //order = view.findViewById(R.id.spinnerOrder)
+        description = view.findViewById(R.id.etDescription)
+        val Adapter = ArrayAdapter.createFromResource(
+            this.context!!,
+            R.array.channel_choice,
+            R.layout.support_simple_spinner_dropdown_item
+        )
+        Adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        option!!.setAdapter(Adapter)
 
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NotificationFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String?, param2: String?): NotificationFragment {
-            val fragment = NotificationFragment()
-            val args = Bundle()
-            args.putString(ARG_PARAM1, param1)
-            args.putString(ARG_PARAM2, param2)
-            fragment.arguments = args
-            return fragment
-        }
+        val btnSend: Button = view.findViewById(R.id.btnNotification)
+
+        btnSend.setOnClickListener(View.OnClickListener {
+            Toast.makeText(context, "Notification sent!", Toast.LENGTH_SHORT).show()
+        })
+
+        return view
     }
+//    public val CHANNEL_ID: String = "User Channel"
+//
+//    var channel: Spinner? = null
+//    //var order: Spinner? = null
+//    var description: EditText? = null
+//
+//    // notification
+//    val builder = NotificationCompat.Builder(this.context!!, CHANNEL_ID)
+//        .setSmallIcon(R.drawable.baseline_notifications_black_24dp)
+//        .setContentTitle("Notification")
+//        .setContentText(description.toString().trim())
+//        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//        // Set the intent that will fire when the user taps the notification
+//    // Spinner
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        var view: View = inflater.inflate(R.layout.fragment_notification, container, false)
+//
+//        channel = view.findViewById(R.id.spinnerChannel)
+//        //order = view.findViewById(R.id.spinnerOrder)
+//        description = view.findViewById(R.id.etDescription)
+//        val btnSend: Button = view.findViewById(R.id.btnNotification)
+//        setChannelContent()
+//
+//        btnSend.setOnClickListener(View.OnClickListener {
+//            Toast.makeText(activity, "Notification sent!", Toast.LENGTH_SHORT).show()
+//            createNotificationChannel()
+//            with(NotificationManagerCompat.from(this.context!!)) {
+//                // notificationId is a unique int for each notification that you must define
+//                notify(1, builder.build())
+//            }
+//
+//        })
+//
+//        return view
+//    }
+//
+//
+//    private fun setChannelContent() {
+//        val Adapter = ArrayAdapter.createFromResource(
+//            this.context!!,
+//            R.array.channel_choice,
+//            R.layout.support_simple_spinner_dropdown_item
+//        )
+//        Adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+//        channel!!.setAdapter(Adapter)
+//    }
+//
+//    private fun createNotificationChannel() {
+//        // Create the NotificationChannel, but only on API 26+ because
+//        // the NotificationChannel class is new and not in the support library
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            val name = "User Channel"
+//            val descriptionText = description.toString().trim()
+//            val importance = NotificationManager.IMPORTANCE_DEFAULT
+//            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+//                description = descriptionText
+//            }
+//            // Register the channel with the system
+//            val notificationManager: NotificationManager =
+//                this.context!!.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+//            notificationManager.createNotificationChannel(channel)
+//        }
+//    }
+//
+//
+
 }

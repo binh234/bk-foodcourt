@@ -4,6 +4,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import kotlin.math.round
 
 @BindingAdapter("imageUrl")
 fun setImageUrl(view: ImageView, url: String) {
@@ -35,4 +36,15 @@ fun convertIntToTime(view:TextView, time:Int) {
     val minutes: Int = time % 60
     val timeText = String.format("%02d", hours) + ":" + String.format("%02d", minutes)
     view.text = timeText
+}
+
+@BindingAdapter(value = ["total_rating", "total_star"])
+fun setRatingStar(view:TextView, totalRatings: Int, totalStars: Int) {
+    if (totalRatings !=0 ) {
+        val rating = round(totalStars * 10.0 / totalRatings + 0.5) / 10
+        val text = String.format("%.1f", rating)
+        view.text = text
+    } else {
+        view.text = "No ratings"
+    }
 }

@@ -1,9 +1,11 @@
 package com.example.bk_foodcourt
 
+import android.app.Notification
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -26,4 +28,6 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(applicationContext, LoginActivity::class.java))
         finish()
     }
+
+    fun add_to_list(view: View) {}
 }

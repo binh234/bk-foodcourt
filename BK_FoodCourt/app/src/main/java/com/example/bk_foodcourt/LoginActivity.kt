@@ -66,6 +66,9 @@ class LoginActivity : AppCompatActivity(), OnItemSelectedListener {
                         else if (user == "Manager") {
                             startActivity(Intent(applicationContext, Manager::class.java))
                             finish()
+                        } else {
+                            startActivity(Intent(applicationContext, OrderActivity::class.java))
+                            finish()
                         }
                     } else {
                         Toast.makeText(

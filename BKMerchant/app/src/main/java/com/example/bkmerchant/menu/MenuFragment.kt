@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.MenuFragmentBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.FirebaseOptions
@@ -31,6 +33,7 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.menu)
 
         val arguments = MenuFragmentArgs.fromBundle(requireArguments())
         storeId = arguments.storeId

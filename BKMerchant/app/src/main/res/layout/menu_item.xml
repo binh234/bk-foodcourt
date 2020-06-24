@@ -25,16 +25,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <View
+                android:id="@+id/menu_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@drawable/bar_background"
+                app:layout_constraintBottom_toBottomOf="@id/edit_text"
+                app:layout_constraintEnd_toStartOf="@id/menu_item_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/menu_item_name" />
+
+            <TextView
+                android:id="@+id/view_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hide_all"
+                app:layout_constraintBottom_toBottomOf="@id/edit_text"
+                app:layout_constraintEnd_toEndOf="@id/dish_recycler"
+                app:layout_constraintTop_toTopOf="@id/menu_item_name" />
+
             <TextView
                 android:id="@+id/menu_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/base_margin"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="@dimen/small_margin"
-                android:fontFamily="sans-serif-medium"
                 android:text="@{category.name}"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
+                style="@style/headerStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Pizza" />
@@ -44,12 +62,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> viewModel.openCategory(category)}"
-                android:paddingStart="@dimen/base_margin"
-                android:paddingTop="@dimen/small_margin"
-                android:paddingEnd="@dimen/base_margin"
+                android:padding="@dimen/small_margin"
                 android:text="@string/edit"
                 android:textColor="@color/colorBlue"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/menu_view"
                 app:layout_constraintTop_toBottomOf="@id/menu_item_name" />
 
             <TextView
@@ -57,9 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> viewModel.deleteCategory(category)}"
-                android:paddingStart="@dimen/small_margin"
-                android:paddingTop="@dimen/small_margin"
-                android:paddingEnd="@dimen/base_margin"
+                android:padding="@dimen/small_margin"
                 android:text="@string/delete"
                 android:textColor="@color/colorBlue"
                 app:layout_constraintStart_toEndOf="@id/edit_text"
@@ -72,7 +86,8 @@
                 android:layout_marginStart="@dimen/base_margin"
                 android:layout_marginEnd="@dimen/base_margin"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintStart_toStartOf="@id/edit_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_text"
                 tools:itemCount="2"
                 tools:listitem="@layout/dish_item" />
