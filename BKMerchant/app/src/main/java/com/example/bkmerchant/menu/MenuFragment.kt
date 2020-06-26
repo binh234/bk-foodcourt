@@ -1,20 +1,22 @@
 package com.example.bkmerchant.menu
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.MenuFragmentBinding
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.firebase.FirebaseOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+
 
 class MenuFragment : Fragment() {
 
@@ -26,6 +28,9 @@ class MenuFragment : Fragment() {
     private lateinit var viewModel: MenuViewModel
     private lateinit var adapter: NewMenuAdapter
     private lateinit var storeId: String
+
+    private lateinit var categoryListView: ListView
+    private lateinit var dialog: AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +44,7 @@ class MenuFragment : Fragment() {
         storeId = arguments.storeId
 
         viewModel = ViewModelProvider(this).get(MenuViewModel::class.java)
-
+        viewModel.getCategoryList(storeId)
         binding = MenuFragmentBinding.inflate(inflater, container, false)
         binding.fabAddDish.setOnClickListener {
             onAddDish(Dish(storeId = storeId))
@@ -65,6 +70,29 @@ class MenuFragment : Fragment() {
                 viewModel.openDishEvent.value = null
             }
         })
+        context?.let {
+            categoryListView = ListView(it)
+
+            val builder = AlertDialog.Builder(it)
+            builder.setTitle("Choose one category")
+                .setCancelable(true)
+            dialog = builder.create()
+
+            dialog.window?.setGravity(Gravity.TOP or Gravity.END)
+
+            categoryListView.setOnItemClickListener { parent, view, position, id ->
+                binding.menuItemRecycler.smoothScrollToPosition(position)
+                dialog.dismiss()
+            }
+        }
+
+        viewModel.categories.observe(viewLifecycleOwner, Observer { categories ->
+            val arrayAdapter =
+                context?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, categories) }
+            categoryListView.adapter = arrayAdapter
+        })
+
+        setHasOptionsMenu(true)
 
         return binding.root
     }
@@ -80,6 +108,8 @@ class MenuFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
+        val layoutManger = SmoothLinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
         val query: Query = FirebaseFirestore.getInstance()
             .collection("stores")
             .document(storeId)
@@ -90,6 +120,27 @@ class MenuFragment : Fragment() {
 
         adapter = NewMenuAdapter(options, viewModel, viewLifecycleOwner, storeId)
         binding.menuItemRecycler.adapter = adapter
+        binding.menuItemRecycler.layoutManager = layoutManger
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_filter, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_filter -> {
+                openDialog()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun openDialog() {
+        dialog.setView(categoryListView)
+        dialog.show()
     }
 
     override fun onStart() {

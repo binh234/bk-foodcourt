@@ -86,6 +86,7 @@ class DishFragment : Fragment() {
         startActivityForResult(intent, 1)
     }
 
+    @Suppress("DEPRECATION")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode==1 && resultCode==RESULT_OK && data!=null && data.data!=null) {

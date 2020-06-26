@@ -1,16 +1,11 @@
 package com.example.bkmerchant.storeActivity.storeDetail
 
-import android.net.Uri
 import android.util.Log
-import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bkmerchant.storeActivity.Store
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageTask
-import com.google.firebase.storage.UploadTask
 
 class StoreDetailViewModel(val store: Store): ViewModel() {
     var name = MutableLiveData<String>()
@@ -25,8 +20,6 @@ class StoreDetailViewModel(val store: Store): ViewModel() {
     private var firestore = FirebaseFirestore.getInstance()
 
     var navigateToMenuFragment = MutableLiveData<Boolean>()
-
-    var storeImageUri: Uri? = null
 
     init {
         bind()
@@ -49,6 +42,7 @@ class StoreDetailViewModel(val store: Store): ViewModel() {
                 .getReferenceFromUrl(imageUrl)
                 .delete()
         }
+
         val map = HashMap<String, Any>()
 
         map["name"] = name.value ?: ""
@@ -58,7 +52,10 @@ class StoreDetailViewModel(val store: Store): ViewModel() {
         map["supportEmail"] = supportEmail.value ?: ""
         map["openTime"] = openTime.value ?: 0
         map["closeTime"] = closeTime.value ?: 0
-        map["imageUrl"] = url
+
+        if (url.isNotEmpty()) {
+            map["imageUrl"] = url
+        }
 
         firestore.collection("stores")
             .document(store.id)

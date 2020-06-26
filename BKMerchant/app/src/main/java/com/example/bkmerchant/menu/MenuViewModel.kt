@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.bkmerchant.menu.dish.DishViewModel
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.FirebaseFirestore
@@ -14,6 +15,7 @@ import com.google.firebase.storage.FirebaseStorage
 class MenuViewModel : ViewModel() {
     private val firestore = FirebaseFirestore.getInstance()
     private lateinit var menuListener: ListenerRegistration
+    val categories = MutableLiveData<List<String>>()
 
     companion object {
         const val TAG = "MenuViewModel"
@@ -110,4 +112,22 @@ class MenuViewModel : ViewModel() {
             .update("availability", !dish.availability)
     }
 
+    fun getCategoryList(storeId: String) {
+        val returnList = mutableListOf<String>()
+        firestore.collection("stores")
+            .document(storeId)
+            .collection("categories")
+            .addSnapshotListener { querySnapshot, exception ->
+                if (exception != null) {
+                    Log.d(TAG, exception.toString())
+                } else if (querySnapshot != null) {
+                    val list = mutableListOf<String>()
+                    for (document in querySnapshot) {
+                        val name = document.getString("name") ?: ""
+                        list.add(name)
+                    }
+                    categories.value = list
+                }
+            }
+    }
 }
