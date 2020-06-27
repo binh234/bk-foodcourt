@@ -202,6 +202,7 @@
                     app:rowCount="2">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/order_card"
                         style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -240,6 +241,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/promotion_card"
                         style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -260,6 +262,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/report_card"
                         style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -279,6 +282,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/notification_card"
                         style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -299,6 +303,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/employee_card"
                         style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

@@ -113,7 +113,6 @@ class MenuViewModel : ViewModel() {
     }
 
     fun getCategoryList(storeId: String) {
-        val returnList = mutableListOf<String>()
         firestore.collection("stores")
             .document(storeId)
             .collection("categories")

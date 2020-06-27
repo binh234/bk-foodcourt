@@ -54,11 +54,6 @@
     <string name="hide_all">Hide all</string>
 
 
-
-
-
-
-
     <string name="term_privacy_text">BK Merchant thừa nhận và tôn trọng thông tin bí mật của những cá nhân đăng nhập và sử dụng BK Merchant.\n\n
         Chính sách này bao gồm thông tin cá nhân mà BK Merchant và bên nhượng quyền và đại diện các bên nhượng quyền của BK Merchant muốn sử dụng,
         quản lý và bảo vệ thông tin cá nhân của khách khi đăng nhập hoặc đặt hàng qua trang web BK Merchant. \n\n
@@ -71,6 +66,8 @@
         khách hàng cũng phải có trách nhiệm thông báo kịp thời cho Website delivery.lotteria.vn về bất kỳ việc sử dụng, lạm dụng hoặc vi phạm bí mật nào trái phép,
         giữ lại tên đăng nhập và mật khẩu của bên thứ ba để có biện pháp khắc phục phù hợp.
 </string>
+
+
     <string name="term_of_use">Term of use</string>
     <string name="location">Đại học Bách Khoa Tp. Hồ Chí Minh, Dĩ An, Bình Dương</string>
     <string name="telephone">(84-8) 5416 1072 ~ 79</string>
@@ -82,5 +79,13 @@
     <string name="current_password">Current password</string>
     <string name="save">Save</string>
     <string name="filter">Filter</string>
+    <string name="title_activity_order">Order</string>
+    <string name="tab_text_1">Ongoing</string>
+    <string name="tab_text_2">History</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="cancel_order">Cancel Order</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="total">Total</string>
+    <string name="applicable_fee">Applicable fee</string>
 
 </resources>

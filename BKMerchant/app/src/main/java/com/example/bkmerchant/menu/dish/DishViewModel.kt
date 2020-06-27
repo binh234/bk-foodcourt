@@ -30,9 +30,12 @@ class DishViewModel(val dish: Dish): ViewModel() {
 
     var categories = mutableListOf<Category>()
     var catList = MutableLiveData<List<String>>()
-    var currentCategoryId = ""
 
-    val emptyNameField = MutableLiveData<String>()
+    var currentCategoryId = ""
+    var currentIndex = 0
+    var currentName = ""
+
+    val nameFieldError = MutableLiveData<String>()
     val emptyPriceField = MutableLiveData<String>()
 
     var navigateToMenuFragment = MutableLiveData<Boolean>()
@@ -46,13 +49,12 @@ class DishViewModel(val dish: Dish): ViewModel() {
 
     private fun bind() {
         Log.d(TAG, dish.id)
-        Log.d(TAG, dish.categoryId)
-        Log.d(TAG, dish.storeId)
         name.value = dish.name
         description.value = dish.description
         price.value = dish.price.toString()
         imageUrl = dish.imageUrl
         currentCategoryId = dish.categoryId
+        currentName = dish.name
     }
 
     fun saveDish(url: String, index: Int) {
@@ -71,10 +73,24 @@ class DishViewModel(val dish: Dish): ViewModel() {
         dish.availability = true
         dish.categoryId = categories[index].id
 
-        if (dish.id.isNotEmpty()) {
-            updateDish()
+        if (dish.id.isNotEmpty() && dish.name.trim() == currentName) {
+            updateDish(index)
         } else {
-            addDish()
+            firestore.collectionGroup("items")
+                .whereEqualTo("storeId", dish.storeId)
+                .whereEqualTo("name", dish.name)
+                .get()
+                .addOnSuccessListener {querySnapshot ->
+                    if (querySnapshot.isEmpty) {
+                        if (dish.id.isNotEmpty()) {
+                            updateDish(index)
+                        } else {
+                            addDish()
+                        }
+                    } else {
+                        nameFieldError.value = "Duplicate item"
+                    }
+                }
         }
     }
 
@@ -93,8 +109,8 @@ class DishViewModel(val dish: Dish): ViewModel() {
             }
     }
 
-    private fun updateDish() {
-        if (currentCategoryId != dish.categoryId) {
+    private fun updateDish(index: Int) {
+        if (currentIndex != index) {
             firestore.collection("stores")
                 .document(dish.storeId)
                 .collection("categories")
@@ -129,6 +145,10 @@ class DishViewModel(val dish: Dish): ViewModel() {
                     for (snapshot in querySnapshot) {
                         val item = snapshot.toObject(Category::class.java)
                         item.id = snapshot.id
+
+                        if (item.id == dish.categoryId) {
+                            currentIndex = categories.size
+                        }
 
                         categories.add(item)
                         returnList.add(item.name)

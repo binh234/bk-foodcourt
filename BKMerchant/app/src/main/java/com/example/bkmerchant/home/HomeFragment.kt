@@ -15,6 +15,7 @@ import com.example.bkmerchant.accountActivity.AccountActivity
 import com.example.bkmerchant.databinding.HomeFragmentBinding
 import com.example.bkmerchant.storeActivity.StoreActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class HomeFragment : Fragment() {
     private lateinit var binding: HomeFragmentBinding
@@ -39,12 +40,15 @@ class HomeFragment : Fragment() {
         binding.changeStoreInfo.setOnClickListener {
             navigateToStoreDetailFragment()
         }
-        binding.menuCard.setOnClickListener { navigateToMenuFragment() }
+
         binding.bottomNav.selectedItemId = R.id.nav_home
         binding.bottomNav.setOnNavigationItemSelectedListener { item ->
             bottomNavigationItemSelected(item)
         }
-        binding.bottomNav.selectedItemId = R.id.nav_home
+
+        binding.menuCard.setOnClickListener { navigateToMenuFragment() }
+        binding.orderCard.setOnClickListener { navigateToOrderFragment() }
+
         return binding.root
     }
 
@@ -65,6 +69,13 @@ class HomeFragment : Fragment() {
     private fun navigateToMenuFragment() {
         val action = HomeFragmentDirections.actionHomeFragmentToMenuFragment()
         action.storeId = viewModel.currentStore.value?.id ?: ""
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToOrderFragment() {
+        val action = HomeFragmentDirections.actionHomeFragmentToOrderFragment(
+            viewModel.currentStore.value?.id ?: ""
+        )
         findNavController().navigate(action)
     }
 

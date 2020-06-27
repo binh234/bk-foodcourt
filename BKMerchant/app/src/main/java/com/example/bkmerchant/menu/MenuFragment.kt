@@ -80,7 +80,7 @@ class MenuFragment : Fragment() {
 
             dialog.window?.setGravity(Gravity.TOP or Gravity.END)
 
-            categoryListView.setOnItemClickListener { parent, view, position, id ->
+            categoryListView.setOnItemClickListener { _, _, position, _ ->
                 binding.menuItemRecycler.smoothScrollToPosition(position)
                 dialog.dismiss()
             }

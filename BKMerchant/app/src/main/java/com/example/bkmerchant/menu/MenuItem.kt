@@ -24,6 +24,5 @@ data class Dish(
     var imageUrl: String="",
     @get: Exclude
     var categoryId: String="",
-    @get: Exclude
     var storeId: String=""
 ): Parcelable

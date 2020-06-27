@@ -54,6 +54,12 @@ class DishFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
+        viewModel.nameFieldError.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                binding.dishNameText.error = it
+            }
+        })
+
         binding.dishImage.setOnClickListener {
             imageLoader()
         }
@@ -74,6 +80,7 @@ class DishFragment : Fragment() {
         viewModel.catList.observe(viewLifecycleOwner, Observer {categories ->
             val arrayAdapter = context?.let { ArrayAdapter(it, android.R.layout.simple_dropdown_item_1line, categories) }
             binding.dishCategory.adapter = arrayAdapter
+            binding.dishCategory.setSelection(viewModel.currentIndex)
         })
 
         return binding.root

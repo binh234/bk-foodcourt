@@ -5,11 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bkmerchant.databinding.DishItemBinding
-import com.example.bkmerchant.databinding.MenuItemBinding
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 
 class DishAdapter(options: FirestoreRecyclerOptions<Dish>, val viewModel: MenuViewModel,val category: Category):
     FirestoreRecyclerAdapter<Dish, DishAdapter.DishViewHolder>(options) {

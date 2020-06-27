@@ -4,6 +4,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.example.bkmerchant.order.OrderStatus
+import com.google.firebase.Timestamp
 import kotlin.math.round
 
 @BindingAdapter("imageUrl")
@@ -30,6 +32,12 @@ fun setPriceFormatted(view: TextView, price: Double) {
     view.text = text
 }
 
+@BindingAdapter("quantityText")
+fun setQuantityText(view: TextView, quantity: Int) {
+    val text = "${quantity}x"
+    view.text = text
+}
+
 @BindingAdapter("time")
 fun convertIntToTime(view:TextView, time:Int) {
     val hours: Int = time / 60
@@ -47,4 +55,27 @@ fun setRatingStar(view:TextView, totalRatings: Int, totalStars: Int) {
     } else {
         view.text = "No ratings"
     }
+}
+
+@BindingAdapter(value = ["order_type", "user_name"])
+fun setOrderDescription(view: TextView, orderType: String, userName: String) {
+    val text = "$userName ($orderType)"
+    view.text = text
+}
+
+@BindingAdapter("order_status")
+fun setOrderStatus(view: TextView, orderStatus: Int) {
+    view.text = when(orderStatus) {
+        OrderStatus.CONFIRMED.value -> "CONFIRMED"
+        OrderStatus.PROCESSING.value -> "PROCESSING"
+        OrderStatus.DONE_PROCESSING.value -> "DONE_PROCESSING"
+        OrderStatus.FINISH.value -> "FINISH"
+        OrderStatus.CANCEL.value -> "CANCELED"
+        else -> "PENDING"
+    }
+}
+
+@BindingAdapter("order_time")
+fun setOrderTime(view: TextView, orderTime: Timestamp) {
+    view.text = orderTime.toDate().toString()
 }
