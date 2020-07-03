@@ -25,7 +25,7 @@ data class OrderItem(
     var orderId: String="",
     var name: String="",
     var options: String ="",
-    var total: Int=0,
+    var total: Double=0.0,
     var quantity: Int=0
 )
 

@@ -1,12 +1,19 @@
 package com.example.bkmerchant.login
 
+import android.os.Parcelable
+import com.google.firebase.firestore.Exclude
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class User(
+    @get: Exclude var id: String = "",
     val name: String = "",
     val avatarUrl: String = "",
     val phoneNumber: String = "",
     val address: String = "",
-    val accountType: AccountType = AccountType.CUSTOMER
-)
+    val accountType: AccountType = AccountType.CUSTOMER,
+    val email: String = ""
+): Parcelable
 
 data class UserType(
     val email: String = "",

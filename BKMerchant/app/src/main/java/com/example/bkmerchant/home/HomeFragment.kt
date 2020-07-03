@@ -48,6 +48,8 @@ class HomeFragment : Fragment() {
 
         binding.menuCard.setOnClickListener { navigateToMenuFragment() }
         binding.orderCard.setOnClickListener { navigateToOrderFragment() }
+        binding.promotionCard.setOnClickListener { navigateToPromotionFragment() }
+        binding.reportCard.setOnClickListener { navigateToReportFragment() }
 
         return binding.root
     }
@@ -74,6 +76,20 @@ class HomeFragment : Fragment() {
 
     private fun navigateToOrderFragment() {
         val action = HomeFragmentDirections.actionHomeFragmentToOrderFragment(
+            viewModel.currentStore.value?.id ?: ""
+        )
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToPromotionFragment() {
+        val action = HomeFragmentDirections.actionHomeFragmentToPromotionFragment(
+            viewModel.currentStore.value?.id ?: ""
+        )
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToReportFragment() {
+        val action = HomeFragmentDirections.actionHomeFragmentToReportFragment(
             viewModel.currentStore.value?.id ?: ""
         )
         findNavController().navigate(action)

@@ -14,7 +14,6 @@ import com.google.firebase.storage.FirebaseStorage
 
 class MenuViewModel : ViewModel() {
     private val firestore = FirebaseFirestore.getInstance()
-    private lateinit var menuListener: ListenerRegistration
     val categories = MutableLiveData<List<String>>()
 
     companion object {

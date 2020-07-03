@@ -50,8 +50,8 @@ class LoginFragment : Fragment() {
         if (email.isEmpty()) {
             binding.emailText.error = "Empty email"
             binding.emailText.requestFocus()
-        } else if (password.isEmpty()) {
-            binding.passwordText.error = "Empty password"
+        } else if (password.length < 6) {
+            binding.passwordText.error = "Password must be at least 6 characters"
             binding.passwordText.requestFocus()
         } else {
             checkPermissionAndLogin(email, password)
@@ -126,7 +126,6 @@ class LoginFragment : Fragment() {
         val email = binding.emailText.text.toString()
         if (email.isEmpty()) {
             binding.emailText.error = "Empty email"
-            binding.emailText.requestFocus()
         } else {
             firebaseAuth.sendPasswordResetEmail(email)
                 .addOnSuccessListener {

@@ -68,7 +68,6 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/store_name"
                         android:layout_alignStart="@id/store_name"
-                        android:layout_marginTop="@dimen/small_margin"
                         android:src="@drawable/ic_star" />
 
                     <TextView

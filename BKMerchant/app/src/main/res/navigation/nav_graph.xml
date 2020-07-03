@@ -19,6 +19,12 @@
         <action
             android:id="@+id/action_homeFragment_to_orderFragment"
             app:destination="@id/orderFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_promotionFragment"
+            app:destination="@id/promotionFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_reportFragment"
+            app:destination="@id/reportFragment" />
     </fragment>
     <fragment
         android:id="@+id/menuFragment"
@@ -33,8 +39,8 @@
             app:destination="@id/dishFragment" />
         <argument
             android:name="storeId"
-            app:argType="string"
-            android:defaultValue='""' />
+            android:defaultValue='""'
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -80,7 +86,7 @@
         tools:layout="@layout/order_fragment">
         <argument
             android:name="storeID"
-            app:argType="string"/>
+            app:argType="string" />
         <action
             android:id="@+id/action_orderFragment_to_orderDetailFragment"
             app:destination="@id/orderDetailFragment" />
@@ -96,5 +102,34 @@
         <argument
             android:name="order"
             app:argType="com.example.bkmerchant.order.Order" />
+    </fragment>
+    <fragment
+        android:id="@+id/promotionFragment"
+        android:name="com.example.bkmerchant.promotion.PromotionFragment"
+        android:label="PromotionFragment"
+        tools:layout="@layout/promotion_fragment" >
+        <argument
+            android:name="storeId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_promotionFragment_to_promotionDetailFragment"
+            app:destination="@id/promotionDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/promotionDetailFragment"
+        android:name="com.example.bkmerchant.promotion.promotionDetail.PromotionDetailFragment"
+        android:label="PromotionDetailFragment"
+        tools:layout="@layout/promotion_detail_fragment" >
+        <argument
+            android:name="promotion"
+            app:argType="com.example.bkmerchant.promotion.Promotion" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.example.bkmerchant.report.ReportFragment"
+        android:label="ReportFragment" >
+        <argument
+            android:name="storeId"
+            app:argType="string" />
     </fragment>
 </navigation>

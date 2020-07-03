@@ -57,8 +57,6 @@ class CategoryFragment : Fragment() {
     }
 
     private fun navigateToMenuFragment() {
-        val action = CategoryFragmentDirections.actionCategoryFragmentToMenuFragment()
-        action.storeId = storeId
-        findNavController().navigate(action)
+        findNavController().navigateUp()
     }
 }

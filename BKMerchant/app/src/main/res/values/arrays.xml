@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="discount_type">
+        <item>Percent discount</item>
+        <item>Price discount</item>
+    </string-array>
+
+    <string-array name="discount_scope">
+        <item>Order discount</item>
+        <item>Menu discount</item>
+        <item>Category discount</item>
+        <item>Item discount</item>
+    </string-array>
+</resources>

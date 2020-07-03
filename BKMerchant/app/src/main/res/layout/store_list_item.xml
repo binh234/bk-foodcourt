@@ -32,8 +32,8 @@
                 android:id="@+id/store_image"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:layout_centerVertical="true"
                 android:scaleType="centerCrop"
-                android:layout_marginTop="@dimen/small_margin"
                 app:imageUrl="@{store.imageUrl}" />
 
             <TextView
@@ -48,22 +48,16 @@
                 android:textStyle="bold"
                 tools:text="Domino's Pizza" />
 
-            <ImageView
-                android:id="@+id/store_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_star"
-                android:layout_below="@id/store_name"
-                android:layout_alignStart="@id/store_name"
-                android:layout_marginTop="@dimen/small_margin"/>
-
             <TextView
-                android:id="@+id/star_rating"
-                android:layout_width="wrap_content"
+                android:id="@+id/store_rating"
                 style="@style/textStyle"
-                android:layout_toEndOf="@id/store_rating"
-                android:layout_alignBottom="@id/store_rating"
-                android:layout_marginStart="@dimen/small_margin"
+                android:layout_width="wrap_content"
+                android:layout_alignStart="@id/store_name"
+                android:layout_below="@id/store_name"
+                android:layout_marginTop="@dimen/small_margin"
+                android:drawableStart="@drawable/ic_star"
+                android:drawablePadding="@dimen/small_margin"
+                android:gravity="bottom"
                 app:total_rating="@{store.totalRatings}"
                 app:total_star="@{store.totalStars}"
                 tools:text="4.7" />
@@ -85,7 +79,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/store_description"
                 android:layout_alignStart="@id/store_name"
-                android:layout_marginTop="@dimen/small_margin"
                 android:onClick="@{() -> viewModel.openStore(store)}"
                 android:padding="@dimen/small_margin"
                 android:text="@string/edit"
@@ -98,7 +91,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/store_description"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/small_margin"
                 android:onClick="@{() -> viewModel.setDefaultStore(store.id)}"
                 android:padding="@dimen/small_margin"
                 android:text="@string/set_as_default"

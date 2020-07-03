@@ -34,6 +34,7 @@
                     app:imageDetailUrl="@{viewModel.imageUrl}" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_margin">
@@ -43,12 +44,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/name"
-                        android:maxLength="40"
                         android:inputType="textCapSentences"
+                        android:maxLength="40"
                         android:text="@={viewModel.name}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_margin">
@@ -72,6 +74,7 @@
                     android:orientation="horizontal">
 
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/small_margin"
@@ -91,6 +94,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/fab_margin"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="@dimen/base_margin"
                         android:text="@string/price_money"
                         android:textColor="@android:color/black"
                         android:textSize="20sp" />
@@ -99,6 +104,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/base_margin"
+                        android:layout_marginTop="@dimen/small_margin"
                         android:layout_weight="2"
                         android:orientation="vertical">
 
@@ -110,7 +116,7 @@
                         <Spinner
                             android:id="@+id/dish_category"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
@@ -120,8 +126,8 @@
                     android:id="@+id/loading_progress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="@dimen/large_margin" />
+                    android:layout_marginTop="@dimen/large_margin"
+                    android:visibility="gone" />
 
             </LinearLayout>
         </ScrollView>

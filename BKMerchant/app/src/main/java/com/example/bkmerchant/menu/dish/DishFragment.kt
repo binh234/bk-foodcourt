@@ -162,8 +162,6 @@ class DishFragment : Fragment() {
     }
 
     private fun navigateToMenuFragment() {
-        val action = DishFragmentDirections.actionDishFragmentToMenuFragment()
-        action.storeId = storeId
-        findNavController().navigate(action)
+        findNavController().navigateUp()
     }
 }

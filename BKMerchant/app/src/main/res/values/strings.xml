@@ -5,6 +5,7 @@
     <string name="term_and_privacy">Term and Privacy</string>
     <string name="store_detail">Store Details</string>
 
+    <string name="empty_field">Please enter this field</string>
 
     <string name="password">Password</string>
     <string name="login">Login</string>
@@ -47,7 +48,7 @@
     <string name="hotline">Hotline</string>
     <string name="website">Website</string>
     <string name="support_email">Support email</string>
-    <string name="update_information">Account information</string>
+    <string name="personal_information">Personal information</string>
     <string name="change_password">Change password</string>
     <string name="term_amp_privacy"><![CDATA[Term & Privacy]]></string>
     <string name="about_us">About Us</string>
@@ -87,5 +88,19 @@
     <string name="subtotal">Subtotal</string>
     <string name="total">Total</string>
     <string name="applicable_fee">Applicable fee</string>
+    <string name="use_times">Use times</string>
+    <string name="label">Label</string>
+    <string name="discount_type">Discount type</string>
+    <string name="discount_scope">Discount scope</string>
+    <string name="value">Value</string>
+    <string name="activate_day">Activate day</string>
+    <string name="expired_day">Expired day</string>
+    <string name="activate_time">Activate time</string>
+    <string name="expired_time">Expired time</string>
+    <string name="num_allowed">Num allowed</string>
+    <string name="code">Code</string>
+    <string name="to_order">To order</string>
+    <string name="from_order">From order</string>
+    <string name="phone_number">Phone number</string>
 
 </resources>
