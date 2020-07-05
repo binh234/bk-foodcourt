@@ -1,21 +1,28 @@
 package com.example.bkmerchant.promotion
 
+import android.graphics.Canvas
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.PromotionFragmentBinding
 import com.example.bkmerchant.order.Order
 import com.example.bkmerchant.order.OrderFragmentDirections
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
-class PromotionFragment: Fragment() {
+class PromotionFragment : Fragment() {
     private lateinit var binding: PromotionFragmentBinding
     private lateinit var adapter: PromotionAdapter
     private lateinit var viewModel: PromotionViewModel
@@ -42,7 +49,63 @@ class PromotionFragment: Fragment() {
 
         setupRecyclerView()
 
-        viewModel.showPromotionDetailEvent.observe(viewLifecycleOwner, Observer {promotion ->
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                adapter.removePromotion(viewHolder.adapterPosition)
+            }
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                RecyclerViewSwipeDecorator.Builder(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
+                    .addSwipeLeftActionIcon(R.drawable.ic_delete_24)
+                    .addSwipeLeftBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.colorSecondary
+                        )
+                    )
+                    .addSwipeLeftLabel(getString(R.string.delete))
+                    .setSwipeLeftLabelColor(Color.WHITE)
+                    .create()
+                    .decorate()
+                super.onChildDraw(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
+            }
+
+        }).attachToRecyclerView(binding.promotionRecycler)
+
+        viewModel.showPromotionDetailEvent.observe(viewLifecycleOwner, Observer { promotion ->
             promotion?.let {
                 navigateToPromotionDetailFragment(it)
                 viewModel.showPromotionDetailEvent.value = null
@@ -69,7 +132,8 @@ class PromotionFragment: Fragment() {
     }
 
     private fun navigateToPromotionDetailFragment(promotion: Promotion) {
-        val action = PromotionFragmentDirections.actionPromotionFragmentToPromotionDetailFragment(promotion)
+        val action =
+            PromotionFragmentDirections.actionPromotionFragmentToPromotionDetailFragment(promotion)
         findNavController().navigate(action)
     }
 

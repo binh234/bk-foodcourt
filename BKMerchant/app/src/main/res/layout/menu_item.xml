@@ -40,19 +40,20 @@
                 android:id="@+id/view_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
                 android:text="@string/hide_all"
                 app:layout_constraintBottom_toBottomOf="@id/edit_text"
                 app:layout_constraintEnd_toEndOf="@id/dish_recycler"
-                app:layout_constraintTop_toTopOf="@id/menu_item_name" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/menu_item_name"
+                style="@style/headerStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="@dimen/small_margin"
                 android:text="@{category.name}"
-                style="@style/headerStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Pizza" />
@@ -65,6 +66,7 @@
                 android:padding="@dimen/small_margin"
                 android:text="@string/edit"
                 android:textColor="@color/colorBlue"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/menu_view"
                 app:layout_constraintTop_toBottomOf="@id/menu_item_name" />
 
@@ -76,6 +78,7 @@
                 android:padding="@dimen/small_margin"
                 android:text="@string/delete"
                 android:textColor="@color/colorBlue"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/edit_text"
                 app:layout_constraintTop_toTopOf="@id/edit_text" />
 

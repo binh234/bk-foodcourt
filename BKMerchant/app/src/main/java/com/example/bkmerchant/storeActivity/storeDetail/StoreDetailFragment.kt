@@ -55,16 +55,12 @@ class StoreDetailFragment : Fragment() {
             imageLoader()
         }
         binding.doneFab.setOnClickListener {
-            if (uploadTask != null && uploadTask!!.isInProgress) {
-                Toast.makeText(context, "Uploading in progress", Toast.LENGTH_SHORT).show()
-            } else {
-                checkValidInformation()
-            }
+            checkValidInformation()
         }
-        binding.changeOpenTime.setOnClickListener {
+        binding.openTime.setOnClickListener {
             openTimePicker()
         }
-        binding.changeCloseTime.setOnClickListener {
+        binding.closeTime.setOnClickListener {
             closeTimePicker()
         }
 
@@ -126,19 +122,22 @@ class StoreDetailFragment : Fragment() {
             val fileReference = storageReference
                 .child(System.currentTimeMillis().toString() + "." + getFileExtension(imageUri))
             binding.loadingProgress.visibility = View.VISIBLE
+            binding.doneFab.isEnabled = false
+
             uploadTask = fileReference.putFile(imageUri)
                 .addOnSuccessListener {
-                    Toast.makeText(context, "Upload successful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.update_success), Toast.LENGTH_SHORT).show()
                     fileReference.downloadUrl
                         .addOnSuccessListener {
-                            Log.d("DishFragment", it.toString())
+                            Log.d("StoreDetailFragment", it.toString())
                             viewModel.updateStore(it.toString())
+
                             binding.loadingProgress.visibility = View.GONE
+                            binding.doneFab.isEnabled = true
                         }
                         .addOnFailureListener {
                             Log.d("StoreDetailFragment", it.toString())
                         }
-
                 }
                 .addOnFailureListener {
                     Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
@@ -160,11 +159,11 @@ class StoreDetailFragment : Fragment() {
         val closeTime = viewModel.closeTime.value ?: 0
         if (name.trim().isEmpty()) {
             check = false
-            binding.storeNameText.error = "Please enter this field"
+            binding.storeNameText.error = getString(R.string.empty_field)
         }
         if (openTime >= closeTime) {
             check = false
-            Toast.makeText(context, "Opening time must be less than closing time", Toast.LENGTH_SHORT)
+            Toast.makeText(context, getString(R.string.time_lesser), Toast.LENGTH_SHORT)
                 .show()
         }
         if (check) {

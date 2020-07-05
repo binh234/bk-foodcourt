@@ -12,13 +12,15 @@ data class User(
     val phoneNumber: String = "",
     val address: String = "",
     val accountType: AccountType = AccountType.CUSTOMER,
-    val email: String = ""
+    val email: String = "",
+    var storeID: String = ""
 ): Parcelable
 
 data class UserType(
     val email: String = "",
     val accountType: AccountType = AccountType.CUSTOMER,
-    val update: Boolean = false
+    val update: Boolean = false,
+    var storeID: String = ""
 )
 
 enum class AccountType(val value: Int) {

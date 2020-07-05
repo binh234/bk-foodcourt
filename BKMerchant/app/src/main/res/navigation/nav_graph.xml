@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_homeFragment_to_reportFragment"
             app:destination="@id/reportFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_employeeFragment"
+            app:destination="@id/employeeFragment" />
     </fragment>
     <fragment
         android:id="@+id/menuFragment"
@@ -127,7 +130,29 @@
     <fragment
         android:id="@+id/reportFragment"
         android:name="com.example.bkmerchant.report.ReportFragment"
-        android:label="ReportFragment" >
+        android:label="ReportFragment"
+        tools:layout="@layout/report_fragment">
+        <argument
+            android:name="storeId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/employeeFragment"
+        android:name="com.example.bkmerchant.employee.EmployeeFragment"
+        android:label="EmployeeFragment"
+        tools:layout="@layout/employee_fragment">
+        <action
+            android:id="@+id/action_employeeFragment_to_addEmployeeFragment"
+            app:destination="@id/addEmployeeFragment" />
+        <argument
+            android:name="storeId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEmployeeFragment"
+        android:name="com.example.bkmerchant.employee.AddEmployeeFragment"
+        android:label="AddEmployeeFragment"
+        tools:layout="@layout/employee_add_fragment">
         <argument
             android:name="storeId"
             app:argType="string" />

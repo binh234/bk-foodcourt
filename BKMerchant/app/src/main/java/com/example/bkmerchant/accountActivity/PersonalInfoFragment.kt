@@ -1,18 +1,20 @@
 package com.example.bkmerchant.accountActivity
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.PersonalInfoFragmentBinding
 import com.example.bkmerchant.login.User
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore
 
 class PersonalInfoFragment : Fragment() {
@@ -47,6 +49,7 @@ class PersonalInfoFragment : Fragment() {
 
     private fun saveInformation() {
         val name = binding.userName.text.toString()
+        val address = binding.userAddress.text.toString()
         val phoneNumber = binding.userPhoneNumber.text.toString()
         val email = binding.userEmail.text.toString()
 
@@ -62,40 +65,80 @@ class PersonalInfoFragment : Fragment() {
 
             updateMap["name"] = name
             updateMap["phoneNumber"] = phoneNumber
+            updateMap["address"] = address
 
             if (email != currentEmail) {
-                currentUser.updateEmail(email)
-                    .addOnSuccessListener {
-                        currentUser.sendEmailVerification()
+                val inflater = requireActivity().layoutInflater
+                val view = inflater.inflate(R.layout.require_password_dialog, null)
+                val editText = view.findViewById<EditText>(R.id.require_password)
+
+                AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.require_password))
+                    .setView(view)
+                    .setPositiveButton("OK") { dialog: DialogInterface, _: Int ->
+                        val password = editText.text.toString()
+                        val credential = EmailAuthProvider.getCredential(currentEmail!!, password)
+
+                        currentUser.reauthenticate(credential)
                             .addOnSuccessListener {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Please check your email",
-                                    Toast.LENGTH_LONG
-                                )
-                                    .show()
-                                updateMap["email"] = email
-                                updateUser(updateMap)
+                                updateUserEmail(email, updateMap)
+                                dialog.dismiss()
                             }
-                        firestore.collection("userTypes")
-                            .whereEqualTo("email", currentEmail)
-                            .limit(1)
-                            .get()
-                            .addOnSuccessListener {querySnapshot ->
-                                if (!querySnapshot.isEmpty) {
-                                    for (document in querySnapshot) {
-                                        document.reference.update("email", email)
-                                    }
-                                }
+                            .addOnFailureListener {
+                                editText.error = getString(R.string.wrong_password)
                             }
                     }
-                    .addOnFailureListener {
-                        Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+                    .setNegativeButton(getString(R.string.cancel)) { _: DialogInterface, _: Int ->
                     }
+                    .show()
             } else {
                 updateUser(updateMap)
             }
         }
+    }
+
+    private fun updateUserEmail(email: String, updateMap: HashMap<String, Any>) {
+        val currentEmail = currentUser.email
+        currentUser.updateEmail(email)
+            .addOnSuccessListener {
+                currentUser.sendEmailVerification()
+                    .addOnSuccessListener {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.verify_email),
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                        updateMap["email"] = email
+                        updateUser(updateMap)
+                    }
+                firestore.collection("userTypes")
+                    .whereEqualTo("email", currentEmail)
+                    .limit(1)
+                    .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        if (!querySnapshot.isEmpty) {
+                            for (document in querySnapshot) {
+                                document.reference.update("email", email)
+                            }
+                        }
+                    }
+            }
+            .addOnFailureListener { exception ->
+                when (exception) {
+                    is FirebaseAuthUserCollisionException -> Toast.makeText(
+                        requireContext(),
+                        getString(R.string.email_registered),
+                        Toast.LENGTH_LONG
+                    ).show()
+                    else -> Toast.makeText(
+                        requireContext(),
+                        exception.toString(),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }
+            }
     }
 
     private fun updateUser(map: HashMap<String, Any>) {
@@ -103,7 +146,11 @@ class PersonalInfoFragment : Fragment() {
             .document(user.id)
             .update(map)
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), "Update successfully", Toast.LENGTH_LONG)
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.update_success),
+                    Toast.LENGTH_LONG
+                )
                     .show()
                 navigateToAccountFragment()
             }

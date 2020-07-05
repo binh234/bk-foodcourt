@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.changeStoreInfo.setOnClickListener {
+        binding.storeInfo.setOnClickListener {
             navigateToStoreDetailFragment()
         }
 
@@ -50,6 +50,7 @@ class HomeFragment : Fragment() {
         binding.orderCard.setOnClickListener { navigateToOrderFragment() }
         binding.promotionCard.setOnClickListener { navigateToPromotionFragment() }
         binding.reportCard.setOnClickListener { navigateToReportFragment() }
+        binding.employeeCard.setOnClickListener { navigateToEmployeeFragment() }
 
         return binding.root
     }
@@ -90,6 +91,13 @@ class HomeFragment : Fragment() {
 
     private fun navigateToReportFragment() {
         val action = HomeFragmentDirections.actionHomeFragmentToReportFragment(
+            viewModel.currentStore.value?.id ?: ""
+        )
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToEmployeeFragment() {
+        val action = HomeFragmentDirections.actionHomeFragmentToEmployeeFragment(
             viewModel.currentStore.value?.id ?: ""
         )
         findNavController().navigate(action)

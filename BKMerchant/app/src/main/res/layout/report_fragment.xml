@@ -13,9 +13,18 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/today_report"
+                android:textColor="@color/colorSecondary"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/report_text"
                 style="@style/subHeaderStyle"
                 android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/base_margin"
                 tools:text="Abcsfdlkfdlk" />
 
         </LinearLayout>

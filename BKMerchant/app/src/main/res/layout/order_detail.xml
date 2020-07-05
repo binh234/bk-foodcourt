@@ -42,63 +42,49 @@
                     <TextView
                         android:id="@+id/order_time"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/subHeaderStyle"
                         android:layout_below="@id/order_id"
                         android:layout_alignStart="@id/order_id"
                         android:layout_marginTop="@dimen/small_margin"
                         android:layout_marginEnd="@dimen/base_margin"
+                        android:fontFamily="@font/roboto"
                         android:maxLines="2"
-                        android:textSize="16sp"
+                        android:textColor="@android:color/tab_indicator_text"
                         app:order_time="@{order.time}"
                         tools:text="5:32 PM" />
 
                     <TextView
                         android:id="@+id/order_description"
+                        style="@style/subHeaderStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:layout_below="@id/order_time"
                         android:layout_alignStart="@id/order_id"
                         android:layout_marginTop="@dimen/small_margin"
                         android:text="@{order.type}"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
                         tools:text="Take away" />
 
                     <TextView
                         android:id="@+id/order_status"
+                        style="@style/subHeaderStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:layout_alignBottom="@id/order_id"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/small_margin"
                         android:layout_marginEnd="@dimen/base_margin"
-                        android:textColor="@color/colorBlue"
-                        android:textSize="16sp"
+                        android:textColor="@{order.status==4 ? @color/colorSecondary : @color/colorBlue}"
                         android:textStyle="bold"
                         app:order_status="@{order.status}"
                         tools:text="CONFIRMED" />
-
-                    <View
-                        android:id="@+id/line"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:layout_below="@id/order_description"
-                        android:layout_alignStart="@id/order_id"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="@dimen/small_margin"
-                        android:layout_marginEnd="@dimen/base_margin"
-                        android:background="@android:color/darker_gray" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <TextView
+                style="@style/headerStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/base_margin"
                 android:layout_marginTop="@dimen/small_margin"
-                android:text="Customer"
-                android:textSize="@dimen/sub_header"
-                android:textStyle="bold" />
+                android:text="@string/customer"
+                android:textColor="@android:color/tab_indicator_text" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -111,25 +97,21 @@
 
                     <TextView
                         android:id="@+id/user_name"
+                        style="@style/subHeaderStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/base_margin"
                         android:layout_marginTop="@dimen/small_margin"
                         android:text="@{order.userName}"
-                        android:textColor="@android:color/black"
-                        android:textSize="18sp"
                         tools:text="Thuận Nguyễn" />
 
                     <TextView
                         android:id="@+id/user_phone_number"
+                        style="@style/subHeaderStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
                         android:layout_below="@id/user_name"
                         android:layout_alignStart="@id/user_name"
                         android:layout_marginTop="@dimen/base_margin"
                         android:text="@{order.userPhoneNumber}"
-                        android:textColor="@android:color/black"
-                        android:textSize="18sp"
                         tools:text="0962692671" />
 
                     <ImageButton
@@ -141,22 +123,22 @@
                         android:layout_marginTop="@dimen/small_margin"
                         android:layout_marginEnd="@dimen/base_margin"
                         android:background="@drawable/circular_button"
-                        android:src="@drawable/ic_phone"
                         android:padding="@dimen/small_margin"
                         android:scaleX="0.8"
                         android:scaleY="0.8"
+                        android:src="@drawable/ic_phone"
                         android:tint="@android:color/white" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <TextView
+                style="@style/subHeaderStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/base_margin"
                 android:layout_marginTop="@dimen/small_margin"
                 android:text="@string/order_summary"
-                android:textSize="@dimen/sub_header"
+                android:textColor="@android:color/tab_indicator_text"
                 android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
@@ -179,79 +161,90 @@
 
                     <TextView
                         android:id="@+id/subtotal_text"
+                        style="@style/textStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:layout_below="@id/order_detail"
                         android:layout_alignParentStart="true"
                         android:layout_marginStart="@dimen/base_margin"
                         android:layout_marginTop="@dimen/small_margin"
-                        android:text="@string/subtotal"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp" />
+                        android:text="@string/subtotal" />
 
                     <TextView
                         android:id="@+id/order_subtotal"
+                        style="@style/textStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:layout_below="@id/order_detail"
                         android:layout_alignTop="@id/subtotal_text"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/base_margin"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        app:priceText="@{order.subtotal}"
+                        app:priceText="@{order.total + order.promotion - order.applicableFee}"
                         tools:text="240,000đ" />
 
                     <TextView
                         android:id="@+id/promotion_text"
+                        style="@style/textStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:layout_below="@id/subtotal_text"
                         android:layout_alignParentStart="true"
                         android:layout_marginStart="@dimen/base_margin"
                         android:layout_marginTop="@dimen/small_margin"
-                        android:text="@string/applicable_fee"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp" />
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:text="@string/promo"
+                        android:visibility="@{order.promotion==0.0 ? View.GONE : View.VISIBLE}" />
 
                     <TextView
                         android:id="@+id/order_promotion"
+                        style="@style/textStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:layout_below="@id/order_subtotal"
                         android:layout_alignTop="@id/promotion_text"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/base_margin"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        app:priceText="@{order.applicableFee}"
+                        android:visibility="@{order.promotion==0.0 ? View.GONE : View.VISIBLE}"
+                        app:priceText="@{-order.promotion}"
                         tools:text="-40,000đ" />
 
                     <TextView
-                        android:id="@+id/total_text"
+                        android:id="@+id/fee_text"
+                        style="@style/textStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:layout_below="@id/promotion_text"
                         android:layout_alignParentStart="true"
                         android:layout_marginStart="@dimen/base_margin"
+                        android:text="@string/applicable_fee" />
+
+                    <TextView
+                        android:id="@+id/order_fee"
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_below="@id/order_promotion"
+                        android:layout_alignTop="@id/fee_text"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/base_margin"
+                        app:priceText="@{order.applicableFee}"
+                        tools:text="24,000đ" />
+
+                    <TextView
+                        android:id="@+id/total_text"
+                        style="@style/headerStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_below="@id/fee_text"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="@dimen/base_margin"
                         android:layout_marginTop="@dimen/base_margin"
-                        android:text="@string/total"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/sub_header"
+                        android:text="@string/total"/>
 
                     <TextView
                         android:id="@+id/order_total"
+                        style="@style/subHeaderStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/order_promotion"
+                        android:layout_below="@id/order_fee"
                         android:layout_alignTop="@id/total_text"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/base_margin"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        app:priceText="@{order.subtotal + order.applicableFee}"
-                        tools:text="200,000đ" />
+                        app:priceText="@{order.total}"
+                        tools:text="224,000đ" />
 
                 </RelativeLayout>
 
@@ -263,8 +256,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/large_margin"
-                android:background="@drawable/button_background"
+                android:background="@drawable/fab_button_background"
+                android:paddingStart="@dimen/base_margin"
+                android:paddingEnd="@dimen/base_margin"
                 android:text="@string/cancel_order"
+                android:textColor="@android:color/white"
                 android:visibility="@{order.status &lt; 3 ? View.VISIBLE : View.GONE }" />
 
         </LinearLayout>

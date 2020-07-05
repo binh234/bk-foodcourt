@@ -52,40 +52,50 @@ class RegisterFragment : Fragment() {
         val confirmPassword = binding.confirmPasswordText.text.toString()
 
         if (email.isEmpty()) {
-            binding.nameText.error = "Please enter your name"
-        }else if (email.isEmpty()) {
-            binding.emailText.error = "Empty email"
-        } else if (password.isEmpty()) {
-            binding.passwordText.error = "Empty password"
+            binding.nameText.error = getString(R.string.empty_field)
+        } else if (email.isEmpty()) {
+            binding.emailText.error = getString(R.string.empty_field)
+        } else if (password.length < 6) {
+            binding.passwordText.error = getString(R.string.password_condition)
         } else if (confirmPassword != password) {
-            binding.confirmPasswordText.error = "Password not match"
+            binding.confirmPasswordText.error = getString(R.string.password_not_match)
             binding.confirmPasswordText.requestFocus()
         } else {
-            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val user = User(name)
-                    task.result?.user?.uid?.let {
-                        userCollection.document(it).set(user)
-                    }
-                    Toast.makeText(context, "Register successful", Toast.LENGTH_SHORT).show()
-                    navigateToLoginFragment()
-                } else {
-                    val exception = task.exception
-                    var errorMessage = ""
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val user = User(name)
+                        task.result?.user?.uid?.let {
+                            userCollection.document(it).set(user)
+                        }
+                        Toast.makeText(
+                            context,
+                            getString(R.string.register_success),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        navigateToLoginFragment()
+                    } else {
+                        val exception = task.exception
+                        var errorMessage = ""
 
-                    if (exception != null) {
-                       when (exception) {
-                            is FirebaseAuthWeakPasswordException -> binding.passwordText.error = "Weak password!"
-                            is FirebaseAuthUserCollisionException -> errorMessage = "This email has been registered before"
-                            is FirebaseAuthInvalidCredentialsException -> errorMessage = "This email is malformed"
-                            else -> errorMessage = "Register failed, please try again"
+                        if (exception != null) {
+                            when (exception) {
+                                is FirebaseAuthWeakPasswordException -> binding.passwordText.error =
+                                    getString(
+                                        R.string.weak_password
+                                    )
+                                is FirebaseAuthUserCollisionException -> errorMessage =
+                                    getString(R.string.email_registered)
+                                is FirebaseAuthInvalidCredentialsException -> errorMessage =
+                                    getString(R.string.invalid_email)
+                                else -> errorMessage = getString(R.string.register_fail)
+                            }
+                        }
+                        if (errorMessage.isNotEmpty()) {
+                            Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
                         }
                     }
-                    if (errorMessage.isNotEmpty()) {
-                        Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
-                    }
                 }
-            }
         }
     }
 

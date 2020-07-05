@@ -48,10 +48,10 @@ class LoginFragment : Fragment() {
         val email = binding.emailText.text.toString()
         val password = binding.passwordText.text.toString()
         if (email.isEmpty()) {
-            binding.emailText.error = "Empty email"
+            binding.emailText.error = getString(R.string.empty_field)
             binding.emailText.requestFocus()
         } else if (password.length < 6) {
-            binding.passwordText.error = "Password must be at least 6 characters"
+            binding.passwordText.error = getString(R.string.password_condition)
             binding.passwordText.requestFocus()
         } else {
             checkPermissionAndLogin(email, password)
@@ -67,11 +67,10 @@ class LoginFragment : Fragment() {
                 if (query.isEmpty) {
                     Toast.makeText(
                         context,
-                        "Sorry, you don't have permission to use this app",
+                        getString(R.string.no_permission),
                         Toast.LENGTH_LONG
                     )
                         .show()
-
                 } else {
                     for (document in query) {
                         val userType = document.toObject(UserType::class.java)
@@ -95,7 +94,7 @@ class LoginFragment : Fragment() {
                                         }
                                         Toast.makeText(
                                             context,
-                                            "Login successful",
+                                            getString(R.string.login_success),
                                             Toast.LENGTH_SHORT
                                         )
                                             .show()
@@ -103,7 +102,7 @@ class LoginFragment : Fragment() {
                                     } else {
                                         Toast.makeText(
                                             context,
-                                            "Login failed, please try again",
+                                            getString(R.string.wrong_email_password),
                                             Toast.LENGTH_SHORT
                                         )
                                             .show()
@@ -112,7 +111,7 @@ class LoginFragment : Fragment() {
                         } else {
                             Toast.makeText(
                                 context,
-                                "Sorry, you don't have permission to use this app",
+                                getString(R.string.no_permission),
                                 Toast.LENGTH_LONG
                             )
                                 .show()
@@ -125,19 +124,19 @@ class LoginFragment : Fragment() {
     private fun resetPassword() {
         val email = binding.emailText.text.toString()
         if (email.isEmpty()) {
-            binding.emailText.error = "Empty email"
+            binding.emailText.error = getString(R.string.empty_field)
         } else {
             firebaseAuth.sendPasswordResetEmail(email)
                 .addOnSuccessListener {
                     Toast.makeText(
                         context,
-                        "Please check your email to set new password",
+                        getString(R.string.reset_password),
                         Toast.LENGTH_LONG
                     )
                         .show()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(context, "Please enter a valid email", Toast.LENGTH_LONG)
+                    Toast.makeText(context, getString(R.string.invalid_email), Toast.LENGTH_LONG)
                         .show()
                 }
         }

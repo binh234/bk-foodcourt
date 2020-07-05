@@ -3,6 +3,7 @@ package com.example.bkmerchant.promotion.promotionDetail
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.bkmerchant.R
 import com.example.bkmerchant.promotion.Promotion
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
@@ -34,7 +35,7 @@ class PromotionDetailViewModel(val promotion: Promotion) : ViewModel() {
     val orderFrom = MutableLiveData("")
     val orderTo = MutableLiveData("")
 
-    val message = MutableLiveData<String>()
+    val message = MutableLiveData<Int>()
     val navigateToPromotionEvent = MutableLiveData<Boolean>()
 
     init {
@@ -67,11 +68,11 @@ class PromotionDetailViewModel(val promotion: Promotion) : ViewModel() {
 
     fun savePromotion() {
         if (activateDay.value!! > expireDay.value!!) {
-            message.value = "Activate day must be less than expired day"
+            message.value = R.string.day_lesser
         } else if (activateDayTime.value!! >= expireDayTime.value!!) {
-            message.value = "Activate time must be less than expired time"
+            message.value = R.string.time_lesser
         } else if (discountScope == 0 && orderFrom.value!! >= orderTo.value!!) {
-            message.value = "Order from must be less than order to"
+            message.value = R.string.order_lesser
         } else {
             val map = HashMap<String, Any>()
 
@@ -105,7 +106,7 @@ class PromotionDetailViewModel(val promotion: Promotion) : ViewModel() {
                                     updatePromotion(map)
                                 }
                             } else {
-                                message.value = "Promotion code had been used before!"
+                                message.value = R.string.promotion_code_used
                             }
                         }
                 } else {
@@ -149,7 +150,7 @@ class PromotionDetailViewModel(val promotion: Promotion) : ViewModel() {
             .collection("promotions")
             .add(map)
             .addOnSuccessListener {
-                message.value = "Add successful"
+                message.value = R.string.add_success
                 navigateToPromotionEvent.value = true
             }
     }
@@ -161,7 +162,7 @@ class PromotionDetailViewModel(val promotion: Promotion) : ViewModel() {
             .document(promotion.id)
             .update(map)
             .addOnSuccessListener {
-                message.value = "Update successful"
+                message.value = R.string.update_success
                 navigateToPromotionEvent.value = true
             }
     }

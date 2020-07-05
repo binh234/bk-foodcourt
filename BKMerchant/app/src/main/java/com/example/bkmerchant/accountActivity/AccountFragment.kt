@@ -1,6 +1,7 @@
 package com.example.bkmerchant.accountActivity
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -40,6 +41,8 @@ class AccountFragment: Fragment() {
     private lateinit var storageReference: StorageReference
     private var userAvatarUri: Uri? = null
     private var uploadTask: StorageTask<UploadTask.TaskSnapshot>? = null
+    private lateinit var uploadDialog: AlertDialog
+    private lateinit var uploadView: View
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,6 +54,12 @@ class AccountFragment: Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.account_setting)
 
         storageReference = FirebaseStorage.getInstance().getReference("user_images")
+
+        val inflater = requireActivity().layoutInflater
+        uploadView = inflater.inflate(R.layout.dialog_progress, null)
+        uploadDialog = AlertDialog.Builder(requireContext())
+            .setView(uploadView)
+            .create()
 
         firebaseAuth = FirebaseAuth.getInstance()
         if (firebaseAuth.currentUser == null) {
@@ -141,13 +150,17 @@ class AccountFragment: Fragment() {
         userAvatarUri?.let {imageUri ->
             val fileReference = storageReference
                 .child(System.currentTimeMillis().toString() + "." + getFileExtension(imageUri))
+
+            uploadDialog.show()
+
             uploadTask = fileReference.putFile(imageUri)
                 .addOnSuccessListener {
-                    Toast.makeText(context, "Upload successful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.update_success), Toast.LENGTH_SHORT).show()
                     fileReference.downloadUrl
                         .addOnSuccessListener {
                             Log.d("AccountFragment", it.toString())
                             viewModel.updateProfileImage(it.toString())
+                            uploadDialog.dismiss()
                         }
                         .addOnFailureListener {
                             Log.d("AccountFragment", it.toString())

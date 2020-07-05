@@ -27,8 +27,7 @@ class HomeViewModel : ViewModel() {
                 .document(currentUser!!.uid)
                 .get()
                 .addOnSuccessListener { document ->
-                    val user = document.toObject(User::class.java)
-                    userName.value = "Welcome,\n " + user?.name
+                    userName.value = document.getString("name")
                 }
 
         } else {

@@ -9,6 +9,8 @@ import com.example.bkmerchant.promotion.Promotion
 import com.google.firebase.Timestamp
 import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
 import kotlin.math.round
 
 @BindingAdapter("imageUrl")
@@ -26,6 +28,15 @@ fun setAvatarUrl(view: CircleImageView, url: String) {
         Glide.with(view.context).load(url).into(view)
     } else {
         view.setImageResource(R.drawable.ic_food_default)
+    }
+}
+
+@BindingAdapter("employeeAvatarUrl")
+fun setEmployeeAvatarUrl(view: CircleImageView, url: String) {
+    if (url.isNotEmpty()) {
+        Glide.with(view.context).load(url).into(view)
+    } else {
+        view.setImageResource(R.drawable.ic_chef)
     }
 }
 
@@ -60,24 +71,29 @@ fun convertIntToTime(view: TextView, time: Int) {
 
 @BindingAdapter("day")
 fun setDayFormatted(view: TextView, time: Timestamp) {
-    val timeText = SimpleDateFormat("MM/dd/yyyy").format(time.toDate())
+    val timeText = SimpleDateFormat("MM/dd/yyyy", Locale.US).format(time.toDate())
     view.text = timeText
 }
 
-@BindingAdapter(value = ["total_rating", "total_star"])
-fun setRatingStar(view: TextView, totalRatings: Int, totalStars: Int) {
+@BindingAdapter(value = ["total_rating", "star_rating"])
+fun setRatingStar(view: TextView, totalRatings: Int, starRating: Double) {
     if (totalRatings != 0) {
-        val rating = round(totalStars * 10.0 / totalRatings + 0.5) / 10
+        val rating = round(starRating * 10 + 0.5) / 10
         val text = String.format("%.1f", rating)
         view.text = text
     } else {
-        view.text = "No ratings"
+        view.text = view.resources.getString(R.string.no_rating)
     }
 }
 
 @BindingAdapter(value = ["order_type", "user_name"])
 fun setOrderDescription(view: TextView, orderType: String, userName: String) {
-    val text = "$userName ($orderType)"
+    var text = "$userName ("
+    text += when (orderType) {
+        "Pickup" -> view.resources.getString(R.string.pickup)
+        else -> view.resources.getString(R.string.take_away)
+    }
+    text += ")"
     view.text = text
 }
 
@@ -98,42 +114,54 @@ fun setOrderTime(view: TextView, orderTime: Timestamp) {
     view.text = orderTime.toDate().toString()
 }
 
+@BindingAdapter("item_option")
+fun setItemOption(view: TextView, option: String) {
+    view.text = option.replace("\\n", "\n")
+}
+
 @BindingAdapter("promotion_description")
 fun setPromotionDescription(view: TextView, promotion: Promotion) {
-    var text = "Discount "
-
-    text += when (promotion.type) {
+    val discountValue = when (promotion.type) {
         0 -> "${promotion.value}%"
         else -> String.format("%1$,.0f", promotion.value) + "đ"
     }
-    text += " for "
 
-    text += when (promotion.scope) {
-        0 -> "order from " + String.format(
-            "%1$,.0f",
-            promotion.orderFrom
-        ) + "đ to " + String.format("%1$,.0f", promotion.orderTo) + "đ"
-        1 -> "all items in menu"
-        2 -> "all items in " + getItemList(promotion.discountList)
-        else -> getItemList(promotion.discountList)
+    view.text = when (promotion.scope) {
+        0 -> view.resources.getString(
+            R.string.order_discount_description,
+            promotion.code,
+            discountValue,
+            String.format("%1$,.0f", promotion.orderFrom) + "đ",
+            String.format("%1$,.0f", promotion.orderTo) + "đ"
+        )
+        1 -> view.resources.getString(R.string.menu_discount_description, discountValue)
+        2 -> view.resources.getString(
+            R.string.category_discount_description,
+            discountValue,
+            getItemList(promotion.discountList)
+        )
+        else -> view.resources.getString(
+            R.string.item_discount_description,
+            discountValue,
+            getItemList(promotion.discountList)
+        )
     }
-    view.text = text
 }
 
 fun getItemList(map: HashMap<String, String>): String {
-    var res = ""
+    var itemList = ""
 
-    for (key in map.keys) {
-        res += map[key] + ", "
+    for (value in map.values) {
+        itemList += "$value, "
     }
-    return res
+    return itemList
 }
 
 @BindingAdapter(value = ["promotion_activate_day", "promotion_expire_day"])
 fun setPromotionDateRange(view: TextView, activateDay: Timestamp, expireDay: Timestamp) {
-    val text = SimpleDateFormat("MM/dd/yyyy").format(activateDay.toDate()) +
+    val text = SimpleDateFormat("MM/dd/yyyy", Locale.US).format(activateDay.toDate()) +
             "-" +
-            SimpleDateFormat("MM/dd/yyyy").format(expireDay.toDate())
+            SimpleDateFormat("MM/dd/yyyy", Locale.US).format(expireDay.toDate())
     view.text = text
 }
 
@@ -141,11 +169,13 @@ fun setPromotionDateRange(view: TextView, activateDay: Timestamp, expireDay: Tim
 fun setPromotionTimeRange(view: TextView, activateTime: Int, expireTime: Int) {
     val activateHours: Int = activateTime / 60
     val activateMinutes: Int = activateTime % 60
-    val activateTimeText = String.format("%02d", activateHours) + ":" + String.format("%02d", activateMinutes)
+    val activateTimeText =
+        String.format("%02d", activateHours) + ":" + String.format("%02d", activateMinutes)
 
     val expireHours: Int = expireTime / 60
     val expireMinutes: Int = expireTime % 60
-    val expireTimeText = String.format("%02d", expireHours) + ":" + String.format("%02d", expireMinutes)
+    val expireTimeText =
+        String.format("%02d", expireHours) + ":" + String.format("%02d", expireMinutes)
     view.text = "${activateTimeText}-${expireTimeText}"
 }
 

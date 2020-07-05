@@ -5,17 +5,21 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.bkmerchant.R
 import com.example.bkmerchant.menu.Category
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 
-class CategoryViewModel(val category: Category): ViewModel() {
+class CategoryViewModel(val category: Category) : ViewModel() {
     companion object {
         const val TAG = "CategoryViewModel"
     }
 
-    private val firestore = FirebaseFirestore.getInstance()
+    private val promotionCollection = FirebaseFirestore.getInstance()
+        .collection("stores")
+        .document(category.storeId)
+        .collection("promotions")
     private val categoryCollection = FirebaseFirestore.getInstance()
         .collection("stores")
         .document(category.storeId)
@@ -23,7 +27,7 @@ class CategoryViewModel(val category: Category): ViewModel() {
 
     var name = MutableLiveData("")
 
-    var nameFieldError = MutableLiveData<String>()
+    var nameFieldError = MutableLiveData<Int>()
 
     var navigateToMenuFragment = MutableLiveData<Boolean>()
 
@@ -55,7 +59,7 @@ class CategoryViewModel(val category: Category): ViewModel() {
                             }
                             Log.i(TAG, catName)
                         } else {
-                            nameFieldError.value = "Duplicate item"
+                            nameFieldError.value = R.string.duplicate_category
                         }
                     }
                     .addOnFailureListener {
@@ -63,7 +67,7 @@ class CategoryViewModel(val category: Category): ViewModel() {
                     }
             }
         } else {
-            nameFieldError.value = "Please enter this field"
+            nameFieldError.value = R.string.empty_field
         }
     }
 
@@ -87,6 +91,14 @@ class CategoryViewModel(val category: Category): ViewModel() {
             }
             .addOnFailureListener {
                 Log.d(TAG, it.toString())
+            }
+
+        promotionCollection.whereGreaterThan("discountList.${category.id}", "")
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot) {
+                    document.reference.update("discountList.${category.id}", category.name)
+                }
             }
     }
 }

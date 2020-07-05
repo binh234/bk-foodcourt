@@ -6,6 +6,9 @@
 
     <data>
 
+        <variable
+            name="user"
+            type="com.example.bkmerchant.login.User" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -28,6 +31,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:employeeAvatarUrl="@{user.avatarUrl}"
                 tools:src="@drawable/ic_chef" />
 
             <TextView
@@ -36,34 +40,38 @@
                 style="@style/headerStyle"
                 android:layout_marginStart="@dimen/small_margin"
                 android:layout_toEndOf="@id/employee_image"
+                android:text="@{user.name}"
                 tools:text="Phan Chau Trinh" />
 
             <TextView
                 android:id="@+id/employee_address"
-                style="@style/textStyle"
+                style="@style/subHeaderStyle"
                 android:layout_width="match_parent"
                 android:layout_alignStart="@id/employee_name"
                 android:layout_below="@id/employee_name"
                 android:layout_marginTop="@dimen/small_margin"
                 android:maxLines="2"
+                android:text="@{user.address}"
                 tools:text="Phú Mỹ Hưng, quận 7, Hồ Chí Minh" />
 
             <TextView
                 android:id="@+id/employee_email"
                 android:layout_width="match_parent"
-                style="@style/textStyle"
+                style="@style/subHeaderStyle"
                 android:layout_below="@id/employee_address"
                 android:layout_alignStart="@id/employee_name"
                 android:layout_marginTop="@dimen/small_margin"
+                android:text="@{user.email}"
                 tools:text="cook_123@gmail.com" />
 
             <TextView
                 android:id="@+id/employee_phone_number"
                 android:layout_width="match_parent"
-                style="@style/textStyle"
+                style="@style/subHeaderStyle"
                 android:layout_below="@id/employee_email"
                 android:layout_alignStart="@id/employee_name"
                 android:layout_marginTop="@dimen/small_margin"
+                android:text="@{user.phoneNumber}"
                 tools:text="0962692671" />
         </RelativeLayout>
 

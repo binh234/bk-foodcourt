@@ -8,6 +8,7 @@ import android.webkit.MimeTypeMap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.bkmerchant.R
 import com.example.bkmerchant.menu.Category
 import com.example.bkmerchant.menu.Dish
 import com.example.bkmerchant.menu.category.CategoryViewModel
@@ -27,6 +28,7 @@ class DishViewModel(val dish: Dish): ViewModel() {
     var description = MutableLiveData<String>()
     var price = MutableLiveData<String>()
     var imageUrl = ""
+    var categoryIndex = 0
 
     var categories = mutableListOf<Category>()
     var catList = MutableLiveData<List<String>>()
@@ -35,8 +37,7 @@ class DishViewModel(val dish: Dish): ViewModel() {
     var currentIndex = 0
     var currentName = ""
 
-    val nameFieldError = MutableLiveData<String>()
-    val emptyPriceField = MutableLiveData<String>()
+    val nameFieldError = MutableLiveData<Int>()
 
     var navigateToMenuFragment = MutableLiveData<Boolean>()
 
@@ -57,7 +58,7 @@ class DishViewModel(val dish: Dish): ViewModel() {
         currentName = dish.name
     }
 
-    fun saveDish(url: String, index: Int) {
+    fun saveDish(url: String) {
         if (url.isNotEmpty() && imageUrl.isNotEmpty()) {
             FirebaseStorage.getInstance()
                 .getReferenceFromUrl(imageUrl)
@@ -71,10 +72,10 @@ class DishViewModel(val dish: Dish): ViewModel() {
         dish.description = description.value ?: ""
         dish.price = (price.value ?: "0").toDouble()
         dish.availability = true
-        dish.categoryId = categories[index].id
+        dish.categoryId = categories[categoryIndex].id
 
         if (dish.id.isNotEmpty() && dish.name.trim() == currentName) {
-            updateDish(index)
+            updateDish()
         } else {
             firestore.collectionGroup("items")
                 .whereEqualTo("storeId", dish.storeId)
@@ -83,12 +84,12 @@ class DishViewModel(val dish: Dish): ViewModel() {
                 .addOnSuccessListener {querySnapshot ->
                     if (querySnapshot.isEmpty) {
                         if (dish.id.isNotEmpty()) {
-                            updateDish(index)
+                            updateDish()
                         } else {
                             addDish()
                         }
                     } else {
-                        nameFieldError.value = "Duplicate item"
+                        nameFieldError.value = R.string.duplicate_item
                     }
                 }
         }
@@ -109,8 +110,8 @@ class DishViewModel(val dish: Dish): ViewModel() {
             }
     }
 
-    private fun updateDish(index: Int) {
-        if (currentIndex != index) {
+    private fun updateDish() {
+        if (currentIndex != categoryIndex) {
             firestore.collection("stores")
                 .document(dish.storeId)
                 .collection("categories")
@@ -119,6 +120,20 @@ class DishViewModel(val dish: Dish): ViewModel() {
                 .document(dish.id)
                 .delete()
         }
+
+        if (dish.name.trim() == currentName) {
+            firestore.collection("stores")
+                .document(dish.storeId)
+                .collection("promotions")
+                .whereGreaterThan("discountList.${dish.id}", "")
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    for (document in querySnapshot) {
+                        document.reference.update("discountList.${dish.id}", dish.name)
+                    }
+                }
+        }
+
         firestore.collection("stores")
             .document(dish.storeId)
             .collection("categories")
@@ -148,6 +163,7 @@ class DishViewModel(val dish: Dish): ViewModel() {
 
                         if (item.id == dish.categoryId) {
                             currentIndex = categories.size
+                            categoryIndex = currentIndex
                         }
 
                         categories.add(item)

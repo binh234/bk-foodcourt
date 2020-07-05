@@ -38,7 +38,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/label"
                         android:inputType="textCapSentences"
-                        android:maxLength="30"
+                        android:maxLength="25"
                         android:text="@={viewModel.label}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,14 +47,14 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/small_margin"
-                    android:hint="@string/discount_type">
+                    android:layout_marginTop="@dimen/small_margin">
 
                     <AutoCompleteTextView
                         android:id="@+id/discount_type"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusable="false"
+                        android:hint="@string/discount_type"
                         android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,14 +63,14 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/small_margin"
-                    android:hint="@string/discount_scope">
+                    android:layout_marginTop="@dimen/small_margin">
 
                     <AutoCompleteTextView
                         android:id="@+id/discount_scope"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusable="false"
+                        android:hint="@string/discount_scope"
                         android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -228,6 +228,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/code"
                         android:inputType="textCapCharacters"
+                        android:maxLength="12"
                         android:text="@={viewModel.code}" />
                 </com.google.android.material.textfield.TextInputLayout>
 

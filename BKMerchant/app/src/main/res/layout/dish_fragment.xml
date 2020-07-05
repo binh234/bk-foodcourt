@@ -100,25 +100,23 @@
                         android:textColor="@android:color/black"
                         android:textSize="20sp" />
 
-                    <LinearLayout
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/discount_scope_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/base_margin"
-                        android:layout_marginTop="@dimen/small_margin"
                         android:layout_weight="2"
-                        android:orientation="vertical">
+                        android:layout_marginStart="@dimen/small_margin"
+                        android:layout_marginTop="@dimen/small_margin">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/category" />
-
-                        <Spinner
+                        <AutoCompleteTextView
                             android:id="@+id/dish_category"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
+                            android:layout_height="wrap_content"
+                            android:hint="@string/category"
+                            android:focusable="false"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 

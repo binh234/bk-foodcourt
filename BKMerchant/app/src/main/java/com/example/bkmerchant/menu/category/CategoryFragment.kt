@@ -49,7 +49,7 @@ class CategoryFragment : Fragment() {
 
         viewModel.nameFieldError.observe(viewLifecycleOwner, Observer {
             if (it != null) {
-                binding.categoryNameText.setError(it)
+                binding.categoryNameText.error = getString(it)
             }
         })
 

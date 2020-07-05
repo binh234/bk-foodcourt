@@ -56,7 +56,7 @@ class DishFragment : Fragment() {
 
         viewModel.nameFieldError.observe(viewLifecycleOwner, Observer {
             it?.let {
-                binding.dishNameText.error = it
+                binding.dishNameText.error = getString(it)
             }
         })
 
@@ -64,11 +64,7 @@ class DishFragment : Fragment() {
             imageLoader()
         }
         binding.doneFab.setOnClickListener {
-            if (uploadTask != null && uploadTask!!.isInProgress) {
-                Toast.makeText(context, "Uploading in progress", Toast.LENGTH_SHORT).show()
-            } else {
-                checkEmptyField()
-            }
+            checkEmptyField()
         }
 
         viewModel.navigateToMenuFragment.observe(viewLifecycleOwner, Observer {
@@ -77,10 +73,17 @@ class DishFragment : Fragment() {
             }
         })
 
-        viewModel.catList.observe(viewLifecycleOwner, Observer {categories ->
-            val arrayAdapter = context?.let { ArrayAdapter(it, android.R.layout.simple_dropdown_item_1line, categories) }
-            binding.dishCategory.adapter = arrayAdapter
-            binding.dishCategory.setSelection(viewModel.currentIndex)
+        viewModel.catList.observe(viewLifecycleOwner, Observer { categories ->
+            val arrayAdapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_dropdown_item_1line,
+                categories
+            )
+            binding.dishCategory.setAdapter(arrayAdapter)
+            binding.dishCategory.setText(arrayAdapter.getItem(viewModel.currentIndex), false)
+            binding.dishCategory.setOnItemClickListener { _, _, position, _ ->
+                viewModel.categoryIndex = position
+            }
         })
 
         return binding.root
@@ -96,7 +99,7 @@ class DishFragment : Fragment() {
     @Suppress("DEPRECATION")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode==1 && resultCode==RESULT_OK && data!=null && data.data!=null) {
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.data != null) {
             dishImageUri = data.data
             binding.dishImage.setImageURI(dishImageUri)
         }
@@ -112,19 +115,23 @@ class DishFragment : Fragment() {
     }
 
     private fun uploadImage() {
-        val itemIndex = binding.dishCategory.selectedItemPosition
-        dishImageUri?.let {imageUri ->
+        dishImageUri?.let { imageUri ->
             val fileReference = storageReference
                 .child(System.currentTimeMillis().toString() + "." + getFileExtension(imageUri))
             binding.loadingProgress.visibility = View.VISIBLE
+            binding.doneFab.isEnabled = false
+
             uploadTask = fileReference.putFile(imageUri)
                 .addOnSuccessListener {
-                    Toast.makeText(context, "Upload successful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.update_success), Toast.LENGTH_SHORT)
+                        .show()
                     fileReference.downloadUrl
                         .addOnSuccessListener {
                             Log.d("DishFragment", it.toString())
-                            viewModel.saveDish(it.toString(), itemIndex)
+                            viewModel.saveDish(it.toString())
+
                             binding.loadingProgress.visibility = View.GONE
+                            binding.doneFab.isEnabled = true
                         }
                         .addOnFailureListener {
                             Log.d("DishFragment", it.toString())
@@ -134,13 +141,13 @@ class DishFragment : Fragment() {
                 .addOnFailureListener {
                     Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
                 }
-                .addOnProgressListener {task ->
+                .addOnProgressListener { task ->
                     val progress = 100.0 * task.bytesTransferred / task.totalByteCount
                     binding.loadingProgress.progress = progress.toInt()
                 }
         }
         if (dishImageUri == null) {
-            viewModel.saveDish("", itemIndex)
+            viewModel.saveDish("")
         }
     }
 
@@ -150,11 +157,11 @@ class DishFragment : Fragment() {
         val price = viewModel.price.value ?: ""
         if (name.trim().isEmpty()) {
             check = false
-            binding.dishNameText.error = "Please enter this field"
+            binding.dishNameText.error = getString(R.string.empty_field)
         }
         if (price.isEmpty()) {
             check = false
-            binding.dishPriceText.error = "Please enter this field"
+            binding.dishPriceText.error = getString(R.string.empty_field)
         }
         if (check) {
             uploadImage()

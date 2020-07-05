@@ -74,7 +74,7 @@ class MenuFragment : Fragment() {
             categoryListView = ListView(it)
 
             val builder = AlertDialog.Builder(it)
-            builder.setTitle("Choose one category")
+            builder.setTitle(getString(R.string.choose_one_category))
                 .setCancelable(true)
             dialog = builder.create()
 

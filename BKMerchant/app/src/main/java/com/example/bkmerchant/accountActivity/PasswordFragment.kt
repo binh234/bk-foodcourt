@@ -1,6 +1,5 @@
 package com.example.bkmerchant.accountActivity
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,17 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.example.bkmerchant.MainActivity
 import com.example.bkmerchant.R
-import com.example.bkmerchant.databinding.LoginFragmentBinding
 import com.example.bkmerchant.databinding.PasswordFragmentBinding
-import com.example.bkmerchant.login.AccountType
-import com.example.bkmerchant.login.UserType
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
 
 class PasswordFragment : Fragment() {
     private lateinit var binding: PasswordFragmentBinding
@@ -53,15 +46,15 @@ class PasswordFragment : Fragment() {
             currentUser.reauthenticate(credential)
                 .addOnSuccessListener {
                     if (newPassword.length < 6) {
-                        binding.newPassword.error = "Password must have at least 6 characters"
+                        binding.newPassword.error = getString(R.string.password_condition)
                     } else if (newPassword != confirmPassword) {
-                        binding.confirmPassword.error = "Password not match"
+                        binding.confirmPassword.error = getString(R.string.password_not_match)
                     } else {
                         currentUser.updatePassword(newPassword)
                             .addOnSuccessListener {
                                 Toast.makeText(
                                     context,
-                                    "Update password successful",
+                                    getString(R.string.update_success),
                                     Toast.LENGTH_SHORT
                                 )
                                     .show()
@@ -72,7 +65,7 @@ class PasswordFragment : Fragment() {
                     }
                 }
                 .addOnFailureListener {
-                    binding.currentPassword.error = "Wrong password"
+                    binding.currentPassword.error = getString(R.string.wrong_password)
                 }
         }
     }
@@ -83,13 +76,13 @@ class PasswordFragment : Fragment() {
                 .addOnSuccessListener {
                     Toast.makeText(
                         context,
-                        "Please check your email to set new password",
+                        getString(R.string.reset_password),
                         Toast.LENGTH_LONG
                     )
                         .show()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(context, "Some error occurred, please try again", Toast.LENGTH_LONG)
+                    Toast.makeText(context, getString(R.string.error_occur), Toast.LENGTH_LONG)
                         .show()
                 }
         }

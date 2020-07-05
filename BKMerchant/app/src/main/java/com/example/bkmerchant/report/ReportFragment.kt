@@ -52,7 +52,7 @@ class ReportFragment: Fragment() {
                     val order = document.toObject(Order::class.java)
                     if (order.status == 3) {
                         finishOrder += 1
-                        totalSale += order.applicableFee + order.subtotal
+                        totalSale += order.total
                     } else if (order.status == 4) {
                         cancelOrder += 1
                     } else {
@@ -61,7 +61,7 @@ class ReportFragment: Fragment() {
                 }
                 var text = "Processing orders: $processingOrder \n"
                 text += "Finish orders: $finishOrder \n"
-                text += "Cancel orders: $cancelOrder \n"
+                text += "Cancel orders: $cancelOrder \n\n"
                 text += "Total sales: " + String.format("%1$,.0f", totalSale) + "đ"
                 binding.reportText.text = text
             }

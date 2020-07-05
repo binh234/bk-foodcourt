@@ -35,6 +35,7 @@
                     app:imageDetailUrl="@{viewModel.imageUrl}" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_margin">
@@ -50,6 +51,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_margin">
@@ -70,85 +72,49 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/small_margin"
                     android:orientation="horizontal">
 
-                    <RelativeLayout
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:id="@+id/open_time"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/small_margin"
-                            android:text="@string/open_time" />
-
-                        <TextView
-                            android:id="@+id/open_time_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/open_time"
-                            android:layout_alignStart="@id/open_time"
-                            android:layout_marginTop="@dimen/small_margin"
-                            app:time="@{viewModel.openTime}"
-                            tools:text="8:00" />
-
-                        <TextView
-                            android:id="@+id/change_open_time"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/open_time"
-                            android:layout_marginStart="@dimen/base_margin"
-                            android:layout_toEndOf="@id/open_time_text"
-                            android:background="@drawable/fab_button_background"
-                            android:padding="@dimen/fab_margin"
-                            android:text="@string/change"
-                            android:textColor="@android:color/white" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/base_margin"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:layout_marginEnd="@dimen/small_margin"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        app:helperTextEnabled="true">
 
-                        <TextView
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/open_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:hint="@string/open_time"
+                            app:time="@{viewModel.openTime}" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/small_margin"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:layout_weight="1"
+                        app:helperTextEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/close_time"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/close_time" />
-
-                        <TextView
-                            android:id="@+id/close_time_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/close_time"
-                            android:layout_alignStart="@id/close_time"
-                            android:layout_marginTop="@dimen/small_margin"
-                            app:time="@{viewModel.closeTime}"
-                            tools:text="21:00" />
-
-                        <TextView
-                            android:id="@+id/change_close_time"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/close_time"
-                            android:layout_marginStart="@dimen/base_margin"
-                            android:layout_toEndOf="@id/close_time_text"
-                            android:background="@drawable/fab_button_background"
-                            android:padding="@dimen/fab_margin"
-                            android:text="@string/change"
-                            android:textColor="@android:color/white" />
-
-                    </RelativeLayout>
-
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:hint="@string/close_time"
+                            app:time="@{viewModel.closeTime}" />
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_margin">
@@ -163,6 +129,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_margin">
@@ -177,6 +144,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_margin">

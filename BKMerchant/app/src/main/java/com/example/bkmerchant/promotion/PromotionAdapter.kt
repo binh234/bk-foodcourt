@@ -6,15 +6,23 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bkmerchant.databinding.OrderItemBinding
 import com.example.bkmerchant.databinding.PromotionItemBinding
+import com.example.bkmerchant.login.AccountType
+import com.example.bkmerchant.login.User
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import java.lang.reflect.Field
 
-class PromotionAdapter(options: FirestoreRecyclerOptions<Promotion>,
-                       val viewModel: PromotionViewModel
-                       , private val storeId: String):
+class PromotionAdapter(
+    options: FirestoreRecyclerOptions<Promotion>,
+    val viewModel: PromotionViewModel
+    , private val storeId: String
+) :
     FirestoreRecyclerAdapter<Promotion, PromotionAdapter.PromotionViewHolder>(options) {
 
-    class PromotionViewHolder private constructor(val binding: PromotionItemBinding): RecyclerView.ViewHolder(binding.root) {
+    class PromotionViewHolder private constructor(val binding: PromotionItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Promotion, viewModel: PromotionViewModel) {
             binding.promotion = item
@@ -40,5 +48,9 @@ class PromotionAdapter(options: FirestoreRecyclerOptions<Promotion>,
         item.id = snapshots.getSnapshot(position).id
         item.storeId = storeId
         holder.bind(item, viewModel)
+    }
+
+    fun removePromotion(position: Int) {
+        snapshots.getSnapshot(position).reference.delete()
     }
 }

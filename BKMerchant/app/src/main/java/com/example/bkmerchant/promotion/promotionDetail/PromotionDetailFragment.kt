@@ -36,7 +36,8 @@ class PromotionDetailFragment : Fragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.promotion_detail_fragment, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.promotion_detail_fragment, container, false)
 
         calendar = Calendar.getInstance()
 
@@ -60,7 +61,7 @@ class PromotionDetailFragment : Fragment() {
 
         viewModel.message.observe(viewLifecycleOwner, Observer {
             it?.let {
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(it), Toast.LENGTH_SHORT).show()
             }
         })
         viewModel.navigateToPromotionEvent.observe(viewLifecycleOwner, Observer { event ->
@@ -85,10 +86,14 @@ class PromotionDetailFragment : Fragment() {
             binding.fromOrder.error = resources.getString(R.string.empty_field)
         } else if (viewModel.discountScope == 0 && binding.toOrder.text.toString().isEmpty()) {
             binding.toOrder.error = resources.getString(R.string.empty_field)
-        } else if (viewModel.discountScope > 1 && viewModel.discountList.isEmpty() && binding.listItem.text.toString().isEmpty()) {
+        } else if (viewModel.discountScope > 1 && viewModel.discountList.isEmpty() && binding.listItem.text.toString()
+                .isEmpty()
+        ) {
             binding.listItem.error = resources.getString(R.string.empty_field)
-        } else if (viewModel.discountType == 0 && binding.discountValue.text.toString().toDouble() >= 100) {
-            binding.discountValue.error = "Discount percent must be less than 100"
+        } else if (viewModel.discountType == 0 && binding.discountValue.text.toString()
+                .toDouble() >= 100
+        ) {
+            binding.discountValue.error = getString(R.string.discount_percent_condition)
         } else if (binding.numAllow.text.toString().toInt() == 0) {
             binding.numAllow.error = resources.getString(R.string.empty_field)
         } else {
@@ -102,7 +107,6 @@ class PromotionDetailFragment : Fragment() {
             R.array.discount_type,
             android.R.layout.simple_dropdown_item_1line
         )
-        binding.discountType.setAdapter(typeAdapter)
         binding.discountType.setText(typeAdapter.getItem(viewModel.discountType), false)
 
         val scopeAdapter = ArrayAdapter.createFromResource(
@@ -110,7 +114,6 @@ class PromotionDetailFragment : Fragment() {
             R.array.discount_scope,
             android.R.layout.simple_dropdown_item_1line
         )
-        binding.discountScope.setAdapter(scopeAdapter)
         binding.discountScope.setText(scopeAdapter.getItem(viewModel.discountScope), false)
 
         if (viewModel.promotion.id.isNotEmpty()) {
@@ -120,7 +123,8 @@ class PromotionDetailFragment : Fragment() {
             var orderDiscountVisibility = View.VISIBLE
             var itemDiscountVisibility = View.GONE
             when (viewModel.discountScope) {
-                0 -> {}
+                0 -> {
+                }
                 1 -> {
                     orderDiscountVisibility = View.GONE
                 }
@@ -140,16 +144,20 @@ class PromotionDetailFragment : Fragment() {
             binding.orderToLayout.visibility = orderDiscountVisibility
             binding.listItemLayout.visibility = itemDiscountVisibility
         } else {
-            binding.discountType.setOnItemClickListener { parent, view, position, id ->
+            binding.discountType.setAdapter(typeAdapter)
+            binding.discountScope.setAdapter(scopeAdapter)
+
+            binding.discountType.setOnItemClickListener { _, _, position, _ ->
                 viewModel.discountType = position
             }
 
-            binding.discountScope.setOnItemClickListener { parent, view, position, id ->
+            binding.discountScope.setOnItemClickListener { _, _, position, _ ->
                 viewModel.discountScope = position
                 var orderDiscountVisibility = View.VISIBLE
                 var itemDiscountVisibility = View.GONE
                 when (position) {
-                    0 -> {}
+                    0 -> {
+                    }
                     1 -> {
                         orderDiscountVisibility = View.GONE
                     }
@@ -174,19 +182,18 @@ class PromotionDetailFragment : Fragment() {
 
     private fun openMultiChoiceDialog() {
         val builder = AlertDialog.Builder(requireContext())
-            .setTitle("Select items")
-            .setNegativeButton("Cancel") { dialog: DialogInterface, which: Int ->
-                dialog.dismiss()
+            .setTitle(getString(R.string.select_item))
+            .setNegativeButton(getString(R.string.cancel)) { _: DialogInterface, _: Int ->
             }
 
         if (viewModel.discountScope == 2) {
             builder.setMultiChoiceItems(
                 viewModel.categories,
                 viewModel.checkedCategories
-            ) { dialog: DialogInterface, i: Int, b: Boolean ->
+            ) { _: DialogInterface, i: Int, b: Boolean ->
                 viewModel.checkedCategories[i] = b
             }
-                .setPositiveButton("OK") { dialog: DialogInterface, which: Int ->
+                .setPositiveButton("OK") { _: DialogInterface, _: Int ->
                     var text = ""
                     for (i in 0 until viewModel.categories.size) {
                         if (viewModel.checkedCategories[i]) {
@@ -200,12 +207,12 @@ class PromotionDetailFragment : Fragment() {
             builder.setMultiChoiceItems(
                 viewModel.items,
                 viewModel.checkedItems
-            ) { dialog: DialogInterface, i: Int, b: Boolean ->
+            ) { _: DialogInterface, i: Int, b: Boolean ->
                 viewModel.checkedItems[i] = b
             }
-                .setPositiveButton("OK") { dialog: DialogInterface, which: Int ->
+                .setPositiveButton("OK") { _: DialogInterface, _: Int ->
                     var text = ""
-                    for (i in 0 until viewModel.items.size) {
+                    for (i in viewModel.items.indices) {
                         if (viewModel.checkedItems[i]) {
                             text += viewModel.items[i] + "\n"
                         }
@@ -222,10 +229,10 @@ class PromotionDetailFragment : Fragment() {
         val curDay = calendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerListener =
-            DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                 val string = "${month + 1}/${dayOfMonth}/$year"
                 Log.d("PromotionDetail", string)
-                val date = SimpleDateFormat("MM/dd/yyyy").parse(string)
+                val date = SimpleDateFormat("MM/dd/yyyy", Locale.US).parse(string)
                 Log.d("PromotionDetail", date?.time.toString())
                 viewModel.activateDay.value = Timestamp(date ?: Date())
             }
@@ -245,10 +252,10 @@ class PromotionDetailFragment : Fragment() {
         val curDay = calendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerListener =
-            DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                 val string = "${month + 1}/${dayOfMonth}/$year"
                 Log.d("PromotionDetail", string)
-                val date = SimpleDateFormat("MM/dd/yyyy").parse(string)
+                val date = SimpleDateFormat("MM/dd/yyyy", Locale.US).parse(string)
                 Log.d("PromotionDetail", date?.time.toString())
                 viewModel.expireDay.value = Timestamp(date ?: Date())
             }

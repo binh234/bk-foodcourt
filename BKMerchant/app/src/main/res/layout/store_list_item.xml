@@ -26,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_margin"
-            android:layout_marginEnd="@dimen/base_margin">
+            android:layout_marginEnd="@dimen/base_margin"
+            android:onClick="@{() -> viewModel.openStore(store)}">
 
             <ImageView
                 android:id="@+id/store_image"
@@ -39,63 +40,48 @@
             <TextView
                 android:id="@+id/store_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/headerStyle"
                 android:layout_marginStart="@dimen/small_margin"
                 android:layout_toEndOf="@id/store_image"
                 android:text="@{store.name}"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
                 tools:text="Domino's Pizza" />
 
             <TextView
                 android:id="@+id/store_rating"
                 style="@style/textStyle"
                 android:layout_width="wrap_content"
-                android:layout_alignStart="@id/store_name"
                 android:layout_below="@id/store_name"
+                android:layout_alignStart="@id/store_name"
                 android:layout_marginTop="@dimen/small_margin"
                 android:drawableStart="@drawable/ic_star"
                 android:drawablePadding="@dimen/small_margin"
                 android:gravity="bottom"
                 app:total_rating="@{store.totalRatings}"
-                app:total_star="@{store.totalStars}"
+                app:star_rating="@{store.starRating}"
                 tools:text="4.7" />
 
             <TextView
                 android:id="@+id/store_description"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/textStyle"
                 android:layout_below="@id/store_rating"
                 android:layout_alignStart="@id/store_name"
                 android:layout_marginTop="@dimen/small_margin"
                 android:maxLines="2"
+                android:textColor="@android:color/tab_indicator_text"
                 android:text="@{store.description}"
-                android:textSize="14sp"
                 tools:text="Tiết kiệm đến 25%. Phù hợp  với nhóm từ 2-4 người. Pizza nướng thơm lừng ..." />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/store_description"
-                android:layout_alignStart="@id/store_name"
-                android:onClick="@{() -> viewModel.openStore(store)}"
-                android:padding="@dimen/small_margin"
-                android:text="@string/edit"
-                android:textColor="@color/colorBlue"
-                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/default_text"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/subHeaderStyle"
                 android:layout_below="@id/store_description"
                 android:layout_alignParentEnd="true"
                 android:onClick="@{() -> viewModel.setDefaultStore(store.id)}"
                 android:padding="@dimen/small_margin"
                 android:text="@string/set_as_default"
                 android:textColor="@color/colorBlue"
-                android:textSize="16sp"
                 android:visibility="@{store.isFocus ? View.GONE : View.VISIBLE}" />
         </RelativeLayout>
 

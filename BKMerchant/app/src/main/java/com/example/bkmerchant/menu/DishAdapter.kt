@@ -39,4 +39,12 @@ class DishAdapter(options: FirestoreRecyclerOptions<Dish>, val viewModel: MenuVi
         item.storeId = category.storeId
         holder.bind(item, viewModel)
     }
+
+    fun deleteDish(position: Int) {
+        val item = snapshots.getSnapshot(position).toObject(Dish::class.java)!!
+        item.id = snapshots.getSnapshot(position).id
+        item.categoryId = category.id
+        item.storeId = category.storeId
+        viewModel.deleteDish(item)
+    }
 }

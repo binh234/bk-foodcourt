@@ -4,13 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.example.bkmerchant.menu.category.CategoryViewModel" />
-    </data>
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -31,8 +24,7 @@
                     android:layout_height="wrap_content"
                     android:maxLength="30"
                     android:hint="@string/email"
-                    android:inputType="textCapSentences"
-                    android:text="@={viewModel.name}" />
+                    android:inputType="textCapSentences"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -44,7 +36,6 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/base_margin"
             android:background="@color/colorSecondary"
-            android:onClick="@{()->viewModel.saveCategory()}"
             android:src="@drawable/ic_done" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
