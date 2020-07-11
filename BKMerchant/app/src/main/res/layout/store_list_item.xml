@@ -18,16 +18,19 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        style="@style/CardViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/base_margin">
+        android:layout_marginBottom="@dimen/base_margin"
+        android:onClick="@{() -> viewModel.openStore(store)}">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_margin"
             android:layout_marginEnd="@dimen/base_margin"
-            android:onClick="@{() -> viewModel.openStore(store)}">
+            android:paddingTop="@dimen/fab_margin"
+            android:paddingBottom="@dimen/fab_margin">
 
             <ImageView
                 android:id="@+id/store_image"
@@ -39,8 +42,8 @@
 
             <TextView
                 android:id="@+id/store_name"
-                android:layout_width="wrap_content"
                 style="@style/headerStyle"
+                android:layout_width="wrap_content"
                 android:layout_marginStart="@dimen/small_margin"
                 android:layout_toEndOf="@id/store_image"
                 android:text="@{store.name}"
@@ -56,26 +59,26 @@
                 android:drawableStart="@drawable/ic_star"
                 android:drawablePadding="@dimen/small_margin"
                 android:gravity="bottom"
-                app:total_rating="@{store.totalRatings}"
                 app:star_rating="@{store.starRating}"
+                app:total_rating="@{store.totalRatings}"
                 tools:text="4.7" />
 
             <TextView
                 android:id="@+id/store_description"
-                android:layout_width="match_parent"
                 style="@style/textStyle"
+                android:layout_width="match_parent"
                 android:layout_below="@id/store_rating"
                 android:layout_alignStart="@id/store_name"
                 android:layout_marginTop="@dimen/small_margin"
                 android:maxLines="2"
-                android:textColor="@android:color/tab_indicator_text"
                 android:text="@{store.description}"
+                android:textColor="@android:color/tab_indicator_text"
                 tools:text="Tiết kiệm đến 25%. Phù hợp  với nhóm từ 2-4 người. Pizza nướng thơm lừng ..." />
 
             <TextView
                 android:id="@+id/default_text"
-                android:layout_width="wrap_content"
                 style="@style/subHeaderStyle"
+                android:layout_width="wrap_content"
                 android:layout_below="@id/store_description"
                 android:layout_alignParentEnd="true"
                 android:onClick="@{() -> viewModel.setDefaultStore(store.id)}"

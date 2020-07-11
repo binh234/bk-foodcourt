@@ -5,7 +5,9 @@ import android.text.format.DateFormat.format
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.ReportFragmentBinding
 import com.example.bkmerchant.order.Order
 import com.google.firebase.Timestamp
@@ -24,6 +26,7 @@ class ReportFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.report)
 
         binding = ReportFragmentBinding.inflate(inflater, container, false)
 

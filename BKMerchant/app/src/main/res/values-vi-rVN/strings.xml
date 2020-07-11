@@ -114,4 +114,11 @@
     <string name="promo">Khuyến mãi</string>
     <string name="setting">Cài đặt</string>
     <string name="uploading">Đang tải ...</string>
+    <string name="order_detail">Thông tin đơn hàng</string>
+    <string name="promotion_detail">Thông tin khuyến mãi</string>
+    <string name="employee_add">Thêm nhân viên</string>
+    <string name="no_notification">Không có thông báo nào để hiển thị</string>
+    <string name="this_feature_will_be_updated_soon">Tính năng này sẽ được cập nhật sớm</string>
+    <string name="priority">Độ ưu tiên</string>
+    <string name="friendly_display">Phục vụ cho mục đích hiển thị</string>
 </resources>

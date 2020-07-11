@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayout
 import androidx.fragment.app.Fragment
 import com.example.bkmerchant.R
@@ -19,6 +20,7 @@ class OrderFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.orders)
         val args = OrderFragmentArgs.fromBundle(requireArguments())
 
         binding = OrderFragmentBinding.inflate(inflater, container, false)

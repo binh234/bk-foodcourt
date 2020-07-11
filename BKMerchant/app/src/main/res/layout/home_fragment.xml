@@ -40,9 +40,11 @@
                     android:id="@+id/store_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white"
+                    android:background="@drawable/click_selector"
                     android:paddingStart="@dimen/base_margin"
-                    android:paddingEnd="@dimen/base_margin">
+                    android:paddingTop="@dimen/fab_margin"
+                    android:paddingEnd="@dimen/base_margin"
+                    android:paddingBottom="@dimen/fab_margin">
 
                     <ImageView
                         android:id="@+id/store_image"

@@ -14,6 +14,7 @@ import com.example.bkmerchant.menu.Dish
 import com.example.bkmerchant.menu.category.CategoryViewModel
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.FirebaseStorage
 
@@ -154,6 +155,7 @@ class DishViewModel(val dish: Dish): ViewModel() {
         firestore.collection("stores")
             .document(dish.storeId)
             .collection("categories")
+            .orderBy("priority", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener {querySnapshot ->
                 if (querySnapshot != null) {

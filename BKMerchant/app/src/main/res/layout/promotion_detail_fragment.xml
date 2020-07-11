@@ -29,7 +29,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:helperText="For friendly display purpose"
+                    app:helperText="@string/friendly_display"
                     app:helperTextEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText

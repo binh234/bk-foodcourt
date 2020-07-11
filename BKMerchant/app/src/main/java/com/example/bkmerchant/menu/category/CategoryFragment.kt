@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -53,7 +54,22 @@ class CategoryFragment : Fragment() {
             }
         })
 
+        setupDropdownList()
+
         return binding.root
+    }
+
+    private fun setupDropdownList() {
+        val priorityAdapter = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.priority,
+            android.R.layout.simple_dropdown_item_1line
+        )
+        binding.categoryPriority.setText(priorityAdapter.getItem(viewModel.priority), false)
+        binding.categoryPriority.setAdapter(priorityAdapter)
+        binding.categoryPriority.setOnItemClickListener { _, _, position, _ ->
+            viewModel.priority = position
+        }
     }
 
     private fun navigateToMenuFragment() {

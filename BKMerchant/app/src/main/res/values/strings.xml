@@ -11,10 +11,13 @@
     <string name="store">Store</string>
     <string name="account">Account</string>
     <string name="orders">Orders</string>
+    <string name="order_detail">Order Detail</string>
     <string name="promotions">Promotions</string>
+    <string name="promotion_detail">Promotion Detail</string>
     <string name="notifications">Notifications</string>
     <string name="report">Report</string>
     <string name="employees">Employees</string>
+    <string name="employee_add">Add Employee</string>
     <string name="personal_information">Personal information</string>
     <string name="change_password">Change password</string>
     <string name="term_amp_privacy"><![CDATA[Term & Privacy]]></string>
@@ -164,6 +167,10 @@
     <string name="promo">Promo</string>
     <string name="setting">Settings</string>
     <string name="uploading">Uploading ...</string>
+    <string name="no_notification">No notifications to show</string>
+    <string name="this_feature_will_be_updated_soon">This feature will be updated soon</string>
+    <string name="priority">Priority</string>
+    <string name="friendly_display">For friendly display purpose</string>
 
 
 </resources>

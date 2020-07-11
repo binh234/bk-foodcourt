@@ -17,6 +17,7 @@ import com.example.bkmerchant.accountActivity.AccountActivity
 import com.example.bkmerchant.databinding.StoreFragmentBinding
 import com.example.bkmerchant.menu.Category
 import com.example.bkmerchant.menu.NewMenuAdapter
+import com.example.bkmerchant.paymentActivity.PaymentActivity
 import com.example.bkmerchant.storeActivity.Store
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -65,12 +66,17 @@ class StoreFragment: Fragment() {
         when (item.itemId) {
             R.id.nav_home -> {
                 val intent = Intent(context, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
                 activity?.finish()
             }
             R.id.nav_account -> {
                 val intent = Intent(context, AccountActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }
+            R.id.nav_payment -> {
+                val intent = Intent(context, PaymentActivity::class.java)
                 startActivity(intent)
                 activity?.finish()
             }

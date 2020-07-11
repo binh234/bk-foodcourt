@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.bkmerchant.R
 import com.example.bkmerchant.accountActivity.AccountActivity
 import com.example.bkmerchant.databinding.HomeFragmentBinding
+import com.example.bkmerchant.paymentActivity.PaymentActivity
 import com.example.bkmerchant.storeActivity.StoreActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -50,6 +51,7 @@ class HomeFragment : Fragment() {
         binding.orderCard.setOnClickListener { navigateToOrderFragment() }
         binding.promotionCard.setOnClickListener { navigateToPromotionFragment() }
         binding.reportCard.setOnClickListener { navigateToReportFragment() }
+        binding.notificationCard.setOnClickListener { navigateToNotificationFragment() }
         binding.employeeCard.setOnClickListener { navigateToEmployeeFragment() }
 
         return binding.root
@@ -63,6 +65,10 @@ class HomeFragment : Fragment() {
             }
             R.id.nav_store -> {
                 val intent = Intent(context, StoreActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_payment -> {
+                val intent = Intent(context, PaymentActivity::class.java)
                 startActivity(intent)
             }
         }
@@ -94,6 +100,10 @@ class HomeFragment : Fragment() {
             viewModel.currentStore.value?.id ?: ""
         )
         findNavController().navigate(action)
+    }
+
+    private fun navigateToNotificationFragment() {
+        findNavController().navigate(R.id.notificationFragment)
     }
 
     private fun navigateToEmployeeFragment() {

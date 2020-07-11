@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_homeFragment_to_employeeFragment"
             app:destination="@id/employeeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/menuFragment"
@@ -157,4 +160,9 @@
             android:name="storeId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.bkmerchant.notification.NotificationFragment"
+        android:label="NotificationFragment"
+        tools:layout="@layout/notification_fragment"/>
 </navigation>

@@ -17,6 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/click_selector"
         android:onClick="@{() -> viewModel.openDish(dish)}">
 
         <View
@@ -46,8 +47,8 @@
             style="@style/headerStyle"
             android:layout_width="0dp"
             android:layout_marginStart="@dimen/base_margin"
-            android:textColor="@{dish.availability ? @android:color/black : @android:color/tab_indicator_text}"
             android:text="@{dish.name}"
+            android:textColor="@{dish.availability ? @android:color/black : @android:color/tab_indicator_text}"
             app:layout_constraintEnd_toStartOf="@id/dish_status"
             app:layout_constraintStart_toEndOf="@id/dish_image"
             app:layout_constraintTop_toTopOf="@id/dish_image"
@@ -72,8 +73,8 @@
             style="@style/subHeaderStyle"
             android:layout_width="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
-            android:textStyle="bold"
             android:textColor="@{dish.availability ? @android:color/black : @android:color/tab_indicator_text}"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/dish_image"
             app:layout_constraintStart_toStartOf="@id/dish_name"
             app:priceText="@{dish.price}"

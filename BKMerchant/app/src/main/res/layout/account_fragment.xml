@@ -30,8 +30,8 @@
 
         <TextView
             android:id="@+id/user_name"
-            android:layout_width="wrap_content"
             style="@style/titleStyle"
+            android:layout_width="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
             android:text="@{viewModel.user.name}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,10 +55,11 @@
                 style="@style/subHeaderStyle"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/click_selector"
                 android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
                 android:gravity="center_vertical"
-                android:padding="@dimen/base_margin"
                 android:onClick="@{() -> viewModel.navigateToPersonalInfo()}"
+                android:padding="@dimen/base_margin"
                 android:text="@string/personal_information" />
 
             <View
@@ -73,6 +74,7 @@
                 style="@style/subHeaderStyle"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/click_selector"
                 android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
                 android:gravity="center_vertical"
                 android:padding="@dimen/base_margin"
@@ -96,6 +98,7 @@
                 style="@style/subHeaderStyle"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/click_selector"
                 android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
                 android:gravity="center_vertical"
                 android:padding="@dimen/base_margin"
@@ -113,6 +116,7 @@
                 style="@style/subHeaderStyle"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/click_selector"
                 android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
                 android:gravity="center_vertical"
                 android:padding="@dimen/base_margin"
@@ -130,6 +134,7 @@
                 style="@style/subHeaderStyle"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/click_selector"
                 android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
                 android:gravity="center_vertical"
                 android:padding="@dimen/base_margin"

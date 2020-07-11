@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.EmployeeAddFragmentBinding
 import com.example.bkmerchant.login.AccountType
 import com.example.bkmerchant.login.UserType
@@ -25,6 +27,7 @@ class AddEmployeeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.employee_add)
 
         firestore = FirebaseFirestore.getInstance()
 

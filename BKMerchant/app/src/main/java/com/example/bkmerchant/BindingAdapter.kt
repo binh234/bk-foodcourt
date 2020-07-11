@@ -78,8 +78,7 @@ fun setDayFormatted(view: TextView, time: Timestamp) {
 @BindingAdapter(value = ["total_rating", "star_rating"])
 fun setRatingStar(view: TextView, totalRatings: Int, starRating: Double) {
     if (totalRatings != 0) {
-        val rating = round(starRating * 10 + 0.5) / 10
-        val text = String.format("%.1f", rating)
+        val text = String.format("%.1f", starRating)
         view.text = text
     } else {
         view.text = view.resources.getString(R.string.no_rating)

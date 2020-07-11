@@ -26,6 +26,7 @@ class CategoryViewModel(val category: Category) : ViewModel() {
         .collection("categories")
 
     var name = MutableLiveData("")
+    var priority = 0
 
     var nameFieldError = MutableLiveData<Int>()
 
@@ -35,15 +36,17 @@ class CategoryViewModel(val category: Category) : ViewModel() {
         Log.d(TAG, "Create ViewModel")
         if (category.id.isNotEmpty()) {
             name.value = category.name
+            priority = category.priority
         }
     }
 
     fun saveCategory() {
         val catName = name.value ?: ""
+        category.priority = priority
 
         if (catName.trim().isNotEmpty()) {
             if (catName.trim() == category.name) {
-                navigateToMenuFragment.value = true
+                updateCategory()
             } else {
                 categoryCollection
                     .whereEqualTo("name", name.value)
@@ -83,6 +86,14 @@ class CategoryViewModel(val category: Category) : ViewModel() {
     }
 
     private fun updateCategory() {
+        promotionCollection.whereGreaterThan("discountList.${category.id}", "")
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot) {
+                    document.reference.update("discountList.${category.id}", category.name)
+                }
+            }
+
         categoryCollection
             .document(category.id)
             .set(category)
@@ -91,14 +102,6 @@ class CategoryViewModel(val category: Category) : ViewModel() {
             }
             .addOnFailureListener {
                 Log.d(TAG, it.toString())
-            }
-
-        promotionCollection.whereGreaterThan("discountList.${category.id}", "")
-            .get()
-            .addOnSuccessListener { querySnapshot ->
-                for (document in querySnapshot) {
-                    document.reference.update("discountList.${category.id}", category.name)
-                }
             }
     }
 }

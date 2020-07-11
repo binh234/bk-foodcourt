@@ -19,7 +19,6 @@ import com.google.firebase.firestore.Query
 
 
 class MenuFragment : Fragment() {
-
     companion object {
         const val TAG = "MenuFragment"
     }
@@ -114,6 +113,7 @@ class MenuFragment : Fragment() {
             .collection("stores")
             .document(storeId)
             .collection("categories")
+            .orderBy("priority", Query.Direction.DESCENDING)
         val options = FirestoreRecyclerOptions.Builder<Category>()
             .setQuery(query, Category::class.java)
             .build()

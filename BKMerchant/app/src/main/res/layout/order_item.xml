@@ -17,6 +17,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/click_selector"
         android:onClick="@{() -> viewModel.showOrderDetail(order)}">
 
         <TextView

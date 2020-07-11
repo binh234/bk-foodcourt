@@ -6,23 +6,20 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Category(
-    @get: Exclude
-    var id: String="",
-    var name: String="",
-    @get: Exclude
-    var storeId: String=""
-): Parcelable
+    @get: Exclude var id: String = "",
+    @get: Exclude var storeId: String = "",
+    var name: String = "",
+    var priority: Int = 0
+) : Parcelable
 
 @Parcelize
 data class Dish(
-    @get: Exclude
-    var id: String="",
-    var name: String="",
+    @get: Exclude var id: String = "",
+    var name: String = "",
     var description: String = "",
-    var price: Double=0.0,
+    var price: Double = 0.0,
     var availability: Boolean = true,
-    var imageUrl: String="",
-    @get: Exclude
-    var categoryId: String="",
-    var storeId: String=""
-): Parcelable
+    var imageUrl: String = "",
+    @get: Exclude var categoryId: String = "",
+    var storeId: String = ""
+) : Parcelable

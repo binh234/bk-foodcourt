@@ -7,9 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.OrderDetailBinding
 import com.example.bkmerchant.order.Order
 import com.example.bkmerchant.order.OrderItem
@@ -32,6 +34,7 @@ class OrderDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.order_detail)
 
         binding = OrderDetailBinding.inflate(inflater, container, false)
 

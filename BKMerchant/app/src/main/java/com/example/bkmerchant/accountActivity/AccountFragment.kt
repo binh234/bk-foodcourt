@@ -23,6 +23,7 @@ import com.example.bkmerchant.databinding.AccountFragmentBinding
 import com.example.bkmerchant.databinding.StoreFragmentBinding
 import com.example.bkmerchant.login.LoginActivity
 import com.example.bkmerchant.login.User
+import com.example.bkmerchant.paymentActivity.PaymentActivity
 import com.example.bkmerchant.storeActivity.StoreActivity
 import com.example.bkmerchant.storeActivity.store.StoreViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -109,12 +110,17 @@ class AccountFragment: Fragment() {
         when (item.itemId) {
             R.id.nav_home -> {
                 val intent = Intent(context, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
                 activity?.finish()
             }
             R.id.nav_store -> {
                 val intent = Intent(context, StoreActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }
+            R.id.nav_payment -> {
+                val intent = Intent(context, PaymentActivity::class.java)
                 startActivity(intent)
                 activity?.finish()
             }
