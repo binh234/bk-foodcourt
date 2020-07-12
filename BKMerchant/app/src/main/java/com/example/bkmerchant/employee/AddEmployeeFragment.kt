@@ -85,7 +85,7 @@ class AddEmployeeFragment : Fragment() {
                 }
         } else {
             Log.d("AddFragment", "Invalid")
-            binding.employeeEmail.error = "Please enter a valid email"
+            binding.employeeEmail.error = getString(R.string.invalid_email)
             binding.employeeEmail.requestFocus()
         }
     }

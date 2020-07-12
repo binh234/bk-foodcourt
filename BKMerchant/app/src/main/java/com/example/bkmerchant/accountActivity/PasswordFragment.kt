@@ -1,5 +1,6 @@
 package com.example.bkmerchant.accountActivity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.PasswordFragmentBinding
+import com.example.bkmerchant.login.LoginActivity
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -58,6 +60,7 @@ class PasswordFragment : Fragment() {
                                     Toast.LENGTH_SHORT
                                 )
                                     .show()
+                                logout()
                             }
                             .addOnFailureListener {
                                 Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
@@ -80,11 +83,22 @@ class PasswordFragment : Fragment() {
                         Toast.LENGTH_LONG
                     )
                         .show()
+                    logout()
                 }
                 .addOnFailureListener {
                     Toast.makeText(context, getString(R.string.error_occur), Toast.LENGTH_LONG)
                         .show()
                 }
         }
+    }
+    private fun logout() {
+        firebaseAuth.signOut()
+        startLoginActivity()
+        requireActivity().finish()
+    }
+
+    private fun startLoginActivity() {
+        val intent = Intent(context, LoginActivity::class.java)
+        startActivity(intent)
     }
 }

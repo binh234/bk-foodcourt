@@ -2,6 +2,7 @@ package com.example.bkmerchant.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,8 +54,11 @@ class LoginFragment : Fragment() {
         } else if (password.length < 6) {
             binding.passwordText.error = getString(R.string.password_condition)
             binding.passwordText.requestFocus()
-        } else {
+        } else if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             checkPermissionAndLogin(email, password)
+        } else {
+            binding.emailText.error = getString(R.string.invalid_email)
+            binding.emailText.requestFocus()
         }
     }
 
@@ -102,7 +106,7 @@ class LoginFragment : Fragment() {
                                     } else {
                                         Toast.makeText(
                                             context,
-                                            getString(R.string.wrong_email_password),
+                                            getString(R.string.wrong_password),
                                             Toast.LENGTH_SHORT
                                         )
                                             .show()
@@ -125,7 +129,7 @@ class LoginFragment : Fragment() {
         val email = binding.emailText.text.toString()
         if (email.isEmpty()) {
             binding.emailText.error = getString(R.string.empty_field)
-        } else {
+        } else if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             firebaseAuth.sendPasswordResetEmail(email)
                 .addOnSuccessListener {
                     Toast.makeText(
@@ -139,6 +143,9 @@ class LoginFragment : Fragment() {
                     Toast.makeText(context, getString(R.string.invalid_email), Toast.LENGTH_LONG)
                         .show()
                 }
+        } else {
+            binding.emailText.error = getString(R.string.invalid_email)
+            binding.emailText.requestFocus()
         }
     }
 

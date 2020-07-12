@@ -13,7 +13,7 @@ data class Promotion(
     var scope: Int = 0,
     var value: Double = 0.0,
     var numUsed: Int = 0,
-    var numAllowed: Int = 1000000000,
+    var numAllowed: Int = 10000,
     var activateDay: Timestamp = Timestamp(0, 0),
     var expireDay: Timestamp = Timestamp(0, 0),
     var activateDayTime: Int = 0,

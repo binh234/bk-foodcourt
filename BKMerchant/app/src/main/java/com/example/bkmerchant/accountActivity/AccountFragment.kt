@@ -189,6 +189,7 @@ class AccountFragment: Fragment() {
     private fun startLoginActivity() {
         val intent = Intent(context, LoginActivity::class.java)
         startActivity(intent)
+        requireActivity().finish()
     }
 
     private fun navigateToTermFragment() {

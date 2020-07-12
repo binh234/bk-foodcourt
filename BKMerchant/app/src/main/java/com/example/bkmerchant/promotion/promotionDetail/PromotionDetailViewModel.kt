@@ -89,8 +89,8 @@ class PromotionDetailViewModel(val promotion: Promotion) : ViewModel() {
             map["status"] = promotion.status
 
             if (discountScope == 0) {
-                map["orderFrom"] = orderFrom.value!!.toInt()
-                map["orderTo"] = orderTo.value!!.toInt()
+                map["orderFrom"] = orderFrom.value!!.toDouble()
+                map["orderTo"] = orderTo.value!!.toDouble()
                 if (lastCode != code.value!!) {
                     firestore.collectionGroup("promotions")
                         .whereEqualTo("code", code.value!!)
