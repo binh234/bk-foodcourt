@@ -19,7 +19,7 @@ data class User(
 data class UserType(
     val email: String = "",
     val accountType: AccountType = AccountType.CUSTOMER,
-    val update: Boolean = false,
+    @field:JvmField val update: Boolean = false,
     var storeID: String = ""
 )
 

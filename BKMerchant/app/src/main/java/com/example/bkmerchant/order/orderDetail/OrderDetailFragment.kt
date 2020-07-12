@@ -15,7 +15,9 @@ import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.OrderDetailBinding
 import com.example.bkmerchant.order.Order
 import com.example.bkmerchant.order.OrderItem
+import com.example.bkmerchant.storeActivity.Store
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
@@ -25,6 +27,7 @@ class OrderDetailFragment : Fragment() {
 
     private lateinit var viewModelFactory: OrderDetailFactory
     private lateinit var viewModel: OrderDetailViewModel
+    private lateinit var firestore: FirebaseFirestore
 
     private lateinit var order: Order
 
@@ -36,6 +39,8 @@ class OrderDetailFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.order_detail)
 
+        firestore = FirebaseFirestore.getInstance()
+
         binding = OrderDetailBinding.inflate(inflater, container, false)
 
         val args = OrderDetailFragmentArgs.fromBundle(requireArguments())
@@ -44,7 +49,7 @@ class OrderDetailFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(OrderDetailViewModel::class.java)
 
         binding.order = order
-        binding.cancelOrderButton.setOnClickListener { navigateToOrderFragment() }
+        binding.cancelOrderButton.setOnClickListener { cancelOrder() }
         binding.phoneButton.setOnClickListener { startCall() }
 
         setupRecyclerView()
@@ -54,8 +59,7 @@ class OrderDetailFragment : Fragment() {
 
     private fun setupRecyclerView() {
         Log.d("OrderDetailFragment", order.id)
-        val query: Query = FirebaseFirestore.getInstance()
-            .collection("order")
+        val query: Query = firestore.collection("order")
             .document(order.id)
             .collection("orderItems")
 
@@ -66,6 +70,15 @@ class OrderDetailFragment : Fragment() {
         adapter = OrderItemAdapter(options)
 
         binding.orderDetail.adapter = adapter
+    }
+
+    private fun cancelOrder() {
+        firestore.collection("order")
+            .document(order.id)
+            .update("status", 4)
+            .addOnSuccessListener {
+                navigateToOrderFragment()
+            }
     }
 
     private fun navigateToOrderFragment() {

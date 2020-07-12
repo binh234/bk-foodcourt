@@ -1,6 +1,7 @@
 package com.example.bkmerchant.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,13 +68,15 @@ class RegisterFragment : Fragment() {
                         val user = User(name, email = email)
                         task.result?.user?.uid?.let {
                             userCollection.document(it).set(user)
+                                .addOnSuccessListener {
+                                    Toast.makeText(
+                                        context,
+                                        getString(R.string.register_success),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    navigateToLoginFragment()
+                                }
                         }
-                        Toast.makeText(
-                            context,
-                            getString(R.string.register_success),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        navigateToLoginFragment()
                     } else {
                         val exception = task.exception
                         var errorMessage = ""
