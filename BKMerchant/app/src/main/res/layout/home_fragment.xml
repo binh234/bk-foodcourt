@@ -329,7 +329,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?android:attr/windowBackground"
-            app:menu="@menu/bottom_navigation" />
+            app:menu="@menu/bottom_navigation"
+            app:labelVisibilityMode="labeled"/>
 
     </LinearLayout>
 </layout>
