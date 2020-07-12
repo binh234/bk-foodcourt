@@ -59,20 +59,19 @@
        
 [     <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/Installation_INstruction/choose_your_device.png">](https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/Installation_INstruction/choose_your_device.png)
 ### Step 4 
-    Login to the app with the following accounts
-    https://codelabs.developers.google.com/codelabs/pay-android-checkout/#6
+    Login to the app with the following accounts:
 
-    Manager account demo:\
-    managerbkdemo@gmail.com\
+    Manager account demo:
+    managerbkdemo@gmail.com
     demo123456
 
-    Vendor account demo:\
-    vendorbkdemo@gmail.com\
+    Vendor account demo:
+    vendorbkdemo@gmail.com
     demo123456
 
-    Cook account demo:\
-    cookbkdemo@gmail.com\
-    demo123456\
+    Cook account demo:
+    cookbkdemo@gmail.com
+    demo123456
 
 ---
 
