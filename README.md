@@ -1,4 +1,3 @@
-
 <img src="https://scontent.fvca1-1.fna.fbcdn.net/v/t1.15752-9/108593396_292839588743103_5434648916852568771_n.png?_nc_cat=103&_nc_sid=ae9488&_nc_ohc=buF1zjldcqMAX8qWbcb&_nc_ht=scontent.fvca1-1.fna&oh=fc4397f8f46418dfa7285406a9ee1488&oe=5F315E1A" title="FoodCourtImage" alt="Food Court Image">
 
 
@@ -48,9 +47,9 @@
 ### Step 1:
 >   Open Android studio and Open the app from the cloned repository:
        
-    [<img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/Installation_INstruction/open_the_app.PNG">](https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/Installation_INstruction/open_the_app.PNG)
-
-
+    
+[     <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/Installation_INstruction/open_the_app.PNG">](https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/Installation_INstruction/open_the_app.PNG)
+    
 ### Step 2
 >    Connect your android device to the computer using the USB cable for your device
 
