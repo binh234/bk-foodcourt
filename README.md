@@ -1,16 +1,3 @@
-https://codelabs.developers.google.com/codelabs/pay-android-checkout/#6
-
-Manager account demo:\
-managerbkdemo@gmail.com\
-demo123456
-
-Vendor account demo:\
-vendorbkdemo@gmail.com\
-demo123456
-
-Cook account demo:\
-cookbkdemo@gmail.com\
-demo123456\
 
 <img src="https://scontent.fvca1-1.fna.fbcdn.net/v/t1.15752-9/108593396_292839588743103_5434648916852568771_n.png?_nc_cat=103&_nc_sid=ae9488&_nc_ohc=buF1zjldcqMAX8qWbcb&_nc_ht=scontent.fvca1-1.fna&oh=fc4397f8f46418dfa7285406a9ee1488&oe=5F315E1A" title="FoodCourtImage" alt="Food Court Image">
 
@@ -18,141 +5,100 @@ demo123456\
 # Smart Food Court System (SFCS) 
 
 > The system is devided into seperate app modules: 
-> 1st app module is for clients of the food court to place order and pay for their bill 
-> 2nd app module is for stores' owner of the food court to manage their own stores
-> 3rd app module is for the manager of the whole food court to manage as well checking the stats of the food court  
+-  **1st app module is for clients of the food co`urt to place order and pay for their bill:**
 
-***INSERT ANOTHER GRAPHIC HERE***
+    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/8.png">
+-  **2nd app module is for stores' owner of the food court to manage their own stores:**
 
-[![INSERT YOUR GRAPHIC HERE](http://i.imgur.com/dt8AUb6.png)]()
+    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/7.png">
+   
+-  **3rd app module is for the manager of the whole food court to manage as well checking the stats of the food court:  **
 
-- Most people will glance at your `README`, *maybe* star it, and leave
-- Ergo, people should understand instantly what your project is about based on your repo
-
-> Tips
-
-- HAVE WHITE SPACE
-- MAKE IT PRETTY
-- GIFS ARE REALLY COOL
-
-> GIF Tools
-
-- Use <a href="http://recordit.co/" target="_blank">**Recordit**</a> to create quicks screencasts of your desktop and export them as `GIF`s.
-- For terminal sessions, there's <a href="https://github.com/chjj/ttystudio" target="_blank">**ttystudio**</a> which also supports exporting `GIF`s.
-
-**Recordit**
-
-![Recordit GIF](http://g.recordit.co/iLN6A0vSD8.gif)
-
-**ttystudio**
-
-![ttystudio GIF](https://raw.githubusercontent.com/chjj/ttystudio/master/img/example.gif)
+    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/1.png">
+    
 
 ---
 
 ## Table of Contents (Optional)
 
-> If your `README` has a lot of info, section headers might be nice.
 
 - [Installation](#installation)
 - [Features](#features)
-- [Contributing](#contributing)
 - [Team](#team)
 - [Support](#support)
-
-
-
----
-
-## Example (Optional)
-
-```javascript
-// code away!
-
-let generateProject = project => {
-  let code = [];
-  for (let js = 0; js < project.length; js++) {
-    code.push(js);
-  }
-};
-```
 
 ---
 
 ## Installation
-
-- All the `code` required to get started
-- Images of what it should look like
+> Requirements: 
+- You should have a Gitlab account
+- A Computer with Android Studio installed. 
+- (Optional) An android smart phone running the latest version of the system. (Require at least android 5.x.x Lolipop)
 
 ### Clone
 
-- Clone this repo to your local machine using `https://github.com/fvcproductions/SOMEREPO`
+- Clone this repo to your local machine using `https://gitlab.com/binhnd234/bk-foodcourt.git`
+
+> If you don't know how to clone a project: Please have a look at: <a href="https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository" target="_blank">How to get a git Repository</a> |
 
 ### Setup
 
-- If you want more syntax highlighting, format your code like this:
+- Before you begin, make sure that you have **android studio installed** on your computer and you have **the repos cloned**  as instructed in the [Clone] section
 
-> update and install this package first
+### Step 1:
+>   Open Android studio and Open the app from the cloned repository:
+       
+    [<img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/Installation_INstruction/open_the_app.PNG">](https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/Installation_INstruction/open_the_app.PNG)
 
-```shell
-$ brew update
-$ brew install fvcproductions
-```
 
-> now install npm and bower packages
+### Step 2
+>    Connect your android device to the computer using the USB cable for your device
 
-```shell
-$ npm install
-$ bower install
-```
+### Step 3
 
-- For all the possible languages that support syntax highlithing on GitHub (which is basically all of them), refer <a href="https://github.com/github/linguist/blob/master/lib/linguist/languages.yml" target="_blank">here</a>.
+>    Choose your device from the tools panel:
+       
+[     <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/Installation_INstruction/choose_your_device.png">](https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/Installation_INstruction/choose_your_device.png)
+### Step 4 
+    Login to the app with the following accounts
+    https://codelabs.developers.google.com/codelabs/pay-android-checkout/#6
+
+    Manager account demo:\
+    managerbkdemo@gmail.com\
+    demo123456
+
+    Vendor account demo:\
+    vendorbkdemo@gmail.com\
+    demo123456
+
+    Cook account demo:\
+    cookbkdemo@gmail.com\
+    demo123456\
 
 ---
 
 ## Features
-## Usage (Optional)
-## Documentation (Optional)
-## Tests (Optional)
 
-- Going into more detail on code and technologies used
-- I utilized this nifty <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Cheatsheet</a> for this sample `README`.
 
----
-
-## Contributing
-
-> To get started...
-
-### Step 1
-
-- **Option 1**
-    - ðŸ´ Fork this repo!
-
-- **Option 2**
-    - ðŸ‘¯ Clone this repo to your local machine using `https://github.com/joanaz/HireDot2.git`
-
-### Step 2
-
-- **HACK AWAY!** ðŸ”¨ðŸ”¨ðŸ”¨
-
-### Step 3
-
-- ðŸ”ƒ Create a new pull request using <a href="https://github.com/joanaz/HireDot2/compare/" target="_blank">`https://github.com/joanaz/HireDot2/compare/`</a>.
+- The app is available for use 24/7
+- We implemented the app using Java and Kotlin Language
+- The interface is friendly and anyone can use the app with rarely any instructions
+- We are constanly updating the app to make it feel more elegant and improve its functionalities
+- More features incoming, so stay tuned
 
 ---
+
 
 ## Team
 
-> Or Contributors/People
+> Our Team Member: 
 
-| <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> | <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> | <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> |
-| :---: |:---:| :---:|
-| [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com)    | [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com) | [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com)  |
-| <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> | <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> | <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> |
+| <a href="https://www.facebook.com/thuan.hua1412" target="_blank">**Developer (Place Order Feature)**</a> | <a href="https://www.facebook.com/profile.php?id=100019884555859" target="_blank">**Developer (BK Merchant app for Vendor)**</a> | <a href="https://www.facebook.com/profile.php?id=100035206815611" target="_blank">**Developer (Payment)**</a> | <a href="https://www.facebook.com/thinh.nguyenhoang2k" target="_blank">**Developer (Manager Tab)**</a> | <a href="https://www.facebook.com/vinh.thuy.18659" target="_blank">**Developer (Login & Order Processing)**</a>
+| :---: |:---:| :---:| :---:| :---:|  
+| [![Hứa Phước Thuận](https://scontent-sin6-2.xx.fbcdn.net/v/t1.0-1/p160x160/106110201_1716106731861020_338836933745271792_o.jpg?_nc_cat=108&_nc_sid=dbb9e7&_nc_ohc=WCeiF-adkR4AX9PavTu&_nc_ht=scontent-sin6-2.xx&_nc_tp=6&oh=e96579fed43d3dc1db7d95a2f063e73a&oe=5F3140D5)](https://www.facebook.com/thuan.hua1412)    | [![Lê Đỗ Thanh Bình](https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/22540155_123088241697327_133765751585589440_n.jpg?_nc_cat=101&_nc_sid=85a577&_nc_ohc=Tr9HWxbqzH8AX8brBGp&_nc_ht=scontent-sin6-1.xx&oh=88e648aa042cdcf3884ad9cb1673bbc7&oe=5F306647)](https://www.facebook.com/profile.php?id=100019884555859) | [![Phạm Công Thiện](https://secure.gravatar.com/avatar/bc173d8aec308c6df54b8743886b6948?s=180&d=identicon)](https://www.facebook.com/profile.php?id=100035206815611) |[![Nguyễn Hoàng Thịnh](https://assets.gitlab-static.net/uploads/-/system/user/avatar/4585230/avatar.png?width=90)](https://www.facebook.com/thinh.nguyenhoang2k)  |[![Trần Đình Vĩnh Thụy](https://scontent.fvca1-2.fna.fbcdn.net/v/t1.0-1/p160x160/67527117_860968024258731_6239061187149955072_o.jpg?_nc_cat=100&_nc_sid=dbb9e7&_nc_ohc=vHtNARm9-cIAX9cajbq&_nc_ht=scontent.fvca1-2.fna&_nc_tp=6&oh=7a474742bd13922746ac3d239a4e3914&oe=5F311E5A)](https://www.facebook.com/vinh.thuy.18659) |
+| <a href="thuan.hua1412@hcmut.edu.vn " target="_blank">`thuan.hua1412@hcmut.edu.vn`</a> | <a href="binh.le2569@hcmut.edu.vn" target="_blank">`binh.le2569@hcmut.edu.vn`</a> | <a href="thien.phamhcmut@hcmut.edu.vn" target="_blank">`thien.phamhcmut@hcmut.edu.vn`</a> | <a href="thinh.nguyenbk2018@hcmut.edu.vn" target="_blank">`thinh.nguyenbk2018@hcmut.edu.vn`</a> | <a href="thuy.tran7120@hcmut.edu.vn" target="_blank">`thuy.tran7120@hcmut.edu.vn`</a> |
 
-- You can just grab their GitHub profile image URL
-- You should probably resize their picture using `?s=200` at the end of the image URL.
+- If you want to contact us by facebook: Click on our images
 
 ---
 
@@ -160,9 +106,8 @@ $ bower install
 
 Reach out to me at one of the following places!
 
-- Website at <a href="http://fvcproductions.com" target="_blank">`fvcproductions.com`</a>
-- Twitter at <a href="http://twitter.com/fvcproductions" target="_blank">`@fvcproductions`</a>
-- Insert more social links here.
+- Gmail at <a href="https://mail.google.com/mail/u/0/?tab=km" target="_blank">`thinh.nguyenbk2018@hcmut.edu.vn`</a>
+- Facebook at <a href="https://www.facebook.com/thinh.nguyenhoang2k" target="_blank">`Hoang Thinh`</a>
 
 ---
 
