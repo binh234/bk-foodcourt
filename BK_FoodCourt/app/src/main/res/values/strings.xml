@@ -12,7 +12,7 @@
     <string name="add_the_fucking_vendor">ADD THE FUCKING VENDOR</string>
     <string name="app_name">BK_FoodCourt</string>
     <string name="nav_home">Home</string>
-    <string name="nav_orderlist">Order List</string>
+    <string name="nav_orderlist">Orders</string>
     <string name="nav_notification">Notification</string>
     <string name="nav_profile">Profile</string>
     <string name="enter_vendor_name">Enter Vendor Name</string>
@@ -65,8 +65,8 @@
     <string name="please_click_on_a_vendor_image_to_check_its_information">Please click on a vendor image to check its information</string>
 
 
-<!--&gt;>>>>>> 6f676e6082c302f14ee5418c33396244dcc5862f-->
->>>>>>> a4a2c11b183c73927c2521b21a6930280051cafa
+    <!--&gt;>>>>>> 6f676e6082c302f14ee5418c33396244dcc5862f-->
+<!--    >>>>>>> a4a2c11b183c73927c2521b21a6930280051cafa-->
     <string-array name="user_choice">
         <item>Customer</item>
         <item>Cook</item>
@@ -75,11 +75,11 @@
 
 
     <string name="title_activity_order_details">orderDetails</string>
-
+    <string name="no_rating">No ratings</string>
 
 
     <string-array name="channel_choice">
-        <item >Modify Request</item>
+        <item>Modify Request</item>
         <item>Complete Notification</item>
     </string-array>
 

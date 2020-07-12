@@ -173,8 +173,83 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.22000003"
+
                         tools:text="0" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="89dp"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/comSuon_photo"
+                        android:layout_width="60dp"
+                        android:layout_height="65dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="16dp"
+                        android:src="@drawable/com_tam_suon"
+                        app:srcCompat="@drawable/com_tam_suon" />
+
+                    <TextView
+                        android:id="@+id/comSuon_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/comSuon_photo"
+                        android:text="Cơm Sườn"
+                        android:textColor="@color/dark_black"
+                        android:textSize="20sp" />
+
+                    <TextView
+
+                        android:id="@+id/comSuon_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/comSuon_textView"
+                        android:layout_toRightOf="@id/comSuon_photo"
+                        android:text="VND 20000"
+                        android:textColor="@color/colorAccent" />
+
+                    <RelativeLayout
+                        android:layout_width="86dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true">
+
+                        <Button
+                            android:id="@+id/comSuon_button"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="40dp"
+                            android:background="@drawable/ic_add"
+                            android:onClick="add_to_list"
+                            android:textColor="#fff"
+                            android:textSize="10sp" />
+
+                        <Button
+                            android:id="@+id/comSuon_button_rm"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignBaseline="@+id/comSuon_button"
+
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="false"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/ic_sub"
+                            android:onClick="rmv_from_list"
+                            android:paddingBottom="10dp"
+                            android:textColor="#fff"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -424,7 +499,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp">
-
 
 
                     <ImageView
@@ -709,82 +783,6 @@
                 </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="89dp"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:padding="16dp">
-
-                <ImageView
-                    android:id="@+id/comSuon_photo"
-                    android:layout_width="60dp"
-                    android:layout_height="65dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginRight="16dp"
-                    android:src="@drawable/com_tam_suon"
-                    app:srcCompat="@drawable/com_tam_suon" />
-
-                <TextView
-                    android:id="@+id/comSuon_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/comSuon_photo"
-                    android:text="Cơm Sườn"
-                    android:textColor="@color/dark_black"
-                    android:textSize="20sp" />
-
-                <TextView
-
-                    android:id="@+id/comSuon_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/comSuon_textView"
-                    android:layout_toRightOf="@id/comSuon_photo"
-                    android:text="VND 20000"
-                    android:textColor="@color/colorAccent" />
-
-                <RelativeLayout
-                    android:layout_width="86dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentRight="true">
-
-                    <Button
-                        android:id="@+id/comSuon_button"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginLeft="40dp"
-                        android:background="@drawable/ic_add"
-                        android:onClick="add_to_list"
-                        android:textColor="#fff"
-                        android:textSize="10sp" />
-
-                    <Button
-                        android:id="@+id/comSuon_button_rm"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignBaseline="@+id/comSuon_button"
-
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentRight="false"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_marginEnd="0dp"
-                        android:background="@drawable/ic_sub"
-                        android:onClick="rmv_from_list"
-                        android:paddingBottom="10dp"
-                        android:textColor="#fff"
-                        android:textSize="15sp" />
-                </RelativeLayout>
-
-
-            </RelativeLayout>
 
         </GridLayout>
 

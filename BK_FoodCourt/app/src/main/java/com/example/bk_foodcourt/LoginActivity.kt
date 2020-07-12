@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.app.AppCompatActivity
+import com.example.bk_foodcourt.home.HomeActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity(), OnItemSelectedListener {
@@ -67,7 +68,7 @@ class LoginActivity : AppCompatActivity(), OnItemSelectedListener {
                             startActivity(Intent(applicationContext, Manager::class.java))
                             finish()
                         } else {
-                            startActivity(Intent(applicationContext, OrderActivity::class.java))
+                            startActivity(Intent(applicationContext, HomeActivity::class.java))
                             finish()
                         }
                     } else {
