@@ -64,9 +64,12 @@
     <string name="check_vendors_info">CHECK VENDORS INFO</string>
     <string name="please_click_on_a_vendor_image_to_check_its_information">Please click on a vendor image to check its information</string>
 
+    <string name="tab_text_1">Ongoing</string>
+    <string name="tab_text_2">History</string>
+
 
     <!--&gt;>>>>>> 6f676e6082c302f14ee5418c33396244dcc5862f-->
-<!--    >>>>>>> a4a2c11b183c73927c2521b21a6930280051cafa-->
+    <!--    >>>>>>> a4a2c11b183c73927c2521b21a6930280051cafa-->
     <string-array name="user_choice">
         <item>Customer</item>
         <item>Cook</item>
@@ -76,6 +79,36 @@
 
     <string name="title_activity_order_details">orderDetails</string>
     <string name="no_rating">No ratings</string>
+    <string name="orders">Order</string>
+    <string name="take_away">Take away</string>
+    <string name="pickup">Pick up</string>
+    <string name="order_detail">Order Detail</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="cancel_order">Cancel Order</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="total">Total</string>
+    <string name="applicable_fee">Applicable fee</string>
+    <string name="customer">Customer</string>
+    <string name="phone_number">Phone number</string>
+    <string name="promo">Promo</string>
+    <string name="vendor">Vendor</string>
+    <string name="filter">Filter</string>
+    <string name="choose_one_category">Choose one category</string>
+    <string name="hide_all">Hide all</string>
+    <string name="show_all">Show all</string>
+    <string name="delete">Delete</string>
+    <string name="menu">Menu</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="options">Options (Optional)</string>
+    <string name="no_onions_please">e.g No onions, please</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="dish_detail">Dish Detail</string>
+    <string name="update_cart">Update cart</string>
+    <string name="checkout">Checkout</string>
+    <string name="order_type">Order type</string>
+    <string name="payment_method">Payment method</string>
+    <string name="proceed_new_cart">Proceed to start new cart?</string>
+    <string name="cancel">Cancel</string>
 
 
     <string-array name="channel_choice">

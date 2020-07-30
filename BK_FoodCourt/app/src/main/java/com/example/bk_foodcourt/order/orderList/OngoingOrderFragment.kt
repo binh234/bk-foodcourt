@@ -1,6 +1,7 @@
-package com.example.bkmerchant.order.orderList
+package com.example.bk_foodcourt.order.orderList
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +10,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bkmerchant.R
-import com.example.bkmerchant.order.Order
-import com.example.bkmerchant.order.OrderFragmentDirections
+import com.example.bk_foodcourt.R
+import com.example.bk_foodcourt.order.Order
+import com.example.bk_foodcourt.order.OrderFragmentDirections
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
-class OngoingOrderFragment(val storeId: String) : Fragment() {
+class OngoingOrderFragment(val userId: String) : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: OrderViewModel
     private lateinit var adapter: OrderAdapter
@@ -46,9 +47,10 @@ class OngoingOrderFragment(val storeId: String) : Fragment() {
     }
 
     private fun setupRecyclerView() {
+        Log.d("OngoingOrder", userId)
         val query: Query = FirebaseFirestore.getInstance()
             .collection("order")
-            .whereEqualTo("storeID", storeId)
+            .whereEqualTo("userID", userId)
             .whereLessThan("status", 3)
             .orderBy("status")
             .orderBy("time", Query.Direction.DESCENDING)

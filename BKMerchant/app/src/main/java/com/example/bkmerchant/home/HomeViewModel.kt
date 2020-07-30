@@ -29,7 +29,6 @@ class HomeViewModel : ViewModel() {
                 .addOnSuccessListener { document ->
                     userName.value = document.getString("name")
                 }
-
         } else {
             userName.value = "Error occurred"
         }

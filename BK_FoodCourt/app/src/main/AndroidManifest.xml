@@ -12,6 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".menu.MenuActivity" />
+        <activity android:name=".order.CustomerOrderActivity" />
         <activity android:name=".home.HomeActivity" />
         <activity android:name=".CheckVendorInfos" />
         <activity android:name=".ItemPieChart" />
@@ -30,8 +32,7 @@
         <activity
             android:name=".HomeFragment"
             tools:ignore="Instantiatable" />
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".Manager" />
         <activity android:name=".StatReportActivity" />
         <activity android:name=".AddRemoveVendorActivity" />

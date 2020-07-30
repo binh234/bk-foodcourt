@@ -109,9 +109,8 @@ class AccountFragment: Fragment() {
     private fun bottomNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_home -> {
-                val intent = Intent(context, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+//                val intent = Intent(context, MainActivity::class.java)
+//                startActivity(intent)
                 activity?.finish()
             }
             R.id.nav_store -> {
