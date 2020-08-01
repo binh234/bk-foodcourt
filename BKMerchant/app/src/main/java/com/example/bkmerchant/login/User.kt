@@ -1,17 +1,26 @@
 package com.example.bkmerchant.login
 
+import android.os.Parcelable
+import com.google.firebase.firestore.Exclude
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class User(
+    @get: Exclude var id: String = "",
     val name: String = "",
     val avatarUrl: String = "",
     val phoneNumber: String = "",
     val address: String = "",
-    val accountType: AccountType = AccountType.CUSTOMER
-)
+    val accountType: AccountType = AccountType.CUSTOMER,
+    val email: String = "",
+    var storeID: String = ""
+): Parcelable
 
 data class UserType(
     val email: String = "",
     val accountType: AccountType = AccountType.CUSTOMER,
-    val update: Boolean = false
+    @field:JvmField val update: Boolean = false,
+    var storeID: String = ""
 )
 
 enum class AccountType(val value: Int) {

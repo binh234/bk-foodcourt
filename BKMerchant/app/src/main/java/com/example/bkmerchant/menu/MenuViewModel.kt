@@ -9,12 +9,12 @@ import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.FirebaseStorage
 
 class MenuViewModel : ViewModel() {
     private val firestore = FirebaseFirestore.getInstance()
-    private lateinit var menuListener: ListenerRegistration
     val categories = MutableLiveData<List<String>>()
 
     companion object {
@@ -113,10 +113,10 @@ class MenuViewModel : ViewModel() {
     }
 
     fun getCategoryList(storeId: String) {
-        val returnList = mutableListOf<String>()
         firestore.collection("stores")
             .document(storeId)
             .collection("categories")
+            .orderBy("priority", Query.Direction.DESCENDING)
             .addSnapshotListener { querySnapshot, exception ->
                 if (exception != null) {
                     Log.d(TAG, exception.toString())

@@ -8,11 +8,13 @@ import android.webkit.MimeTypeMap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.bkmerchant.R
 import com.example.bkmerchant.menu.Category
 import com.example.bkmerchant.menu.Dish
 import com.example.bkmerchant.menu.category.CategoryViewModel
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.FirebaseStorage
 
@@ -27,13 +29,16 @@ class DishViewModel(val dish: Dish): ViewModel() {
     var description = MutableLiveData<String>()
     var price = MutableLiveData<String>()
     var imageUrl = ""
+    var categoryIndex = 0
 
     var categories = mutableListOf<Category>()
     var catList = MutableLiveData<List<String>>()
-    var currentCategoryId = ""
 
-    val emptyNameField = MutableLiveData<String>()
-    val emptyPriceField = MutableLiveData<String>()
+    var currentCategoryId = ""
+    var currentIndex = 0
+    var currentName = ""
+
+    val nameFieldError = MutableLiveData<Int>()
 
     var navigateToMenuFragment = MutableLiveData<Boolean>()
 
@@ -46,16 +51,15 @@ class DishViewModel(val dish: Dish): ViewModel() {
 
     private fun bind() {
         Log.d(TAG, dish.id)
-        Log.d(TAG, dish.categoryId)
-        Log.d(TAG, dish.storeId)
         name.value = dish.name
         description.value = dish.description
         price.value = dish.price.toString()
         imageUrl = dish.imageUrl
         currentCategoryId = dish.categoryId
+        currentName = dish.name
     }
 
-    fun saveDish(url: String, index: Int) {
+    fun saveDish(url: String) {
         if (url.isNotEmpty() && imageUrl.isNotEmpty()) {
             FirebaseStorage.getInstance()
                 .getReferenceFromUrl(imageUrl)
@@ -69,12 +73,26 @@ class DishViewModel(val dish: Dish): ViewModel() {
         dish.description = description.value ?: ""
         dish.price = (price.value ?: "0").toDouble()
         dish.availability = true
-        dish.categoryId = categories[index].id
+        dish.categoryId = categories[categoryIndex].id
 
-        if (dish.id.isNotEmpty()) {
+        if (dish.id.isNotEmpty() && dish.name.trim() == currentName) {
             updateDish()
         } else {
-            addDish()
+            firestore.collectionGroup("items")
+                .whereEqualTo("storeId", dish.storeId)
+                .whereEqualTo("name", dish.name)
+                .get()
+                .addOnSuccessListener {querySnapshot ->
+                    if (querySnapshot.isEmpty) {
+                        if (dish.id.isNotEmpty()) {
+                            updateDish()
+                        } else {
+                            addDish()
+                        }
+                    } else {
+                        nameFieldError.value = R.string.duplicate_item
+                    }
+                }
         }
     }
 
@@ -94,7 +112,7 @@ class DishViewModel(val dish: Dish): ViewModel() {
     }
 
     private fun updateDish() {
-        if (currentCategoryId != dish.categoryId) {
+        if (currentIndex != categoryIndex) {
             firestore.collection("stores")
                 .document(dish.storeId)
                 .collection("categories")
@@ -103,6 +121,20 @@ class DishViewModel(val dish: Dish): ViewModel() {
                 .document(dish.id)
                 .delete()
         }
+
+        if (dish.name.trim() == currentName) {
+            firestore.collection("stores")
+                .document(dish.storeId)
+                .collection("promotions")
+                .whereGreaterThan("discountList.${dish.id}", "")
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    for (document in querySnapshot) {
+                        document.reference.update("discountList.${dish.id}", dish.name)
+                    }
+                }
+        }
+
         firestore.collection("stores")
             .document(dish.storeId)
             .collection("categories")
@@ -123,12 +155,18 @@ class DishViewModel(val dish: Dish): ViewModel() {
         firestore.collection("stores")
             .document(dish.storeId)
             .collection("categories")
+            .orderBy("priority", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener {querySnapshot ->
                 if (querySnapshot != null) {
                     for (snapshot in querySnapshot) {
                         val item = snapshot.toObject(Category::class.java)
                         item.id = snapshot.id
+
+                        if (item.id == dish.categoryId) {
+                            currentIndex = categories.size
+                            categoryIndex = currentIndex
+                        }
 
                         categories.add(item)
                         returnList.add(item.name)

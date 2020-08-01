@@ -19,7 +19,6 @@ import com.google.firebase.firestore.Query
 
 
 class MenuFragment : Fragment() {
-
     companion object {
         const val TAG = "MenuFragment"
     }
@@ -74,13 +73,13 @@ class MenuFragment : Fragment() {
             categoryListView = ListView(it)
 
             val builder = AlertDialog.Builder(it)
-            builder.setTitle("Choose one category")
+            builder.setTitle(getString(R.string.choose_one_category))
                 .setCancelable(true)
             dialog = builder.create()
 
             dialog.window?.setGravity(Gravity.TOP or Gravity.END)
 
-            categoryListView.setOnItemClickListener { parent, view, position, id ->
+            categoryListView.setOnItemClickListener { _, _, position, _ ->
                 binding.menuItemRecycler.smoothScrollToPosition(position)
                 dialog.dismiss()
             }
@@ -114,6 +113,7 @@ class MenuFragment : Fragment() {
             .collection("stores")
             .document(storeId)
             .collection("categories")
+            .orderBy("priority", Query.Direction.DESCENDING)
         val options = FirestoreRecyclerOptions.Builder<Category>()
             .setQuery(query, Category::class.java)
             .build()

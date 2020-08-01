@@ -14,9 +14,10 @@ data class Store(
     val website: String = "",
     val supportEmail: String = "",
     val description: String = "",
+    @field:JvmField
     val isFocus: Boolean = false,
     val openTime: Int = 0,
     val closeTime: Int = 0,
     val totalRatings: Int = 0,
-    val totalStars: Int = 0
+    val starRating: Double = 0.0
 ): Parcelable

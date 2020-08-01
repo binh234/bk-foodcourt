@@ -13,8 +13,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.bkmerchant.R
 import com.example.bkmerchant.accountActivity.AccountActivity
 import com.example.bkmerchant.databinding.HomeFragmentBinding
+import com.example.bkmerchant.paymentActivity.PaymentActivity
 import com.example.bkmerchant.storeActivity.StoreActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class HomeFragment : Fragment() {
     private lateinit var binding: HomeFragmentBinding
@@ -36,15 +38,22 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.changeStoreInfo.setOnClickListener {
+        binding.storeInfo.setOnClickListener {
             navigateToStoreDetailFragment()
         }
-        binding.menuCard.setOnClickListener { navigateToMenuFragment() }
+
         binding.bottomNav.selectedItemId = R.id.nav_home
         binding.bottomNav.setOnNavigationItemSelectedListener { item ->
             bottomNavigationItemSelected(item)
         }
-        binding.bottomNav.selectedItemId = R.id.nav_home
+
+        binding.menuCard.setOnClickListener { navigateToMenuFragment() }
+        binding.orderCard.setOnClickListener { navigateToOrderFragment() }
+        binding.promotionCard.setOnClickListener { navigateToPromotionFragment() }
+        binding.reportCard.setOnClickListener { navigateToReportFragment() }
+        binding.notificationCard.setOnClickListener { navigateToNotificationFragment() }
+        binding.employeeCard.setOnClickListener { navigateToEmployeeFragment() }
+
         return binding.root
     }
 
@@ -58,6 +67,10 @@ class HomeFragment : Fragment() {
                 val intent = Intent(context, StoreActivity::class.java)
                 startActivity(intent)
             }
+            R.id.nav_payment -> {
+                val intent = Intent(context, PaymentActivity::class.java)
+                startActivity(intent)
+            }
         }
         return true
     }
@@ -65,6 +78,38 @@ class HomeFragment : Fragment() {
     private fun navigateToMenuFragment() {
         val action = HomeFragmentDirections.actionHomeFragmentToMenuFragment()
         action.storeId = viewModel.currentStore.value?.id ?: ""
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToOrderFragment() {
+        val action = HomeFragmentDirections.actionHomeFragmentToOrderFragment(
+            viewModel.currentStore.value?.id ?: ""
+        )
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToPromotionFragment() {
+        val action = HomeFragmentDirections.actionHomeFragmentToPromotionFragment(
+            viewModel.currentStore.value?.id ?: ""
+        )
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToReportFragment() {
+        val action = HomeFragmentDirections.actionHomeFragmentToReportFragment(
+            viewModel.currentStore.value?.id ?: ""
+        )
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToNotificationFragment() {
+        findNavController().navigate(R.id.notificationFragment)
+    }
+
+    private fun navigateToEmployeeFragment() {
+        val action = HomeFragmentDirections.actionHomeFragmentToEmployeeFragment(
+            viewModel.currentStore.value?.id ?: ""
+        )
         findNavController().navigate(action)
     }
 

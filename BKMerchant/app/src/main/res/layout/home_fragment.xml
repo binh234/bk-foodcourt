@@ -29,19 +29,22 @@
 
                 <TextView
                     android:id="@+id/welcome_text"
+                    style="@style/titleStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_margin="@dimen/base_margin"
-                    android:text="@{viewModel.userName}"
-                    android:textSize="24sp"
+                    android:text="@{@string/welcome_text(viewModel.userName)}"
+                    android:textColor="@android:color/tab_indicator_text"
                     tools:text="Welcome" />
 
                 <RelativeLayout
+                    android:id="@+id/store_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white"
+                    android:background="@drawable/click_selector"
                     android:paddingStart="@dimen/base_margin"
-                    android:paddingEnd="@dimen/base_margin">
+                    android:paddingTop="@dimen/fab_margin"
+                    android:paddingEnd="@dimen/base_margin"
+                    android:paddingBottom="@dimen/fab_margin">
 
                     <ImageView
                         android:id="@+id/store_image"
@@ -52,16 +55,14 @@
 
                     <TextView
                         android:id="@+id/store_name"
+                        style="@style/headerStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/small_margin"
                         android:layout_toEndOf="@id/store_image"
                         android:text="@{viewModel.currentStore.name}"
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
                         tools:text="Domino's Pizza" />
 
+<<<<<<< HEAD
 
                     <TextView
                         android:id="@+id/star_rating"
@@ -69,25 +70,35 @@
                         android:layout_width="wrap_content"
                         android:layout_alignBottom="@id/store_rating"
                         android:layout_marginStart="@dimen/small_margin"
+=======
+                    <TextView
+                        android:id="@+id/store_rating"
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_below="@id/store_name"
+                        android:layout_alignStart="@id/store_name"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:drawableStart="@drawable/ic_star"
+                        android:drawablePadding="@dimen/small_margin"
+                        android:gravity="bottom"
+                        app:star_rating="@{viewModel.currentStore.starRating}"
+>>>>>>> 4f2bf32309e7daf2319802885ffaf7087b64aa43
                         app:total_rating="@{viewModel.currentStore.totalRatings}"
-                        app:total_star="@{viewModel.currentStore.totalStars}"
-                        android:layout_toEndOf="@id/store_rating"
                         tools:text="4.7" />
 
                     <TextView
                         android:id="@+id/store_description"
+                        style="@style/textStyle"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:layout_below="@id/store_rating"
                         android:layout_alignStart="@id/store_name"
                         android:layout_marginTop="@dimen/small_margin"
                         android:maxLines="2"
                         android:text="@{viewModel.currentStore.description}"
-                        android:textSize="14sp"
+                        android:textColor="@android:color/tab_indicator_text"
                         tools:text="Tiết kiệm đến 25%. Phù hợp  với nhóm từ 2-4 người. Pizza nướng thơm lừng ..." />
 
                     <TextView
-                        android:id="@+id/change_store_info"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/store_description"
@@ -124,6 +135,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/base_margin"
+                            android:fontFamily="@font/roboto"
                             android:text="@string/total_sales"
                             android:textColor="@android:color/white"
                             app:layout_constraintStart_toEndOf="@id/icon_payment"
@@ -134,7 +146,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/small_margin"
-                            android:text="@string/vnd"
+                            android:fontFamily="@font/roboto"
+                            android:text="@string/currency"
                             android:textColor="@android:color/white"
                             app:layout_constraintStart_toStartOf="@id/today_sale"
                             app:layout_constraintTop_toBottomOf="@id/today_sale" />
@@ -143,6 +156,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/small_margin"
+                            android:fontFamily="@font/roboto"
                             android:text="1,350,000"
                             android:textColor="@android:color/white"
                             android:textSize="28sp"
@@ -155,6 +169,7 @@
                             android:id="@+id/yesterday"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
                             android:text="@string/yesterday"
                             android:textColor="@android:color/white"
                             app:layout_constraintStart_toStartOf="@id/yesterday_sale"
@@ -194,6 +209,7 @@
                     app:rowCount="2">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/order_card"
                         style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -232,6 +248,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/promotion_card"
                         style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -252,6 +269,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/report_card"
                         style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -271,6 +289,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/notification_card"
                         style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -291,6 +310,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/employee_card"
                         style="@style/CardViewStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -319,7 +339,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?android:attr/windowBackground"
-            app:menu="@menu/bottom_navigation" />
+            app:menu="@menu/bottom_navigation"
+            app:labelVisibilityMode="labeled"/>
 
     </LinearLayout>
 </layout>

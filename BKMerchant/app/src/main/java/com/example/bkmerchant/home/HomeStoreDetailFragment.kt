@@ -64,10 +64,10 @@ class HomeStoreDetailFragment : Fragment() {
                 checkValidInformation()
             }
         }
-        binding.changeOpenTime.setOnClickListener {
+        binding.openTime.setOnClickListener {
             openTimePicker()
         }
-        binding.changeCloseTime.setOnClickListener {
+        binding.closeTime.setOnClickListener {
             closeTimePicker()
         }
 
@@ -131,7 +131,7 @@ class HomeStoreDetailFragment : Fragment() {
             binding.loadingProgress.visibility = View.VISIBLE
             uploadTask = fileReference.putFile(imageUri)
                 .addOnSuccessListener {
-                    Toast.makeText(context, "Upload successful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.update_success), Toast.LENGTH_SHORT).show()
                     fileReference.downloadUrl
                         .addOnSuccessListener {
                             Log.d("DishFragment", it.toString())
@@ -163,11 +163,11 @@ class HomeStoreDetailFragment : Fragment() {
         val closeTime = viewModel.closeTime.value ?: 0
         if (name.trim().isEmpty()) {
             check = false
-            binding.storeNameText.error = "Please enter this field"
+            binding.storeNameText.error = getString(R.string.empty_field)
         }
         if (openTime >= closeTime) {
             check = false
-            Toast.makeText(context, "Opening time must be less than closing time", Toast.LENGTH_SHORT)
+            Toast.makeText(context, getString(R.string.time_lesser), Toast.LENGTH_SHORT)
                 .show()
         }
         if (check) {
