@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="headline">#FD5532</color>
+    <color name="basilBackground">#FFFBE6</color>
+    <color name="basilTextColor">#356859</color>
+    <color name="basilFieldBackground">#B9e4C9</color>
+    <color name="basilHorizontalLine">#37966F</color>
+
+</resources>

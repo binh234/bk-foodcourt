@@ -1,0 +1,267 @@
+package com.example.managertab
+
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.os.Handler
+import android.util.Log
+import android.webkit.MimeTypeMap
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
+import com.example.managertab.databinding.ActivityAddNewVendorBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
+//import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.StorageTask
+import com.google.firebase.storage.UploadTask
+import java.lang.Integer.parseInt
+
+
+@Suppress("DEPRECATION")
+class AddNewVendorActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAddNewVendorBinding
+    private val pickImageRequest : Int = 1
+    private lateinit var vendorImageView : ImageView
+    private lateinit var imageUri : Uri
+    private var firebaseStorage: StorageReference? = null
+    private var firebaseDatabase : DatabaseReference? = null
+    private lateinit var firebaseFireStore : FirebaseFirestore
+    private var uploadTask: StorageTask<UploadTask.TaskSnapshot>? = null
+    // Data object of class Store to store the whole vendor Information
+    private lateinit var vendorInfo : Store
+    private lateinit var imageURL : String
+    // Obtain ViewModel from ViewModelProviders
+    private val viewModel by lazy {
+        ViewModelProviders.of(this).get(AddVendorViewModel::class.java)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_new_vendor)
+        binding.lifecycleOwner = this  // use Fragment.viewLifecycleOwner for fragments
+        binding.managerViewModel = viewModel
+        vendorImageView = binding.vendorImageView
+        // Remember to edit the location in this line when merge with the whole team's APP
+        firebaseStorage = FirebaseStorage.getInstance().getReference("manager_images")
+        // getDatabase reference to upload the store information onto the firebase database
+        firebaseDatabase =  FirebaseDatabase.getInstance().reference
+        // Get FirebaseFirestore reference to upload the store information to firestore
+        firebaseFireStore = FirebaseFirestore.getInstance()
+        // Upload (Image) Button in the Add Vendor Tab
+        binding.chooseImageButton.setOnClickListener{
+            openFileChooser()
+        }
+        binding.uploadButton.setOnClickListener{
+            uploadFile()
+        }
+        // Set store attributes to the infos the manager type in the apps;
+        vendorInfo = Store()
+
+1
+
+        // Upload (whole Store information) Button in the Add Vendor Tab
+        binding.doneButton.setOnClickListener{
+            if (fieldsValidated()){
+                vendorInfo.closeTime = parseInt(binding.closeTimeEditText.text.toString())
+                vendorInfo.description = binding.vendorDescriptionEditText.text.toString()
+                vendorInfo.openTime = parseInt(binding.openTimeEditText.text.toString())
+                vendorInfo.hotline = binding.hotLineEditText.text.toString()
+                if (imageURL.trim() != "") {
+                    vendorInfo.imageUrl = imageURL
+                }
+                else{
+                    vendorInfo.imageUrl = imageUri.toString()
+                }
+                vendorInfo.name = binding.vendorNameEditText.text.toString()
+                vendorInfo.ownerName = binding.vendorOwnerNameEditText.text.toString()
+                vendorInfo.supportEmail = binding.supportMailEditText.text.toString()
+                val storeID : String? = firebaseDatabase!!.child("stores").push().key
+                if (storeID != null) {
+                    Toast.makeText(this, "HIHI. UPLOADING STORE", Toast.LENGTH_SHORT).show()
+                    uploadStore(storeID)
+                }
+                else {
+                    Toast.makeText(this, "Error getting new ID on the Database", Toast.LENGTH_SHORT).show()
+                }
+            }
+            else {
+                Toast.makeText(this,"Some Field is missing, Make sure that every fields is correctly filled",Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    }
+    //-------------------------------------------------------------------------------------------------------
+    /* These codes are for uploading the image to the Database and load the Image into the Image
+    View in the Add Vendor Tab
+     */
+    private fun openFileChooser(){
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, pickImageRequest)
+    }
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == pickImageRequest && resultCode == Activity.RESULT_OK && data != null && data.data != null
+        ) {
+            imageUri = data.data!!
+            binding.vendorImageView.setImageURI(imageUri)
+        }
+    }
+
+    private fun getFileExtension(uri: Uri): String? {
+        val cR = contentResolver
+        val mime = MimeTypeMap.getSingleton()
+        return mime.getExtensionFromMimeType(cR.getType(uri))
+    }
+
+    private fun uploadFile() {
+        imageUri.let {
+            val fileReference: StorageReference = firebaseStorage!!.child(
+                System.currentTimeMillis()
+                    .toString() + "." + getFileExtension(imageUri)
+            )
+            uploadTask = fileReference.putFile(imageUri)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Grats. Your Image is being uploaded " +
+                            "to the Database", Toast.LENGTH_SHORT).show()
+                    fileReference.downloadUrl.addOnCompleteListener {
+                        imageURL = it.toString()
+                        Toast.makeText(this, "imageURL:$imageURL", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(
+                        this,
+                        it.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                .addOnProgressListener { taskSnapshot ->
+                    val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
+                    binding.progressUploadImage.progress = progress.toInt()
+                }
+        }
+    }
+    //-----------------------------------------------------------------------------------------------
+    /*The following codes are for uploading the whole vendor image onto the database child collection
+    named stores (with fields specified in the Store class)
+     */
+    private fun uploadStore(storeID : String){
+        // Upload to Firebase DATABASE
+            vendorInfo.id = storeID
+        /*
+        Toast.makeText(this, "proceeded to initiate Store:$storeID", Toast.LENGTH_SHORT).show()
+        //
+            firebaseDatabase!!.child("stores").child(storeID).setValue(vendorInfo)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "The store is now uploaded to the Database",
+                        Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener{
+                    Toast.makeText(this,"Some error occured. Upload Failed",
+                        Toast.LENGTH_SHORT).show()
+                }
+                .addOnCanceledListener {
+                    Toast.makeText(this, "Something went wrong. Upload Canceled",
+                        Toast.LENGTH_SHORT).show()
+                }
+        */
+        // Upload TO FIREBASE FIRESTORE:
+            val data = HashMap<String,Any>()
+            data["name"] = vendorInfo.name
+            data["description"] = vendorInfo.description
+            data["hotline"] = vendorInfo.hotline
+            data["websit"] = vendorInfo.website
+            data["supportEmail"] = vendorInfo.supportEmail
+            data["openTime"] = vendorInfo.openTime
+            data["closeTime"] = vendorInfo.closeTime
+            data["imageUrl"] = vendorInfo.imageUrl
+            firebaseFireStore!!.collection("stores")
+                .add(data)
+                .addOnSuccessListener {
+                    Log.d("TAG", "DocumentSnapshot written with ID: ${it.id}")
+                }
+                .addOnCanceledListener {
+                    Log.d("TAG", "DocumentSnapshot Canceled")
+                }
+                .addOnFailureListener{
+                    Toast.makeText(this, "Failed to write DOcucment", Toast.LENGTH_SHORT).show()
+                }
+    }
+    /* This function make sure that all the editexts are filled before the store is uploaded
+     */
+    private fun fieldsValidated() : Boolean{
+        when {
+            binding.closeTimeEditText.text.isEmpty() -> {
+                binding.closeTimeEditText.error = "Vendor's Close time is required"
+                return false
+            }
+            binding.openTimeEditText.text.isEmpty()  -> {
+                binding.openTimeEditText.error ="Vendor's Open time is required"
+                return false
+            }
+            binding.hotLineEditText.text.isEmpty() -> {
+                binding.hotLineEditText.error = "This field is required"
+                return false
+            }
+            binding.vendorNameEditText.text.isEmpty() -> {
+                binding.vendorNameEditText.error = "Store name is required"
+                return false
+            }
+            binding.vendorOwnerNameEditText.text.isEmpty() -> {
+                binding.vendorOwnerNameEditText.error = "Store Owner need to be input"
+                return false
+            }
+            else -> return true
+        }
+    }
+}
+
+//-------------------------------------------------------CODE GRAVE YARD---------------------------------------------
+/*
+fun uploadImage(){
+if (imageUri != null) {
+            val fileReference: StorageReference = firebaseStorage!!.child(
+                System.currentTimeMillis()
+                    .toString() + "." + getFileExtension(imageUri)
+            )
+            uploadTask = fileReference.putFile(imageUri)
+                .addOnSuccessListener { taskSnapshot ->
+                    val handler = Handler()
+                    handler.postDelayed(Runnable { binding.progressUploadImage.progress = 0 }, 500)
+                    Toast.makeText(this, "Upload successful", Toast.LENGTH_LONG)
+                        .show()
+                    val upload = Upload(
+                        binding.editTextFileName.text.toString().trim(),
+                        firebaseStorage!!.downloadUrl.toString()
+                    )
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(
+                        this,
+                        e.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                .addOnProgressListener { taskSnapshot ->
+                    val progress =
+                        100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
+                    binding.progressUploadImage.progress = progress.toInt()
+                }
+        } else {
+            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show()
+        }
+}*/

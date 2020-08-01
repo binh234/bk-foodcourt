@@ -30,6 +30,7 @@
             android:text="@string/owner_name" />
 
         <EditText
+            android:id="@+id/VendorNameEditText"
             style="@style/FormFieldAsk"
             android:hint="@string/enter_vendor_s_owner_name"
             android:importantForAutofill="no" />

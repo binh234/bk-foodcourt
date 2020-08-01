@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "514457150356",
+    "firebase_url": "https://managertab-3ded5.firebaseio.com",
+    "project_id": "managertab-3ded5",
+    "storage_bucket": "managertab-3ded5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514457150356:android:95b0530ed6cb8cb3ffa581",
+        "android_client_info": {
+          "package_name": "com.example.managertab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "514457150356-f6fh7kqs0pvarihgl4nce6e94rhso0dp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSGO80iWYKCw1uiD0HIkJOuGaYua62oz0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "514457150356-f6fh7kqs0pvarihgl4nce6e94rhso0dp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

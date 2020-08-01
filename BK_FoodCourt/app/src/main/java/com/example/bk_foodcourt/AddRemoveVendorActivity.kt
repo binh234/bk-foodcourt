@@ -6,11 +6,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.ProgressBar
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -24,15 +22,14 @@ import java.net.URI
 
 class AddRemoveVendorActivity : AppCompatActivity() {
     private var viewPager: ViewPager2? = null
-    private var filepath : Uri? = null
     private var storage: FirebaseStorage? = null
-       private var storageReference : StorageReference? = null
+    private var storageReference : StorageReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_remove_vendor)
         viewPager = findViewById<ViewPager2>(R.id.pager)
-        //Init firebase
+        //Init firebaseCr
         storage = FirebaseStorage.getInstance()
         storageReference = storage!!.reference
         //Setup button
@@ -65,6 +62,9 @@ class AddRemoveVendorActivity : AppCompatActivity() {
 class AddVendorFragment : Fragment() {
     private val pickImageRequest : Int = 1
     private var vendorImageView : ImageView? = null
+    private var chooseImageButton : Button? = null
+    private var text : EditText? = null
+    private var vendorImageUri : Uri? =null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -73,10 +73,11 @@ class AddVendorFragment : Fragment() {
         // Inflate the layout for this fragment
         val view : View =  inflater!!.inflate(R.layout.fragment_add_vendor, container, false)
 
-        val chooseImageButton : Button = view.findViewById(R.id.chooseVendorImage)
+        chooseImageButton = view.findViewById(R.id.chooseVendorImage)
         vendorImageView = view.findViewById(R.id.vendorImageView)
         val progressBar : ProgressBar = view.findViewById(R.id.progress_image)
-        chooseImageButton.setOnClickListener{
+        text = view.findViewById(R.id.VendorNameEditText)
+        chooseImageButton!!.setOnClickListener{
             openFileChooser()
         }
         return inflater.inflate(R.layout.fragment_add_vendor, container, false)
@@ -85,7 +86,7 @@ class AddVendorFragment : Fragment() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(intent, pickImageRequest)
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"), pickImageRequest)
     }
 
     override fun onActivityResult(
@@ -96,8 +97,8 @@ class AddVendorFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == pickImageRequest && resultCode == Activity.RESULT_OK && data != null && data.data != null
         ) {
-            val imageURI : Uri = data.data!!
-            vendorImageView!!.setImageURI(imageURI)
+            vendorImageUri = data.data!!
+            vendorImageView!!.setImageURI(vendorImageUri)
         }
     }
     companion object {
