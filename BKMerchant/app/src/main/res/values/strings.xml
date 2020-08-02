@@ -95,7 +95,7 @@
         Hệ thống đặt hàng trực tuyến cũng lưu trữ thông tin về đơn đặt hàng của khách hàng để ghi nhớ và đặt hàng lại cho những lần giao dịch tiếp theo. \n\n
         Nếu BK Merchant thu thập thông tin cá nhân của khách hàng từ người khác, BK Merchant sẽ thực hiện các bước hợp lý để thông báo cho khách hàng. \n\n
         Khách hàng chịu trách nhiệm về sự an toàn của mình và duy trì việc sử dụng dịch vụ với tên đăng nhập, mật khẩu và hộp thư điện tử của mình. Ngoài ra,
-        khách hàng cũng phải có trách nhiệm thông báo kịp thời cho Website delivery.lotteria.vn về bất kỳ việc sử dụng, lạm dụng hoặc vi phạm bí mật nào trái phép,
+        khách hàng cũng phải có trách nhiệm thông báo kịp thời cho Website support.hcmut.edu.vn về bất kỳ việc sử dụng, lạm dụng hoặc vi phạm bí mật nào trái phép,
         giữ lại tên đăng nhập và mật khẩu của bên thứ ba để có biện pháp khắc phục phù hợp.
 </string>
     <string name="term_of_use">Term of use</string>
@@ -166,7 +166,7 @@
     <string name="remove">Remove</string>
     <string name="promo">Promo</string>
     <string name="setting">Settings</string>
-    <string name="uploading">Uploading ...</string>
+    <string name="uploading">Uploading …</string>
     <string name="no_notification">No notifications to show</string>
     <string name="this_feature_will_be_updated_soon">This feature will be updated soon</string>
     <string name="priority">Priority</string>

@@ -1,11 +1,10 @@
 package com.example.bk_foodcourt
 
-import android.app.Notification
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
+import com.example.bk_foodcourt.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 
 

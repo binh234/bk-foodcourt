@@ -72,7 +72,7 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
         }
-        return true
+        return false
     }
 
     private fun navigateToMenuFragment() {

@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.bk_foodcourt.R
+import com.example.bk_foodcourt.account.AccountActivity
 import com.example.bk_foodcourt.databinding.ActivityCustomerOrderBinding
 import com.example.bk_foodcourt.home.HomeActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -32,6 +33,11 @@ class CustomerOrderActivity : AppCompatActivity() {
     private fun bottomNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_home -> {
+                finish()
+            }
+            R.id.nav_profile -> {
+                val intent = Intent(applicationContext, AccountActivity::class.java)
+                startActivity(intent)
                 finish()
             }
         }

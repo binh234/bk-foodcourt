@@ -23,15 +23,15 @@ class DishViewModel(val dish: Dish) : ViewModel() {
     var quantity = MutableLiveData<Int>()
 
     var navigateToMenuFragment = MutableLiveData<String>()
+    var navigateToCartFragment = MutableLiveData<String>()
 
     init {
-        if (dish.id.isNotEmpty()) {
-            bind()
-        }
+        bind()
     }
 
     private fun bind() {
         Log.d(TAG, dish.id)
+        Log.d(TAG, dish.options)
         options.value = dish.options
 
         if (dish.quantity > 0) {
@@ -77,7 +77,8 @@ class DishViewModel(val dish: Dish) : ViewModel() {
             .document(dish.cartItemId)
             .set(item)
             .addOnSuccessListener {
-                navigateToMenuFragment.value = "Update ${item.name} successful"
+                val message = "Update ${item.name} successful"
+                navigateToMenuFragment.value = message
             }
     }
 

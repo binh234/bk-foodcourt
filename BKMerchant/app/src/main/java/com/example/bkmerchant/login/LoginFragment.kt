@@ -75,10 +75,6 @@ class LoginFragment : Fragment() {
                         Toast.LENGTH_LONG
                     )
                         .show()
-<<<<<<< HEAD
-                    startMainActivity()
-=======
->>>>>>> 4f2bf32309e7daf2319802885ffaf7087b64aa43
                 } else {
                     for (document in query) {
                         val userType = document.toObject(UserType::class.java)
@@ -123,7 +119,6 @@ class LoginFragment : Fragment() {
                                 Toast.LENGTH_LONG
                             )
                                 .show()
-                            startMainActivity()
                         }
                     }
                 }

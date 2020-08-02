@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/click_selector"
+        android:clickable="@{dish.availability ? true : false}"
         android:onClick="@{() -> viewModel.openDish(dish)}">
 
         <View
@@ -47,11 +48,12 @@
         <TextView
             android:id="@+id/dish_name"
             style="@style/headerStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_marginStart="@dimen/base_margin"
             android:maxLines="2"
             android:text="@{dish.name}"
             android:textColor="@{dish.availability ? @android:color/black : @android:color/tab_indicator_text}"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/dish_image"
             app:layout_constraintTop_toTopOf="@id/dish_image"
             tools:text="Pizza" />
@@ -60,26 +62,28 @@
             android:id="@+id/dish_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:maxLines="2"
             android:minLines="2"
             android:text="@{dish.availability ? dish.description : @string/unavailable}"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@id/dish_price"
-            app:layout_constraintStart_toStartOf="@id/dish_name"
-            app:layout_constraintTop_toBottomOf="@id/dish_name"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dish_image"
+            app:layout_constraintTop_toBottomOf="@id/dish_name"
             tools:text="Description of a dish Description of a dish" />
 
         <TextView
             android:id="@+id/dish_price"
             style="@style/subHeaderStyle"
             android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
             android:layout_marginTop="@dimen/small_margin"
-            android:visibility="@{dish.availability ? View.VISIBLE : View.GONE}"
             android:textStyle="bold"
+            android:visibility="@{dish.availability ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/dish_image"
-            app:layout_constraintStart_toStartOf="@id/dish_name"
+            app:layout_constraintStart_toEndOf="@id/dish_image"
             app:priceText="@{dish.price}"
             tools:text="99,000đ" />
     </androidx.constraintlayout.widget.ConstraintLayout>
