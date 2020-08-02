@@ -1,4 +1,4 @@
-package com.example.bkmerchant.accountActivity
+package com.example.bk_foodcourt.account
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -17,18 +17,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.bkmerchant.MainActivity
-import com.example.bkmerchant.R
-import com.example.bkmerchant.databinding.AccountFragmentBinding
-import com.example.bkmerchant.databinding.StoreFragmentBinding
-import com.example.bkmerchant.login.LoginActivity
-import com.example.bkmerchant.login.User
-import com.example.bkmerchant.paymentActivity.PaymentActivity
-import com.example.bkmerchant.storeActivity.StoreActivity
-import com.example.bkmerchant.storeActivity.store.StoreViewModel
+import com.example.bk_foodcourt.login.LoginActivity
+import com.example.bk_foodcourt.R
+import com.example.bk_foodcourt.databinding.AccountFragmentBinding
+import com.example.bk_foodcourt.login.User
+import com.example.bk_foodcourt.order.CustomerOrderActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
@@ -73,7 +67,7 @@ class AccountFragment: Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.bottomNav.selectedItemId = R.id.nav_account
+        binding.bottomNav.selectedItemId = R.id.nav_profile
         binding.bottomNav.setOnNavigationItemSelectedListener {
             bottomNavigationItemSelected(it)
         }
@@ -113,15 +107,10 @@ class AccountFragment: Fragment() {
 //                startActivity(intent)
                 activity?.finish()
             }
-            R.id.nav_store -> {
-                val intent = Intent(context, StoreActivity::class.java)
+            R.id.nav_orderlist -> {
+                val intent = Intent(context, CustomerOrderActivity::class.java)
                 startActivity(intent)
-                activity?.finish()
-            }
-            R.id.nav_payment -> {
-                val intent = Intent(context, PaymentActivity::class.java)
-                startActivity(intent)
-                activity?.finish()
+                requireActivity().finish()
             }
         }
         return true

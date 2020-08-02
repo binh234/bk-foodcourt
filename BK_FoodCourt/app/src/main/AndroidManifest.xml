@@ -4,7 +4,7 @@
     package="com.example.bk_foodcourt">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".account.AccountActivity"></activity>
         <activity android:name=".menu.MenuActivity" />
         <activity android:name=".order.CustomerOrderActivity" />
         <activity android:name=".home.HomeActivity" />
@@ -23,7 +24,7 @@
         <activity android:name=".TotalRevenueVendor_StatReport" />
         <activity android:name=".Cook" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

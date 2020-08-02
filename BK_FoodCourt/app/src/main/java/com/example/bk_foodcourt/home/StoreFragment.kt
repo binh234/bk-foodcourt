@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.bk_foodcourt.OrderActivity
 import com.example.bk_foodcourt.R
+import com.example.bk_foodcourt.account.AccountActivity
 import com.example.bk_foodcourt.databinding.StoreFragmentBinding
 import com.example.bk_foodcourt.menu.CartItem
 import com.example.bk_foodcourt.order.CustomerOrderActivity
@@ -65,12 +66,15 @@ class StoreFragment: Fragment() {
     private fun bottomNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_orderlist -> {
-                binding.bottomNav.selectedItemId = R.id.nav_home
                 val intent = Intent(context, CustomerOrderActivity::class.java)
                 startActivity(intent)
             }
+            R.id.nav_profile -> {
+                val intent = Intent(context, AccountActivity::class.java)
+                startActivity(intent)
+            }
         }
-        return true
+        return false
     }
 
     private fun setupRecyclerView() {

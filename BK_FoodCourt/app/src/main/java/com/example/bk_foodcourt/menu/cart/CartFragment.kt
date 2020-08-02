@@ -39,8 +39,6 @@ class CartFragment : Fragment() {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var currentUser: FirebaseUser
 
-    private lateinit var order: Order
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -83,7 +81,7 @@ class CartFragment : Fragment() {
                 android.R.layout.simple_dropdown_item_1line,
                 codeList
             )
-            binding.orderCode.adapter = arrayAdapter
+            binding.orderCode.setAdapter(arrayAdapter)
         })
 
         viewModel.showCartItemDetailEvent.observe(viewLifecycleOwner, Observer { dish ->
