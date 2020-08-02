@@ -109,6 +109,9 @@
     <string name="payment_method">Payment method</string>
     <string name="proceed_new_cart">Proceed to start new cart?</string>
     <string name="cancel">Cancel</string>
+    <string name="empty_cart">Your cart is empty!</string>
+    <string name="promotion_code">Promotion code</string>
+    <string name="cart">Cart</string>
 
 
     <string-array name="channel_choice">

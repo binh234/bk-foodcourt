@@ -37,6 +37,11 @@
         <argument
             android:name="dish"
             app:argType="com.example.bk_foodcourt.menu.Dish" />
+        <action
+            android:id="@+id/action_dishFragment_to_cartFragment"
+            app:destination="@id/cartFragment"
+            app:popUpTo="@id/cartFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -46,5 +51,10 @@
         <action
             android:id="@+id/action_cartFragment_to_dishFragment"
             app:destination="@id/dishFragment" />
+        <action
+            android:id="@+id/action_cartFragment_to_storeFragment"
+            app:destination="@id/storeFragment"
+            app:popUpTo="@id/storeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

@@ -9,6 +9,6 @@ data class CartItem(
     var total: Double = 0.0,
     var quantity: Int = 0,
     @get: Exclude var id: String = "",
-    @get: Exclude var description: String ="",
-    @get: Exclude var imageUrl: String =""
+    var description: String ="",
+    var imageUrl: String =""
 )

@@ -65,6 +65,7 @@ class StoreFragment: Fragment() {
     private fun bottomNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_orderlist -> {
+                binding.bottomNav.selectedItemId = R.id.nav_home
                 val intent = Intent(context, CustomerOrderActivity::class.java)
                 startActivity(intent)
             }

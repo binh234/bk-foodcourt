@@ -43,6 +43,7 @@ class MenuFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(MenuViewModel::class.java)
         viewModel.getCategoryList(storeId)
+        viewModel.checkEmptyCart()
         binding = MenuFragmentBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = this
@@ -80,6 +81,14 @@ class MenuFragment : Fragment() {
             val arrayAdapter =
                 context?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, categories) }
             categoryListView.adapter = arrayAdapter
+        })
+
+        viewModel.isEmptyCart.observe(viewLifecycleOwner, Observer {
+            it?.let {isEmpty ->
+                if (!isEmpty) {
+                    binding.cartFab.visibility = View.VISIBLE
+                }
+            }
         })
 
         binding.cartFab.setOnClickListener {

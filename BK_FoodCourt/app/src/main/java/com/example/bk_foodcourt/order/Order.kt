@@ -9,6 +9,7 @@ import kotlinx.android.parcel.Parcelize
 data class Order(
     @get: Exclude
     var id: String = "",
+    var userID: String = "",
     var userName: String = "",
     var userPhoneNumber: String = "",
     var status: Int = 0,
@@ -18,6 +19,7 @@ data class Order(
     var total: Double = 0.0,
     var promotionCode: String = "",
     var promotion: Double = 0.0,
+    var storeID: String = "",
     var storeName: String = "",
     var storeHotline: String = ""
 ) : Parcelable
