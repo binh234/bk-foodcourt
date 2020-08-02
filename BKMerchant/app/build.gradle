@@ -42,12 +42,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-<<<<<<< HEAD
-    implementation 'com.android.support:multidex:1.0.3'
-
-=======
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
->>>>>>> 4f2bf32309e7daf2319802885ffaf7087b64aa43
 
     //Test support
     testImplementation 'junit:junit:4.12'

@@ -65,7 +65,7 @@ class RegisterFragment : Fragment() {
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val user = User(name, email = email)
+                        val user = User(name = name, email = email)
                         task.result?.user?.uid?.let {
                             userCollection.document(it).set(user)
                                 .addOnSuccessListener {

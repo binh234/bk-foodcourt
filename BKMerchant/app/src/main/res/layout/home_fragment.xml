@@ -62,15 +62,6 @@
                         android:text="@{viewModel.currentStore.name}"
                         tools:text="Domino's Pizza" />
 
-<<<<<<< HEAD
-
-                    <TextView
-                        android:id="@+id/star_rating"
-                        style="@style/textStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_alignBottom="@id/store_rating"
-                        android:layout_marginStart="@dimen/small_margin"
-=======
                     <TextView
                         android:id="@+id/store_rating"
                         style="@style/textStyle"
@@ -82,7 +73,6 @@
                         android:drawablePadding="@dimen/small_margin"
                         android:gravity="bottom"
                         app:star_rating="@{viewModel.currentStore.starRating}"
->>>>>>> 4f2bf32309e7daf2319802885ffaf7087b64aa43
                         app:total_rating="@{viewModel.currentStore.totalRatings}"
                         tools:text="4.7" />
 
@@ -339,8 +329,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?android:attr/windowBackground"
-            app:menu="@menu/bottom_navigation"
-            app:labelVisibilityMode="labeled"/>
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_navigation" />
 
     </LinearLayout>
 </layout>
