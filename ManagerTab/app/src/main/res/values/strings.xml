@@ -94,4 +94,6 @@
     <string name="vendor_s_information">Vendor\'s Information</string>
     <string name="enter_file_name_here">Enter File Name Here</string>
     <string name="done">Done</string>
+    <string name="the_vendor_s_official_website">The vendor\'s official website</string>
+    <string name="store">STORE:</string>
 </resources>

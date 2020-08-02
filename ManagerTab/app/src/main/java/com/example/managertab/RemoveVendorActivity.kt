@@ -2,101 +2,48 @@ package com.example.managertab
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.database.FirebaseDatabase
-
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_remove_vendor.*
 
 
 class RemoveVendorActivity : AppCompatActivity() {
-    private lateinit var  firebaseDatabase : FirebaseDatabase
+    private lateinit var firebaseFireStore : FirebaseFirestore
 
-    private lateinit var  firebaseStorage : FirebaseStorage
+    private lateinit var firebaseStorage: FirebaseStorage
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_remove_vendor)
-        firebaseDatabase = FirebaseDatabase.getInstance()
-        firebaseStorage = FirebaseStorage.getInstance()
-
-
-        //val storeItemList = readData()
-        //recycler_view.adapter = StoreItemAdapter(storeItemList)
+        firebaseFireStore = FirebaseFirestore.getInstance()
+        val storeItemList = mutableListOf<StoreItem>()
+        // Codes to get stores from firebase and store it into the list
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
+        firebaseFireStore.collection("stores").orderBy("name")
+            .get()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    for (document in it.result!!) {
+                        val storeItem: StoreItem = document.toObject(StoreItem::class.java)
+                        Log.d("STORENAME:","$storeItem.name" )
+                        Toast.makeText(this, "$storeItem.name", Toast.LENGTH_SHORT).show()
+                        storeItemList.add(storeItem)
+                        Toast.makeText(this, "list size is:${storeItemList.size}", Toast.LENGTH_SHORT).show()
+                    }
+                    recycler_view.adapter = StoreItemAdapter(storeItemList)
 
-    }
-
-    override fun onStart() {
-        super.onStart()
-    }
-
-    override fun onStop() {
-        super.onStop()
-    }
-
-    /*
-    interface MyCallback {
-        fun onCallback(value: ArrayList<StoreItem>)
-    }
-    fun readData(myCallback : MyCallback) {
-        storeReference.get().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val list = ArrayList<StoreItem>()
-                for (document in task.result!!) {
-                    val storeName = document.data["name"].toString()
-                    val storeOpenTime : String = document.data["openTime"].toString()
-                    val storeCloseTime : String = document.data["closeTime"].toString()
-                    val storeEmail : String = document.data["supportEmail"].toString()
-                    val storeToAdd : StoreItem = StoreItem(storeName,storeOpenTime.toInt(),storeCloseTime.toInt(),storeEmail)
-                    list.add(storeToAdd)
-                }
-                myCallback.onCallback(list)
-            }
-        }
-    }
-    private suspend fun getListOfStores(): List<DocumentSnapshot> {
-        val snapshot = storeReference.get().await()
-        return snapshot.documents
-    }
-    private suspend fun getDataFromFirestore() : ArrayList<StoreItem> {
-        val storeList : ArrayList<StoreItem>  = getListOfStores()
-    }
-    */
-
-
-    /*
-    private fun getStoreList() : List<StoreItem>{
-        val list = ArrayList<StoreItem>()
-        var imageUri : String = ""
-        var imageRef = firebaseStorage.reference.child("1593356786662.jpg")
-        imageRef.downloadUrl.addOnSuccessListener {
-            imageUri = it.toString()
-        }
-
-        storeReference.orderByChild("storeId")
-        var store : StoreItem = StoreItem("",0,0,"")
-        val valueEventListener = object : ValueEventListener{
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-
-            }
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for(ds in snapshot.children) {
-                    store.ImageResource = imageUri
-                    store.CloseTime = ds.child("closeTime").value as Int
-                    store.OpenTime = ds.child("opentTime").value as Int
-                    store.SupportEmail = ds.child("supportEamil").value.toString()
-                    list.add(store)
                 }
             }
+            .addOnFailureListener{
+                Toast.makeText(this, "Failed to connect to Firebase.Check your connection", Toast.LENGTH_SHORT).show()
+            }
+        //
+        Toast.makeText(this, "list: ${storeItemList.size}", Toast.LENGTH_SHORT).show()
 
-        }
-        return list
+
     }
-     */
 }
-

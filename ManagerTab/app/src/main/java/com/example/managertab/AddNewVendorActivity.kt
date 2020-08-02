@@ -83,10 +83,11 @@ class AddNewVendorActivity : AppCompatActivity() {
                 vendorInfo.name = binding.vendorNameEditText.text.toString()
                 vendorInfo.ownerName = binding.vendorOwnerNameEditText.text.toString()
                 vendorInfo.supportEmail = binding.supportMailEditText.text.toString()
+                vendorInfo.website = binding.websiteEditText.text.toString()
                 val storeID : String? = firebaseDatabase!!.child("stores").push().key
                 if (storeID != null) {
                     Toast.makeText(this, "HIHI. UPLOADING STORE", Toast.LENGTH_SHORT).show()
-                    uploadStore(storeID)
+                    uploadStore()
                 }
                 else {
                     Toast.makeText(this, "Error getting new ID on the Database", Toast.LENGTH_SHORT).show()
@@ -137,10 +138,19 @@ class AddNewVendorActivity : AppCompatActivity() {
                 .addOnSuccessListener {
                     Toast.makeText(this, "Grats. Your Image is being uploaded " +
                             "to the Database", Toast.LENGTH_SHORT).show()
-                    fileReference.downloadUrl.addOnCompleteListener {
-                        imageURL = it.toString()
-                        Toast.makeText(this, "imageURL:$imageURL", Toast.LENGTH_SHORT).show()
-                    }
+                    fileReference.downloadUrl
+                        .addOnCompleteListener {
+                            it.addOnSuccessListener {
+                                imageURL = it.toString()
+                                Toast.makeText(this, "imageURL:$imageURL", Toast.LENGTH_SHORT).show()
+                            }
+                                .addOnFailureListener{
+                                    Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                        .addOnFailureListener{
+                            Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
+                        }
                 }
                 .addOnFailureListener {
                     Toast.makeText(
@@ -159,38 +169,14 @@ class AddNewVendorActivity : AppCompatActivity() {
     /*The following codes are for uploading the whole vendor image onto the database child collection
     named stores (with fields specified in the Store class)
      */
-    private fun uploadStore(storeID : String){
+    private fun uploadStore(){
         // Upload to Firebase DATABASE
-            vendorInfo.id = storeID
-        /*
-        Toast.makeText(this, "proceeded to initiate Store:$storeID", Toast.LENGTH_SHORT).show()
-        //
-            firebaseDatabase!!.child("stores").child(storeID).setValue(vendorInfo)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "The store is now uploaded to the Database",
-                        Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener{
-                    Toast.makeText(this,"Some error occured. Upload Failed",
-                        Toast.LENGTH_SHORT).show()
-                }
-                .addOnCanceledListener {
-                    Toast.makeText(this, "Something went wrong. Upload Canceled",
-                        Toast.LENGTH_SHORT).show()
-                }
-        */
         // Upload TO FIREBASE FIRESTORE:
-            val data = HashMap<String,Any>()
-            data["name"] = vendorInfo.name
-            data["description"] = vendorInfo.description
-            data["hotline"] = vendorInfo.hotline
-            data["websit"] = vendorInfo.website
-            data["supportEmail"] = vendorInfo.supportEmail
-            data["openTime"] = vendorInfo.openTime
-            data["closeTime"] = vendorInfo.closeTime
-            data["imageUrl"] = vendorInfo.imageUrl
-            firebaseFireStore!!.collection("stores")
-                .add(data)
+            val store = Store(vendorInfo.name,vendorInfo.imageUrl,vendorInfo.hotline
+            ,vendorInfo.website,vendorInfo.supportEmail,vendorInfo.description,vendorInfo.ownerName
+            ,true,vendorInfo.openTime,vendorInfo.closeTime)
+            firebaseFireStore.collection("stores")
+                .add(store)
                 .addOnSuccessListener {
                     Log.d("TAG", "DocumentSnapshot written with ID: ${it.id}")
                 }
