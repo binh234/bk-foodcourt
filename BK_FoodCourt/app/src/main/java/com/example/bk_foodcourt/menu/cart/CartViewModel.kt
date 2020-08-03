@@ -14,6 +14,7 @@ import com.example.bk_foodcourt.order.Order
 import com.example.bk_foodcourt.order.OrderItem
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.DateFormat
 import java.util.*
@@ -25,17 +26,22 @@ class CartViewModel : ViewModel() {
     private var storeInfo = Store()
     private var storeId = ""
 
+    var subtotal = MutableLiveData(0.0)
     var total = MutableLiveData(0.0)
     var applicableFee = MutableLiveData(0.0)
-    var promotion = MutableLiveData(0.0)
+    var promo = MutableLiveData(0.0)
 
     val cartList = MutableLiveData<List<CartItem>>()
-    val promotionList = mutableListOf<Promotion>()
+    private val promotionList = mutableListOf<Promotion>()
     val codeList = MutableLiveData<List<String>>()
+    private var applyPosition = -1
 
     val showCartItemDetailEvent = MutableLiveData<Dish>()
     val goToHomeEvent = MutableLiveData<Boolean>()
     var errorMessage = MutableLiveData<Int>()
+    val clearTextEvent = MutableLiveData<Boolean>()
+
+    private val calendar = Calendar.getInstance()
 
     init {
         getCart()
@@ -64,8 +70,9 @@ class CartViewModel : ViewModel() {
                         getPromotionCodes()
                         Log.d("CartViewModel", list[0].storeId)
                     }
-                    total.value = subTotal * 1.1
+                    subtotal.value = subTotal
                     applicableFee.value = subTotal / 10
+                    applyPromotion(applyPosition)
                     cartList.value = list
 
                     Log.d("CartViewModel", subTotal.toString())
@@ -104,6 +111,7 @@ class CartViewModel : ViewModel() {
             firestore.collection("stores")
                 .document(storeId)
                 .collection("promotions")
+                .whereEqualTo("status", true)
                 .whereEqualTo("scope", 0)
                 .whereLessThanOrEqualTo("activateDay", todayTimestamp)
                 .get()
@@ -136,8 +144,54 @@ class CartViewModel : ViewModel() {
         showCartItemDetailEvent.value = dish
     }
 
-    fun checkout(orderType: String, promotionCode: String) {
+    fun applyPromotion(position: Int) {
+        if (position == -1) {
+            total.value = subtotal.value!! + applicableFee.value!!
+        } else {
+            val promotion = promotionList[position]
+            val hour = Calendar.HOUR_OF_DAY
+            val minute = Calendar.MINUTE
+            val time = hour * 60 + minute
+            var valid = false
+
+            if (promotion.activateDayTime > time) {
+                errorMessage.value = R.string.promo_active_time_error
+            } else if (time > promotion.expireDayTime) {
+                errorMessage.value = R.string.promo_expire_time_error
+            } else if (promotion.orderFrom > subtotal.value!!) {
+                errorMessage.value = R.string.promo_min_error
+            } else if (subtotal.value!! > promotion.orderTo) {
+                errorMessage.value = R.string.promo_max_error
+            } else {
+                valid = true
+            }
+
+            if (valid) {
+                if (applyPosition != position) {
+                    applyPosition = position
+                    errorMessage.value = R.string.apply_promo_success
+                }
+                if (promotion.type == 1) {
+                    promo.value = promotion.value
+                } else {
+                    promo.value = promotion.value * subtotal.value!! / 100
+                }
+                total.value = subtotal.value!! + applicableFee.value!! - promo.value!!
+            } else {
+                clearTextEvent.value = true
+                applyPosition = -1
+                promo.value = 0.0
+                total.value = subtotal.value!! + applicableFee.value!!
+            }
+        }
+    }
+
+    fun checkout(orderType: String) {
+        var promotionCode = ""
         cartList.value?.let { list ->
+            if (applyPosition != -1) {
+                promotionCode = codeList.value!![applyPosition]
+            }
             if (storeId.isNotEmpty()) {
                 val order = Order(
                     userID = userInfo.id,
@@ -146,7 +200,7 @@ class CartViewModel : ViewModel() {
                     storeID = storeInfo.id,
                     storeName = storeInfo.name,
                     storeHotline = storeInfo.hotline,
-                    promotion = promotion.value!!,
+                    promotion = promo.value!!,
                     promotionCode = promotionCode,
                     total = total.value!!,
                     applicableFee = applicableFee.value!!,
@@ -177,7 +231,28 @@ class CartViewModel : ViewModel() {
                                         .delete()
                                 }
                         }
-                        goToHomeEvent.value = true
+                        if (promotionCode.isNotEmpty()) {
+                            val promotion = promotionList[applyPosition]
+                            if (promotion.numUsed == promotion.numAllowed - 1) {
+                                firestore.collection("stores")
+                                    .document(storeId)
+                                    .collection("promotions")
+                                    .document(promotion.id)
+                                    .delete()
+                                goToHomeEvent.value = true
+                            } else {
+                                firestore.collection("stores")
+                                    .document(storeId)
+                                    .collection("promotions")
+                                    .document(promotion.id)
+                                    .update("numUsed", FieldValue.increment(1))
+                                    .addOnSuccessListener {
+                                        goToHomeEvent.value = true
+                                    }
+                            }
+                        } else {
+                            goToHomeEvent.value = true
+                        }
                     }
                     .addOnFailureListener {
                         Log.d("CartViewModel", it.toString())

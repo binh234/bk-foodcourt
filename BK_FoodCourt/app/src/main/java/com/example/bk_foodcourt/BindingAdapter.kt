@@ -4,6 +4,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.example.bk_foodcourt.menu.Promotion
 import com.example.bk_foodcourt.order.OrderStatus
 import com.google.firebase.Timestamp
 import de.hdodenhof.circleimageview.CircleImageView
@@ -91,4 +92,23 @@ fun setOrderTime(view: TextView, orderTime: Timestamp) {
 @BindingAdapter("item_option")
 fun setItemOption(view: TextView, option: String) {
     view.text = option.replace("\\n", "\n")
+}
+
+@BindingAdapter("promotion_description")
+fun setPromotionDescription(view: TextView, promotion: Promotion) {
+    val discountValue = when (promotion.type) {
+        0 -> "${promotion.value}%"
+        else -> String.format("%1$,.0f", promotion.value) + "đ"
+    }
+
+    view.text = view.resources.getString(
+        R.string.order_discount_description,
+        promotion.code,
+        discountValue,
+        String.format("%1$,.0f", promotion.orderFrom) + "đ",
+        String.format("%1$,.0f", promotion.orderTo) + "đ",
+        convertIntToTime(promotion.activateDayTime),
+        convertIntToTime(promotion.expireDayTime)
+    )
+
 }

@@ -66,6 +66,7 @@
                         android:layout_alignTop="@id/subtotal_text"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/base_margin"
+                        app:priceText="@{viewModel.subtotal}"
                         tools:text="240,000đ" />
 
                     <TextView
@@ -78,7 +79,8 @@
                         android:layout_marginTop="@dimen/small_margin"
                         android:layout_marginBottom="@dimen/small_margin"
                         android:text="@string/promo"
-                        android:visibility="@{viewModel.promotion==0.0 ? View.GONE : View.VISIBLE}" />
+                        android:textColor="@color/colorGreen"
+                        android:visibility="@{viewModel.promo==0.0 ? View.GONE : View.VISIBLE}" />
 
                     <TextView
                         android:id="@+id/order_promotion"
@@ -88,7 +90,9 @@
                         android:layout_alignTop="@id/promotion_text"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/base_margin"
-                        android:visibility="@{viewModel.promotion==0.0 ? View.GONE : View.VISIBLE}"
+                        android:textColor="@color/colorGreen"
+                        android:visibility="@{viewModel.promo==0.0 ? View.GONE : View.VISIBLE}"
+                        app:priceText="@{-viewModel.promo}"
                         tools:text="-40,000đ" />
 
                     <TextView
@@ -108,6 +112,7 @@
                         android:layout_alignTop="@id/fee_text"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/base_margin"
+                        app:priceText="@{viewModel.applicableFee}"
                         tools:text="24,000đ" />
 
                     <TextView
@@ -130,6 +135,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/base_margin"
                         android:textStyle="bold"
+                        app:priceText="@{viewModel.total}"
                         tools:text="224,000đ" />
 
                 </RelativeLayout>

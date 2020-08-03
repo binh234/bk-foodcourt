@@ -171,6 +171,12 @@
     <string name="register_fail">Register fail, please try again</string>
     <string name="register_success">Register successful</string>
     <string name="or">OR</string>
+    <string name="apply_promo_success">Promotion applied successfully, enjoyed!</string>
+    <string name="promo_min_error">Your order subtotal is too low!</string>
+    <string name="promo_max_error">Your order subtotal is too high!</string>
+    <string name="promo_active_time_error">Promotion isn\'t activated now</string>
+    <string name="promo_expire_time_error">Promotion is expired now!</string>
+    <string name="order_discount_description">Enter %s to get discount %s for order from %s to %s, applied from %s to %s</string>
 
 
     <string-array name="channel_choice">

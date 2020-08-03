@@ -19,15 +19,15 @@
         android:name="com.example.bk_foodcourt.menu.MenuFragment"
         android:label="MenuFragment"
         tools:layout="@layout/menu_fragment">
-        <argument
-            android:name="storeId"
-            app:argType="string" />
         <action
             android:id="@+id/action_menuFragment_to_dishFragment"
             app:destination="@id/dishFragment" />
         <action
             android:id="@+id/action_menuFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+        <argument
+            android:name="store"
+            app:argType="com.example.bk_foodcourt.home.Store" />
     </fragment>
     <fragment
         android:id="@+id/dishFragment"

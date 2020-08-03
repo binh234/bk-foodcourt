@@ -3,16 +3,21 @@ package com.example.bk_foodcourt.menu
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import java.text.DateFormat
+import java.util.*
 
-class MenuViewModel : ViewModel() {
+class MenuViewModel(private val storeId: String) : ViewModel() {
     private val firestore = FirebaseFirestore.getInstance()
     private var currentUser = FirebaseAuth.getInstance().currentUser!!
     val categories = MutableLiveData<List<String>>()
     var orderDiscountValue = 0.0
     var orderDiscountPercent = 0.0
+
+    val promotionList = MutableLiveData<List<Promotion>>()
 
     val isEmptyCart = MutableLiveData<Boolean>()
 
@@ -22,6 +27,8 @@ class MenuViewModel : ViewModel() {
 
     init {
         Log.d("MenuViewModel", "Create view model")
+        getCategoryList()
+        getPromotionList()
     }
 
     val loadDiscountDone = MutableLiveData<Boolean>()
@@ -34,11 +41,7 @@ class MenuViewModel : ViewModel() {
             .limit(1)
             .get()
             .addOnSuccessListener { querySnapshot ->
-                if (querySnapshot.isEmpty) {
-                    isEmptyCart.value = true
-                } else {
-                    isEmptyCart.value = false
-                }
+                isEmptyCart.value = querySnapshot.isEmpty
             }
     }
 
@@ -46,7 +49,7 @@ class MenuViewModel : ViewModel() {
         openDishEvent.value = dish
     }
 
-    fun getCategoryList(storeId: String) {
+    fun getCategoryList() {
         firestore.collection("stores")
             .document(storeId)
             .collection("categories")
@@ -62,6 +65,28 @@ class MenuViewModel : ViewModel() {
                     }
                     categories.value = list
                 }
+            }
+    }
+
+    private fun getPromotionList() {
+        val list = mutableListOf<Promotion>()
+        val todayString = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(Date())
+        val today = DateFormat.getDateInstance(DateFormat.DATE_FIELD).parse(todayString)!!
+        val todayTimestamp = Timestamp(today)
+        firestore.collection("stores")
+            .document(storeId)
+            .collection("promotions")
+            .whereEqualTo("status", true)
+            .whereEqualTo("scope", 0)
+            .whereLessThanOrEqualTo("activateDay", todayTimestamp)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot) {
+                    val promotion = document.toObject(Promotion::class.java)
+                    promotion.id = document.id
+                    list.add(promotion)
+                }
+                promotionList.value = list
             }
     }
 

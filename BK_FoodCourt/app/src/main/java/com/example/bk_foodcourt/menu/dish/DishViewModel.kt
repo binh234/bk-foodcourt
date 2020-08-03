@@ -48,7 +48,7 @@ class DishViewModel(val dish: Dish) : ViewModel() {
             name = dish.name,
             quantity = dishQuantity,
             total = dishQuantity * dish.price,
-            options = options.value!!,
+            options = options.value!!.trim(),
             description = dish.description,
             imageUrl = dish.imageUrl
         )
