@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="dish"
             type="com.example.bk_foodcourt.menu.Dish" />
@@ -42,37 +44,42 @@
                 android:layout_toStartOf="@id/dish_price"
                 android:maxLines="2"
                 android:text="@{dish.name}"
-                app:layout_constraintStart_toEndOf="@id/dish_image"
-                app:layout_constraintTop_toTopOf="@id/dish_image"
                 tools:text="Pizza" />
 
             <TextView
-                android:id="@+id/dish_price"
+                android:id="@+id/dish_discount_price"
                 style="@style/subHeaderStyle"
                 android:layout_width="wrap_content"
                 android:layout_alignBottom="@id/dish_name"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/base_margin"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/dish_image"
-                app:layout_constraintStart_toStartOf="@id/dish_name"
-                app:priceText="@{dish.price}"
+                app:priceText="@{dish.discountPrice}"
+                tools:text="99,000đ" />
+
+            <TextView
+                android:id="@+id/dish_price"
+                style="@style/subHeaderStyle"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/dish_discount_price"
+                android:layout_marginEnd="@dimen/base_margin"
+                android:textStyle="bold"
+                android:textColor="@android:color/tab_indicator_text"
+                android:visibility="@{dish.discountPrice!=dish.price ? View.VISIBLE : View.INVISIBLE}"
+                app:strike_price_text="@{dish.price}"
                 tools:text="99,000đ" />
 
             <TextView
                 android:id="@+id/dish_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dish_name"
+                android:layout_below="@id/dish_price"
                 android:layout_marginStart="@dimen/base_margin"
                 android:layout_marginTop="@dimen/small_margin"
                 android:text="@{dish.description}"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@id/dish_price"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/dish_name"
-                app:layout_constraintTop_toBottomOf="@id/dish_name"
                 tools:text="Description of a dish Description of a dish" />
 
             <TextView

@@ -133,7 +133,8 @@ class CartViewModel : ViewModel() {
         Log.d("CartViewModel", item.options)
         val dish = Dish(
             name = item.name,
-            price = item.total / item.quantity,
+            price = item.baseTotal / item.quantity,
+            discountPrice = item.total / item.quantity,
             description = item.description,
             options = item.options,
             quantity = item.quantity,

@@ -65,6 +65,7 @@
     <string name="choose_one_category">Choose one category</string>
     <string name="duplicate_category">Duplicate category</string>
     <string name="duplicate_item">Duplicate item</string>
+    <string name="strike_text" translatable="false"><strike>%s</strike></string>
 
     <!--  Sale summary  -->
     <string name="total_sales">Total sales Today</string>
@@ -171,6 +172,7 @@
     <string name="this_feature_will_be_updated_soon">This feature will be updated soon</string>
     <string name="priority">Priority</string>
     <string name="friendly_display">For friendly display purpose</string>
+    <string name="discount_price">Discount Price</string>
 
 
 </resources>

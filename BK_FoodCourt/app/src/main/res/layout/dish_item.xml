@@ -68,24 +68,35 @@
             android:minLines="2"
             android:text="@{dish.availability ? dish.description : @string/unavailable}"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@id/dish_price"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/dish_image"
             app:layout_constraintTop_toBottomOf="@id/dish_name"
             tools:text="Description of a dish Description of a dish" />
 
         <TextView
+            android:id="@+id/dish_discount_price"
+            style="@style/subHeaderStyle"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:textColor="@{dish.availability ? @android:color/black : @android:color/tab_indicator_text}"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/dish_description"
+            app:layout_constraintStart_toStartOf="@id/dish_name"
+            app:priceText="@{dish.discountPrice}"
+            tools:text="99,000đ" />
+
+        <TextView
             android:id="@+id/dish_price"
             style="@style/subHeaderStyle"
             android:layout_width="wrap_content"
-            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginStart="@dimen/small_margin"
             android:layout_marginTop="@dimen/small_margin"
+            android:textColor="@android:color/tab_indicator_text"
             android:textStyle="bold"
-            android:visibility="@{dish.availability ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="@id/dish_image"
-            app:layout_constraintStart_toEndOf="@id/dish_image"
-            app:priceText="@{dish.price}"
-            tools:text="99,000đ" />
+            android:visibility="@{dish.availability ? dish.discountPrice!=dish.price ? View.VISIBLE : View.GONE : View.GONE}"
+            app:strike_price_text="@{dish.price}"
+            app:layout_constraintTop_toBottomOf="@id/dish_description"
+            app:layout_constraintStart_toEndOf="@id/dish_discount_price" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

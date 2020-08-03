@@ -21,6 +21,7 @@ data class Dish(
     var name: String = "",
     var description: String = "",
     var price: Double = 0.0,
+    var discountPrice: Double = 0.0,
     var availability: Boolean = true,
     var imageUrl: String = "",
     @get: Exclude var categoryId: String = "",
