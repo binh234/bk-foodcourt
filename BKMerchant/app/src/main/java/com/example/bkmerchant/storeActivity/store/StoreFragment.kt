@@ -95,7 +95,7 @@ class StoreFragment: Fragment() {
         binding.storeRecycler.adapter = adapter
     }
 
-    private fun openStoreDetail(store: Store) {
+    private fun openStoreDetail(    store: Store) {
         val action = StoreFragmentDirections.actionStoreFragmentToStoreDetailFragment(store)
         findNavController().navigate(action)
     }
