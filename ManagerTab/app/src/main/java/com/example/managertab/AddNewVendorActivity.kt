@@ -88,6 +88,7 @@ class AddNewVendorActivity : AppCompatActivity() {
                 if (storeID != null) {
                     Toast.makeText(this, "HIHI. UPLOADING STORE", Toast.LENGTH_SHORT).show()
                     uploadStore()
+                    finish()
                 }
                 else {
                     Toast.makeText(this, "Error getting new ID on the Database", Toast.LENGTH_SHORT).show()
@@ -172,7 +173,7 @@ class AddNewVendorActivity : AppCompatActivity() {
     private fun uploadStore(){
         // Upload to Firebase DATABASE
         // Upload TO FIREBASE FIRESTORE:
-            val store = Store(vendorInfo.name,vendorInfo.imageUrl,vendorInfo.hotline
+            val store = Store("",vendorInfo.name,vendorInfo.imageUrl,vendorInfo.hotline
             ,vendorInfo.website,vendorInfo.supportEmail,vendorInfo.description,vendorInfo.ownerName
             ,true,vendorInfo.openTime,vendorInfo.closeTime)
             firebaseFireStore.collection("stores")

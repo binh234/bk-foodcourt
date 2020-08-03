@@ -14,23 +14,15 @@ class Manager() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manager)
-        // Open Stat Report from the corresponding Image Button and Button
-        val statReportImageButton: ImageButton = findViewById(R.id.statReport)
-        statReportImageButton.setOnClickListener {
-            openStatReportClick()
-        }
-        val statReportButton: Button = findViewById(R.id.stat_button)
-        statReportButton.setOnClickListener(){
-            openStatReportClick()
-        }
+
         // Open Add Remove Vendor from the corresponding Image Button and Button
-        val addRemoveVendorImageButton: ImageButton = findViewById(R.id.addRemoveVendorButton)
-        addRemoveVendorImageButton.setOnClickListener {
-            openAddRemoveClick()
+        val addVendorImageButton: ImageButton = findViewById(R.id.addVendorButton)
+        addVendorImageButton.setOnClickListener {
+            openAddClick()
         }
-        val addRemoveVendorButton : Button = findViewById(R.id.addRemoveButton)
-        addRemoveVendorButton.setOnClickListener(){
-            openAddRemoveClick()
+        val addVendorButton : Button = findViewById(R.id.addRemoveButton)
+        addVendorButton.setOnClickListener(){
+            openAddClick()
         }
         // Open Top 5 Vendor List from the corresponding Image Button and Button
         val removeVendor : ImageButton = findViewById(R.id.removeVendorIB)
@@ -52,7 +44,7 @@ class Manager() : AppCompatActivity() {
         }
     }
 
-    private fun openAddRemoveClick() {
+    private fun openAddClick() {
         val intent = Intent(this, AddNewVendorActivity::class.java)
         startActivityForResult(intent, openAddVendor)
     }
@@ -66,7 +58,7 @@ class Manager() : AppCompatActivity() {
     }
     private fun openRemoveVendor(){
         val intent = Intent(this,RemoveVendorActivity::class.java)
-        startActivityForResult(intent,1)
+        startActivityForResult(intent,removeVendor)
     }
 
 }

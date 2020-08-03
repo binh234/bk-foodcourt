@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewConfiguration.get
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -19,7 +20,10 @@ import kotlinx.android.synthetic.main.store_item.view.*
 import java.lang.reflect.Array.get
 import kotlin.math.log
 
-class StoreItemAdapter(private val StoreItemList : MutableList<StoreItem>) : Adapter<StoreItemAdapter.StoreItemViewHolder>(){
+class StoreItemAdapter(
+    private val StoreItemList : MutableList<StoreItem>,
+    private val listener: StoreItemClickListener
+) : Adapter<StoreItemAdapter.StoreItemViewHolder>(){
     // Each of the View Holder is called when each of the view is created (for each Item)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreItemViewHolder {
         val storeItemObject = LayoutInflater.from(parent.context).inflate(R.layout.store_item,
@@ -56,10 +60,6 @@ class StoreItemAdapter(private val StoreItemList : MutableList<StoreItem>) : Ada
         holder.supportEmail.text = currentItem.supportEmail
         val text = holder.closeTimeTextView.text
         val imageText = currentItem.imageUrl.toString()
-        Toast.makeText(holder.imageView.context, "current item: $text", Toast.LENGTH_SHORT).show()
-        Toast.makeText(holder.imageView.context, "current item: $imageText", Toast.LENGTH_SHORT).show()
-
-
     }
 
 
@@ -68,11 +68,26 @@ class StoreItemAdapter(private val StoreItemList : MutableList<StoreItem>) : Ada
     }
     // This class is used to avoid calling FindViewByID over and over again (Cache the view in the xml
     // so they can be updated faster and easier)
-    class StoreItemViewHolder(StoreItemView: View) : RecyclerView.ViewHolder(StoreItemView){
+    inner class StoreItemViewHolder(StoreItemView: View) : RecyclerView.ViewHolder(StoreItemView)
+    , View.OnClickListener{
         val imageView : ImageView = StoreItemView.image_view
         val nameTextView : TextView = StoreItemView.store_name
         val openTimeTextView : TextView = StoreItemView.open_time
         val closeTimeTextView  : TextView = StoreItemView.close_time
         val supportEmail : TextView = StoreItemView.support_email
+        init {
+            StoreItemView.setOnClickListener(this)
+        }
+
+        override fun onClick(p0: View?) {
+            val position  = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onStoreClicked(position)
+            }
+        }
     }
+    interface StoreItemClickListener{
+        fun onStoreClicked(position: Int)
+    }
+
 }

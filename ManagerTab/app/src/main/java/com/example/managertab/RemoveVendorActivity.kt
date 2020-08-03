@@ -9,17 +9,17 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_remove_vendor.*
 
-
-class RemoveVendorActivity : AppCompatActivity() {
+class RemoveVendorActivity : AppCompatActivity(),StoreItemAdapter.StoreItemClickListener {
     private lateinit var firebaseFireStore : FirebaseFirestore
 
     private lateinit var firebaseStorage: FirebaseStorage
+    private val storeItemList = mutableListOf<StoreItem>()
+    private val adapter = StoreItemAdapter(storeItemList,this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_remove_vendor)
-        firebaseFireStore = FirebaseFirestore.getInstance()
-        val storeItemList = mutableListOf<StoreItem>()
+            firebaseFireStore = FirebaseFirestore.getInstance()
         // Codes to get stores from firebase and store it into the list
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
@@ -30,20 +30,39 @@ class RemoveVendorActivity : AppCompatActivity() {
                     for (document in it.result!!) {
                         val storeItem: StoreItem = document.toObject(StoreItem::class.java)
                         Log.d("STORENAME:","$storeItem.name" )
-                        Toast.makeText(this, "$storeItem.name", Toast.LENGTH_SHORT).show()
                         storeItemList.add(storeItem)
-                        Toast.makeText(this, "list size is:${storeItemList.size}", Toast.LENGTH_SHORT).show()
                     }
-                    recycler_view.adapter = StoreItemAdapter(storeItemList)
+                    recycler_view.adapter = adapter
 
                 }
             }
             .addOnFailureListener{
                 Toast.makeText(this, "Failed to connect to Firebase.Check your connection", Toast.LENGTH_SHORT).show()
             }
-        //
-        Toast.makeText(this, "list: ${storeItemList.size}", Toast.LENGTH_SHORT).show()
 
+
+    }
+
+    override fun onStoreClicked(position: Int) {
+        val storeToDel = firebaseFireStore.collection("stores")
+            .whereEqualTo("name",storeItemList.elementAt(position).name)
+            .whereEqualTo("imageUrl",storeItemList.elementAt(position).imageUrl)
+            .whereEqualTo("closeTime",storeItemList.elementAt(position).closeTime)
+        storeToDel.get()
+            .addOnSuccessListener {
+                it.forEach{
+                    it.reference.delete()
+                        .addOnSuccessListener {
+                            storeItemList.removeAt(position)
+                            adapter.notifyItemRemoved(position)
+                            Toast.makeText(this, "The store is removed Successfully.", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener{
+                            Toast.makeText(this, "Something went wrong. Try delete this store later",
+                                Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
 
     }
 }

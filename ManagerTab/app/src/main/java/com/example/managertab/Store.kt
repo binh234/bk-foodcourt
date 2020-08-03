@@ -7,6 +7,7 @@ import kotlinx.android.parcel.Parcelize
     @IgnoreExtraProperties
     data class Store(
         @get: Exclude
+        var id: String = "",
         var name: String = "",
         var imageUrl: String = "",
         var hotline: String = "",
