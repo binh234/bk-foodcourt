@@ -78,16 +78,6 @@ class StoreFragment: Fragment() {
     }
 
     private fun setupRecyclerView() {
-//        FirebaseFirestore.getInstance().collection("stores")
-//            .get()
-//            .addOnSuccessListener {
-//                for (doc in it) {
-//                    Log.d("StoreFragment", doc.id)
-//                    val store = doc.toObject(Store::class.java)
-//
-//                    Log.d("StoreFragment", (store.openTime+1).toString())
-//                }
-//            }
         val query = FirebaseFirestore.getInstance()
             .collection("stores")
         val options = FirestoreRecyclerOptions.Builder<Store>()
@@ -101,7 +91,7 @@ class StoreFragment: Fragment() {
     private fun openStoreMenu(store: Store) {
 //        val intent = Intent(requireContext(), OrderActivity::class.java)
 //        startActivity(intent)
-        val action = StoreFragmentDirections.actionStoreFragmentToMenuFragment(store.id)
+        val action = StoreFragmentDirections.actionStoreFragmentToMenuFragment(store)
         FirebaseFirestore.getInstance()
             .collection("users")
             .document(currentUser.uid)

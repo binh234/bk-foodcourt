@@ -1,5 +1,6 @@
 package com.example.bkmerchant
 
+import android.graphics.Paint
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -10,8 +11,10 @@ import com.google.firebase.Timestamp
 import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.HashMap
-import kotlin.math.round
+
+fun formatText(value: Double): String {
+    return String.format("%1$,.0f", value) + "đ"
+}
 
 @BindingAdapter("imageUrl")
 fun setImageUrl(view: ImageView, url: String) {
@@ -51,8 +54,15 @@ fun setImageDetailUrl(view: ImageView, url: String) {
 
 @BindingAdapter("priceText")
 fun setPriceFormatted(view: TextView, price: Double) {
-    val text = String.format("%1$,.0f", price) + "đ"
+    val text = formatText(price)
     view.text = text
+}
+
+@BindingAdapter("strike_price_text")
+fun setStrikePriceFormatted(view: TextView, price: Double) {
+    val text = formatText(price)
+    view.paintFlags = view.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+    view.text = view.resources.getString(R.string.strike_text, text)
 }
 
 @BindingAdapter("quantityText")

@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="cartItem"
             type="com.example.bk_foodcourt.menu.CartItem" />
@@ -54,6 +56,18 @@
             tools:text="80,000đ" />
 
         <TextView
+            android:id="@+id/item_base_price"
+            style="@style/subHeaderStyle"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/item_price"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:textColor="@android:color/tab_indicator_text"
+            android:visibility="@{cartItem.total!=cartItem.baseTotal ? View.VISIBLE : View.GONE}"
+            app:strike_price_text="@{cartItem.baseTotal}"
+            tools:text="80,000đ" />
+
+        <TextView
             android:id="@+id/item_option"
             style="@style/textStyle"
             android:layout_width="wrap_content"
@@ -61,6 +75,7 @@
             android:layout_alignStart="@id/item_name"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginEnd="@dimen/base_margin"
+            android:layout_toStartOf="@id/item_price"
             app:item_option="@{cartItem.options}"
             tools:text="Không ớt\nKhông hành" />
 

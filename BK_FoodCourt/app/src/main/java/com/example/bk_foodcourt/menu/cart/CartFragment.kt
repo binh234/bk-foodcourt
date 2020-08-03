@@ -24,6 +24,7 @@ import com.example.bk_foodcourt.databinding.CartFragmentBinding
 import com.example.bk_foodcourt.menu.CartItem
 import com.example.bk_foodcourt.menu.Dish
 import com.example.bk_foodcourt.order.Order
+import com.example.bk_foodcourt.setPriceFormatted
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -51,19 +52,12 @@ class CartFragment : Fragment() {
         currentUser = FirebaseAuth.getInstance().currentUser!!
 
         binding = CartFragmentBinding.inflate(inflater, container, false)
-
         viewModel = ViewModelProvider(this).get(CartViewModel::class.java)
 
-        binding.checkoutButton.setOnClickListener { checkOut() }
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
-        viewModel.applicableFee.observe(viewLifecycleOwner, Observer {
-            binding.orderFee.text = String.format("%1$,.0f", it) + "đ"
-            binding.orderTotal.text = String.format("%1$,.0f", viewModel.total.value) + "đ"
-            binding.orderSubtotal.text = String.format(
-                "%1$,.0f",
-                viewModel.total.value!! + viewModel.promotion.value!! - viewModel.applicableFee.value!!
-            ) + "đ"
-        })
+        binding.checkoutButton.setOnClickListener { checkOut() }
 
         setupRecyclerView()
 
@@ -82,6 +76,9 @@ class CartFragment : Fragment() {
                 codeList
             )
             binding.orderCode.setAdapter(arrayAdapter)
+            binding.orderCode.setOnItemClickListener { _, _, position, _ ->
+                viewModel.applyPromotion(position)
+            }
         })
 
         viewModel.showCartItemDetailEvent.observe(viewLifecycleOwner, Observer { dish ->
@@ -102,6 +99,13 @@ class CartFragment : Fragment() {
         viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
             it?.let {
                 Toast.makeText(context, getString(it), Toast.LENGTH_SHORT).show()
+                viewModel.errorMessage.value = null
+            }
+        })
+        viewModel.clearTextEvent.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                binding.orderCode.setText("")
+                viewModel.clearTextEvent.value = null
             }
         })
 
@@ -185,7 +189,7 @@ class CartFragment : Fragment() {
     private fun checkOut() {
         val orderType = binding.orderType.selectedItem.toString()
         Log.d("CartFragment", orderType)
-        viewModel.checkout(orderType, "")
+        viewModel.checkout(orderType)
     }
 
     private fun navigateToPaymentFragment() {

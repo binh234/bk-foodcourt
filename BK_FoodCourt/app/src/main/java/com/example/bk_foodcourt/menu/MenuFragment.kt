@@ -24,7 +24,9 @@ class MenuFragment : Fragment() {
 
     private lateinit var binding: MenuFragmentBinding
     private lateinit var viewModel: MenuViewModel
+    private lateinit var viewModelFactory: MenuViewModelFactory
     private lateinit var adapter: NewMenuAdapter
+    private lateinit var promotionAdapter: PromotionAdapter
     private lateinit var storeId: String
 
     private lateinit var categoryListView: ListView
@@ -39,16 +41,25 @@ class MenuFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.menu)
 
         val arguments = MenuFragmentArgs.fromBundle(requireArguments())
-        storeId = arguments.storeId
+        storeId = arguments.store.id
 
-        viewModel = ViewModelProvider(this).get(MenuViewModel::class.java)
-        viewModel.getCategoryList(storeId)
+        viewModelFactory = MenuViewModelFactory(storeId)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MenuViewModel::class.java)
         viewModel.checkEmptyCart()
         binding = MenuFragmentBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = this
+        binding.store = arguments.store
 
         setupRecyclerView()
+        promotionAdapter = PromotionAdapter(viewModel)
+        viewModel.promotionList.observe(viewLifecycleOwner, Observer { list ->
+            list?.let {
+                promotionAdapter.submitList(list)
+                binding.discountRecycler.adapter = promotionAdapter
+            }
+        })
+
         viewModel.loadDiscountDone.observe(viewLifecycleOwner, Observer {
             it?.let {
                 viewModel.loadDiscountDone.value = null

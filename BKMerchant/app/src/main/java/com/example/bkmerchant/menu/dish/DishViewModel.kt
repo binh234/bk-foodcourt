@@ -28,6 +28,7 @@ class DishViewModel(val dish: Dish): ViewModel() {
     var name = MutableLiveData<String>()
     var description = MutableLiveData<String>()
     var price = MutableLiveData<String>()
+    var discountPrice = MutableLiveData<String>()
     var imageUrl = ""
     var categoryIndex = 0
 
@@ -54,6 +55,7 @@ class DishViewModel(val dish: Dish): ViewModel() {
         name.value = dish.name
         description.value = dish.description
         price.value = dish.price.toString()
+        discountPrice.value = dish.discountPrice.toString()
         imageUrl = dish.imageUrl
         currentCategoryId = dish.categoryId
         currentName = dish.name
@@ -72,8 +74,13 @@ class DishViewModel(val dish: Dish): ViewModel() {
         dish.name = name.value ?: ""
         dish.description = description.value ?: ""
         dish.price = (price.value ?: "0").toDouble()
-        dish.availability = true
         dish.categoryId = categories[categoryIndex].id
+
+        if (discountPrice.value!!.isEmpty()) {
+            dish.discountPrice = dish.price
+        } else {
+            dish.discountPrice = discountPrice.value!!.toDouble()
+        }
 
         if (dish.id.isNotEmpty() && dish.name.trim() == currentName) {
             updateDish()
