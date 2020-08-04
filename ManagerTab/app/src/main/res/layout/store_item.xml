@@ -15,7 +15,8 @@
             android:layout_height="100dp"
             android:layout_marginEnd="8dp"
             app:srcCompat="@drawable/ic_no_image"
-            tools:ignore="VectorDrawableCompat" />
+            tools:ignore="VectorDrawableCompat"
+            android:scaleType="fitXY"/>
         <TextView
             android:id="@+id/store_field"
             android:layout_width="wrap_content"

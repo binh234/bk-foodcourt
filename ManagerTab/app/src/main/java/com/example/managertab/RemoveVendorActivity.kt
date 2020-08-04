@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_remove_vendor.*
 
+
 class RemoveVendorActivity : AppCompatActivity(),StoreItemAdapter.StoreItemClickListener {
     private lateinit var firebaseFireStore : FirebaseFirestore
-
     private lateinit var firebaseStorage: FirebaseStorage
     private val storeItemList = mutableListOf<StoreItem>()
     private val adapter = StoreItemAdapter(storeItemList,this)
@@ -33,8 +34,16 @@ class RemoveVendorActivity : AppCompatActivity(),StoreItemAdapter.StoreItemClick
                         storeItemList.add(storeItem)
                     }
                     recycler_view.adapter = adapter
-
+                    val dividerItemDecoration = DividerItemDecoration(
+                        recycler_view.context,
+                        LinearLayoutManager(this).orientation
+                    )
+                    recycler_view.addItemDecoration(dividerItemDecoration)
                 }
+            }
+            .addOnCanceledListener {
+                Toast.makeText(this, "Disconected. Please Check your Internet connection and try again",
+                    Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener{
                 Toast.makeText(this, "Failed to connect to Firebase.Check your connection", Toast.LENGTH_SHORT).show()

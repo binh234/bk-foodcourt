@@ -31,7 +31,6 @@
     <string name="enter_the_vendor_s_suppport_line_here">Enter the vendor\'s suppport line here</string>
     <string name="open_time">Open Time:</string>
     <string name="enter_open_time">Enter Open Time</string>
-    <string name="close_time">Close Time:</string>
     <string name="enter_vendor_s_close_time">Enter vendor\'s close time</string>
     <string name="vendorimage">VendorImage</string>
     <string name="plans">PLANS</string>
@@ -96,4 +95,11 @@
     <string name="done">Done</string>
     <string name="the_vendor_s_official_website">The vendor\'s official website</string>
     <string name="store">STORE:</string>
+    <string name="store_brand_mockstore">Store Brand:MockStore</string>
+    <string name="store_name">STORE NAME:</string>
+    <string name="opentime">OpenTime:</string>
+    <string name="close_time">Close Time:</string>
+    <string name="hotline">Hotline:</string>
+    <string name="website">Website:</string>
+    <string name="owner_name1">Owner Name</string>
 </resources>

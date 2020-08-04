@@ -45,12 +45,12 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-<<<<<<< HEAD
+//<<<<<<< HEAD
   //Test support
-=======
+//=======
 
     //Test support
->>>>>>> 88ad6810848383c047b933a331abb7a0b0b5c1f3
+//>>>>>>> 88ad6810848383c047b933a331abb7a0b0b5c1f3
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/store_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/box"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_no_image"
+            tools:srcCompat="@drawable/ic_no_image"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/store_field"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@id/store_image"
+            android:text="@string/store_name"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/box"
+            />
+        <TextView
+            android:id="@+id/store_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_toEndOf="@id/store_field"
+            android:layout_below="@id/store_image"
+            android:text="Best Store Forever"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/box"
+            />
+        <TextView
+            android:id="@+id/OwnerName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/owner_name1"
+            android:layout_below="@id/store_field"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:background="@drawable/box"
+            />
+
+        <View android:id="@+id/fakeView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/OwnerName"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/open_time_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@id/OwnerName"
+            android:layout_alignParentStart="true"
+            android:layout_alignEnd="@id/fakeView"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/open_time"
+            android:background="@drawable/box"
+            />
+        <TextView
+            android:id="@+id/close_time_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@id/OwnerName"
+            android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/fakeView"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:text="@string/close_time"
+            android:background="@drawable/box"
+            />
+        <TextView
+            android:id="@+id/hotLine"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/open_time_detail"
+            android:layout_marginTop ="10dp"
+            android:padding="10dp"
+            android:background="@drawable/box"
+            android:text="@string/hotline"/>
+
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
