@@ -14,6 +14,7 @@
         <activity android:name=".Manager" />
         <activity android:name=".LoginActivity"/>
         <activity android:name=".CookActivity"/>
+        <activity android:name=".RegisterActivity"/>
         <activity android:name=".RemoveVendorActivity" />
         <activity android:name=".AddNewVendorActivity" />
         <activity android:name=".CheckVendorInfosActivity" />
