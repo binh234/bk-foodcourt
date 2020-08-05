@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.ImageButton
 
 class Manager() : AppCompatActivity() {
-    private val openStatReport = 1
     private val openAddVendor = 1
     private val checkVendorInfos = 1
     private val removeVendor = 1
@@ -52,10 +51,7 @@ class Manager() : AppCompatActivity() {
         val intent = Intent(this, CheckVendorInfosActivity::class.java)
         startActivityForResult(intent,checkVendorInfos)
     }
-    private fun openStatReportClick() {
-        val intent = Intent(this, StatReportActivity::class.java)
-        startActivityForResult(intent, openStatReport)
-    }
+
     private fun openRemoveVendor(){
         val intent = Intent(this,RemoveVendorActivity::class.java)
         startActivityForResult(intent,removeVendor)
