@@ -80,32 +80,33 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            Toast.makeText(this, user.getEmail(), Toast.LENGTH_SHORT).show();
-            mFirestore.collection("userTypes").whereEqualTo("email", user.getEmail()).get()
-                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            mFirestore.collection("userTypes")
+                    .whereEqualTo("email", user.getEmail())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
-                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                            if (queryDocumentSnapshots.isEmpty()) {
-                                Toast.makeText(LoginActivity.this, "Permission denied!", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                                    User userType = document.toObject(User.class);
-                                    Toast.makeText(LoginActivity.this, userType.toString(), Toast.LENGTH_SHORT).show();
-                                    account = userType.getAccountType();
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    account = document.get("accountType").toString();
+                                    Toast.makeText(LoginActivity.this, account, Toast.LENGTH_SHORT).show();
                                 }
-                                if (account == "COOK") {
+                                if (account.equals("COOK")) {
                                     Toast.makeText(LoginActivity.this, "Cook login!", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, CookActivity.class);
                                     startActivity(intent);
-
                                 }
-                                else if (account == "MANAGER") {
+                                else if (account.equals("MANAGER")) {
                                     Toast.makeText(LoginActivity.this, "Manager login!", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, Manager.class);
                                     startActivity(intent);
                                 }
-                                Toast.makeText(LoginActivity.this, "HERE2", Toast.LENGTH_SHORT).show();
+                                else {
+                                    Toast.makeText(LoginActivity.this, "Not written yet", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            else {
+                                Toast.makeText(LoginActivity.this, "Permission denied!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
