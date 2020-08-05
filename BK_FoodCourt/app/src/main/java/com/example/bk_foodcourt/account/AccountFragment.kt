@@ -52,6 +52,7 @@ class AccountFragment: Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.account_setting)
 
         storageReference = FirebaseStorage.getInstance().getReference("user_images")
+        firestore = FirebaseFirestore.getInstance()
 
         val inflater = requireActivity().layoutInflater
         uploadView = inflater.inflate(R.layout.dialog_progress, null)

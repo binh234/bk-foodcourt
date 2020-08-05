@@ -1,7 +1,11 @@
 package com.example.bk_foodcourt
 
 import android.graphics.Paint
+import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -9,6 +13,7 @@ import com.example.bk_foodcourt.menu.Promotion
 import com.example.bk_foodcourt.order.OrderStatus
 import com.google.firebase.Timestamp
 import de.hdodenhof.circleimageview.CircleImageView
+import java.util.*
 
 fun formatText(value: Double): String {
     return String.format("%1$,.0f", value) + "đ"
@@ -52,6 +57,13 @@ fun convertIntToTime(time: Int): String {
 fun setOpeningHours(view: TextView, open_time: Int, close_time: Int) {
     val openingHours = convertIntToTime(open_time) + " - " + convertIntToTime(close_time)
     view.text = openingHours
+}
+
+@BindingAdapter(value = ["vendor_open_time", "vendor_close_time"])
+fun checkOpeningHours(view: RelativeLayout, open_time: Int, close_time: Int) {
+    val calendar = Calendar.getInstance()
+    val time = calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE)
+    view.isEnabled = time in open_time..close_time
 }
 
 @BindingAdapter("priceText")
@@ -99,6 +111,15 @@ fun setOrderStatus(view: TextView, orderStatus: Int) {
 @BindingAdapter("order_time")
 fun setOrderTime(view: TextView, orderTime: Timestamp) {
     view.text = orderTime.toDate().toString()
+}
+
+@BindingAdapter("order_process")
+fun setOrderProcessText(view: Button, orderStatus: Int) {
+    when (orderStatus) {
+        OrderStatus.CONFIRMED.value -> view.text = "GET ORDER"
+        OrderStatus.PROCESSING.value -> view.text = "DONE"
+        else -> view.visibility = View.GONE
+    }
 }
 
 @BindingAdapter("item_option")

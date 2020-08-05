@@ -180,6 +180,17 @@
     <string name="new_order">New order</string>
     <string name="new_order_approve">New order approved to %s. Check now!</string>
     <string name="invalid_phone_number">Invalid phone number</string>
+    <string name="my_order">My order</string>
+    <string name="no_vendor_error">You haven\'t worked for any vendor yet!</string>
+    <string name="e_g_out_of_order">E.g Out of order</string>
+    <string name="cancel_reason">Cancel reason:</string>
+    <string name="cancel_requirement">You must enter a reason to cancel this order</string>
+    <string name="order_cancelled">Order cancelled</string>
+    <string name="cancel_message">Your order #%s is cancel due to: %s</string>
+    <string name="finish_message">Your order #%s is finish, get your food now!</string>
+    <string name="processed_order">This order has been processed by another cook</string>
+    <string name="get_order_success">Get order successful</string>
+    <string name="order_finished">Order finished</string>
 
 
     <string-array name="channel_choice">

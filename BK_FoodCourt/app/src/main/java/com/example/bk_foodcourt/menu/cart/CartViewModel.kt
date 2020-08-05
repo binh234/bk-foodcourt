@@ -43,6 +43,7 @@ class CartViewModel : ViewModel() {
     val sendNotificationEvent = MutableLiveData<String>()
 
     var errorMessage = MutableLiveData<Int>()
+    private val calendar = Calendar.getInstance()
 
     init {
         getCart()
@@ -144,8 +145,8 @@ class CartViewModel : ViewModel() {
             total.value = subtotal.value!! + applicableFee.value!!
         } else {
             val promotion = promotionList[position]
-            val hour = Calendar.HOUR_OF_DAY
-            val minute = Calendar.MINUTE
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
             val time = hour * 60 + minute
             var valid = false
 

@@ -23,7 +23,9 @@
         android:paddingStart="@dimen/base_margin"
         android:paddingTop="@dimen/fab_margin"
         android:paddingEnd="@dimen/base_margin"
-        android:paddingBottom="@dimen/fab_margin">
+        android:paddingBottom="@dimen/fab_margin"
+        app:vendor_close_time="@{store.closeTime}"
+        app:vendor_open_time="@{store.openTime}">
 
         <ImageView
             android:id="@+id/store_image"

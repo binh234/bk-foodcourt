@@ -21,7 +21,8 @@ data class Order(
     var promotion: Double = 0.0,
     var storeID: String = "",
     var storeName: String = "",
-    var storeHotline: String = ""
+    var storeHotline: String = "",
+    var cookID: String =""
 ) : Parcelable
 
 data class OrderItem(

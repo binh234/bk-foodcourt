@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.bk_foodcourt.Cook
 import com.example.bk_foodcourt.Manager
 import com.example.bk_foodcourt.R
+import com.example.bk_foodcourt.cook.CookActivity
 import com.example.bk_foodcourt.databinding.LoginFragmentBinding
 import com.example.bk_foodcourt.home.HomeActivity
 import com.example.bk_foodcourt.notificationService.Token
@@ -112,8 +113,8 @@ class LoginFragment : Fragment() {
                                 firebaseAuth.signInWithEmailAndPassword(email, password)
                                     .addOnCompleteListener { task ->
                                         if (task.isSuccessful) {
+                                            currentUser = firebaseAuth.currentUser!!
                                             if (!userType.update) {
-                                                currentUser = firebaseAuth.currentUser!!
                                                 firestore.collection("users")
                                                     .document(currentUser.uid)
                                                     .update(
@@ -215,7 +216,7 @@ class LoginFragment : Fragment() {
         if (accountType == "CUSTOMER") {
             intent = Intent(context, HomeActivity::class.java)
         } else if (accountType == "COOK") {
-            intent = Intent(context, Cook::class.java)
+            intent = Intent(context, CookActivity::class.java)
         } else if (accountType == "MANAGER"){
             intent = Intent(context, Manager::class.java)
         }

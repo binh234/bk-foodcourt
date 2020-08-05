@@ -34,6 +34,7 @@ class PasswordFragment : Fragment() {
 
         firebaseAuth = FirebaseAuth.getInstance()
         currentUser = firebaseAuth.currentUser!!
+        firestore  = FirebaseFirestore.getInstance()
 
         binding = PasswordFragmentBinding.inflate(inflater, container, false)
         binding.forgotPassword.setOnClickListener { resetPassword() }

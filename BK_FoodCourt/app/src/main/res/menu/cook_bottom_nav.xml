@@ -7,15 +7,7 @@
         android:icon="@drawable/baseline_home_black_24dp"
         android:title="@string/nav_home" />
     <item
-        android:id="@+id/nav_orderlist"
+        android:id="@+id/nav_order"
         android:icon="@drawable/baseline_menu_book_black_24dp"
         android:title="@string/nav_orderlist" />
-    <item
-        android:id="@+id/nav_notification"
-        android:icon="@drawable/baseline_campaign_black_24dp"
-        android:title="@string/nav_notification" />
-    <item
-        android:id="@+id/nav_profile"
-        android:icon="@drawable/baseline_person_black_24dp"
-        android:title="@string/nav_profile" />
 </menu>
