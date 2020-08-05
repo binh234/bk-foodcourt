@@ -23,8 +23,6 @@ import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 import java.lang.Integer.parseInt
 
-
-@Suppress("DEPRECATION")
 class AddNewVendorActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddNewVendorBinding
     private val pickImageRequest : Int = 1

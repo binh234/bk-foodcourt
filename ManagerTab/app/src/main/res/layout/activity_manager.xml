@@ -23,6 +23,7 @@
         android:contentDescription="@string/bestsellers"
         android:scaleType="fitCenter"
         android:src="@drawable/remove_estate"
+        android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,21 +46,21 @@
         app:layout_constraintTop_toBottomOf="@+id/vendorCheckInfo"
         tools:srcCompat="@drawable/vendor_add" />
 
-    <ImageButton
-        android:id="@+id/vendorCheckInfo"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/vendor_management"
-        android:scaleType="fitCenter"
-        android:src="@drawable/vendor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/removeVendorButton"
-        tools:srcCompat="@drawable/vendor_512_1_" />
+        <ImageButton
+            android:id="@+id/vendorCheckInfo"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="32dp"
+            android:contentDescription="@string/vendor_management"
+            android:scaleType="fitCenter"
+            android:src="@drawable/vendor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.486"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/removeVendorButton"
+            tools:srcCompat="@drawable/vendor_512_1_" />
 
-    <androidx.constraintlayout.widget.Group
+        <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -88,32 +89,33 @@
         app:layout_constraintStart_toStartOf="@id/removeVendorIB"
         app:layout_constraintTop_toBottomOf="@+id/removeVendorIB" />
 
-    <Button
-        android:id="@+id/vendor_check_Button"
-        style="@style/ManagerTabButton"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="12dp"
-        android:text="@string/check_vendors_info"
-        app:layout_constraintBottom_toTopOf="@+id/addVendorButton"
-        app:layout_constraintEnd_toEndOf="@+id/vendorCheckInfo"
-        app:layout_constraintStart_toStartOf="@id/vendorCheckInfo"
-        app:layout_constraintTop_toBottomOf="@+id/vendorCheckInfo"
-        app:layout_constraintVertical_bias="0.0" />
+        <Button
+            android:id="@+id/vendor_check_Button"
+            style="@style/ManagerTabButton"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="12dp"
+            android:text="@string/check_vendors_info"
+            app:layout_constraintBottom_toTopOf="@+id/addVendorButton"
+            app:layout_constraintEnd_toEndOf="@+id/vendorCheckInfo"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/vendorCheckInfo"
+            app:layout_constraintTop_toBottomOf="@+id/vendorCheckInfo"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/addRemoveButton"
-        style="@style/ManagerTabButton"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:text="Add a vendor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/addVendorButton"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/vendorCheckInfo"
-        app:layout_constraintTop_toBottomOf="@+id/addVendorButton"
-        app:layout_constraintVertical_bias="0.137" />
+        <Button
+            android:id="@+id/addRemoveButton"
+            style="@style/ManagerTabButton"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="Add a vendor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/addVendorButton"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/vendorCheckInfo"
+            app:layout_constraintTop_toBottomOf="@+id/addVendorButton"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

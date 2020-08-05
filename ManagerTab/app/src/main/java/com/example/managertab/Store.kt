@@ -4,9 +4,7 @@ import android.os.Parcelable
 import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
 import kotlinx.android.parcel.Parcelize
-    @IgnoreExtraProperties
     data class Store(
-        @get: Exclude
         var id: String = "",
         var name: String = "",
         var imageUrl: String = "",

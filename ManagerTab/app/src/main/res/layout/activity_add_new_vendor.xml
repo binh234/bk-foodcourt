@@ -288,20 +288,14 @@
 
                     />
 
-                <EditText
-                    android:id="@+id/editTextFileName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_toEndOf="@id/chooseImageButton"
-                    android:text="@string/enter_file_name_here" />
+
 
                 <ImageView
                     android:id="@+id/vendor_image_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_above="@id/progressUploadImage"
-                    android:layout_below="@id/editTextFileName"
+                    android:layout_below="@id/chooseImageButton"
                     android:layout_marginTop="16dp" />
 
                 <ProgressBar
@@ -318,17 +312,6 @@
                     android:layout_centerHorizontal="true"
                     android:text="@string/upload_to_database" />
 
-                <TextView
-                    android:id="@+id/text_view_show_uploads"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/uploadButton"
-                    android:layout_alignBottom="@+id/uploadButton"
-                    android:layout_marginStart="25dp"
-                    android:layout_toEndOf="@+id/uploadButton"
-                    android:gravity="center"
-                    android:text="@string/show_uploads"
-                    android:textSize="16sp" />
             </RelativeLayout>
 
             <View
