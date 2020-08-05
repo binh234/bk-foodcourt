@@ -23,7 +23,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText email, password;
-    private Button btn_login;
     private FirebaseAuth mAuth;
 
 
@@ -33,12 +32,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         email = findViewById(R.id.etEmail);
         password = findViewById(R.id.etPassword);
-        btn_login = findViewById(R.id.btnLogin);
+        Button btn_login = findViewById(R.id.btnLogin);
         mAuth = FirebaseAuth.getInstance();
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.signInWithEmailAndPassword(email.toString(), password.toString())
+                mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
 
                             @Override
