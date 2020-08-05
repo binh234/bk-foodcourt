@@ -201,9 +201,46 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:165534808147:android:3eb3f653827b7cc894eea6",
+        "mobilesdk_app_id": "1:165534808147:android:a5b9a818dcf7172b94eea6",
         "android_client_info": {
           "package_name": "com.example.managertab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "165534808147-tk81bf3b91dp34edgm0de6ngpi91ov37.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.managertab",
+            "certificate_hash": "ee5bfcdf79e5b6950cb7b1b756eae0389fe5607e"
+          }
+        },
+        {
+          "client_id": "165534808147-k7nd6bf3vms9t0tu4f044qrg6kbguf5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoXOPXK9HrI6li0U6joZSc6Gf_uKI1VUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "165534808147-k7nd6bf3vms9t0tu4f044qrg6kbguf5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:165534808147:android:87bcd4eb483946fb94eea6",
+        "android_client_info": {
+          "package_name": "com.example.managertab1"
         }
       },
       "oauth_client": [
