@@ -59,10 +59,12 @@ class CookOrderDetailViewModel(val order: Order): ViewModel() {
                             if (document.exists()) {
                                 val token = document.toObject(Token::class.java)!!
                                 if (token.token.isNotEmpty()) {
+                                    Log.d("CookOrderDetail", token.token)
                                     sendFinishNotificationEvent.value = token.token
                                 }
+                            } else {
+                                navigateToOrderFragmentEvent.value = true
                             }
-                            navigateToOrderFragmentEvent.value = true
                         }
                 }
         }
@@ -76,6 +78,7 @@ class CookOrderDetailViewModel(val order: Order): ViewModel() {
                 if (document.exists()) {
                     val token = document.toObject(Token::class.java)!!
                     if (token.token.isNotEmpty()) {
+                        Log.d("CookOrderDetail", token.token)
                         sendCancelNotificationEvent.value = token.token
                     }
                 }
