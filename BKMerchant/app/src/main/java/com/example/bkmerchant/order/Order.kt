@@ -9,6 +9,7 @@ import kotlinx.android.parcel.Parcelize
 data class Order(
     @get: Exclude
     var id: String = "",
+    var userID: String = "",
     var userName: String = "",
     var userPhoneNumber: String = "",
     var status: Int = 0,

@@ -48,12 +48,15 @@ class RegisterFragment : Fragment() {
 
     private fun registerNewAccount() {
         val name = binding.nameText.text.toString().trim()
+        val phone = binding.phoneText.text.toString().trim()
         val email = binding.emailText.text.toString().trim()
         val password = binding.passwordText.text.toString()
         val confirmPassword = binding.confirmPasswordText.text.toString()
 
-        if (email.isEmpty()) {
+        if (name.isEmpty()) {
             binding.nameText.error = getString(R.string.empty_field)
+        } else if (phone.length < 10) {
+            binding.phoneText.error = getString(R.string.invalid_phone_number)
         } else if (email.isEmpty()) {
             binding.emailText.error = getString(R.string.empty_field)
         } else if (password.length < 6) {
@@ -65,7 +68,7 @@ class RegisterFragment : Fragment() {
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val user = User(name = name, email = email)
+                        val user = User(name = name, phoneNumber = phone, email = email)
                         task.result?.user?.uid?.let {
                             userCollection.document(it).set(user)
                                 .addOnSuccessListener {

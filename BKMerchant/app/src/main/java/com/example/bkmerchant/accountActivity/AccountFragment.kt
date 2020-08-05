@@ -29,6 +29,7 @@ import com.example.bkmerchant.storeActivity.store.StoreViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
@@ -37,6 +38,7 @@ import com.google.firebase.storage.UploadTask
 class AccountFragment: Fragment() {
     private lateinit var binding: AccountFragmentBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
     private lateinit var viewModel: AccountViewModel
 
     private lateinit var storageReference: StorageReference
@@ -63,6 +65,7 @@ class AccountFragment: Fragment() {
             .create()
 
         firebaseAuth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
         if (firebaseAuth.currentUser == null) {
             logout()
         }
@@ -181,8 +184,22 @@ class AccountFragment: Fragment() {
     }
 
     private fun logout() {
-        firebaseAuth.signOut()
-        startLoginActivity()
+        binding.logoutButton.isClickable = false
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnSuccessListener { result ->
+                Log.d("LoginFragment", "Current token: ${result.token}")
+                firestore.collection("tokens")
+                    .document(firebaseAuth.currentUser!!.uid)
+                    .update("token", "")
+                    .addOnSuccessListener {
+                        Log.d("LoginFragment", "Update token successful")
+                        firebaseAuth.signOut()
+                        startLoginActivity()
+                    }
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun startLoginActivity() {

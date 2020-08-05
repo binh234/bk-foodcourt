@@ -121,4 +121,12 @@
     <string name="this_feature_will_be_updated_soon">Tính năng này sẽ được cập nhật sớm</string>
     <string name="priority">Độ ưu tiên</string>
     <string name="friendly_display">Phục vụ cho mục đích hiển thị</string>
+    <string name="discount_price">Giá khuyến mãi</string>
+    <string name="order_cancelled">Đơn hàng bị hủy</string>
+    <string name="cancel_requirement">Bạn phải nhập lý do hủy đơn hàng này</string>
+    <string name="cancel_message">Đơn hang #%s bị hủy bởi lý do: %s</string>
+    <string name="e_g_out_of_order">vd Món ăn đã bán hết</string>
+    <string name="cancel_reason">Lý do hủy đơn</string>
+    <string name="list_item">Danh sách món</string>
+    <string name="invalid_phone_number">Số điện thoại không hợp lệ</string>
 </resources>

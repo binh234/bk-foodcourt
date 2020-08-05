@@ -2,6 +2,7 @@ package com.example.bk_foodcourt.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -15,14 +16,18 @@ import com.example.bk_foodcourt.Manager
 import com.example.bk_foodcourt.R
 import com.example.bk_foodcourt.databinding.LoginFragmentBinding
 import com.example.bk_foodcourt.home.HomeActivity
+import com.example.bk_foodcourt.notificationService.Token
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.iid.FirebaseInstanceId
 import java.util.*
 
 class LoginFragment : Fragment() {
     private lateinit var binding: LoginFragmentBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var currentUser: FirebaseUser
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,17 +68,19 @@ class LoginFragment : Fragment() {
     }
 
     private fun checkPermissionAndLogin(email: String, password: String, accountType: String) {
+        setButtonClickable(false)
         if (accountType == "CUSTOMER") {
             firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        currentUser = firebaseAuth.currentUser!!
                         Toast.makeText(
                             context,
                             getString(R.string.login_success),
                             Toast.LENGTH_SHORT
                         )
                             .show()
-                        startMainActivity(accountType)
+                        updateToken(accountType)
                     } else {
                         Toast.makeText(
                             context,
@@ -81,6 +88,7 @@ class LoginFragment : Fragment() {
                             Toast.LENGTH_SHORT
                         )
                             .show()
+                        setButtonClickable(true)
                     }
                 }
         } else {
@@ -96,6 +104,7 @@ class LoginFragment : Fragment() {
                             Toast.LENGTH_LONG
                         )
                             .show()
+                        setButtonClickable(true)
                     } else {
                         for (document in query) {
                             val userType = document.toObject(UserType::class.java)
@@ -104,7 +113,7 @@ class LoginFragment : Fragment() {
                                     .addOnCompleteListener { task ->
                                         if (task.isSuccessful) {
                                             if (!userType.update) {
-                                                val currentUser = firebaseAuth.currentUser!!
+                                                currentUser = firebaseAuth.currentUser!!
                                                 firestore.collection("users")
                                                     .document(currentUser.uid)
                                                     .update(
@@ -121,7 +130,7 @@ class LoginFragment : Fragment() {
                                                 Toast.LENGTH_SHORT
                                             )
                                                 .show()
-                                            startMainActivity(accountType)
+                                            updateToken(accountType)
                                         } else {
                                             Toast.makeText(
                                                 context,
@@ -129,6 +138,7 @@ class LoginFragment : Fragment() {
                                                 Toast.LENGTH_SHORT
                                             )
                                                 .show()
+                                            setButtonClickable(true)
                                         }
                                     }
                             } else {
@@ -138,6 +148,7 @@ class LoginFragment : Fragment() {
                                     Toast.LENGTH_LONG
                                 )
                                     .show()
+                                setButtonClickable(true)
                             }
                         }
                     }
@@ -171,6 +182,32 @@ class LoginFragment : Fragment() {
 
     private fun navigateToRegisterFragment() {
         findNavController().navigate(R.id.registerFragment)
+    }
+
+    private fun updateToken(accountType: String) {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnSuccessListener { result ->
+                Log.d("LoginFragment", "Current token: ${result.token}")
+                firestore.collection("tokens")
+                    .document(currentUser.uid)
+                    .set(Token(result.token))
+                    .addOnSuccessListener {
+                        Log.d("LoginFragment", "Update token successful")
+                        startMainActivity(accountType)
+                    }
+                    .addOnFailureListener {
+                        Log.d("LoginFragment", it.toString())
+                    }
+            }
+            .addOnFailureListener {
+                Log.d("LoginFragment", it.toString())
+                Toast.makeText(context, getString(R.string.error_occur), Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun setButtonClickable(value: Boolean) {
+        binding.loginButton.isClickable = value
+        binding.createAccountButton.isClickable = value
     }
 
     private fun startMainActivity(accountType: String) {

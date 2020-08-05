@@ -36,7 +36,8 @@ class PromotionDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.promotion_detail)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.promotion_detail)
 
         binding =
             DataBindingUtil.inflate(inflater, R.layout.promotion_detail_fragment, container, false)
@@ -80,7 +81,7 @@ class PromotionDetailFragment : Fragment() {
             binding.discountLabel.error = resources.getString(R.string.empty_field)
         } else if (binding.discountValue.text.toString().isEmpty()) {
             binding.discountValue.error = resources.getString(R.string.empty_field)
-        } else if (binding.numAllow.text.toString().isEmpty()) {
+        } else if (viewModel.discountScope == 0 && binding.numAllow.text.toString().isEmpty()) {
             binding.numAllow.error = resources.getString(R.string.empty_field)
         } else if (viewModel.discountScope == 0 && binding.discountCode.text.toString().isEmpty()) {
             binding.discountCode.error = resources.getString(R.string.empty_field)
@@ -177,6 +178,7 @@ class PromotionDetailFragment : Fragment() {
                 binding.discountCodeLayout.visibility = orderDiscountVisibility
                 binding.orderFromLayout.visibility = orderDiscountVisibility
                 binding.orderToLayout.visibility = orderDiscountVisibility
+                binding.numAllowLayout.visibility = orderDiscountVisibility
                 binding.listItemLayout.visibility = itemDiscountVisibility
             }
         }

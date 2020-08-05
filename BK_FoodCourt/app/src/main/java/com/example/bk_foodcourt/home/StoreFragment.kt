@@ -25,12 +25,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.messaging.FirebaseMessaging
 
 class StoreFragment: Fragment() {
     private lateinit var binding: StoreFragmentBinding
     private lateinit var adapter: StoreAdapter
     private lateinit var viewModel: StoreViewModel
     private lateinit var currentUser: FirebaseUser
+
+    companion object {
+        private const val TOPIC = "promotion"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,6 +64,8 @@ class StoreFragment: Fragment() {
                 viewModel.openStoreMenuEvent.value = null
             }
         })
+
+        subscribeTopic()
 
         return binding.root
     }
@@ -125,6 +132,13 @@ class StoreFragment: Fragment() {
                 } else {
                     findNavController().navigate(action)
                 }
+            }
+    }
+
+    private fun subscribeTopic() {
+        // [START subscribe_topics]
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
+            .addOnCompleteListener {
             }
     }
 

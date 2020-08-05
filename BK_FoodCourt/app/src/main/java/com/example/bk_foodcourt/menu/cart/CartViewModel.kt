@@ -10,6 +10,7 @@ import com.example.bk_foodcourt.menu.CartItem
 import com.example.bk_foodcourt.menu.Dish
 import com.example.bk_foodcourt.menu.MenuViewModel
 import com.example.bk_foodcourt.menu.Promotion
+import com.example.bk_foodcourt.notificationService.Token
 import com.example.bk_foodcourt.order.Order
 import com.example.bk_foodcourt.order.OrderItem
 import com.google.firebase.Timestamp
@@ -38,10 +39,10 @@ class CartViewModel : ViewModel() {
 
     val showCartItemDetailEvent = MutableLiveData<Dish>()
     val goToHomeEvent = MutableLiveData<Boolean>()
-    var errorMessage = MutableLiveData<Int>()
     val clearTextEvent = MutableLiveData<Boolean>()
+    val sendNotificationEvent = MutableLiveData<String>()
 
-    private val calendar = Calendar.getInstance()
+    var errorMessage = MutableLiveData<Int>()
 
     init {
         getCart()
@@ -66,9 +67,10 @@ class CartViewModel : ViewModel() {
                     }
                     if (list.isNotEmpty()) {
                         storeId = list[0].storeId
-                        getStoreInfo()
                         getPromotionCodes()
                         Log.d("CartViewModel", list[0].storeId)
+                    } else {
+                        storeId = ""
                     }
                     subtotal.value = subTotal
                     applicableFee.value = subTotal / 10
@@ -90,16 +92,8 @@ class CartViewModel : ViewModel() {
             }
     }
 
-    private fun getStoreInfo() {
-        if (storeId.isNotEmpty()) {
-            firestore.collection("stores")
-                .document(storeId)
-                .get()
-                .addOnSuccessListener { document ->
-                    storeInfo = document.toObject(Store::class.java)!!
-                    storeInfo.id = document.id
-                }
-        }
+    fun getStoreInfo(store: Store) {
+        storeInfo = store
     }
 
     private fun getPromotionCodes() {
@@ -187,13 +181,27 @@ class CartViewModel : ViewModel() {
         }
     }
 
-    fun checkout(orderType: String) {
+    fun checkout(orderType: String, ownerID: String) {
         var promotionCode = ""
         cartList.value?.let { list ->
             if (applyPosition != -1) {
                 promotionCode = codeList.value!![applyPosition]
             }
             if (storeId.isNotEmpty()) {
+                firestore.collection("tokens")
+                    .document(ownerID)
+                    .get()
+                    .addOnSuccessListener { document ->
+                        if (document.exists()) {
+                            val token = document.toObject(Token::class.java)!!
+                            if (token.token.isNotEmpty()) {
+                                sendNotificationEvent.value = token.token
+                            }
+                        }
+                    }
+                    .addOnFailureListener {
+                        Log.d("CartViewModel", it.toString())
+                    }
                 val order = Order(
                     userID = userInfo.id,
                     userName = userInfo.name,

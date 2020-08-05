@@ -45,7 +45,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/name"
-                        android:inputType="textCapSentences"
+                        android:inputType="textCapWords"
                         android:maxLength="20"
                         android:text="@={viewModel.name}" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -124,7 +124,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/hotline"
-                        android:inputType="textCapSentences"
+                        android:inputType="phone"
+                        android:maxLength="12"
                         android:text="@={viewModel.hotline}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -139,7 +140,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/website"
-                        android:inputType="textCapSentences"
+                        android:inputType="textWebEditText"
                         android:text="@={viewModel.website}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -154,7 +155,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/support_email"
-                        android:inputType="textCapSentences"
+                        android:inputType="textEmailAddress"
                         android:text="@={viewModel.supportEmail}" />
                 </com.google.android.material.textfield.TextInputLayout>
 

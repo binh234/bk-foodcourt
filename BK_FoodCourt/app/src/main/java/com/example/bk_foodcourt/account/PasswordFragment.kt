@@ -2,6 +2,7 @@ package com.example.bk_foodcourt.account
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +15,14 @@ import com.example.bk_foodcourt.databinding.PasswordFragmentBinding
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.iid.FirebaseInstanceId
 
 class PasswordFragment : Fragment() {
     private lateinit var binding: PasswordFragmentBinding
     private lateinit var currentUser: FirebaseUser
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -92,13 +96,26 @@ class PasswordFragment : Fragment() {
         }
     }
     private fun logout() {
-        firebaseAuth.signOut()
-        startLoginActivity()
-        requireActivity().finish()
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnSuccessListener { result ->
+                Log.d("LoginFragment", "Current token: ${result.token}")
+                firestore.collection("tokens")
+                    .document(firebaseAuth.currentUser!!.uid)
+                    .update("token", "")
+                    .addOnSuccessListener {
+                        Log.d("LoginFragment", "Update token successful")
+                        firebaseAuth.signOut()
+                        startLoginActivity()
+                    }
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun startLoginActivity() {
         val intent = Intent(context, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
 }

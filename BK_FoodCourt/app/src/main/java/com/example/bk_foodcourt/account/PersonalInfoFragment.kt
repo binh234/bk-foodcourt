@@ -48,16 +48,16 @@ class PersonalInfoFragment : Fragment() {
     }
 
     private fun saveInformation() {
-        val name = binding.userName.text.toString()
-        val address = binding.userAddress.text.toString()
-        val phoneNumber = binding.userPhoneNumber.text.toString()
-        val email = binding.userEmail.text.toString()
+        val name = binding.userName.text.toString().trim()
+        val address = binding.userAddress.text.toString().trim()
+        val phoneNumber = binding.userPhoneNumber.text.toString().trim()
+        val email = binding.userEmail.text.toString().trim()
 
-        if (name.trim().isEmpty()) {
+        if (name.isEmpty()) {
             binding.userName.error = resources.getString(R.string.empty_field)
-        } else if (phoneNumber.trim().isEmpty()) {
-            binding.userPhoneNumber.error = resources.getString(R.string.empty_field)
-        } else if (email.trim().isEmpty()) {
+        } else if (phoneNumber.length < 10) {
+            binding.userPhoneNumber.error = resources.getString(R.string.invalid_phone_number)
+        } else if (email.isEmpty()) {
             binding.userEmail.error = resources.getString(R.string.empty_field)
         } else {
             val updateMap = HashMap<String, Any>()

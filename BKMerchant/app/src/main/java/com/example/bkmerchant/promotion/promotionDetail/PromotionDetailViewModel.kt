@@ -23,7 +23,7 @@ class PromotionDetailViewModel(val promotion: Promotion) : ViewModel() {
     var discountType = 0
     var discountScope = 0
     val value = MutableLiveData("")
-    val numAllowed = MutableLiveData("1000000000")
+    val numAllowed = MutableLiveData("10000")
     val activateDay = MutableLiveData(Timestamp.now())
     val expireDay = MutableLiveData(Timestamp.now())
     val activateDayTime = MutableLiveData(0)
@@ -80,7 +80,6 @@ class PromotionDetailViewModel(val promotion: Promotion) : ViewModel() {
             map["type"] = discountType
             map["scope"] = discountScope
             map["numUsed"] = promotion.numUsed
-            map["numAllowed"] = numAllowed.value!!.toInt()
             map["value"] = value.value!!.toDouble()
             map["activateDay"] = activateDay.value!!
             map["expireDay"] = expireDay.value!!
@@ -91,6 +90,7 @@ class PromotionDetailViewModel(val promotion: Promotion) : ViewModel() {
             if (discountScope == 0) {
                 map["orderFrom"] = orderFrom.value!!.toDouble()
                 map["orderTo"] = orderTo.value!!.toDouble()
+                map["numAllowed"] = numAllowed.value!!.toInt()
                 if (lastCode != code.value!!) {
                     firestore.collectionGroup("promotions")
                         .whereEqualTo("code", code.value!!)

@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bk_foodcourt.R
 import com.example.bk_foodcourt.databinding.MenuFragmentBinding
+import com.example.bk_foodcourt.home.Store
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -28,6 +29,7 @@ class MenuFragment : Fragment() {
     private lateinit var adapter: NewMenuAdapter
     private lateinit var promotionAdapter: PromotionAdapter
     private lateinit var storeId: String
+    private lateinit var store: Store
 
     private lateinit var categoryListView: ListView
     private lateinit var dialog: AlertDialog
@@ -41,7 +43,8 @@ class MenuFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.menu)
 
         val arguments = MenuFragmentArgs.fromBundle(requireArguments())
-        storeId = arguments.store.id
+        store = arguments.store
+        storeId = store.id
 
         viewModelFactory = MenuViewModelFactory(storeId)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MenuViewModel::class.java)
@@ -49,7 +52,7 @@ class MenuFragment : Fragment() {
         binding = MenuFragmentBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = this
-        binding.store = arguments.store
+        binding.store = store
 
         setupRecyclerView()
         promotionAdapter = PromotionAdapter(viewModel)
@@ -112,7 +115,8 @@ class MenuFragment : Fragment() {
     }
 
     private fun showCart() {
-        findNavController().navigate(R.id.cartFragment)
+        val action = MenuFragmentDirections.actionMenuFragmentToCartFragment(store)
+        findNavController().navigate(action)
     }
 
     private fun navigateToDishDetail(dish: Dish) {

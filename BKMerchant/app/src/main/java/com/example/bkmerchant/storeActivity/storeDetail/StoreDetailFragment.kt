@@ -155,11 +155,15 @@ class StoreDetailFragment : Fragment() {
     private fun checkValidInformation() {
         var check = true
         val name = viewModel.name.value ?: ""
+        val hotline = viewModel.hotline.value ?: ""
         val openTime = viewModel.openTime.value ?: 0
         val closeTime = viewModel.closeTime.value ?: 0
         if (name.trim().isEmpty()) {
             check = false
             binding.storeNameText.error = getString(R.string.empty_field)
+        } else if (hotline.trim().length < 10) {
+            check = false
+            binding.storeHotline.error = getString(R.string.invalid_phone_number)
         }
         if (openTime >= closeTime) {
             check = false

@@ -1,6 +1,5 @@
 package com.example.bk_foodcourt.menu.cart
 
-import android.content.DialogInterface
 import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Bundle
@@ -10,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -19,18 +17,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.AuthFailureError
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.example.bk_foodcourt.R
 import com.example.bk_foodcourt.databinding.CartFragmentBinding
-import com.example.bk_foodcourt.menu.CartItem
+import com.example.bk_foodcourt.home.Store
 import com.example.bk_foodcourt.menu.Dish
-import com.example.bk_foodcourt.order.Order
-import com.example.bk_foodcourt.setPriceFormatted
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.example.bk_foodcourt.notificationService.MessageQueue
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
+import org.json.JSONObject
 
 class CartFragment : Fragment() {
     private lateinit var binding: CartFragmentBinding
@@ -39,6 +38,15 @@ class CartFragment : Fragment() {
     private lateinit var viewModel: CartViewModel
     private lateinit var firestore: FirebaseFirestore
     private lateinit var currentUser: FirebaseUser
+    private lateinit var store: Store
+
+    companion object {
+        private const val TAG = "CartFragment"
+        private const val FCM_API = "https://fcm.googleapis.com/fcm/send"
+        private const val serverKey =
+            "key=AAAAJoqkuFM:APA91bHNoY2WeQieUpseXcRIXdsBN9oDpzXsyqvR4fj7ADU6M1zk8MNs7fW31wJsMDCfW3ntwihOMQgA7h-Whd-B3iaMrNwCRXO5ua_UQlGCB9rDJe1ti94bxIcquuejy4zoORaFWNYF"
+        private const val contentType = "application/json"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,18 +56,20 @@ class CartFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.cart)
 
+        val args = CartFragmentArgs.fromBundle(requireArguments())
+        store = args.store
+
         firestore = FirebaseFirestore.getInstance()
         currentUser = FirebaseAuth.getInstance().currentUser!!
 
         binding = CartFragmentBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(CartViewModel::class.java)
+        viewModel.getStoreInfo(store)
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
         binding.checkoutButton.setOnClickListener { checkOut() }
-
-        setupRecyclerView()
 
         adapter = CartItemAdapter(viewModel)
         viewModel.cartList.observe(viewLifecycleOwner, Observer { list ->
@@ -90,12 +100,27 @@ class CartFragment : Fragment() {
 
         viewModel.goToHomeEvent.observe(viewLifecycleOwner, Observer {
             it?.let {
-                Toast.makeText(context, "Checkout successfullly", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Checkout successfully", Toast.LENGTH_LONG).show()
                 findNavController().navigate(R.id.storeFragment)
                 viewModel.goToHomeEvent.value = null
             }
         })
+        viewModel.sendNotificationEvent.observe(viewLifecycleOwner, Observer {token ->
+            token?.let {
+                if (token.isNotEmpty()) {
+                    val notification = JSONObject()
+                    val body = JSONObject()
 
+                    body.put("title", getString(R.string.new_order))
+                    body.put("message", getString(R.string.new_order_approve, store.name))
+
+                    notification.put("to", token)
+                    notification.put("data", body)
+                    sendNotification(notification)
+                    viewModel.sendNotificationEvent.value = null
+                }
+            }
+        })
         viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
             it?.let {
                 Toast.makeText(context, getString(it), Toast.LENGTH_SHORT).show()
@@ -171,25 +196,31 @@ class CartFragment : Fragment() {
         }).attachToRecyclerView(binding.orderDetail)
     }
 
-    private fun setupRecyclerView() {
-//        val query: Query = firestore.collection("users")
-//            .document(currentUser.uid)
-//            .collection("cart")
-//
-//        val options = FirestoreRecyclerOptions.Builder<CartItem>()
-//            .setQuery(query, CartItem::class.java)
-//            .build()
-//
-//        adapter = CartItemAdapter(options, viewModel)
-//
-//        binding.orderDetail.adapter = adapter
-
-    }
-
     private fun checkOut() {
         val orderType = binding.orderType.selectedItem.toString()
         Log.d("CartFragment", orderType)
-        viewModel.checkout(orderType)
+        viewModel.checkout(orderType, store.ownerID)
+    }
+
+    private fun sendNotification(notification: JSONObject) {
+        val jsonObjectRequest: JsonObjectRequest = object : JsonObjectRequest(FCM_API, notification,
+            Response.Listener<JSONObject> { response ->
+                Log.d(TAG, "onResponse: $response")
+            },
+            Response.ErrorListener {
+                Toast.makeText(context, "Request error", Toast.LENGTH_LONG).show()
+                Log.d(TAG, "onErrorResponse: Didn't work")
+            }) {
+
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["Authorization"] = serverKey
+                params["Content-Type"] = contentType
+                return params
+            }
+        }
+        MessageQueue.getInstance(requireContext())?.addToRequestQueue(jsonObjectRequest)
     }
 
     private fun navigateToPaymentFragment() {

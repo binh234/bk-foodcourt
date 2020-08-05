@@ -20,11 +20,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
         viewBinding = true
     }
-
 
     buildTypes {
         release {
@@ -37,7 +36,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
@@ -45,12 +44,8 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-<<<<<<< HEAD
-  //Test support
-=======
 
     //Test support
->>>>>>> 88ad6810848383c047b933a331abb7a0b0b5c1f3
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -61,6 +56,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:21.4.3'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.firebaseui:firebase-ui-firestore:4.1.0'
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
 
     //Material design support
     implementation 'com.google.android.material:material:1.3.0-alpha01'
@@ -92,4 +88,11 @@ dependencies {
 
     // Swipe helper in recycler view
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
+
+    // Retrofit support
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    // Volley support
+    implementation 'com.android.volley:volley:1.1.1'
 }

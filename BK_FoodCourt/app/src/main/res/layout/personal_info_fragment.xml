@@ -59,7 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/phone_number"
-                android:inputType="number"
+                android:inputType="phone"
+                android:maxLength="12"
                 android:text="@{user.phoneNumber}" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:text="@{user.email}"/>
+                android:text="@{user.email}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,8 +89,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/base_margin"
             android:background="@drawable/button_background"
-            android:textColor="@android:color/white"
-            android:text="@string/save" />
+            android:text="@string/save"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 </layout>

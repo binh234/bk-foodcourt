@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="promotion"
             type="com.example.bkmerchant.promotion.Promotion" />
@@ -26,8 +28,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/base_margin"
-            android:layout_marginStart="@dimen/base_margin">
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginEnd="@dimen/base_margin">
 
             <ImageView
                 android:id="@+id/promotion_icon"
@@ -35,9 +37,9 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="@dimen/small_margin"
                 android:layout_marginBottom="@dimen/small_margin"
+                android:src="@drawable/ic_sale"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/ic_sale" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/promotion_title"
@@ -58,12 +60,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small_margin"
-                android:maxLines="3"
                 android:fontFamily="@font/roboto"
-                app:promotion_description="@{promotion}"
-                app:layout_constraintStart_toStartOf="@id/promotion_title"
+                android:maxLines="3"
+                android:minLines="2"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/promotion_title"
                 app:layout_constraintTop_toBottomOf="@id/promotion_title"
+                app:promotion_description="@{promotion}"
                 tools:text=" Promotion description Promotion description Promotion description" />
 
             <TextView
@@ -71,12 +74,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fab_margin"
-                android:textSize="14sp"
                 android:fontFamily="@font/roboto"
-                app:promotion_activate_day="@{promotion.activateDay}"
-                app:promotion_expire_day="@{promotion.expireDay}"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@id/promotion_title"
                 app:layout_constraintTop_toBottomOf="@id/promotion_description"
+                app:promotion_activate_day="@{promotion.activateDay}"
+                app:promotion_expire_day="@{promotion.expireDay}"
                 tools:text="06/07/2020 - 20/07/2020" />
 
             <TextView
@@ -84,8 +87,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/small_margin"
-                android:textSize="14sp"
                 android:fontFamily="@font/roboto"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/promotion_time"
                 app:layout_constraintTop_toTopOf="@id/promotion_time"
@@ -108,10 +111,11 @@
                 style="@style/textStyle"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="@dimen/small_margin"
+                android:visibility="@{promotion.scope==0 ? View.VISIBLE : View.GONE}"
                 app:layout_constraintStart_toStartOf="@id/promotion_icon"
                 app:layout_constraintTop_toBottomOf="@id/promotion_time"
-                app:promotion_num_used="@{promotion.numUsed}"
                 app:promotion_num_allowed="@{promotion.numAllowed}"
+                app:promotion_num_used="@{promotion.numUsed}"
                 tools:text="3/1200000" />
 
             <TextView
@@ -119,6 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/use_times"
+                android:visibility="@{promotion.scope==0 ? View.VISIBLE : View.GONE}"
                 app:layout_constraintStart_toStartOf="@id/promotion_icon"
                 app:layout_constraintTop_toBottomOf="@id/promotion_use" />
         </androidx.constraintlayout.widget.ConstraintLayout>

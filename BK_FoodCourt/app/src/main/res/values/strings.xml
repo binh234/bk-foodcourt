@@ -177,6 +177,9 @@
     <string name="promo_active_time_error">Promotion isn\'t activated now</string>
     <string name="promo_expire_time_error">Promotion is expired now!</string>
     <string name="order_discount_description">Enter %s to get discount %s for order from %s to %s, applied from %s to %s</string>
+    <string name="new_order">New order</string>
+    <string name="new_order_approve">New order approved to %s. Check now!</string>
+    <string name="invalid_phone_number">Invalid phone number</string>
 
 
     <string-array name="channel_choice">

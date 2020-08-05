@@ -66,6 +66,7 @@
     <string name="duplicate_category">Duplicate category</string>
     <string name="duplicate_item">Duplicate item</string>
     <string name="strike_text" translatable="false"><strike>%s</strike></string>
+    <string name="discount_price">Discount Price</string>
 
     <!--  Sale summary  -->
     <string name="total_sales">Total sales Today</string>
@@ -130,6 +131,12 @@
     <string name="menu_discount_description">Discount %s for all items in menu</string>
     <string name="category_discount_description">Discount %s for all items in %s</string>
     <string name="item_discount_description">Discount %s for %s</string>
+    <string name="order_cancelled">Order cancelled</string>
+    <string name="cancel_requirement">You must enter reason to cancelled this order</string>
+    <string name="cancel_message">Your order #%s is cancel due to: %s</string>
+    <string name="cancel_reason">Cancel reason: </string>
+    <string name="e_g_out_of_order">E.g Out of order</string>
+    <string name="invalid_phone_number">Invalid phone number</string>
 
     <!--  Promotion  -->
     <string name="use_times">Use times</string>
@@ -150,6 +157,8 @@
     <string name="select_item">Select items</string>
     <string name="promotion_code_used">Promotion code had been used before!</string>
     <string name="order_lesser">Order min must be less than order max</string>
+    <string name="friendly_display">For friendly display purpose</string>
+    <string name="list_item">List item</string>
 
     <!--  Report  -->
     <string name="today_report">Sale report</string>
@@ -171,8 +180,5 @@
     <string name="no_notification">No notifications to show</string>
     <string name="this_feature_will_be_updated_soon">This feature will be updated soon</string>
     <string name="priority">Priority</string>
-    <string name="friendly_display">For friendly display purpose</string>
-    <string name="discount_price">Discount Price</string>
-
 
 </resources>
