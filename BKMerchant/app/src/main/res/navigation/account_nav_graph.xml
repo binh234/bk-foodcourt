@@ -38,4 +38,8 @@
             android:name="user"
             app:argType="com.example.bkmerchant.login.User" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.bkmerchant.accountActivity.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

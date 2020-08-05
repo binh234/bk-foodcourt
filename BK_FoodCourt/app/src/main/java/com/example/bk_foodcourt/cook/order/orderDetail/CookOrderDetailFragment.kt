@@ -113,7 +113,8 @@ class CookOrderDetailFragment : Fragment() {
                     notification.put("to", token)
                     notification.put("data", body)
                     sendNotification(notification)
-                    viewModel.sendCancelNotificationEvent.value = null
+                    viewModel.sendFinishNotificationEvent.value = null
+                    navigateToOrderFragment()
                 }
             }
         })

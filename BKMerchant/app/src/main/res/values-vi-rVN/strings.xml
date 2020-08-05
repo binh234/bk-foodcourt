@@ -113,7 +113,7 @@
     <string name="remove">Xóa</string>
     <string name="promo">Khuyến mãi</string>
     <string name="setting">Cài đặt</string>
-    <string name="uploading">Đang tải ...</string>
+    <string name="uploading">Đang tải …</string>
     <string name="order_detail">Thông tin đơn hàng</string>
     <string name="promotion_detail">Thông tin khuyến mãi</string>
     <string name="employee_add">Thêm nhân viên</string>
@@ -129,4 +129,7 @@
     <string name="cancel_reason">Lý do hủy đơn</string>
     <string name="list_item">Danh sách món</string>
     <string name="invalid_phone_number">Số điện thoại không hợp lệ</string>
+    <string name="english">Tiếng Anh</string>
+    <string name="language_label">Chọn ngôn ngữ</string>
+    <string name="vietnamese">Tiếng Việt</string>
 </resources>

@@ -48,6 +48,7 @@ class OrderDetailFragment : Fragment() {
 
         binding.order = order
         binding.cancelOrderButton.setOnClickListener { cancelOrder() }
+        binding.finishOrderButton.setOnClickListener { finishOrder() }
         binding.phoneButton.setOnClickListener { startCall() }
 
         setupRecyclerView()
@@ -68,6 +69,15 @@ class OrderDetailFragment : Fragment() {
         adapter = OrderItemAdapter(options)
 
         binding.orderDetail.adapter = adapter
+    }
+
+    private fun finishOrder() {
+        firestore.collection("order")
+            .document(order.id)
+            .update("status", 3)
+            .addOnSuccessListener {
+                navigateToOrderFragment()
+            }
     }
 
     private fun cancelOrder() {
