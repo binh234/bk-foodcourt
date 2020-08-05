@@ -39,6 +39,7 @@ class RemoveVendorActivity : AppCompatActivity(),StoreItemAdapter.StoreItemClick
                         LinearLayoutManager(this).orientation
                     )
                     recycler_view.addItemDecoration(dividerItemDecoration)
+
                 }
             }
             .addOnCanceledListener {
