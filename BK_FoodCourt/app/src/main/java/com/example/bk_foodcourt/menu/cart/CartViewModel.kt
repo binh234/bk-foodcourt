@@ -189,7 +189,7 @@ class CartViewModel : ViewModel() {
                 promotionCode = codeList.value!![applyPosition]
             }
             if (storeId.isNotEmpty()) {
-                firestore.collection("tokens")
+                firestore.collection("vendor_tokens")
                     .document(ownerID)
                     .get()
                     .addOnSuccessListener { document ->

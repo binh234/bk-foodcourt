@@ -111,7 +111,7 @@ fun setOrderStatus(view: TextView, orderStatus: Int) {
     view.text = when (orderStatus) {
         OrderStatus.CONFIRMED.value -> "CONFIRMED"
         OrderStatus.PROCESSING.value -> "PROCESSING"
-        OrderStatus.DONE_PROCESSING.value -> "DONE_PROCESSING"
+        OrderStatus.DONE_PROCESSING.value -> "DONE_PROCESS"
         OrderStatus.FINISH.value -> "FINISH"
         OrderStatus.CANCEL.value -> "CANCELED"
         else -> "PENDING"

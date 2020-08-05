@@ -40,6 +40,10 @@ class LoginFragment : Fragment() {
 
         firebaseAuth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
+        if (null != firebaseAuth.currentUser) {
+            currentUser = firebaseAuth.currentUser!!
+            releaseToken()
+        }
 
         binding = LoginFragmentBinding.inflate(inflater, container, false)
 
@@ -131,7 +135,7 @@ class LoginFragment : Fragment() {
                                                 Toast.LENGTH_SHORT
                                             )
                                                 .show()
-                                            updateToken(accountType)
+                                            startMainActivity(accountType)
                                         } else {
                                             Toast.makeText(
                                                 context,
@@ -183,6 +187,19 @@ class LoginFragment : Fragment() {
 
     private fun navigateToRegisterFragment() {
         findNavController().navigate(R.id.registerFragment)
+    }
+
+    private fun releaseToken() {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnSuccessListener { result ->
+                firestore.collection("tokens")
+                    .document(currentUser.uid)
+                    .update("token", "")
+            }
+            .addOnFailureListener {
+                Log.d("LoginFragment", it.toString())
+                Toast.makeText(context, getString(R.string.error_occur), Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun updateToken(accountType: String) {

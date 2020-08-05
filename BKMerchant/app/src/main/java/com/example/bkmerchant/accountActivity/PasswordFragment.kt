@@ -100,11 +100,15 @@ class PasswordFragment : Fragment() {
         FirebaseInstanceId.getInstance().instanceId
             .addOnSuccessListener { result ->
                 Log.d("LoginFragment", "Current token: ${result.token}")
-                firestore.collection("tokens")
+                firestore.collection("vendor_tokens")
                     .document(currentUser.uid)
                     .update("token", "")
                     .addOnSuccessListener {
                         Log.d("LoginFragment", "Update token successful")
+                        firebaseAuth.signOut()
+                        startLoginActivity()
+                    }
+                    .addOnFailureListener {
                         firebaseAuth.signOut()
                         startLoginActivity()
                     }

@@ -10,13 +10,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bkmerchant.R
-import com.example.bkmerchant.menu.Category
-import com.example.bkmerchant.menu.NewMenuAdapter
 import com.example.bkmerchant.order.Order
 import com.example.bkmerchant.order.OrderFragmentDirections
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import java.util.*
 
 class HistoryOrderFragment(val storeId: String) : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -47,9 +47,14 @@ class HistoryOrderFragment(val storeId: String) : Fragment() {
     }
 
     private fun setupRecyclerView() {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_YEAR, -14)
+        val lastTwoWeekTimestamp = Timestamp(calendar.time)
+
         val query: Query = FirebaseFirestore.getInstance()
             .collection("order")
             .whereEqualTo("storeID", storeId)
+            .whereGreaterThan("time", lastTwoWeekTimestamp)
             .orderBy("time", Query.Direction.DESCENDING)
 
         val options = FirestoreRecyclerOptions.Builder<Order>()

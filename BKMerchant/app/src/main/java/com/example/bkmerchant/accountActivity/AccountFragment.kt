@@ -94,6 +94,9 @@ class AccountFragment: Fragment() {
         binding.aboutUs.setOnClickListener {
             navigateToAboutFragment()
         }
+        binding.setting.setOnClickListener {
+            navigateToSettingFragment()
+        }
         binding.changePassword.setOnClickListener {
             navigateToPasswordFragment()
         }
@@ -188,11 +191,15 @@ class AccountFragment: Fragment() {
         FirebaseInstanceId.getInstance().instanceId
             .addOnSuccessListener { result ->
                 Log.d("LoginFragment", "Current token: ${result.token}")
-                firestore.collection("tokens")
+                firestore.collection("vendor_tokens")
                     .document(firebaseAuth.currentUser!!.uid)
                     .update("token", "")
                     .addOnSuccessListener {
                         Log.d("LoginFragment", "Update token successful")
+                        firebaseAuth.signOut()
+                        startLoginActivity()
+                    }
+                    .addOnFailureListener {
                         firebaseAuth.signOut()
                         startLoginActivity()
                     }
@@ -214,6 +221,10 @@ class AccountFragment: Fragment() {
 
     private fun navigateToAboutFragment() {
         findNavController().navigate(R.id.aboutFragment)
+    }
+
+    private fun navigateToSettingFragment() {
+        findNavController().navigate(R.id.settingsFragment)
     }
 
     private fun navigateToPasswordFragment() {

@@ -165,7 +165,7 @@ class LoginFragment : Fragment() {
         FirebaseInstanceId.getInstance().instanceId
             .addOnSuccessListener { result ->
                 Log.d("LoginFragment", "Current token: ${result.token}")
-                firestore.collection("tokens")
+                firestore.collection("vendor_tokens")
                     .document(currentUser.uid)
                     .set(Token(result.token))
                     .addOnSuccessListener {
