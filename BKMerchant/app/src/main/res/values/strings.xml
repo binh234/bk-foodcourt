@@ -76,7 +76,6 @@
     <string name="set_as_default">Set as default</string>
     <string name="price_money" translatable="false">đ</string>
 
-
     <!--  Store detail  -->
     <string name="open_time">Opening Time</string>
     <string name="close_time">Closing Time</string>
@@ -99,7 +98,7 @@
         Khách hàng chịu trách nhiệm về sự an toàn của mình và duy trì việc sử dụng dịch vụ với tên đăng nhập, mật khẩu và hộp thư điện tử của mình. Ngoài ra,
         khách hàng cũng phải có trách nhiệm thông báo kịp thời cho Website support.hcmut.edu.vn về bất kỳ việc sử dụng, lạm dụng hoặc vi phạm bí mật nào trái phép,
         giữ lại tên đăng nhập và mật khẩu của bên thứ ba để có biện pháp khắc phục phù hợp.
-</string>
+    </string>
     <string name="term_of_use">Term of use</string>
     <string name="location" translatable="false">Đại học Bách Khoa Tp. Hồ Chí Minh, Dĩ An, Bình Dương</string>
     <string name="telephone" translatable="false">(84-8) 5416 1072 ~ 79</string>
@@ -132,11 +131,17 @@
     <string name="category_discount_description">Discount %s for all items in %s</string>
     <string name="item_discount_description">Discount %s for %s</string>
     <string name="order_cancelled">Order cancelled</string>
-    <string name="cancel_requirement">You must enter reason to cancelled this order</string>
+    <string name="cancel_requirement">You must enter reason to cancel this order</string>
     <string name="cancel_message">Your order #%s is cancel due to: %s</string>
     <string name="cancel_reason">Cancel reason: </string>
     <string name="e_g_out_of_order">E.g Out of order</string>
     <string name="invalid_phone_number">Invalid phone number</string>
+    <string name="pending_status">PENDING</string>
+    <string name="confirm_status">CONFIRMED</string>
+    <string name="processing_status">PROCESSING</string>
+    <string name="done_process_status">DONE PROCESS</string>
+    <string name="finish_status">FINISH</string>
+    <string name="cancel_status">CANCELLED</string>
 
     <!--  Promotion  -->
     <string name="use_times">Use times</string>
@@ -162,7 +167,10 @@
 
     <!--  Report  -->
     <string name="today_report">Sale report</string>
-
+    <string name="num_process_order">Process order: %d</string>
+    <string name="num_finish_order">Finish order: %d</string>
+    <string name="num_cancel_order">Cancel order: %d</string>
+    <string name="today_total_sales">Total sales: %s</string>
 
     <string name="update_success">Update successful</string>
     <string name="cancel">Cancel</string>

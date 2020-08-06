@@ -1,4 +1,4 @@
-package com.example.my_app;
+package com.example.my_app.login;
 
 public class User {
     private String email;

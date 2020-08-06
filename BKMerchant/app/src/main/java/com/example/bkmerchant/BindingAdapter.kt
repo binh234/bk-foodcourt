@@ -109,12 +109,12 @@ fun setOrderDescription(view: TextView, orderType: String, userName: String) {
 @BindingAdapter("order_status")
 fun setOrderStatus(view: TextView, orderStatus: Int) {
     view.text = when (orderStatus) {
-        OrderStatus.CONFIRMED.value -> "CONFIRMED"
-        OrderStatus.PROCESSING.value -> "PROCESSING"
-        OrderStatus.DONE_PROCESSING.value -> "DONE_PROCESS"
-        OrderStatus.FINISH.value -> "FINISH"
-        OrderStatus.CANCEL.value -> "CANCELED"
-        else -> "PENDING"
+        OrderStatus.CONFIRMED.value -> view.resources.getString(R.string.confirm_status)
+        OrderStatus.PROCESSING.value -> view.resources.getString(R.string.processing_status)
+        OrderStatus.DONE_PROCESSING.value -> view.resources.getString(R.string.done_process_status)
+        OrderStatus.FINISH.value -> view.resources.getString(R.string.finish_status)
+        OrderStatus.CANCEL.value -> view.resources.getString(R.string.cancel_status)
+        else -> view.resources.getString(R.string.pending_status)
     }
 }
 

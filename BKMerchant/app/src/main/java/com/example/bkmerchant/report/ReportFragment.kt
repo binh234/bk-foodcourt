@@ -62,10 +62,10 @@ class ReportFragment: Fragment() {
                         processingOrder += 1
                     }
                 }
-                var text = "Processing orders: $processingOrder \n"
-                text += "Finish orders: $finishOrder \n"
-                text += "Cancel orders: $cancelOrder \n\n"
-                text += "Total sales: " + String.format("%1$,.0f", totalSale) + "đ"
+                var text = getString(R.string.num_process_order, processingOrder) + "\n"
+                text += getString(R.string.num_finish_order, finishOrder) + "\n"
+                text += getString(R.string.num_cancel_order, finishOrder) + "\n\n"
+                text += getString(R.string.today_total_sales, String.format("%1$,.0f", totalSale) + "đ")
                 binding.reportText.text = text
             }
 

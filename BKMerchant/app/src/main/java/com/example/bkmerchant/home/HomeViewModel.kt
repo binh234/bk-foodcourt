@@ -2,7 +2,6 @@ package com.example.bkmerchant.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.bkmerchant.login.User
 import com.example.bkmerchant.storeActivity.Store
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,7 +17,6 @@ class HomeViewModel : ViewModel() {
 
     init {
         getUserName()
-        getCurrentStore()
     }
 
     private fun getUserName() {
@@ -34,7 +32,7 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    private fun getCurrentStore() {
+    fun getCurrentStore() {
         if (null != currentUser) {
             firestore.collection("stores")
                 .whereEqualTo("ownerID", currentUser!!.uid)
@@ -46,9 +44,10 @@ class HomeViewModel : ViewModel() {
                         errorMessage.value = "You don't have any store!"
                     } else {
                         for (document in query) {
-                            currentStore.value = document.toObject(Store::class.java)
-                            currentStore.value!!.id = document.id
-                            if (!currentStore.value!!.isFocus) {
+                            val store = document.toObject(Store::class.java)
+                            store.id = document.id
+                            currentStore.value = store
+                            if (!store.isFocus) {
                                 firestore.collection("stores")
                                     .document(document.id)
                                     .update("isFocus", true)

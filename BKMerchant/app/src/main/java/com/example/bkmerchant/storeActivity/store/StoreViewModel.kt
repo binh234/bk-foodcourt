@@ -1,4 +1,5 @@
 package com.example.bkmerchant.storeActivity.store
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bkmerchant.storeActivity.Store
@@ -6,7 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
-class StoreViewModel: ViewModel() {
+class StoreViewModel : ViewModel() {
     private var firestore = FirebaseFirestore.getInstance()
     private var currentUser = FirebaseAuth.getInstance().currentUser!!
 

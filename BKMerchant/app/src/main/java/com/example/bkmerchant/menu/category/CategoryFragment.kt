@@ -12,13 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.CategoryFragmentBinding
-import com.example.bkmerchant.menu.dish.DishFragmentDirections
-import com.google.firebase.firestore.FirebaseFirestore
 
 class CategoryFragment : Fragment() {
-    companion object {
-        const val TAG = "CategoryFragment"
-    }
 
     private lateinit var binding: CategoryFragmentBinding
     private lateinit var viewModel: CategoryViewModel

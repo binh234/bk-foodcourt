@@ -4,15 +4,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bkmerchant.databinding.OrderItemBinding
 import com.example.bkmerchant.databinding.PromotionItemBinding
-import com.example.bkmerchant.login.AccountType
-import com.example.bkmerchant.login.User
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.FirebaseFirestore
-import java.lang.reflect.Field
 
 class PromotionAdapter(
     options: FirestoreRecyclerOptions<Promotion>,

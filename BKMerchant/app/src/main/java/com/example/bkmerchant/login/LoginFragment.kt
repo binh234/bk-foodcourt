@@ -14,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.bkmerchant.MainActivity
 import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.LoginFragmentBinding
-import com.example.bkmerchant.notificationService.MyFirebaseMessagingService
 import com.example.bkmerchant.notificationService.Token
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser

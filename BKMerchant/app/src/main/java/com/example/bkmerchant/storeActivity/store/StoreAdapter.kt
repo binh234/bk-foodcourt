@@ -2,11 +2,9 @@ package com.example.bkmerchant.storeActivity.store
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bkmerchant.databinding.StoreListItemBinding
-import com.example.bkmerchant.menu.MenuViewModel
 import com.example.bkmerchant.storeActivity.Store
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions

@@ -7,11 +7,6 @@ import com.example.bkmerchant.order.orderList.HistoryOrderFragment
 import com.example.bkmerchant.order.orderList.OngoingOrderFragment
 import java.lang.IndexOutOfBoundsException
 
-private val TAB_TITLES = arrayOf(
-    R.string.tab_text_1,
-    R.string.tab_text_2
-)
-
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
@@ -30,19 +25,4 @@ class SectionsPagerAdapter(fragment: Fragment, val storeId: String) : FragmentSt
     override fun createFragment(position: Int): Fragment {
         return tabFragmentsCreators[position]?.invoke() ?: throw IndexOutOfBoundsException()
     }
-
-//    override fun getItem(position: Int): Fragment {
-//        // getItem is called to instantiate the fragment for the given page.
-//        // Return a PlaceholderFragment (defined as a static inner class below).
-//        return PlaceholderFragment.newInstance(position + 1)
-//    }
-//
-//    override fun getPageTitle(position: Int): CharSequence? {
-//        return context.resources.getString(TAB_TITLES[position])
-//    }
-//
-//    override fun getCount(): Int {
-//        // Show 2 total pages.
-//        return 2
-//    }
 }

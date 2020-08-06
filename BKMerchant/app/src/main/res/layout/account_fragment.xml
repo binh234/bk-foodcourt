@@ -147,7 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="@dimen/base_margin"
-            android:background="@drawable/button_background"
+            android:background="@drawable/green_button_selector"
             android:padding="@dimen/small_margin"
             android:text="@string/log_out"
             app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
