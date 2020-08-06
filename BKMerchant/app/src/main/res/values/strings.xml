@@ -67,6 +67,7 @@
     <string name="duplicate_item">Duplicate item</string>
     <string name="strike_text" translatable="false"><strike>%s</strike></string>
     <string name="discount_price">Discount Price</string>
+    <string name="no_category">Your menu is empty, please create a new category first</string>
 
     <!--  Sale summary  -->
     <string name="total_sales">Total sales Today</string>

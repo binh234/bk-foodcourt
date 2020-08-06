@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -102,8 +103,14 @@ class MenuFragment : Fragment() {
     }
 
     private fun onAddDish(dish: Dish) {
-        val action = MenuFragmentDirections.actionMenuFragmentToDishFragment(dish)
-        findNavController().navigate(action)
+        viewModel.categories.value?.let {
+            if (it.isEmpty()) {
+                Toast.makeText(context, getString(R.string.no_category), Toast.LENGTH_LONG).show()
+            } else {
+                val action = MenuFragmentDirections.actionMenuFragmentToDishFragment(dish)
+                findNavController().navigate(action)
+            }
+        }
     }
 
     private fun setupRecyclerView() {
