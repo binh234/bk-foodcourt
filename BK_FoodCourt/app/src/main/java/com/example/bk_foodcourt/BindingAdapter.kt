@@ -13,6 +13,7 @@ import com.example.bk_foodcourt.menu.Promotion
 import com.example.bk_foodcourt.order.OrderStatus
 import com.google.firebase.Timestamp
 import de.hdodenhof.circleimageview.CircleImageView
+import java.text.SimpleDateFormat
 import java.util.*
 
 fun formatText(value: Double): String {
@@ -110,7 +111,7 @@ fun setOrderStatus(view: TextView, orderStatus: Int) {
 
 @BindingAdapter("order_time")
 fun setOrderTime(view: TextView, orderTime: Timestamp) {
-    view.text = orderTime.toDate().toString()
+    view.text = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.US).format(orderTime.toDate())
 }
 
 @BindingAdapter("order_process")

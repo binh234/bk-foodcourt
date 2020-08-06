@@ -81,7 +81,7 @@ fun convertIntToTime(view: TextView, time: Int) {
 
 @BindingAdapter("day")
 fun setDayFormatted(view: TextView, time: Timestamp) {
-    val timeText = SimpleDateFormat("MM/dd/yyyy", Locale.US).format(time.toDate())
+    val timeText = SimpleDateFormat("dd/MM/yyyy", Locale.US).format(time.toDate())
     view.text = timeText
 }
 
@@ -120,7 +120,7 @@ fun setOrderStatus(view: TextView, orderStatus: Int) {
 
 @BindingAdapter("order_time")
 fun setOrderTime(view: TextView, orderTime: Timestamp) {
-    view.text = orderTime.toDate().toString()
+    view.text = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.US).format(orderTime.toDate())
 }
 
 @BindingAdapter("item_option")
@@ -168,9 +168,9 @@ fun getItemList(map: HashMap<String, String>): String {
 
 @BindingAdapter(value = ["promotion_activate_day", "promotion_expire_day"])
 fun setPromotionDateRange(view: TextView, activateDay: Timestamp, expireDay: Timestamp) {
-    val text = SimpleDateFormat("MM/dd/yyyy", Locale.US).format(activateDay.toDate()) +
+    val text = SimpleDateFormat("dd/MM/yyyy", Locale.US).format(activateDay.toDate()) +
             "-" +
-            SimpleDateFormat("MM/dd/yyyy", Locale.US).format(expireDay.toDate())
+            SimpleDateFormat("dd/MM/yyyy", Locale.US).format(expireDay.toDate())
     view.text = text
 }
 
