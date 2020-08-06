@@ -67,8 +67,8 @@
     <string name="activate_time">Thời gian bắt đàu</string>
     <string name="expired_time">Thời gian kết thúc</string>
     <string name="num_allowed">Số lượng</string>
-    <string name="to_order">Đơn hàng từ</string>
-    <string name="from_order">Đến</string>
+    <string name="to_order">Đến</string>
+    <string name="from_order">Đơn hàng từ</string>
     <string name="phone_number">Số điện thoại</string>
     <string name="today_report">Báo cáo doanh thu</string>
     <string name="password_condition">Mật khẩu phải chứa ít nhất 6 kí tự</string>
