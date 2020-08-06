@@ -48,7 +48,7 @@ class AddNewVendorActivity : AppCompatActivity() {
         binding.managerViewModel = viewModel
         vendorImageView = binding.vendorImageView
         // Remember to edit the location in this line when merge with the whole team's APP
-        firebaseStorage = FirebaseStorage.getInstance().getReference("store_images")
+        firebaseStorage = FirebaseStorage.getInstance().getReference("manager_images")
         // getDatabase reference to upload the store information onto the firebase database
         firebaseDatabase =  FirebaseDatabase.getInstance().reference
         // Get FirebaseFirestore reference to upload the store information to firestore
@@ -183,13 +183,12 @@ class AddNewVendorActivity : AppCompatActivity() {
                 .add(store)
                 .addOnSuccessListener {
                     Log.d("TAG", "DocumentSnapshot written with ID: ${it.id}")
-                    Toast.makeText(this, "Store is being uploaded", Toast.LENGTH_SHORT).show()
                 }
                 .addOnCanceledListener {
                     Log.d("TAG", "DocumentSnapshot Canceled")
                 }
                 .addOnFailureListener{
-                    Toast.makeText(this, "Failed to write Docucment", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Failed to write DOcucment", Toast.LENGTH_SHORT).show()
                 }
     }
     /* This function make sure that all the editexts are filled before the store is uploaded
