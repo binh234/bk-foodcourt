@@ -1,9 +1,13 @@
 package com.example.managertab
 
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
@@ -54,6 +58,14 @@ class RemoveVendorActivity : AppCompatActivity(),StoreItemAdapter.StoreItemClick
     }
 
     override fun onStoreClicked(position: Int) {
+        confirmRemoveDialog(position)
+    }
+    private fun confirmRemoveDialog(position: Int) {
+        val newFragment: DialogFragment = MyAlertDialogFragment
+            .newInstance(position)
+        newFragment.show(supportFragmentManager, "dialog")
+    }
+    fun removeStore(position : Int){
         val storeToDel = firebaseFireStore.collection("stores")
             .whereEqualTo("name",storeItemList.elementAt(position).name)
             .whereEqualTo("imageUrl",storeItemList.elementAt(position).imageUrl)
@@ -75,4 +87,52 @@ class RemoveVendorActivity : AppCompatActivity(),StoreItemAdapter.StoreItemClick
             }
 
     }
+    class MyAlertDialogFragment : DialogFragment() {
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+            val pos = arguments!!.getInt("position")
+            return AlertDialog.Builder(activity!!)
+                .setTitle("CONFIRM DELETE STORE")
+                .setMessage("Delete this store? Action is irreversible")
+                .setPositiveButton("YES",
+                    DialogInterface.OnClickListener { dialog, whichButton ->
+                        (activity as RemoveVendorActivity?)
+                            ?.removeStore(pos)
+                    })
+                .setNegativeButton("NO",
+                    DialogInterface.OnClickListener { dialog, whichButton ->
+                        dialog.dismiss()
+                    }).create()
+        }
+
+        companion object {
+            fun newInstance(position: Int): MyAlertDialogFragment {
+                val frag = MyAlertDialogFragment()
+                val args = Bundle()
+                args.putInt("position", position)
+                frag.arguments = args
+                return frag
+            }
+        }
+    }
+//    class ConfirmRemoveDialogFragment: DialogFragment(){
+//        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+//            return activity?.let {
+//                // Use the Builder class for convenient dialog construction
+//                val builder = AlertDialog.Builder(it)
+//                builder.setTitle("Confirm Store Delete")
+//                    .setMessage(R.string.confirm_store_delete)
+//                    .setPositiveButton(R.string.confirm_delete_positive,
+//                        { dialog, id ->
+//
+//                        })
+//                    .setNegativeButton(R.string.confirm_delete_negative,
+//                        DialogInterface.OnClickListener { dialog, id ->
+//                            // User cancelled the dialog
+//                        })
+//                // Create the AlertDialog object and return it
+//                builder.create()
+//            } ?: throw IllegalStateException("Activity cannot be null")
+//        }
+//    }
+
 }

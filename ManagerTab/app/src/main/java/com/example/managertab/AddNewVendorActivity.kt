@@ -129,15 +129,12 @@ class AddNewVendorActivity : AppCompatActivity() {
 
     private fun uploadFile() {
         imageUri.let {
-            Toast.makeText(this, "HERE2", Toast.LENGTH_SHORT).show()
             val fileReference: StorageReference = firebaseStorage!!.child(
                 System.currentTimeMillis()
                     .toString() + "." + getFileExtension(imageUri)
             )
-            Toast.makeText(this, "HERE3", Toast.LENGTH_SHORT).show()
             uploadTask = fileReference.putFile(imageUri)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "HERE4", Toast.LENGTH_SHORT).show()
                     Toast.makeText(this, "Grats. Your Image is being uploaded " +
                             "to the Database", Toast.LENGTH_SHORT).show()
                     fileReference.downloadUrl
@@ -155,7 +152,6 @@ class AddNewVendorActivity : AppCompatActivity() {
                         }
                 }
                 .addOnFailureListener {
-                    Toast.makeText(this, "HERE5", Toast.LENGTH_SHORT).show()
                     Toast.makeText(
                         this,
                         it.toString(),
