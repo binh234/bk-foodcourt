@@ -90,17 +90,6 @@ class LoginFragment : Fragment() {
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
                                         currentUser = firebaseAuth.currentUser!!
-                                        if (!userType.update) {
-                                            firestore.collection("users")
-                                                .document(currentUser.uid)
-                                                .update(
-                                                    "accountType",
-                                                    AccountType.VENDOR_OWNER
-                                                )
-                                            firestore.collection("userTypes")
-                                                .document(document.id)
-                                                .update("update", true)
-                                        }
                                         Toast.makeText(
                                             context,
                                             getString(R.string.login_success),
