@@ -17,17 +17,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.bkmerchant.MainActivity
 import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.AccountFragmentBinding
-import com.example.bkmerchant.databinding.StoreFragmentBinding
 import com.example.bkmerchant.login.LoginActivity
 import com.example.bkmerchant.login.User
 import com.example.bkmerchant.paymentActivity.PaymentActivity
 import com.example.bkmerchant.storeActivity.StoreActivity
-import com.example.bkmerchant.storeActivity.store.StoreViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.storage.FirebaseStorage

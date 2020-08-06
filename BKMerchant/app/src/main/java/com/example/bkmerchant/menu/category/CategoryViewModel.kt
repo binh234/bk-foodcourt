@@ -1,15 +1,11 @@
 package com.example.bkmerchant.menu.category
 
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bkmerchant.R
 import com.example.bkmerchant.menu.Category
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.*
 
 class CategoryViewModel(val category: Category) : ViewModel() {
     companion object {

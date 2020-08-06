@@ -16,8 +16,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.PromotionFragmentBinding
-import com.example.bkmerchant.order.Order
-import com.example.bkmerchant.order.OrderFragmentDirections
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query

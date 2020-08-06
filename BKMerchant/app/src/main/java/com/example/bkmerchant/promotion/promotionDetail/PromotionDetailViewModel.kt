@@ -14,8 +14,8 @@ class PromotionDetailViewModel(val promotion: Promotion) : ViewModel() {
 
     var categories = arrayOf<String>()
     var items = arrayOf<String>()
-    var categoryIds = arrayOf<String>()
-    var itemIds = arrayOf<String>()
+    private var categoryIds = arrayOf<String>()
+    private var itemIds = arrayOf<String>()
     var checkedCategories = BooleanArray(0)
     var checkedItems = BooleanArray(0)
 

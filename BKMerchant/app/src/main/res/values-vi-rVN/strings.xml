@@ -132,4 +132,14 @@
     <string name="english">Tiếng Anh</string>
     <string name="language_label">Chọn ngôn ngữ</string>
     <string name="vietnamese">Tiếng Việt</string>
+    <string name="pending_status">ĐANG CHỜ</string>
+    <string name="confirm_status">XÁC NHẬN</string>
+    <string name="processing_status">ĐANG XỬ LÝ</string>
+    <string name="done_process_status">XỬ LÝ XONG</string>
+    <string name="finish_status">HOÀN THÀNH</string>
+    <string name="cancel_status">ĐÃ HỦY</string>
+    <string name="num_process_order">Đơn đang xử lý: %d</string>
+    <string name="num_finish_order">Đơn hoàn thành: %d</string>
+    <string name="num_cancel_order">Đơn đã hủy: %d</string>
+    <string name="today_total_sales">Tổng doanh thu: %s</string>
 </resources>

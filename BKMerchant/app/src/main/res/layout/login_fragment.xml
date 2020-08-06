@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/base_margin"
-                android:background="@drawable/button_background"
+                android:background="@drawable/green_button_selector"
                 android:text="@string/login" />
 
             <TextView
@@ -108,7 +108,7 @@
                 android:layout_marginTop="@dimen/large_margin"
                 android:paddingEnd="@dimen/base_margin"
                 android:paddingStart="@dimen/base_margin"
-                android:background="@drawable/button_background"
+                android:background="@drawable/green_button_selector"
                 android:text="@string/create_account" />
         </LinearLayout>
     </ScrollView>

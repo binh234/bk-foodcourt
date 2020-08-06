@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.PasswordFragmentBinding
 import com.example.bkmerchant.login.LoginActivity
-import com.example.bkmerchant.notificationService.Token
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser

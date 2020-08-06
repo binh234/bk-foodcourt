@@ -11,12 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.bkmerchant.MainActivity
 import com.example.bkmerchant.R
 import com.example.bkmerchant.accountActivity.AccountActivity
 import com.example.bkmerchant.databinding.StoreFragmentBinding
-import com.example.bkmerchant.menu.Category
-import com.example.bkmerchant.menu.NewMenuAdapter
 import com.example.bkmerchant.paymentActivity.PaymentActivity
 import com.example.bkmerchant.storeActivity.Store
 import com.firebase.ui.firestore.FirestoreRecyclerOptions

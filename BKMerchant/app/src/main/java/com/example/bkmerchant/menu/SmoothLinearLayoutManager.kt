@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SmoothScroller
 
-
 class SmoothLinearLayoutManager(
     context: Context?,
     orientation: Int,

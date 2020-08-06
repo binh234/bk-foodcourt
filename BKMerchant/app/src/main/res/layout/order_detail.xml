@@ -257,7 +257,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/large_margin"
-                android:background="@drawable/fab_button_background"
+                android:background="@drawable/red_button_selector"
                 android:paddingStart="@dimen/base_margin"
                 android:paddingEnd="@dimen/base_margin"
                 android:text="@string/cancel_order"

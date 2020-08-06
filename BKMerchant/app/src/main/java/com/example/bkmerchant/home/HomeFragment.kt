@@ -16,8 +16,6 @@ import com.example.bkmerchant.databinding.HomeFragmentBinding
 import com.example.bkmerchant.paymentActivity.PaymentActivity
 import com.example.bkmerchant.storeActivity.StoreActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.messaging.FirebaseMessaging
 
 class HomeFragment : Fragment() {
     private lateinit var binding: HomeFragmentBinding
@@ -121,5 +119,10 @@ class HomeFragment : Fragment() {
         if (action != null) {
             findNavController().navigate(action)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getCurrentStore()
     }
 }

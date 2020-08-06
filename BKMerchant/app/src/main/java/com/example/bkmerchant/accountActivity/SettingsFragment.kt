@@ -1,14 +1,11 @@
 package com.example.bkmerchant.accountActivity
 
-import android.app.Activity
-import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.*
-import com.example.bkmerchant.MainActivity
 import com.example.bkmerchant.R
 import java.util.*
 

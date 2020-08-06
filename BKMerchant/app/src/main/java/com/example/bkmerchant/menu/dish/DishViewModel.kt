@@ -1,21 +1,13 @@
 package com.example.bkmerchant.menu.dish
 
-import android.content.ContentResolver
-import android.content.Context
-import android.net.Uri
 import android.util.Log
-import android.webkit.MimeTypeMap
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bkmerchant.R
 import com.example.bkmerchant.menu.Category
 import com.example.bkmerchant.menu.Dish
-import com.example.bkmerchant.menu.category.CategoryViewModel
-import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.FirebaseStorage
 
 class DishViewModel(val dish: Dish): ViewModel() {
@@ -28,7 +20,7 @@ class DishViewModel(val dish: Dish): ViewModel() {
     var name = MutableLiveData<String>()
     var description = MutableLiveData<String>()
     var price = MutableLiveData<String>()
-    var discountPrice = MutableLiveData<String>()
+    var discountPrice = MutableLiveData("")
     var imageUrl = ""
     var categoryIndex = 0
 
@@ -70,16 +62,17 @@ class DishViewModel(val dish: Dish): ViewModel() {
         if (url.isNotEmpty()) {
             dish.imageUrl = url
         }
+        val dishDiscountPrice = discountPrice.value ?: ""
 
         dish.name = name.value ?: ""
         dish.description = description.value ?: ""
         dish.price = (price.value ?: "0").toDouble()
         dish.categoryId = categories[categoryIndex].id
 
-        if (discountPrice.value!!.isEmpty()) {
+        if (dishDiscountPrice.isEmpty()) {
             dish.discountPrice = dish.price
         } else {
-            dish.discountPrice = discountPrice.value!!.toDouble()
+            dish.discountPrice = dishDiscountPrice.toDouble()
         }
 
         if (dish.id.isNotEmpty() && dish.name.trim() == currentName) {

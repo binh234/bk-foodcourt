@@ -21,7 +21,6 @@ import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.example.bkmerchant.promotion.Promotion
 import java.util.*
 
 class PromotionDetailFragment : Fragment() {

@@ -21,12 +21,10 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.example.bkmerchant.R
 import com.example.bkmerchant.databinding.OrderDetailBinding
-import com.example.bkmerchant.notification.NotificationFragment
 import com.example.bkmerchant.notificationService.MessageQueue
 import com.example.bkmerchant.order.Order
 import com.example.bkmerchant.order.OrderItem
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import org.json.JSONObject
