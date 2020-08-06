@@ -235,7 +235,7 @@ class PromotionDetailFragment : Fragment() {
             DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                 val string = "${month + 1}/${dayOfMonth}/$year"
                 Log.d("PromotionDetail", string)
-                val date = SimpleDateFormat("MM/dd/yyyy", Locale.US).parse(string)
+                val date = SimpleDateFormat("dd/MM/yyyy", Locale.US).parse(string)
                 Log.d("PromotionDetail", date?.time.toString())
                 viewModel.activateDay.value = Timestamp(date ?: Date())
             }
@@ -258,7 +258,7 @@ class PromotionDetailFragment : Fragment() {
             DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                 val string = "${month + 1}/${dayOfMonth}/$year"
                 Log.d("PromotionDetail", string)
-                val date = SimpleDateFormat("MM/dd/yyyy", Locale.US).parse(string)
+                val date = SimpleDateFormat("dd/MM/yyyy", Locale.US).parse(string)
                 Log.d("PromotionDetail", date?.time.toString())
                 viewModel.expireDay.value = Timestamp(date ?: Date())
             }

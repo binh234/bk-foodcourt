@@ -93,7 +93,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/store_description"
                         android:layout_alignStart="@id/store_name"
-                        android:padding="@dimen/small_margin"
+                        android:paddingTop="@dimen/small_margin"
                         android:text="@string/change_information"
                         android:textColor="@color/colorBlue" />
                 </RelativeLayout>

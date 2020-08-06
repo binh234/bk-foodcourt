@@ -61,6 +61,10 @@
 ### Step 4 
     Login to the app with the following accounts:
 
+    Customer account demo:
+    Customerbkdemo@gmail.com
+    demo123456
+
     Manager account demo:
     managerbkdemo@gmail.com
     demo123456

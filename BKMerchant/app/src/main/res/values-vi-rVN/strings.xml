@@ -142,4 +142,6 @@
     <string name="num_finish_order">Đơn hoàn thành: %d</string>
     <string name="num_cancel_order">Đơn đã hủy: %d</string>
     <string name="today_total_sales">Tổng doanh thu: %s</string>
+    <string name="menu">Thực đơn</string>
+    <string name="no_category">Thực đơn hiện đang trống, vui lòng tạo một danh mục trước</string>
 </resources>

@@ -5,7 +5,7 @@
     <string name="password_setting">Password</string>
     <string name="term_and_privacy">Term and Privacy</string>
     <string name="store_detail">Store Details</string>
-    <string name="menu" translatable="false">Menu</string>
+    <string name="menu">Menu</string>
     <string name="home" translatable="false">Home</string>
     <string name="payment">Payment</string>
     <string name="store">Store</string>
@@ -67,6 +67,7 @@
     <string name="duplicate_item">Duplicate item</string>
     <string name="strike_text" translatable="false"><strike>%s</strike></string>
     <string name="discount_price">Discount Price</string>
+    <string name="no_category">Your menu is empty, please create a new category first</string>
 
     <!--  Sale summary  -->
     <string name="total_sales">Total sales Today</string>

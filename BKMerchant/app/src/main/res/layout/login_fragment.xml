@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/large_margin"
-                android:text="BKMerchant"
+                android:text="@string/app_name"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
@@ -59,6 +59,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/base_margin"
                 android:background="@drawable/green_button_selector"
+                android:paddingStart="@dimen/base_margin"
+                android:paddingEnd="@dimen/base_margin"
                 android:text="@string/login" />
 
             <TextView
@@ -78,8 +80,8 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
-                    android:layout_weight="1"
                     android:layout_marginTop="@dimen/small_margin"
+                    android:layout_weight="1"
                     android:background="#000000" />
 
                 <TextView
@@ -94,8 +96,8 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
-                    android:layout_weight="1"
                     android:layout_marginTop="@dimen/small_margin"
+                    android:layout_weight="1"
                     android:background="#000000" />
 
             </LinearLayout>
@@ -106,9 +108,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/large_margin"
-                android:paddingEnd="@dimen/base_margin"
-                android:paddingStart="@dimen/base_margin"
                 android:background="@drawable/green_button_selector"
+                android:paddingStart="@dimen/base_margin"
+                android:paddingEnd="@dimen/base_margin"
                 android:text="@string/create_account" />
         </LinearLayout>
     </ScrollView>

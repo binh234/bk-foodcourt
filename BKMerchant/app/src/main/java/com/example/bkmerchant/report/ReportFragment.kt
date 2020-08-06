@@ -60,6 +60,7 @@ class ReportFragment: Fragment() {
                         cancelOrder += 1
                     } else {
                         processingOrder += 1
+                        totalSale += order.total
                     }
                 }
                 var text = getString(R.string.num_process_order, processingOrder) + "\n"
