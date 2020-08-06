@@ -11,14 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Manager" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity"/>
         <activity android:name=".CookActivity"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".RemoveVendorActivity" />
         <activity android:name=".AddNewVendorActivity" />
         <activity android:name=".CheckVendorInfosActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Manager">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

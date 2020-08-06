@@ -37,7 +37,7 @@ class RemoveVendorActivity : AppCompatActivity(),StoreItemAdapter.StoreItemClick
                     val dividerItemDecoration = DividerItemDecoration(
                         recycler_view.context,
                         LinearLayoutManager(this).orientation
-                    )
+                        )
                     recycler_view.addItemDecoration(dividerItemDecoration)
 
                 }
