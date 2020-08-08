@@ -67,7 +67,7 @@ class PromotionDetailViewModel(val promotion: Promotion) : ViewModel() {
     }
 
     fun savePromotion() {
-        if (activateDay.value!! > expireDay.value!!) {
+        if (activateDay.value!! >= expireDay.value!!) {
             message.value = R.string.day_lesser
         } else if (activateDayTime.value!! >= expireDayTime.value!!) {
             message.value = R.string.time_lesser

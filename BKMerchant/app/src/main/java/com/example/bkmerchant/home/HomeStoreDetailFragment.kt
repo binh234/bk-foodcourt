@@ -81,23 +81,23 @@ class HomeStoreDetailFragment : Fragment() {
     }
 
     private fun openTimePicker() {
-        val cal = Calendar.getInstance()
+        val currentHour = viewModel.openTime.value!! / 60
+        val currentMinute = viewModel.openTime.value!! % 60
+
         val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-            cal.set(Calendar.HOUR_OF_DAY, hourOfDay)
-            cal.set(Calendar.MINUTE, minute)
             viewModel.openTime.value = hourOfDay * 60 + minute
         }
-        TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
+        TimePickerDialog(context, timeSetListener, currentHour, currentMinute, false).show()
     }
 
     private fun closeTimePicker() {
-        val cal = Calendar.getInstance()
+        val currentHour = viewModel.closeTime.value!! / 60
+        val currentMinute = viewModel.closeTime.value!! % 60
+
         val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-            cal.set(Calendar.HOUR_OF_DAY, hourOfDay)
-            cal.set(Calendar.MINUTE, minute)
             viewModel.closeTime.value = hourOfDay * 60 + minute
         }
-        TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
+        TimePickerDialog(context, timeSetListener, currentHour, currentMinute, false).show()
     }
 
     private fun imageLoader() {
@@ -176,7 +176,7 @@ class HomeStoreDetailFragment : Fragment() {
     }
 
     private fun navigateToStoreFragment() {
-        findNavController().navigate(R.id.homeFragment)
+        findNavController().navigateUp()
     }
 
 }

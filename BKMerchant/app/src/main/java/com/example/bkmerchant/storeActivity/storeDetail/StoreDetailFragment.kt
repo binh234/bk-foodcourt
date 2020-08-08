@@ -74,23 +74,23 @@ class StoreDetailFragment : Fragment() {
     }
 
     private fun openTimePicker() {
-        val cal = Calendar.getInstance()
+        val currentHour = viewModel.openTime.value!! / 60
+        val currentMinute = viewModel.openTime.value!! % 60
+
         val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-            cal.set(Calendar.HOUR_OF_DAY, hourOfDay)
-            cal.set(Calendar.MINUTE, minute)
             viewModel.openTime.value = hourOfDay * 60 + minute
         }
-        TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
+        TimePickerDialog(context, timeSetListener, currentHour, currentMinute, false).show()
     }
 
     private fun closeTimePicker() {
-        val cal = Calendar.getInstance()
+        val currentHour = viewModel.closeTime.value!! / 60
+        val currentMinute = viewModel.closeTime.value!! % 60
+
         val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-            cal.set(Calendar.HOUR_OF_DAY, hourOfDay)
-            cal.set(Calendar.MINUTE, minute)
             viewModel.closeTime.value = hourOfDay * 60 + minute
         }
-        TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
+        TimePickerDialog(context, timeSetListener, currentHour, currentMinute, false).show()
     }
 
     private fun imageLoader() {
@@ -102,7 +102,7 @@ class StoreDetailFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode==1 && resultCode== Activity.RESULT_OK && data!=null && data.data!=null) {
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             storeImageUri = data.data
             binding.storeImage.setImageURI(data.data)
         }
@@ -118,7 +118,7 @@ class StoreDetailFragment : Fragment() {
     }
 
     private fun uploadImage() {
-        storeImageUri?.let {imageUri ->
+        storeImageUri?.let { imageUri ->
             val fileReference = storageReference
                 .child(System.currentTimeMillis().toString() + "." + getFileExtension(imageUri))
             binding.loadingProgress.visibility = View.VISIBLE
@@ -126,7 +126,8 @@ class StoreDetailFragment : Fragment() {
 
             uploadTask = fileReference.putFile(imageUri)
                 .addOnSuccessListener {
-                    Toast.makeText(context, getString(R.string.update_success), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.update_success), Toast.LENGTH_SHORT)
+                        .show()
                     fileReference.downloadUrl
                         .addOnSuccessListener {
                             Log.d("StoreDetailFragment", it.toString())
@@ -142,7 +143,7 @@ class StoreDetailFragment : Fragment() {
                 .addOnFailureListener {
                     Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
                 }
-                .addOnProgressListener {task ->
+                .addOnProgressListener { task ->
                     val progress = 100.0 * task.bytesTransferred / task.totalByteCount
                     binding.loadingProgress.progress = progress.toInt()
                 }
@@ -176,7 +177,7 @@ class StoreDetailFragment : Fragment() {
     }
 
     private fun navigateToStoreFragment() {
-        findNavController().navigate(R.id.storeFragment)
+        findNavController().navigateUp()
     }
 
 }

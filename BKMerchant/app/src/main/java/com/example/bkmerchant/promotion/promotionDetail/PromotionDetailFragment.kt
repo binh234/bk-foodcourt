@@ -27,7 +27,8 @@ class PromotionDetailFragment : Fragment() {
     private lateinit var binding: PromotionDetailFragmentBinding
     private lateinit var viewModelFactory: PromotionDetailFactory
     private lateinit var viewModel: PromotionDetailViewModel
-    private lateinit var calendar: Calendar
+    private lateinit var openCalendar: Calendar
+    private lateinit var closeCalendar: Calendar
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,8 +42,6 @@ class PromotionDetailFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.promotion_detail_fragment, container, false)
 
-        calendar = Calendar.getInstance()
-
         val args = PromotionDetailFragmentArgs.fromBundle(requireArguments())
         viewModelFactory = PromotionDetailFactory(args.promotion)
         viewModel =
@@ -52,12 +51,12 @@ class PromotionDetailFragment : Fragment() {
         binding.viewModel = viewModel
 
         setupDropdownList()
+        setupCalendar()
 
         binding.activateDay.setOnClickListener { openDatePicker() }
         binding.expireDay.setOnClickListener { closeDatePicker() }
         binding.activateDayTime.setOnClickListener { openTimePicker() }
         binding.expireDayTime.setOnClickListener { closeTimePicker() }
-
         binding.doneFab.setOnClickListener { checkValidate() }
         binding.listItem.setOnClickListener { openMultiChoiceDialog() }
 
@@ -227,78 +226,89 @@ class PromotionDetailFragment : Fragment() {
     }
 
     private fun openDatePicker() {
-        val curYear = calendar.get(Calendar.YEAR)
-        val curMonth = calendar.get(Calendar.MONTH)
-        val curDay = calendar.get(Calendar.DAY_OF_MONTH)
+        val currentYear = openCalendar.get(Calendar.YEAR)
+        val currentMonth = openCalendar.get(Calendar.MONTH)
+        val currentDay = openCalendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerListener =
             DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                val string = "${month + 1}/${dayOfMonth}/$year"
-                Log.d("PromotionDetail", string)
-                val date = SimpleDateFormat("dd/MM/yyyy", Locale.US).parse(string)
-                Log.d("PromotionDetail", date?.time.toString())
-                viewModel.activateDay.value = Timestamp(date ?: Date())
+                openCalendar.set(year, month, dayOfMonth)
+                viewModel.activateDay.value = Timestamp(openCalendar.time)
             }
 
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             android.R.style.Theme_Holo_Dialog_NoActionBar_MinWidth,
             datePickerListener,
-            curYear, curMonth, curDay
+            currentYear, currentMonth, currentDay
         )
         datePickerDialog.show()
     }
 
     private fun closeDatePicker() {
-        val curYear = calendar.get(Calendar.YEAR)
-        val curMonth = calendar.get(Calendar.MONTH)
-        val curDay = calendar.get(Calendar.DAY_OF_MONTH)
+        val currentYear = closeCalendar.get(Calendar.YEAR)
+        val currentMonth = closeCalendar.get(Calendar.MONTH)
+        val currentDay = closeCalendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerListener =
             DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                val string = "${month + 1}/${dayOfMonth}/$year"
-                Log.d("PromotionDetail", string)
-                val date = SimpleDateFormat("dd/MM/yyyy", Locale.US).parse(string)
-                Log.d("PromotionDetail", date?.time.toString())
-                viewModel.expireDay.value = Timestamp(date ?: Date())
+                closeCalendar.set(year, month, dayOfMonth)
+                viewModel.expireDay.value = Timestamp(closeCalendar.time)
             }
 
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             android.R.style.Theme_Holo_Dialog_NoActionBar_MinWidth,
             datePickerListener,
-            curYear, curMonth, curDay
+            currentYear, currentMonth, currentDay
         )
         datePickerDialog.show()
     }
 
     private fun openTimePicker() {
+        val currentHour = viewModel.activateDayTime.value!! / 60
+        val currentMinute = viewModel.activateDayTime.value!! % 60
+
         val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
-            calendar.set(Calendar.MINUTE, minute)
             viewModel.activateDayTime.value = hourOfDay * 60 + minute
         }
         TimePickerDialog(
             context,
             timeSetListener,
-            calendar.get(Calendar.HOUR_OF_DAY),
-            calendar.get(Calendar.MINUTE),
+            currentHour,
+            currentMinute,
             false
         ).show()
     }
 
     private fun closeTimePicker() {
+        val currentHour = viewModel.expireDayTime.value!! / 60
+        val currentMinute = viewModel.expireDayTime.value!! % 60
+
         val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
-            calendar.set(Calendar.MINUTE, minute)
             viewModel.expireDayTime.value = hourOfDay * 60 + minute
         }
         TimePickerDialog(
             context,
             timeSetListener,
-            calendar.get(Calendar.HOUR_OF_DAY),
-            calendar.get(Calendar.MINUTE),
+            currentHour,
+            currentMinute,
             false
         ).show()
+    }
+
+    private fun setupCalendar() {
+        openCalendar = Calendar.getInstance()
+        closeCalendar = Calendar.getInstance()
+
+        val activateDate = viewModel.activateDay.value!!.toDate()
+        openCalendar.time = activateDate
+        openCalendar.set(Calendar.HOUR_OF_DAY, 0)
+        openCalendar.set(Calendar.MINUTE, 0)
+
+        val expireDate = viewModel.expireDay.value!!.toDate()
+        closeCalendar.time = expireDate
+        closeCalendar.set(Calendar.HOUR_OF_DAY, 0)
+        closeCalendar.set(Calendar.MINUTE, 0)
     }
 }
