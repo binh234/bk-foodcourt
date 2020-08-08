@@ -5,11 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bk_foodcourt.menu.CartItem
 import com.example.bk_foodcourt.menu.Dish
-import com.example.bk_foodcourt.order.OrderItem
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import com.google.firebase.storage.FirebaseStorage
 
 class DishViewModel(val dish: Dish) : ViewModel() {
     companion object {

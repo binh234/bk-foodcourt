@@ -8,8 +8,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.bk_foodcourt.R
 import com.example.bk_foodcourt.account.AccountActivity
-import com.example.bk_foodcourt.databinding.ActivityCustomerOrderBinding
-import com.example.bk_foodcourt.home.HomeActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CustomerOrderActivity : AppCompatActivity() {

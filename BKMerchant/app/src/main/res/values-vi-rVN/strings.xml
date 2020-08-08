@@ -57,7 +57,7 @@
     <string name="cancel_order">Hủy đơn</string>
     <string name="total">Tổng</string>
     <string name="subtotal">Tổng tạm tính</string>
-    <string name="applicable_fee">Phí phát sinh</string>
+    <string name="applicable_fee">Phí phụ thu</string>
     <string name="use_times">Lần sử dụng</string>
     <string name="discount_type">Loại khuyến mãi</string>
     <string name="discount_scope">Phạm vi khuyến mãi</string>
@@ -124,7 +124,7 @@
     <string name="discount_price">Giá khuyến mãi</string>
     <string name="order_cancelled">Đơn hàng bị hủy</string>
     <string name="cancel_requirement">Bạn phải nhập lý do hủy đơn hàng này</string>
-    <string name="cancel_message">Đơn hang #%s bị hủy bởi lý do: %s</string>
+    <string name="cancel_message">Đơn hàng #%s bị hủy bởi lý do: %s</string>
     <string name="e_g_out_of_order">vd Món ăn đã bán hết</string>
     <string name="cancel_reason">Lý do hủy đơn</string>
     <string name="list_item">Danh sách món</string>

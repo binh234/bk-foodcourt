@@ -12,14 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bk_foodcourt.R
 import com.example.bk_foodcourt.cook.order.CookOrderFragmentDirections
 import com.example.bk_foodcourt.order.Order
-import com.example.bk_foodcourt.order.OrderFragmentDirections
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
-class CookMyOrderFragment() : Fragment() {
+class CookMyOrderFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: CookOrderViewModel
     private lateinit var adapter: CookOrderAdapter

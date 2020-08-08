@@ -5,10 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bk_foodcourt.databinding.CookOrderItemBinding
-import com.example.bk_foodcourt.databinding.OrderItemBinding
 import com.example.bk_foodcourt.order.Order
-import com.example.bk_foodcourt.order.orderList.OrderAdapter
-import com.example.bk_foodcourt.order.orderList.OrderViewModel
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 

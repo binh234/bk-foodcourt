@@ -40,11 +40,11 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.menu)
 
         val arguments = MenuFragmentArgs.fromBundle(requireArguments())
         store = arguments.store
         storeId = store.id
+        (activity as AppCompatActivity).supportActionBar?.title = store.name
 
         viewModelFactory = MenuViewModelFactory(storeId)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MenuViewModel::class.java)

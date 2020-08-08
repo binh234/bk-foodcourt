@@ -1,6 +1,6 @@
 <resources>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
     <string name="total_revenues_by_vendor">Total Revenues By Vendor</string>
     <string name="total_revenue_by_item">Total Revenue By Item</string>
@@ -8,19 +8,16 @@
     <string name="vendor_chart">Vendor_chart</string>
     <string name="add_new_vendor">Add New Vendor</string>
     <string name="remove_vendor">Remove Vendor</string>
-    <string name="remove_the_fucking_vendor">REMOVE THE FUCKING VENDOR</string>
-    <string name="add_the_fucking_vendor">ADD THE FUCKING VENDOR</string>
-    <string name="app_name">BK_FoodCourt</string>
-    <string name="nav_home">Home</string>
+    <string name="app_name" translatable="false">BK_FoodCourt</string>
+    <string name="nav_home" translatable="false">Home</string>
     <string name="nav_orderlist">Orders</string>
     <string name="nav_notification">Notification</string>
     <string name="nav_profile">Profile</string>
     <string name="enter_vendor_name">Enter Vendor Name</string>
-    <string name="owner_name">Owner Name:</string>
-    <string name="name">Name:</string>
+    <string name="owner_name">Owner Name</string>
+    <string name="name">Name</string>
     <string name="vendor_information_form">Vendor Information Form</string>
     <string name="enter_vendor_s_owner_name">Enter Vendor\'s Owner Name</string>
-
 
     <string name="vendor1">Vendor 1</string>
     <string name="vendor2">Vendor2</string>
@@ -28,11 +25,11 @@
 
     <string name="choose_vendor_image">CHOOSE VENDOR IMAGE</string>
     <string name="upload_image">UPLOAD IMAGE</string>
-    <string name="hot_line">Hot Line:</string>
-    <string name="enter_the_vendor_s_suppport_line_here">Enter the vendor\'s suppport line here</string>
-    <string name="open_time">Open Time:</string>
+    <string name="hot_line" translatable="false">Hotline</string>
+    <string name="enter_the_vendor_s_suppport_line_here" translatable="false">Enter the vendor\'s suppport line here</string>
+    <string name="open_time">Open Time</string>
     <string name="enter_open_time">Enter Open Time</string>
-    <string name="close_time">Close Time:</string>
+    <string name="close_time">Close Time</string>
     <string name="enter_vendor_s_close_time">Enter vendor\'s close time</string>
     <string name="vendorimage">VendorImage</string>
     <string name="plans">PLANS</string>
@@ -42,40 +39,35 @@
     <string name="vendor_management">Vendor Management</string>
     <string name="check_stats">Check Stats</string>
     <string name="top_5_vendor">TOP 5 VENDOR</string>
-    <string name="manage_button">MANAGE VENDORS</string>
-    <string name="vendors_stats">VENDORS STATS</string>
-    <string name="add_remove_a_vendor">ADD/REMOVE A VENDOR</string>
-    <string name="store_number_1">STORE NUMBER 1</string>
-    <string name="total_revenues">Total Revenues:</string>
-    <string name="total_revenues_1000">Total Revenues:1000$</string>
-    <string name="store_number_2">STORE NUMBER 2</string>
-    <string name="total_revenues_2000">Total Revenues: 2000$</string>
-    <string name="display_pie_chart">Display Pie Chart</string>
-    <string name="pie_chart_displaying_vendors_sale_in">Pie Chart Displaying Vendors\' Sale (in %)</string>
-    <string name="total_revenues_2500">Total revenues: 2500$</string>
-    <string name="item_5">ITEM 5</string>
-    <string name="total_revenues_3000">Total revenues: 3000$</string>
-    <string name="item_4">ITEM 4</string>
-    <string name="total_revenues_500">Total Revenues: 500$</string>
-    <string name="item_3">ITEM 3</string>
-    <string name="item2">ITEM2</string>
-    <string name="total_revenues_1500">Total Revenues: 1500$</string>
-    <string name="item1">ITEM1</string>
-    <string name="check_vendors_info">CHECK VENDORS INFO</string>
-    <string name="please_click_on_a_vendor_image_to_check_its_information">Please click on a vendor image to check its information</string>
+    <string name="manage_button" translatable="false">MANAGE VENDORS</string>
+    <string name="vendors_stats" translatable="false">VENDORS STATS</string>
+    <string name="add_remove_a_vendor" translatable="false">ADD/REMOVE A VENDOR</string>
+    <string name="store_number_1" translatable="false">STORE NUMBER 1</string>
+    <string name="total_revenues" translatable="false">Total Revenues:</string>
+    <string name="total_revenues_1000" translatable="false">Total Revenues:1000$</string>
+    <string name="store_number_2" translatable="false">STORE NUMBER 2</string>
+    <string name="total_revenues_2000" translatable="false">Total Revenues: 2000$</string>
+    <string name="display_pie_chart" translatable="false">Display Pie Chart</string>
+    <string name="pie_chart_displaying_vendors_sale_in" translatable="false">Pie Chart Displaying Vendors\' Sale (in %)</string>
+    <string name="total_revenues_2500" translatable="false">Total revenues: 2500$</string>
+    <string name="item_5" translatable="false">ITEM 5</string>
+    <string name="total_revenues_3000" translatable="false">Total revenues: 3000$</string>
+    <string name="item_4" translatable="false">ITEM 4</string>
+    <string name="total_revenues_500" translatable="false">Total Revenues: 500$</string>
+    <string name="item_3" translatable="false">ITEM 3</string>
+    <string name="item2" translatable="false">ITEM2</string>
+    <string name="total_revenues_1500" translatable="false">Total Revenues: 1500$</string>
+    <string name="item1" translatable="false">ITEM1</string>
+    <string name="check_vendors_info" translatable="false">CHECK VENDORS INFO</string>
+    <string name="please_click_on_a_vendor_image_to_check_its_information" translatable="false">Please click on a vendor image to check its information</string>
 
     <string name="tab_text_1">Ongoing</string>
     <string name="tab_text_2">History</string>
 
-
-    <!--&gt;>>>>>> 6f676e6082c302f14ee5418c33396244dcc5862f-->
-    <!--    >>>>>>> a4a2c11b183c73927c2521b21a6930280051cafa-->
     <string-array name="user_choice">
         <item>Customer</item>
         <item>Cook</item>
-        <item>Manager</item>
     </string-array>
-
 
     <string name="title_activity_order_details">orderDetails</string>
     <string name="no_rating">No ratings</string>
@@ -147,7 +139,7 @@
     <string name="uploading">Uploading …</string>
     <string name="address">Address</string>
     <string name="email_change_warning">If you change your email, you will need to reauthenticate and verify new email</string>
-    <string name="email">Email</string>
+    <string name="email" translatable="false">Email</string>
     <string name="empty_field">Please enter this field</string>
     <string name="require_password">Enter your password to continue</string>
     <string name="verify_email">Please verify your email</string>
@@ -162,7 +154,7 @@
     <string name="confirm_password">Confirm password</string>
     <string name="create_account">Create new account</string>
     <string name="login">Login</string>
-    <string name="bk_foodcourt">BK FoodCourt</string>
+    <string name="bk_foodcourt" translatable="false">BK FoodCourt</string>
     <string name="already_account">Already have account? Sign in here</string>
     <string name="register">Register</string>
     <string name="invalid_email">Invalid email</string>
@@ -187,7 +179,7 @@
     <string name="cancel_requirement">You must enter a reason to cancel this order</string>
     <string name="order_cancelled">Order cancelled</string>
     <string name="cancel_message">Your order #%s is cancel due to: %s</string>
-    <string name="finish_message">Your order #%s is finish, get your food now!</string>
+    <string name="finish_message">Your order #%s is finish. Get your food now!</string>
     <string name="processed_order">This order has been processed by another cook</string>
     <string name="get_order_success">Get order successful</string>
     <string name="order_finished">Order finished</string>
@@ -199,18 +191,28 @@
         <item>Complete Notification</item>
     </string-array>
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="messages_header" translatable="false">Messages</string>
+    <string name="sync_header" translatable="false">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="signature_title" translatable="false">Your signature</string>
+    <string name="reply_title" translatable="false">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    <string name="sync_title" translatable="false">Sync email periodically</string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
     </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
+    <string name="confirm_cancel">Are your sure to cancel this order?</string>
+    <string name="warning">Warning</string>
+    <string name="confirm_status">CONFIRM</string>
+    <string name="processing_status">PROCESSING</string>
+    <string name="done_process_status">DONE PROCESS</string>
+    <string name="finish_status">FINISH</string>
+    <string name="cancel_status">CANCELLED</string>
+    <string name="pending_status">PENDING</string>
+    <string name="done">Done</string>
+    <string name="get_order">Get order</string>
 
 </resources>

@@ -2,7 +2,6 @@ package com.example.bk_foodcourt.cook.menu
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +16,6 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.google.firebase.iid.FirebaseInstanceId
 
 class CookMenuFragment : Fragment() {
     private lateinit var firebaseAuth: FirebaseAuth

@@ -77,7 +77,6 @@ class CartViewModel : ViewModel() {
                     applicableFee.value = subTotal / 10
                     applyPromotion(applyPosition)
                     cartList.value = list
-
                     Log.d("CartViewModel", subTotal.toString())
                 }
             }
@@ -116,8 +115,6 @@ class CartViewModel : ViewModel() {
                         promotion.id = document.id
                         list.add(promotion.code)
                         promotionList.add(promotion)
-                        Log.d("CartViewModel", promotion.id)
-                        Log.d("CartViewModel", promotion.code)
                     }
                     codeList.value = list
                 }
