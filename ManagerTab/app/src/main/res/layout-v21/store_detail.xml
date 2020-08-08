@@ -58,7 +58,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:padding="10dp"
-            android:background="@drawable/box"
+            android:textSize="20sp"
             android:textColor="@color/basilTextColor"
             android:textStyle="bold"
             />
@@ -94,6 +94,7 @@
             android:textSize="20sp"
             android:layout_marginTop="10dp"
             android:text="@string/open_time_format"
+            android:textStyle="bold"
             android:textColor="@color/basilTextColor"
             />
         <TextView
@@ -117,6 +118,7 @@
             android:padding="10dp"
             android:text="@string/close_time_format"
             android:textSize="20sp"
+            android:textStyle="bold"
             android:layout_toEndOf="@+id/to"
             android:textColor="@color/basilTextColor"
             />
@@ -146,6 +148,7 @@
             android:layout_below="@id/open_time_detail"
             android:padding="10dp"
             android:textSize="20dp"
+            android:textStyle="bold"
             android:gravity="bottom"
             android:textColor="@color/basilTextColor"
             android:layout_toEndOf="@id/hot_line_field"

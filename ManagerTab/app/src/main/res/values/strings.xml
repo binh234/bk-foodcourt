@@ -26,8 +26,8 @@
     <string name="vendor1">Vendor 1</string>
     <string name="vendor2">Vendor2</string>
     <string name="vendor3">Vendor 3</string>
-    <string name="open_time_format">Open Time: $s</string>
-    <string name="close_time_format">Close Time: $s</string>
+    <string name="open_time_format">0:00</string>
+    <string name="close_time_format">0:00</string>
     <string name="choose_vendor_image">CHOOSE IMAGE</string>
     <string name="upload_image">UPLOAD IMAGE</string>
     <string name="hot_line">Hot Line:</string>
@@ -117,4 +117,8 @@
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="log_out">LOG OUT</string>
     <string name="sign_in">Sign In</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
+    <string name="hotline_field">Hotline:</string>
+    <string name="_0886673468">0886673468</string>
 </resources>
