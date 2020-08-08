@@ -85,6 +85,7 @@
                         android:textColor="@color/basilTextColor"
                         android:textSize="26sp"
                         android:inputType="number"
+                        android:focusableInTouchMode="false"
                         />
                 </LinearLayout>
             </RelativeLayout>
@@ -141,7 +142,8 @@
                         android:hint="Choose Vendor Close Time"
                         android:textColor="@color/basilTextColor"
                         android:textSize="26sp"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:focusableInTouchMode="false"/>
                 </LinearLayout>
             </RelativeLayout>
 

@@ -1,6 +1,7 @@
 package com.example.managertab
 
 import android.app.Activity
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -22,8 +23,9 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 import java.lang.Integer.parseInt
+import java.util.*
 
-class AddNewVendorActivity : AppCompatActivity() {
+class AddNewVendorActivity : AppCompatActivity(){
     private lateinit var binding: ActivityAddNewVendorBinding
     private val pickImageRequest : Int = 1
     private lateinit var vendorImageView : ImageView
@@ -63,14 +65,17 @@ class AddNewVendorActivity : AppCompatActivity() {
         }
         // Set store attributes to the infos the manager type in the apps;
         vendorInfo = Store()
-
+        binding.openTimeEditText.setOnClickListener{
+            openTimePicker()
+        }
+        binding.closeTimeEditText.setOnClickListener{
+            closeTimePicker()
+        }
 
         // Upload (whole Store information) Button in the Add Vendor Tab
         binding.doneButton.setOnClickListener{
             if (fieldsValidated()){
-                vendorInfo.closeTime = parseInt(binding.closeTimeEditText.text.toString())
                 vendorInfo.description = binding.vendorDescriptionEditText.text.toString()
-                vendorInfo.openTime = parseInt(binding.openTimeEditText.text.toString())
                 vendorInfo.hotline = binding.hotLineEditText.text.toString()
                 if (imageURL.trim() != "") {
                     vendorInfo.imageUrl = imageURL
@@ -213,6 +218,29 @@ class AddNewVendorActivity : AppCompatActivity() {
             }
             else -> return true
         }
+    }
+    private fun openTimePicker() {
+        val cal = Calendar.getInstance()
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+            cal.set(Calendar.HOUR_OF_DAY, hourOfDay)
+            cal.set(Calendar.MINUTE, minute)
+            val timeText = "${String.format("%02d",hourOfDay)}: ${String.format("%02d",minute)}"
+            binding.openTimeEditText.setText(timeText)
+            vendorInfo.openTime = hourOfDay * 60 + minute
+        }
+        TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
+    }
+
+    private fun closeTimePicker() {
+        val cal = Calendar.getInstance()
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+            cal.set(Calendar.HOUR_OF_DAY, hourOfDay)
+            cal.set(Calendar.MINUTE, minute)
+            val timeText = "${String.format("%02d",hourOfDay)}: ${String.format("%02d",minute)}"
+            binding.closeTimeEditText.setText(timeText)
+            vendorInfo.closeTime = hourOfDay * 60 + minute
+        }
+        TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
     }
 }
 

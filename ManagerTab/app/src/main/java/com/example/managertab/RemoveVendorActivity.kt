@@ -114,25 +114,4 @@ class RemoveVendorActivity : AppCompatActivity(),StoreItemAdapter.StoreItemClick
             }
         }
     }
-//    class ConfirmRemoveDialogFragment: DialogFragment(){
-//        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-//            return activity?.let {
-//                // Use the Builder class for convenient dialog construction
-//                val builder = AlertDialog.Builder(it)
-//                builder.setTitle("Confirm Store Delete")
-//                    .setMessage(R.string.confirm_store_delete)
-//                    .setPositiveButton(R.string.confirm_delete_positive,
-//                        { dialog, id ->
-//
-//                        })
-//                    .setNegativeButton(R.string.confirm_delete_negative,
-//                        DialogInterface.OnClickListener { dialog, id ->
-//                            // User cancelled the dialog
-//                        })
-//                // Create the AlertDialog object and return it
-//                builder.create()
-//            } ?: throw IllegalStateException("Activity cannot be null")
-//        }
-//    }
-
 }
