@@ -18,12 +18,6 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 
 class RegisterFragment : Fragment() {
-
-    companion object {
-        const val TAG = "RegisterFragment"
-        const val REGISTER_RESULT_CODE = 1003
-    }
-
     private lateinit var binding: RegisterFragmentBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var userCollection: CollectionReference
@@ -42,7 +36,7 @@ class RegisterFragment : Fragment() {
         binding = RegisterFragmentBinding.inflate(inflater, container, false)
         binding.registerButton.setOnClickListener { registerNewAccount() }
         binding.signInTextView.setOnClickListener { navigateToLoginFragment() }
-        return binding.root;
+        return binding.root
     }
 
     private fun registerNewAccount() {

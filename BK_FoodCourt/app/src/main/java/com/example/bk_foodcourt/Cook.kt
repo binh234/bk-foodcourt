@@ -33,10 +33,6 @@ class Cook : AppCompatActivity() {
                     setFragment(orderListFragment)
                     true
                 }
-                R.id.nav_notification -> {
-                    setFragment(notiFragment)
-                    true
-                }
                 R.id.nav_profile -> {
                     setFragment(profileFragment)
                     true

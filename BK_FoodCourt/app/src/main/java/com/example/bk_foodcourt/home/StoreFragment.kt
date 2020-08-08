@@ -3,7 +3,6 @@ package com.example.bk_foodcourt.home
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -14,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.bk_foodcourt.OrderActivity
 import com.example.bk_foodcourt.R
 import com.example.bk_foodcourt.account.AccountActivity
 import com.example.bk_foodcourt.databinding.StoreFragmentBinding
@@ -24,7 +22,6 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.messaging.FirebaseMessaging
 
 class StoreFragment: Fragment() {
@@ -43,6 +40,7 @@ class StoreFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
 
         currentUser = FirebaseAuth.getInstance().currentUser!!
 
@@ -113,7 +111,7 @@ class StoreFragment: Fragment() {
                     }
                     if (item.storeId != store.id) {
                         val builder = AlertDialog.Builder(requireContext())
-                        builder.setTitle("Warning")
+                        builder.setTitle(getString(R.string.warning))
                             .setMessage(R.string.proceed_new_cart)
                             .setNegativeButton(getString(R.string.cancel)) { _: DialogInterface, _: Int ->
                             }

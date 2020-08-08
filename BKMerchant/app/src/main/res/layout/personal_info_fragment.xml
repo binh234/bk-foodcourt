@@ -89,6 +89,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/base_margin"
             android:background="@drawable/green_button_selector"
+            android:paddingStart="@dimen/base_margin"
+            android:paddingEnd="@dimen/base_margin"
             android:text="@string/save" />
 
     </LinearLayout>

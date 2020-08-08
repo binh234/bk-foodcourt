@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.bk_foodcourt.Cook
 import com.example.bk_foodcourt.Manager
 import com.example.bk_foodcourt.R
 import com.example.bk_foodcourt.cook.CookActivity
@@ -51,7 +50,7 @@ class LoginFragment : Fragment() {
         binding.createAccountButton.setOnClickListener { navigateToRegisterFragment() }
         binding.forgotPassword.setOnClickListener { resetPassword() }
 
-        return binding.root;
+        return binding.root
     }
 
     private fun login() {
@@ -223,8 +222,6 @@ class LoginFragment : Fragment() {
             intent = Intent(context, HomeActivity::class.java)
         } else if (accountType == "COOK") {
             intent = Intent(context, CookActivity::class.java)
-        } else if (accountType == "MANAGER"){
-            intent = Intent(context, Manager::class.java)
         }
         startActivity(intent)
         activity?.finish()

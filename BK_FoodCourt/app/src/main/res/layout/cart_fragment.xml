@@ -237,7 +237,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/large_margin"
                 android:layout_marginBottom="@dimen/small_margin"
-                android:background="@drawable/fab_button_background"
+                android:background="@drawable/secondary_button_selector"
                 android:paddingStart="@dimen/base_margin"
                 android:paddingEnd="@dimen/base_margin"
                 android:text="@string/checkout"

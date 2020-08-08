@@ -94,7 +94,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/large_margin"
                 android:textColor="@android:color/white"
-                android:background="@drawable/button_background"
+                android:background="@drawable/primary_button_selector"
                 android:text="@string/register" />
 
             <TextView

@@ -139,7 +139,7 @@
                 android:layout_below="@id/sub_button"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/base_margin"
-                android:background="@drawable/fab_button_background"
+                android:background="@drawable/secondary_button_selector"
                 android:paddingStart="@dimen/base_margin"
                 android:paddingEnd="@dimen/base_margin"
                 android:text="@{dish.quantity==0 ? @string/add_to_cart: @string/update_cart}"

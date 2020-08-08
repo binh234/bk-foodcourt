@@ -5,10 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bk_foodcourt.databinding.CookMenuItemBinding
-import com.example.bk_foodcourt.databinding.DishItemBinding
-import com.example.bk_foodcourt.menu.Category
 import com.example.bk_foodcourt.menu.Dish
-import com.example.bk_foodcourt.menu.MenuViewModel
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 

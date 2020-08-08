@@ -8,11 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.bk_foodcourt.R
 import com.example.bk_foodcourt.databinding.OrderFragmentBinding
-import com.example.bk_foodcourt.order.SectionsPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 class CookOrderFragment() : Fragment() {
     private lateinit var binding: OrderFragmentBinding

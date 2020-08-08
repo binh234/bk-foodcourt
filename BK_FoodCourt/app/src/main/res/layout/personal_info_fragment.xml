@@ -88,7 +88,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/base_margin"
-            android:background="@drawable/button_background"
+            android:background="@drawable/primary_button_selector"
+            android:paddingStart="@dimen/base_margin"
+            android:paddingEnd="@dimen/base_margin"
             android:text="@string/save"
             android:textColor="@android:color/white" />
 
