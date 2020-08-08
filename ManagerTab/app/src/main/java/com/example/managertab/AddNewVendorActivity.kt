@@ -76,7 +76,7 @@ class AddNewVendorActivity : AppCompatActivity() {
                     vendorInfo.imageUrl = imageURL
                 }
                 else{
-                    vendorInfo.imageUrl = imageUri.toString()
+                    vendorInfo.imageUrl = ""
                 }
                 vendorInfo.name = binding.vendorNameEditText.text.toString()
                 vendorInfo.ownerName = binding.vendorOwnerNameEditText.text.toString()

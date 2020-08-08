@@ -3,12 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RemoveVendorActivity">
+    tools:context=".RemoveVendorActivity"
+    android:background="@color/basilBackground"
+    >
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/basilBackground"
         android:clipToPadding="false"
         android:padding="4dp"
-        tools:listitem="@layout/store_item" />
+        tools:listitem="@layout/store_item"
+        />
 </RelativeLayout>

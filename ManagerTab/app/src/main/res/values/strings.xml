@@ -26,7 +26,8 @@
     <string name="vendor1">Vendor 1</string>
     <string name="vendor2">Vendor2</string>
     <string name="vendor3">Vendor 3</string>
-
+    <string name="open_time_format">Open Time: $s</string>
+    <string name="close_time_format">Close Time: $s</string>
     <string name="choose_vendor_image">CHOOSE IMAGE</string>
     <string name="upload_image">UPLOAD IMAGE</string>
     <string name="hot_line">Hot Line:</string>
