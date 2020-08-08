@@ -55,13 +55,18 @@ class StoreItemAdapter(
             }
         }
         holder.nameTextView.text = currentItem.name
-        holder.closeTimeTextView.text = currentItem.closeTime.toString()
-        holder.openTimeTextView.text = currentItem.openTime.toString()
+        holder.closeTimeTextView.text = currentItem.closeTime?.let { timeFormat(it) }
+        holder.openTimeTextView.text = currentItem.openTime?.let { timeFormat(it) }
         holder.supportEmail.text = currentItem.supportEmail
         val text = holder.closeTimeTextView.text
         val imageText = currentItem.imageUrl.toString()
     }
+    private fun timeFormat(time : Int) : String{
+        val hour = time / 60
+        val minute = time % 60
+        return "${String.format("%02d",hour)}:${String.format("%02d",minute)}"
 
+    }
 
     override fun getItemCount(): Int {
         return StoreItemList.size

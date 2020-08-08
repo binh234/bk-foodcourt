@@ -42,12 +42,19 @@ class StoreAdapter(private val storeList: MutableList<Store>) : RecyclerView.Ada
         }
         holder.storeName.text = currentItem.name
         holder.storeOwner.text = currentItem.ownerName
-        holder.openTime.text = currentItem.openTime.toString()
-        holder.closeTime.text = currentItem.closeTime.toString()
+        val openTimeString = "Open Time:" + timeFormat(currentItem.closeTime)
+        val closeTimeString = "Close TIme:" + timeFormat(currentItem.openTime)
+        holder.openTime.text = openTimeString
+        holder.closeTime.text = closeTimeString
         holder.hotLine.text = currentItem.hotline
 
     }
+    private fun timeFormat(time : Int) : String{
+        val hour = time / 60
+        val minute = time % 60
+        return "${String.format("%02d",hour)}:${String.format("%02d",minute)}"
 
+    }
     override fun getItemCount(): Int {
         return storeList.size
     }
