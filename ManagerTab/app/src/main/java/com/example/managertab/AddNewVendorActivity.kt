@@ -60,7 +60,7 @@ class AddNewVendorActivity : AppCompatActivity(){
             openFileChooser()
         }
         binding.uploadButton.setOnClickListener{
-            Toast.makeText(this, "HERE!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Your Image is being uploaded", Toast.LENGTH_SHORT).show()
             uploadFile()
         }
         // Set store attributes to the infos the manager type in the apps;
@@ -89,7 +89,7 @@ class AddNewVendorActivity : AppCompatActivity(){
                 vendorInfo.website = binding.websiteEditText.text.toString()
                 val storeID : String? = firebaseDatabase!!.child("stores").push().key
                 if (storeID != null) {
-                    Toast.makeText(this, "HIHI. UPLOADING STORE", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "UPLOADING STORE", Toast.LENGTH_SHORT).show()
                     uploadStore()
                     finish()
                 }
@@ -140,13 +140,13 @@ class AddNewVendorActivity : AppCompatActivity(){
             )
             uploadTask = fileReference.putFile(imageUri)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Grats. Your Image is being uploaded " +
+                    Toast.makeText(this, "Grats. Your Image is now uploaded " +
                             "to the Database", Toast.LENGTH_SHORT).show()
                     fileReference.downloadUrl
                         .addOnCompleteListener {
                             it.addOnSuccessListener {
                                 imageURL = it.toString()
-                                Toast.makeText(this, "imageURL:$imageURL", Toast.LENGTH_SHORT).show()
+                                Log.d("Upload Image", "imageURL:$imageURL")
                             }
                                 .addOnFailureListener{
                                     Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
