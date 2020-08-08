@@ -71,7 +71,7 @@ class PromotionDetailViewModel(val promotion: Promotion) : ViewModel() {
             message.value = R.string.day_lesser
         } else if (activateDayTime.value!! >= expireDayTime.value!!) {
             message.value = R.string.time_lesser
-        } else if (discountScope == 0 && orderFrom.value!! >= orderTo.value!!) {
+        } else if (discountScope == 0 && orderFrom.value!!.toDouble() >= orderTo.value!!.toDouble()) {
             message.value = R.string.order_lesser
         } else {
             val map = HashMap<String, Any>()
