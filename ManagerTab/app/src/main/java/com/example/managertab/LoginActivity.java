@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     account = document.get("accountType").toString();
-                                    Toast.makeText(LoginActivity.this, account, Toast.LENGTH_SHORT).show();
+                                    Log.i("Login", "onComplete ");
                                 }
                                 if (account.equals("COOK")) {
                                     Toast.makeText(LoginActivity.this, "Cook login!", Toast.LENGTH_SHORT).show();
@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                                 else if (account.equals("MANAGER")) {
-                                    Toast.makeText(LoginActivity.this, "Manager login!", Toast.LENGTH_SHORT).show();
+                                    Log.i("Login", "onComplete: Manager");
                                     Intent intent = new Intent(LoginActivity.this, Manager.class);
                                     startActivity(intent);
                                 }
