@@ -144,4 +144,8 @@
     <string name="today_total_sales">Tổng doanh thu: %s</string>
     <string name="menu">Thực đơn</string>
     <string name="no_category">Thực đơn hiện đang trống, vui lòng tạo một danh mục trước</string>
+    <string name="add_permission_success">Thêm quyền thành công</string>
+    <string name="permision_invalid">Bạn không thể thay đổi quyền của email này</string>
+    <string name="upload_in_progress">Đang tải</string>
+    <string name="email_not_exist">Email này chưa đăng ký vào hệ thống</string>
 </resources>

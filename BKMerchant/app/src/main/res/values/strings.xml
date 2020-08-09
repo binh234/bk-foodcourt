@@ -196,5 +196,10 @@
     <string name="language_label">Select language</string>
     <string name="vietnamese">Vietnamese</string>
     <string name="en" translatable="false">en</string>
+    <string name="add_permission_success">Add permission successfully</string>
+    <string name="permision_invalid">You can\'t change this email permission</string>
+    <string name="request_error" translatable="false">Request error</string>
+    <string name="upload_in_progress">Uploading in progress</string>
+    <string name="email_not_exist">This email hasn\'t registered to the system</string>
 
 </resources>

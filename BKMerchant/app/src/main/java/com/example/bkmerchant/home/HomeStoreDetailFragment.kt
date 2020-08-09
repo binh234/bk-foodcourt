@@ -25,7 +25,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
-import java.util.*
 
 class HomeStoreDetailFragment : Fragment() {
     private lateinit var binding: StoreDetailFragmentBinding
@@ -59,7 +58,7 @@ class HomeStoreDetailFragment : Fragment() {
         }
         binding.doneFab.setOnClickListener {
             if (uploadTask != null && uploadTask!!.isInProgress) {
-                Toast.makeText(context, "Uploading in progress", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.upload_in_progress), Toast.LENGTH_SHORT).show()
             } else {
                 checkValidInformation()
             }

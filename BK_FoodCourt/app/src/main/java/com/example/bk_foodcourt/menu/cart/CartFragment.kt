@@ -205,6 +205,7 @@ class CartFragment : Fragment() {
     }
 
     private fun checkOut() {
+        binding.checkoutButton.isClickable = false
         val orderType = binding.orderType.selectedItem.toString()
         Log.d("CartFragment", orderType)
         viewModel.checkout(orderType, store.ownerID)

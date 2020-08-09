@@ -11,22 +11,11 @@ data class User(
     val avatarUrl: String = "",
     val phoneNumber: String = "",
     val address: String = "",
-    val accountType: String = "CUSTOMER",
     val email: String = "",
     var storeID: String = ""
 ): Parcelable
 
 data class UserType(
     val email: String = "",
-    val accountType: String = "CUSTOMER",
-    @field:JvmField val update: Boolean = false,
-    var storeID: String = ""
+    val accountType: String = "CUSTOMER"
 )
-
-enum class AccountType(val value: Int) {
-    CUSTOMER(0),
-    COOK(1),
-    VENDOR_OWNER(2),
-    MANAGER(3),
-    SYS_ADMIN(4)
-}

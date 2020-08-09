@@ -141,7 +141,6 @@ class OrderDetailFragment : Fragment() {
                 Log.d(TAG, "onResponse: $response")
             },
             Response.ErrorListener {
-                Toast.makeText(context, "Request error", Toast.LENGTH_LONG).show()
                 Log.d(TAG, "onErrorResponse: Didn't work")
             }) {
 

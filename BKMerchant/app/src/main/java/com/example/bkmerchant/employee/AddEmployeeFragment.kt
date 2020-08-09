@@ -54,28 +54,45 @@ class AddEmployeeFragment : Fragment() {
                 .get()
                 .addOnSuccessListener { querySnapshot ->
                     if (querySnapshot.isEmpty) {
-                        val userType = UserType(email, AccountType.COOK, false, storeId)
-                        firestore.collection("userTypes")
-                            .add(userType)
-                            .addOnSuccessListener {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Add permission successful",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                navigateToEmployeeFragmnet()
-                            }
-                            .addOnFailureListener {
-                                Toast.makeText(
-                                    requireContext(),
-                                    it.toString(),
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                        val userType = UserType(email, AccountType.COOK)
+                        firestore.collection("users")
+                            .whereEqualTo("email", email)
+                            .limit(1)
+                            .get()
+                            .addOnSuccessListener { query ->
+                                if (query.isEmpty) {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        getString(R.string.email_not_exist),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } else {
+                                    for (document in query) {
+                                        document.reference.update("storeID", storeId)
+                                    }
+                                    firestore.collection("userTypes")
+                                        .add(userType)
+                                        .addOnSuccessListener {
+                                            Toast.makeText(
+                                                requireContext(),
+                                                getString(R.string.add_permission_success),
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            navigateToEmployeeFragmnet()
+                                        }
+                                        .addOnFailureListener {
+                                            Toast.makeText(
+                                                requireContext(),
+                                                it.toString(),
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                }
                             }
                     } else {
                         Toast.makeText(
                             requireContext(),
-                            "You can't change this email permission",
+                            getString(R.string.permision_invalid),
                             Toast.LENGTH_LONG
                         ).show()
                     }

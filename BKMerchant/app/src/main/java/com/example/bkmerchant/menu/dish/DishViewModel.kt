@@ -32,7 +32,6 @@ class DishViewModel(val dish: Dish): ViewModel() {
     var currentName = ""
 
     val nameFieldError = MutableLiveData<Int>()
-
     var navigateToMenuFragment = MutableLiveData<Boolean>()
 
     init {
@@ -47,10 +46,13 @@ class DishViewModel(val dish: Dish): ViewModel() {
         name.value = dish.name
         description.value = dish.description
         price.value = dish.price.toString()
-        discountPrice.value = dish.discountPrice.toString()
         imageUrl = dish.imageUrl
         currentCategoryId = dish.categoryId
         currentName = dish.name
+
+        if (dish.discountPrice != dish.price) {
+            discountPrice.value = dish.discountPrice.toString()
+        }
     }
 
     fun saveDish(url: String) {
@@ -73,6 +75,9 @@ class DishViewModel(val dish: Dish): ViewModel() {
             dish.discountPrice = dish.price
         } else {
             dish.discountPrice = dishDiscountPrice.toDouble()
+            if (dish.discountPrice > dish.price) {
+                dish.discountPrice = dish.price
+            }
         }
 
         if (dish.id.isNotEmpty() && dish.name.trim() == currentName) {
