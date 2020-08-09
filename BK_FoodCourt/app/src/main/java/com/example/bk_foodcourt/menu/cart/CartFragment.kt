@@ -86,8 +86,9 @@ class CartFragment : Fragment() {
                 codeList
             )
             binding.orderCode.setAdapter(arrayAdapter)
-            binding.orderCode.setOnItemClickListener { _, _, position, _ ->
-                viewModel.applyPromotion(position)
+            binding.orderCode.setOnItemClickListener { parent, _, position, _ ->
+                val index: Int = viewModel.codeList.value!!.indexOf(parent.getItemAtPosition(position))
+                viewModel.applyPromotion(index)
             }
         })
 
