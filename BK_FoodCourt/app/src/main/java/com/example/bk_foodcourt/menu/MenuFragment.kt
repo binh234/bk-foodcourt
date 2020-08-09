@@ -19,10 +19,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
 class MenuFragment : Fragment() {
-    companion object {
-        const val TAG = "MenuFragment"
-    }
-
     private lateinit var binding: MenuFragmentBinding
     private lateinit var viewModel: MenuViewModel
     private lateinit var viewModelFactory: MenuViewModelFactory
@@ -101,6 +97,8 @@ class MenuFragment : Fragment() {
             it?.let {isEmpty ->
                 if (!isEmpty) {
                     binding.cartFab.visibility = View.VISIBLE
+                } else {
+                    binding.cartFab.visibility = View.GONE
                 }
             }
         })

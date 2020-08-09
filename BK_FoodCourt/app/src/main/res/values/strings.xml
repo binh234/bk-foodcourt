@@ -214,5 +214,6 @@
     <string name="pending_status">PENDING</string>
     <string name="done">Done</string>
     <string name="get_order">Get order</string>
+    <string name="checkout_success">Checkout successfully</string>
 
 </resources>

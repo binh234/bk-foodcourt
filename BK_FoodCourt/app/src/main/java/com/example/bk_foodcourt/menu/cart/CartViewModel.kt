@@ -43,6 +43,7 @@ class CartViewModel : ViewModel() {
     val sendNotificationEvent = MutableLiveData<String>()
 
     var errorMessage = MutableLiveData<Int>()
+    var navigateToMenuFragmentEvent = MutableLiveData<Boolean>()
     private val calendar = Calendar.getInstance()
 
     init {
@@ -72,6 +73,7 @@ class CartViewModel : ViewModel() {
                         Log.d("CartViewModel", list[0].storeId)
                     } else {
                         storeId = ""
+                        navigateToMenuFragmentEvent.value = true
                     }
                     subtotal.value = subTotal
                     applicableFee.value = subTotal / 10
@@ -99,9 +101,7 @@ class CartViewModel : ViewModel() {
     private fun getPromotionCodes() {
         if (storeId.isNotEmpty()) {
             val list = mutableListOf<String>()
-            val todayString = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(Date())
-            val today = DateFormat.getDateInstance(DateFormat.DATE_FIELD).parse(todayString)!!
-            val todayTimestamp = Timestamp(today)
+            val todayTimestamp = Timestamp.now()
             firestore.collection("stores")
                 .document(storeId)
                 .collection("promotions")

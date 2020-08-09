@@ -100,6 +100,6 @@ class RegisterFragment : Fragment() {
 
     private fun navigateToLoginFragment() {
         firebaseAuth.signOut()
-        findNavController().navigate(R.id.loginFragment)
+        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
     }
 }

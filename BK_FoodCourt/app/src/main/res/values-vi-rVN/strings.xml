@@ -140,4 +140,5 @@
     <string name="pending_status">ĐANG CHỜ</string>
     <string name="done">Xong</string>
     <string name="get_order">Nhận đơn</string>
+    <string name="checkout_success">Thanh toán thành công</string>
 </resources>

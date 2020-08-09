@@ -99,10 +99,17 @@ class CartFragment : Fragment() {
             }
         })
 
+        viewModel.navigateToMenuFragmentEvent.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                Toast.makeText(context, getString(R.string.empty_cart), Toast.LENGTH_LONG).show()
+                findNavController().navigateUp()
+                viewModel.navigateToMenuFragmentEvent.value = null
+            }
+        })
         viewModel.goToHomeEvent.observe(viewLifecycleOwner, Observer {
             it?.let {
-                Toast.makeText(context, "Checkout successfully", Toast.LENGTH_LONG).show()
-                findNavController().navigate(R.id.storeFragment)
+                Toast.makeText(context, getString(R.string.checkout_success), Toast.LENGTH_LONG).show()
+                findNavController().navigate(R.id.action_cartFragment_to_storeFragment)
                 viewModel.goToHomeEvent.value = null
             }
         })

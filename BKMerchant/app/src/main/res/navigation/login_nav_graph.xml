@@ -16,7 +16,7 @@
         android:label="RegisterFragment"
         tools:layout="@layout/register_fragment" >
         <action
-            android:id="@+id/action_registerFragment2_to_loginFragment2"
+            android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/registerFragment"
             app:popUpToInclusive="true" />

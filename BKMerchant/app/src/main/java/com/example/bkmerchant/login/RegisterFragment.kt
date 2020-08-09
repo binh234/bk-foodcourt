@@ -1,7 +1,6 @@
 package com.example.bkmerchant.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -107,6 +106,6 @@ class RegisterFragment : Fragment() {
 
     private fun navigateToLoginFragment() {
         firebaseAuth.signOut()
-        findNavController().navigate(R.id.loginFragment)
+        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
     }
 }

@@ -14,8 +14,6 @@ class MenuViewModel(private val storeId: String) : ViewModel() {
     private val firestore = FirebaseFirestore.getInstance()
     private var currentUser = FirebaseAuth.getInstance().currentUser!!
     val categories = MutableLiveData<List<String>>()
-    var orderDiscountValue = 0.0
-    var orderDiscountPercent = 0.0
 
     val promotionList = MutableLiveData<List<Promotion>>()
 
@@ -49,7 +47,7 @@ class MenuViewModel(private val storeId: String) : ViewModel() {
         openDishEvent.value = dish
     }
 
-    fun getCategoryList() {
+    private fun getCategoryList() {
         firestore.collection("stores")
             .document(storeId)
             .collection("categories")
@@ -70,9 +68,7 @@ class MenuViewModel(private val storeId: String) : ViewModel() {
 
     private fun getPromotionList() {
         val list = mutableListOf<Promotion>()
-        val todayString = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(Date())
-        val today = DateFormat.getDateInstance(DateFormat.DATE_FIELD).parse(todayString)!!
-        val todayTimestamp = Timestamp(today)
+        val todayTimestamp = Timestamp.now()
         firestore.collection("stores")
             .document(storeId)
             .collection("promotions")
@@ -87,25 +83,6 @@ class MenuViewModel(private val storeId: String) : ViewModel() {
                     list.add(promotion)
                 }
                 promotionList.value = list
-            }
-    }
-
-    fun getOrderDiscount(storeId: String) {
-        firestore.collection("stores")
-            .document(storeId)
-            .collection("promotions")
-            .whereEqualTo("scope", 0)
-            .get()
-            .addOnSuccessListener { querySnapshot ->
-                for (document in querySnapshot) {
-                    val promo = document.toObject(Promotion::class.java)
-                    if (promo.type == 0) {
-                        orderDiscountPercent += promo.value
-                    } else {
-                        orderDiscountValue += promo.value
-                    }
-                }
-                loadDiscountDone.value = true
             }
     }
 }

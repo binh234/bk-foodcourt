@@ -49,8 +49,8 @@
         <action
             android:id="@+id/action_cartFragment_to_storeFragment"
             app:destination="@id/storeFragment"
-            app:popUpTo="@id/storeFragment"
-            app:popUpToInclusive="true" />
+            app:launchSingleTop="true"
+            app:popUpTo="@id/storeFragment" />
         <argument
             android:name="store"
             app:argType="com.example.bk_foodcourt.home.Store" />
