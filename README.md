@@ -6,19 +6,26 @@
 > The system is devided into seperate app modules: 
 -  **1st app module is for clients of the food co`urt to place order and pay for their bill:**
 
-    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/SE/Screenshot_20200809_112728.png">
-    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/SE/Screenshot_20200809_112739.png">
-    
--  **2nd app module is for stores' owner of the food court to manage their own stores:**
+    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/SE/Screenshot_20200809_112728.png"  width = "360dp">
+    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/SE/Screenshot_20200809_112739.png"
+     width="360dp >
+-  **2nd app module is for stores' cook to display and notify the customers about their food orders:**
 
-    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/7.png">
-    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/d91b3e8d09dc11392e7c6b2ce650ab278aab1ab9/Image/14.png">
+    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/d91b3e8d09dc11392e7c6b2ce650ab278aab1ab9/Image/SE/Screenshot_20200809_143523.png" width = "360dp">
+    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/d91b3e8d09dc11392e7c6b2ce650ab278aab1ab9/Image/SE/Screenshot_20200809_143401.png" width ="360dp">
 
    
--  **3rd app module is for the manager of the whole food court to manage as well checking the stats of the food court:  **
+    
+-  **3nd app module is for stores' owner of the food court to manage their own stores:**
 
-    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/SE/Screenshot_20200809_113535.png">
-    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/d91b3e8d09dc11392e7c6b2ce650ab278aab1ab9/Image/SE/Screenshot_20200809_113457.png">
+    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/7.png" width ="360dp">
+    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/d91b3e8d09dc11392e7c6b2ce650ab278aab1ab9/Image/14.png" width ="360dp">
+
+   
+-  **4rd app module is for the manager of the whole food court to manage as well checking the stats of the food court:  **
+
+    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/SE/Screenshot_20200809_113535.png" width = "360dp">
+    <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/d91b3e8d09dc11392e7c6b2ce650ab278aab1ab9/Image/SE/Screenshot_20200809_113457.png" width = "360dp">
 
 
 ---
