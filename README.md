@@ -4,7 +4,7 @@
 # Smart Food Court System (SFCS) 
 
 > The system is devided into seperate app modules: 
--  **1st app module is for clients of the food co`urt to place order and pay for their bill:**
+-  **1st app module is for clients of the food court to place orders and pay for their bills:**
 
     <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/SE/Screenshot_20200809_112728.png"  width = "360dp">
     <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/SE/Screenshot_20200809_112739.png"
@@ -16,7 +16,7 @@
 
    
     
--  **3nd app module is for stores' owner of the food court to manage their own stores:**
+-  **3nd app module is for stores' owner of the food court to manage their stores:**
 
     <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/master/Image/7.png" width ="360dp">
     <img src ="https://gitlab.com/thinh.nguyenbk2018/image/-/raw/d91b3e8d09dc11392e7c6b2ce650ab278aab1ab9/Image/14.png" width ="360dp">
